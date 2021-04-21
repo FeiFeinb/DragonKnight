@@ -15,11 +15,11 @@ namespace RPG.QuestSystem
             public int progress = default;          // 进度
             public bool isCompleted = default;      // 是否完成
         }
-        public Quest quest;
+        public QuestSO quest;
         public bool IsFinish => isFinish;
         [SerializeField] private bool isFinish;                                                                             // 是否完成任务
         private Dictionary<QuestObjective, ObjectivePair> progressDic = new Dictionary<QuestObjective, ObjectivePair>();    // 任务目标字典
-        public PlayerQuestStatus(Quest _quest)
+        public PlayerQuestStatus(QuestSO _quest)
         {
             quest = _quest;
             foreach (QuestObjective questObjective in quest.GetObjectives())

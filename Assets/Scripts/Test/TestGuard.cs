@@ -9,11 +9,11 @@ using RPG.Entity;
 using RPG.InventorySystem;
 public class TestGuard : BaseEntity
 {
-    public void StartQuest(Quest _quest)
+    public void StartQuest(QuestSO _quest)
     {
         PlayerQuestManager.Instance.AddQuest(_quest);
     }
-    public void SubmitQuest(Quest _quest)
+    public void SubmitQuest(QuestSO _quest)
     {
         // TODO: 使任务UI显示奖励物品
         // TODO: 完成与NPC对话AddItem

@@ -8,7 +8,6 @@ namespace RPG.QuestSystem
 {
     public class PlayerQuestManager : BaseSingletonWithMono<PlayerQuestManager>, IPredicateEvaluators
     {
-        public Quest kill1;
         [SerializeField] private List<PlayerQuestStatus> playerQuestStatuses = new List<PlayerQuestStatus>();     // 玩家任务数列
         private Action onQuestUpdate;              // 任务更新
         private Action onQuestObjectiveUpdate;     //  任务目标更新
@@ -44,7 +43,7 @@ namespace RPG.QuestSystem
                 yield return playerQuestStatus;
             }
         }
-        public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : Quest
+        public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : QuestSO
         {
             foreach (var playerQuestStatus in playerQuestStatuses)
             {
@@ -65,17 +64,12 @@ namespace RPG.QuestSystem
             }
             return null;
         }
-        [ContextMenu("AddQ")]
-        private void AddQ()
-        {
-            AddQuest(kill1);
-        }
-        public void AddQuest(Quest addQuest)
+        public void AddQuest(QuestSO addQuest)
         {
             playerQuestStatuses.Add(new PlayerQuestStatus(addQuest));
             UpdateQuest();
         }
-        public void RemoveQuest(Quest removeQuest)
+        public void RemoveQuest(QuestSO removeQuest)
         {
             // 查找符合条件的Status
             for (int i = 0; i < playerQuestStatuses.Count; i++)
@@ -92,7 +86,7 @@ namespace RPG.QuestSystem
         public void KillQuestTrigger(string _entityID)
         {
             // 若玩家有多个击杀同一个目标的任务 都会更新
-            foreach (PlayerQuestStatus playerQuestStatus in GetQuestStatuses<KillQuest>())
+            foreach (PlayerQuestStatus playerQuestStatus in GetQuestStatuses<KillQuestSO>())
             {
                 playerQuestStatus.KillQuestProgress(_entityID);
             }

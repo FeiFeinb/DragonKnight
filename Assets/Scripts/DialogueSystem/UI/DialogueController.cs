@@ -18,16 +18,13 @@ namespace RPG.DialogueSystem
         [SerializeField] private Button quitButton;                     // 退出按钮
         [SerializeField] private Transform playerChoiceContainer;       // 选项按钮容器
         [SerializeField] private GameObject playerChoiceButtonPrefab;   // 玩家选项容器
-        private PlayerConversant playerConversant;                      // 玩家对话管理
         public override void PreInit()
         {
             // 完成初始化
-            // TODO: Player标签特化
-            playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
             // 添加当对话文件改变时监听
-            playerConversant.onDialogueChange += Show;
+            PlayerDialogueManager.Instance.onDialogueChange += Show;
             // 添加当对话节点改变时监听
-            playerConversant.onDialogueNodeChange += UpdateDialogue;
+            PlayerDialogueManager.Instance.onDialogueNodeChange += UpdateDialogue;
             // 添加点击Next按钮时
             nextButton.onClick.AddListener(Next);
             quitButton.onClick.AddListener(Hide);
@@ -41,57 +38,57 @@ namespace RPG.DialogueSystem
         public override void Hide()
         {
             // 关闭对话UI
-            playerConversant.ResetDialogue();
+            PlayerDialogueManager.Instance.ResetDialogue();
             gameObject.SetActive(false);
         }
         private void Next()
         {
             // 推进节点进度
-            playerConversant.Next();
+            PlayerDialogueManager.Instance.Next();
         }
         private void UpdateDialogue()
         {
             // 判断是否存在对话组件或者对话节点
-            if (playerConversant.CurrentDialogueNode == null || playerConversant.IsEmpty)
+            if (PlayerDialogueManager.Instance.CurrentDialogueNode == null || PlayerDialogueManager.Instance.IsEmpty)
             {
                 // 不存在对话节点，则直接关闭窗口
                 Hide();
                 return;
             }
             // 玩家主动或被动对话
-            if (playerConversant.IsPlayerChoice || playerConversant.CurrentDialogueNode.Speaker == DialogueSpeaker.Player)
+            if (PlayerDialogueManager.Instance.IsPlayerChoice || PlayerDialogueManager.Instance.CurrentDialogueNode.Speaker == DialogueSpeaker.Player)
             {
-                speakerHeadSculpture.sprite = playerConversant.DialoguePlayerInfo.HeadSculpture;
-                speakerName.text = playerConversant.DialoguePlayerInfo.CharacterName;
+                speakerHeadSculpture.sprite = PlayerDialogueManager.Instance.DialoguePlayerInfo.HeadSculpture;
+                speakerName.text = PlayerDialogueManager.Instance.DialoguePlayerInfo.CharacterName;
             }
             else
             {
-                speakerHeadSculpture.sprite = playerConversant.NPCHeadSculpture;
-                speakerName.text = playerConversant.NPCName;
+                speakerHeadSculpture.sprite = PlayerDialogueManager.Instance.NPCHeadSculpture;
+                speakerName.text = PlayerDialogueManager.Instance.NPCName;
             }
             // 若非玩家选择环节 则隐藏
-            playerChoiceContainer.gameObject.SetActive(playerConversant.IsPlayerChoice);
+            playerChoiceContainer.gameObject.SetActive(PlayerDialogueManager.Instance.IsPlayerChoice);
             // 当非玩家选择环节 且 不是最后一个节点 时才显示nextButton
-            nextButton.gameObject.SetActive(!playerConversant.IsPlayerChoice && !playerConversant.IsLastNode);
-            if (playerConversant.IsPlayerChoice)
+            nextButton.gameObject.SetActive(!PlayerDialogueManager.Instance.IsPlayerChoice && !PlayerDialogueManager.Instance.IsLastNode);
+            if (PlayerDialogueManager.Instance.IsPlayerChoice)
             {
                 playerChoiceContainer.DestroyChildren();
-                foreach (DialogueNode choice in playerConversant.GetChoice())
+                foreach (DialogueNodeSO choice in PlayerDialogueManager.Instance.GetChoice())
                 {
                     GameObject choiceObj = GameObject.Instantiate(playerChoiceButtonPrefab, playerChoiceContainer.transform);
                     choiceObj.GetComponentInChildren<Text>().text = choice.Text;
                     choiceObj.GetComponent<Button>().onClick.AddListener(delegate
                     {
-                        playerConversant.Choose(choice);
+                        PlayerDialogueManager.Instance.Choose(choice);
                     }); ;
-                    playerConversant.CurrentDialogueNPC.OnDialogueTriggerEvent(choice.EnterEventID, choice?.UniqueID);
+                    PlayerDialogueManager.Instance.CurrentDialogueNPC.OnDialogueTriggerEvent(choice.EnterEventID, choice?.UniqueID);
                 }
             }
             else
             {
                 // 更新UI文字显示
-                playerConversant.CurrentDialogueNPC.OnDialogueTriggerEvent(playerConversant.CurrentDialogueNode?.EnterEventID, playerConversant.CurrentDialogueNode?.UniqueID);
-                dialogueText.text = playerConversant.CurrentDialogueNode?.Text;
+                PlayerDialogueManager.Instance.CurrentDialogueNPC.OnDialogueTriggerEvent(PlayerDialogueManager.Instance.CurrentDialogueNode?.EnterEventID, PlayerDialogueManager.Instance.CurrentDialogueNode?.UniqueID);
+                dialogueText.text = PlayerDialogueManager.Instance.CurrentDialogueNode?.Text;
             }
         }
 

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df7de523effa7f449b52e84709c8d7d, type: 3}
+  m_Name: New TransitionTable
+  m_EditorClassIdentifier: 
+  transitionItems:
+  - fromState: {fileID: 11400000, guid: 4c7cbb5f55ca70b4d82ed82ba74aa36b, type: 2}
+    toState: {fileID: 11400000, guid: 42b0614f433989841b32391c05e27a73, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: 6fa471e0430b79b4a8db0c8726bf9d70, type: 2}
+  - fromState: {fileID: 11400000, guid: 4c7cbb5f55ca70b4d82ed82ba74aa36b, type: 2}
+    toState: {fileID: 11400000, guid: 42b0614f433989841b32391c05e27a73, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: 344a01be9a0e7494ba9b6b46be8288fc, type: 2}
+  - fromState: {fileID: 11400000, guid: 42b0614f433989841b32391c05e27a73, type: 2}
+    toState: {fileID: 11400000, guid: 4c7cbb5f55ca70b4d82ed82ba74aa36b, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: 791b7c242d081f64a818b37b15987e43, type: 2}
+  cachedState:
+  - originStateSO: {fileID: 11400000, guid: 4c7cbb5f55ca70b4d82ed82ba74aa36b, type: 2}
+  - originStateSO: {fileID: 11400000, guid: 42b0614f433989841b32391c05e27a73, type: 2}

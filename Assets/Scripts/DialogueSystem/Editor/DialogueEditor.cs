@@ -9,9 +9,9 @@ namespace RPG.DialogueSystem
 {
     public class DialogueEditor : EditorWindow
     {
-        private Dialogue selectedDialogue;      // 对话物件
-        [NonSerialized] private DialogueNode draggingNode = null;       // 拖拽节点
-        [NonSerialized] private DialogueNode connectingNode = null;     // 待连接父节点
+        private DialogueSO selectedDialogue;      // 对话物件
+        [NonSerialized] private DialogueNodeSO draggingNode = null;       // 拖拽节点
+        [NonSerialized] private DialogueNodeSO connectingNode = null;     // 待连接父节点
         [NonSerialized] private GUIStyle npcNodeStyle;                  // NPC节点背景风格
         [NonSerialized] private GUIStyle playerNodeStyle;               // 玩家节点背景风格
         [NonSerialized] private Vector2 dragOffSet;                     // 节点拖拽便宜量
@@ -35,7 +35,7 @@ namespace RPG.DialogueSystem
         public static bool OnOpenAsset(int instanceID, int line)
         {
             // 检测打开资源
-            Dialogue dialogue = EditorUtility.InstanceIDToObject(instanceID) as Dialogue;
+            DialogueSO dialogue = EditorUtility.InstanceIDToObject(instanceID) as DialogueSO;
             // 打开资源则打开编辑窗口
             if (dialogue)
             {
@@ -53,8 +53,8 @@ namespace RPG.DialogueSystem
             npcNodeStyle = new GUIStyle();
             playerNodeStyle = new GUIStyle();
             // 设置背景
-            npcNodeStyle.normal.background = EditorGUIUtility.Load("NPCNodeBackGround.png") as Texture2D;
-            playerNodeStyle.normal.background = EditorGUIUtility.Load("PlayerNodeBackGround.png") as Texture2D;
+            npcNodeStyle.normal.background = EditorGUIUtility.Load("DialogueEditor/NPCNodeBackGround.png") as Texture2D;
+            playerNodeStyle.normal.background = EditorGUIUtility.Load("DialogueEditor/PlayerNodeBackGround.png") as Texture2D;
             // 设置信息与背景框间距
             npcNodeStyle.padding = new RectOffset(10, 10, 10, 10);
             playerNodeStyle.padding = new RectOffset(10, 10, 10, 10);
@@ -63,7 +63,7 @@ namespace RPG.DialogueSystem
         // 当点击资源切换时调用(单击)
         private void OnSelectionChanged()
         {
-            Dialogue tempDialogue = Selection.activeObject as Dialogue;
+            DialogueSO tempDialogue = Selection.activeObject as DialogueSO;
             if (tempDialogue != null)
             {
                 // 只有当选择另一个对话物件时才更新
@@ -85,7 +85,7 @@ namespace RPG.DialogueSystem
             // 设置节点位置
             OnMoveNode();
             // 遍历对话
-            foreach (DialogueNode node in selectedDialogue.GetNodes())
+            foreach (DialogueNodeSO node in selectedDialogue.GetNodes())
             {
                 // 绘制节点间贝塞尔曲线
                 DrawNodeConnection(node);
@@ -157,11 +157,11 @@ namespace RPG.DialogueSystem
                 isDragScene = false;
             }
         }
-        private DialogueNode GetDragNode(Vector2 mousePosition)
+        private DialogueNodeSO GetDragNode(Vector2 mousePosition)
         {
             // 获取Dialogue数组中最靠后的节点 (越靠后证明越慢绘制 证明它在界面中被绘制在最顶层)
-            DialogueNode dragNode = null;
-            foreach (DialogueNode node in selectedDialogue.GetNodes())
+            DialogueNodeSO dragNode = null;
+            foreach (DialogueNodeSO node in selectedDialogue.GetNodes())
             {
                 if (node.sizeRect.Contains(mousePosition))
                 {
@@ -171,13 +171,13 @@ namespace RPG.DialogueSystem
             return dragNode;
         }
 
-        private void DrawNodeConnection(DialogueNode node)
+        private void DrawNodeConnection(DialogueNodeSO node)
         {
             // 连接线与框图之间的间距
             float lineDis = 10f;
             // 设定起始点
             Vector3 startVec = new Vector2(node.sizeRect.xMax + lineDis, node.sizeRect.center.y);
-            foreach (DialogueNode childNode in selectedDialogue.GetChildren(node))
+            foreach (DialogueNodeSO childNode in selectedDialogue.GetChildren(node))
             {
                 // 设置终点
                 Vector3 endVec = new Vector2(childNode.sizeRect.xMin - lineDis, childNode.sizeRect.center.y);
@@ -186,7 +186,7 @@ namespace RPG.DialogueSystem
             }
         }
 
-        private void DrawNode(DialogueNode node)
+        private void DrawNode(DialogueNodeSO node)
         {
             // 开启边框绘制 判断节点类型
             switch (node.Speaker)
