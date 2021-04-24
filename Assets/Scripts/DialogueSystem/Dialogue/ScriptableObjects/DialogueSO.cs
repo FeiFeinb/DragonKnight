@@ -11,7 +11,7 @@ namespace RPG.DialogueSystem
         private Dictionary<string, DialogueNodeSO> nodeDic = new Dictionary<string, DialogueNodeSO>();      // 节点ID字典
         private Vector2 nodeVerticalOffSet = new Vector2(0, 200);          // 生成节点偏移
         private Vector2 nodeHorizontalOffSet = new Vector2(250, 0);          // 生成节点偏移
-        private void OnValidate()
+        private void OnEnable()
         {
             Debug.Log("重新填充节点ID字典");
             // 清空缓存

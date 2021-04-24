@@ -17,7 +17,7 @@ namespace RPG.DialogueSystem
         public string NPCName => currentDialogueNPC.NPCInfo.CharacterName;      // 外部获取
         public Sprite NPCHeadSculpture => currentDialogueNPC.NPCInfo.HeadSculpture;
         public DialogueNodeSO CurrentDialogueNode => currentDialogueNode;     // 外部获取
-        public Action onDialogueChange;                         // 对话物体改变时
+        public Action<DialogueSO> onDialogueChange;                         // 对话物体改变时
         public Action onDialogueNodeChange;                     // 对话节点改变时
         [SerializeField] private DialogueCharacterInfoSO dialoguePlayerInfo;  // 玩家信息
         private DialogueSO currentDialogue;                       // 当前对话物体
@@ -30,7 +30,7 @@ namespace RPG.DialogueSystem
             currentDialogueNode = currentDialogue.GetRootNode();
             currentDialogueNPC = _currentNPC;
             isPlayerChoice = false;
-            onDialogueChange?.Invoke();
+            onDialogueChange?.Invoke(currentDialogue);
         }
         public void ResetDialogue()
         {
@@ -38,6 +38,7 @@ namespace RPG.DialogueSystem
             currentDialogue = null;
             currentDialogueNPC = null;
             isPlayerChoice = false;
+            onDialogueChange?.Invoke(currentDialogue);
         }
         public IEnumerable<DialogueNodeSO> GetChoice()
         {

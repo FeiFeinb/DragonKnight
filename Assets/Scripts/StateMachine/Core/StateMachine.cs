@@ -6,31 +6,15 @@ namespace RPG.StateMachine
 {
     public class StateMachine : MonoBehaviour
     {
-        public State currentState;                                          // 当前状态
-        [SerializeField] private TransitionTableSO transitionTable;         // 状态转换表
+        private State currentState;                                     // 当前状态
+        [SerializeField] private TransitionTableSO transitionTable;     // 状态转换表
         private void Start()
         {
             // 初始化状态转换表
             transitionTable.InitTransitionTable(this);
             // 将状态转化表中的根节点作为初始状态
             // TODO: 可设置的初始根节点
-
-            // FIXME: 查明Bug
-            // TransitionState(transitionTable.rootState);
-            currentState = transitionTable.rootState;
-            currentState.OnStateEnter();
-        }
-        private void Update()
-        {
-            // TODO: 将每帧询问修改为主动更改
-            State targetState = currentState.TryTransition();
-            if (targetState != null)
-            {
-                TransitionState(targetState);
-            }
-            // 每帧执行状态
-            // TODO: 为状态添加FixedUpdate与LateUpdate
-            currentState.OnUpdate();
+            TransitionState(transitionTable.rootState);
         }
         private void TransitionState(State targetState)
         {
@@ -38,6 +22,26 @@ namespace RPG.StateMachine
             currentState = targetState;
             currentState?.OnStateEnter();
         }
+        private void Update()
+        {
+            // 每帧检测是否需要切换
+            State targetState = currentState.TryTransition();
+            if (targetState != null)
+            {
+                TransitionState(targetState);
+            }
+            // 每帧执行状态
+            currentState.OnUpdate();
+        }
+        private void FixedUpdate()
+        {
+            currentState.OnFixedUpdate();
+        }
+        private void LateUpdate()
+        {
+            currentState.OnLateUpdate();
+        }
+
     }
 
 }

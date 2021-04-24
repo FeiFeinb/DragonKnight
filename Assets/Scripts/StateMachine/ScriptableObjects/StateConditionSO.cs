@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "New StateConditionSO", menuName = "StateMachine/StateConditionSO")]
     public abstract class StateConditionSO : ScriptableObject
     {
         public StateCondition GetStateCondition(StateMachine stateMachine, Dictionary<ScriptableObject, object> createInstance, bool expectedResult)
@@ -15,10 +14,10 @@ namespace RPG.StateMachine
             // 缓存中不存在 新建Condition
             Condition condition = CreateCondition(this);
             condition.Init(stateMachine);
+            // 储存在缓存中
+            createInstance.Add(this, condition);
             // 利用Condition构建新的StateCondition
             StateCondition stateCondition = new StateCondition(stateMachine, condition, expectedResult);
-            // 储存在缓存中
-            createInstance.Add(this, stateCondition);
             return stateCondition;
         }
         protected abstract Condition CreateCondition(StateConditionSO stateConditionSO);

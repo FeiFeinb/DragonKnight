@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RPG.StateMachine
 {
-    [System.Serializable]
     public class State
     {
-        [SerializeField, DisplayOnly] private StateSO originStateSO;    // 状态对应的ScriptableObject
+        private StateSO originStateSO;    // 状态对应的ScriptableObject
         private StateMachine stateMachine;                              // 状态所处状态机
         private StateTransition[] transitions;                          // 转换关系数组
         private StateAction[] actions;                                  // 状态执行所调动的方法数组
-
+        public State()
+        {
+            Debug.Log(1);
+        }
         public State(StateSO _originStateSO, StateMachine _stateMachine)
         {
             originStateSO = _originStateSO;
@@ -54,6 +56,20 @@ namespace RPG.StateMachine
             for (int i = 0; i < actions.Length; i++)
             {
                 actions[i].OnUpdate();
+            }
+        }
+        public void OnFixedUpdate()
+        {
+            for (int i = 0; i < actions.Length; i++)
+            {
+                actions[i].OnFixedUpdate();
+            }
+        }
+        public void OnLateUpdate()
+        {
+            for (int i = 0; i < actions.Length; i++)
+            {
+                actions[i].OnLateUpdate();
             }
         }
         public void OnStateExit()

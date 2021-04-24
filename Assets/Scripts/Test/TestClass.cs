@@ -8,7 +8,7 @@ public class TestClass : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             // 显示背包界面
             if (InventoryController.controller.isActive)

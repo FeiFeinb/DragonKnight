@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using RPG.DialogueSystem;
 namespace RPG.DialogueSystem
 {
     [RequireComponent(typeof(SphereCollider))]
@@ -13,15 +13,15 @@ namespace RPG.DialogueSystem
         public DialogueCharacterInfoSO NPCInfo => npcInfo;
         [SerializeField] private DialogueCharacterInfoSO npcInfo;     // NPC角色信息
         [SerializeField] private DialogueSO dialogueContent;          // NPC对话内容
-        [SerializeField] private LayerMask targetLayer;             // 对象层级
         [SerializeField] private List<DialogueEvent> dialogueEvents = new List<DialogueEvent>();    // 事件数列
-        private void OnTriggerEnter(Collider other)
+        
+        public void StartDialogue()
         {
-            int objectLayer = 1 << other.gameObject.layer;
-            if ((targetLayer.value & objectLayer) != 0)
-            {
-                PlayerDialogueManager.Instance.SetDialogue(this);
-            }
+            PlayerDialogueManager.Instance?.SetDialogue(this);
+        }
+        public void ResetDialogue()
+        {
+            PlayerDialogueManager.Instance?.ResetDialogue();
         }
         public void OnDialogueTriggerEvent(string _dialogueEventID, string _dialogueUniqueID)
         {

@@ -34158,7 +34158,6 @@ GameObject:
   - component: {fileID: 2199260235067961543}
   - component: {fileID: 2199260235067961536}
   - component: {fileID: 2199260235067961537}
-  - component: {fileID: 2112127801}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -34365,21 +34364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13faf8a8d8736b84e9bffe07beb346f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kill1: {fileID: 11400000, guid: d3f76833f42e1f345bc9af1ee1cbf364, type: 2}
   playerQuestStatuses: []
---- !u!114 &2112127801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199260235067961550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4034c16599d2fad4698af52ac2740853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionTable: {fileID: 11400000, guid: a60f41c882b127d4b93ce85081d9062b, type: 2}
 --- !u!1 &2199260592243329924
 GameObject:
   m_ObjectHideFlags: 0

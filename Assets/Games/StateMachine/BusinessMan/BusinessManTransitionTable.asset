@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df7de523effa7f449b52e84709c8d7d, type: 3}
+  m_Name: BusinessManTransitionTable
+  m_EditorClassIdentifier: 
+  transitionItems:
+  - fromState: {fileID: 11400000, guid: aa9305dd1a824b645b988596651e27f9, type: 2}
+    toState: {fileID: 11400000, guid: 6bcc600a44108ab4c92c25a8c31aae79, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: c5aa3cb679861394badd06c4f2e53ac2, type: 2}
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: 0242fa11fcaf2904a8022b61fa694760, type: 2}
+  - fromState: {fileID: 11400000, guid: 6bcc600a44108ab4c92c25a8c31aae79, type: 2}
+    toState: {fileID: 11400000, guid: aa9305dd1a824b645b988596651e27f9, type: 2}
+    conditions:
+    - expectedResult: 0
+      condition: {fileID: 11400000, guid: ceac3f83e5640b34b84774c7c2ec4e0e, type: 2}
+  - fromState: {fileID: 11400000, guid: 6bcc600a44108ab4c92c25a8c31aae79, type: 2}
+    toState: {fileID: 11400000, guid: aa9305dd1a824b645b988596651e27f9, type: 2}
+    conditions:
+    - expectedResult: 0
+      condition: {fileID: 11400000, guid: c5aa3cb679861394badd06c4f2e53ac2, type: 2}

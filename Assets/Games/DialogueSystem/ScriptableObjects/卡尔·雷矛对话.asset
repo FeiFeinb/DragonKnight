@@ -32,7 +32,7 @@ MonoBehaviour:
         expectedResult: 0
   rect:
     serializedVersion: 2
-    x: 581
+    x: 582
     y: 644
     width: 200
     height: 170
@@ -94,7 +94,7 @@ MonoBehaviour:
         expectedResult: 0
   rect:
     serializedVersion: 2
-    x: 598
+    x: 599
     y: 215
     width: 200
     height: 170

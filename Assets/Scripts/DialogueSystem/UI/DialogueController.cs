@@ -22,12 +22,17 @@ namespace RPG.DialogueSystem
         {
             // 完成初始化
             // 添加当对话文件改变时监听
-            PlayerDialogueManager.Instance.onDialogueChange += Show;
+            PlayerDialogueManager.Instance.onDialogueChange += (dialogueSO) =>
+            {
+                if (dialogueSO == null) Hide();
+                else Show();
+            };
             // 添加当对话节点改变时监听
             PlayerDialogueManager.Instance.onDialogueNodeChange += UpdateDialogue;
-            // 添加点击Next按钮时
+            // 添加点击Next按钮事件
             nextButton.onClick.AddListener(Next);
-            quitButton.onClick.AddListener(Hide);
+            // 添加点击Quit按钮事件
+            quitButton.onClick.AddListener(CloseDialogue);
         }
         public override void Show()
         {
@@ -37,9 +42,11 @@ namespace RPG.DialogueSystem
         }
         public override void Hide()
         {
-            // 关闭对话UI
-            PlayerDialogueManager.Instance.ResetDialogue();
             gameObject.SetActive(false);
+        }
+        public void CloseDialogue()
+        {
+            PlayerDialogueManager.Instance.ResetDialogue();
         }
         private void Next()
         {
@@ -52,7 +59,7 @@ namespace RPG.DialogueSystem
             if (PlayerDialogueManager.Instance.CurrentDialogueNode == null || PlayerDialogueManager.Instance.IsEmpty)
             {
                 // 不存在对话节点，则直接关闭窗口
-                Hide();
+                CloseDialogue();
                 return;
             }
             // 玩家主动或被动对话

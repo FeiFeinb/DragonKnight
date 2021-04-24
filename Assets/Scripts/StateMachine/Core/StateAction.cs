@@ -14,9 +14,19 @@ namespace RPG.StateMachine
         public virtual void OnStateEnter() {}
 
         /// <summary>
-        /// 每帧执行
+        /// Update执行
         /// </summary>
         public abstract void OnUpdate();
+
+        /// <summary>
+        /// FixedUpdate执行
+        /// </summary>
+        public virtual void OnFixedUpdate() {}
+
+        /// <summary>
+        /// LateUpdate执行
+        /// </summary>
+        public virtual void OnLateUpdate() {}
         public virtual void OnStateExit() {}
     }
 }
