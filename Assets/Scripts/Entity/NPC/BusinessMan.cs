@@ -4,38 +4,24 @@ using UnityEngine;
 using RPG.QuestSystem;
 using RPG.InventorySystem;
 using RPG.DialogueSystem;
+using RPG.Utility;
 namespace RPG.Entity
 {
     [RequireComponent(typeof(Animator), typeof(DialogueNPC), typeof(CapsuleCollider))]
     public class BusinessMan : BaseEntity
     {
-        public bool IsCollidePlayer => isCollidePlayer;
+        public bool IsCollidePlayer => collidePlayerCheck.IsCollide;
+        [SerializeField] private LayerMask targetLayer;             // 对象层级
         private Animator animator;
         private DialogueNPC dialogueNPC;
-        [SerializeField] private LayerMask targetLayer;             // 对象层级
-        private bool isCollidePlayer = false;
+        private OverlabSphereCheck collidePlayerCheck;
         private void Awake()
         {
             animator = GetComponent<Animator>();
             dialogueNPC = GetComponent<DialogueNPC>();
+            collidePlayerCheck = GetComponent<OverlabSphereCheck>();
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            int objectLayer = 1 << other.gameObject.layer;
-            if ((targetLayer.value & objectLayer) != 0)
-            {
-                isCollidePlayer = true;
-            }
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            int objectLayer = 1 << other.gameObject.layer;
-            if ((targetLayer.value & objectLayer) != 0)
-            {
-                isCollidePlayer = false;
-            }
-        }
-
+        
         public void StartQuest(QuestSO quest)
         {
             PlayerQuestManager.Instance.AddQuest(quest);

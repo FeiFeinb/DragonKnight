@@ -4,7 +4,7 @@ using UnityEngine;
 using RPG.Entity;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "BusinessManTalkStateActionSO", menuName = "FSM/BusinessMan/StateAction/Talk")]
+    [CreateAssetMenu(fileName = "BusinessManTalkStateActionSO", menuName = "StateMachine/BusinessMan/StateAction/Talk")]
     public class BusinessManTalkStateActionSO : StateActionSO<BusinessManTalkStateAction> {}
     public class BusinessManTalkStateAction : StateAction
     {

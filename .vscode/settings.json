@@ -53,5 +53,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "todo-tree.tree.showBadges": false
+    "todo-tree.tree.showBadges": false,
+    "todo-tree.tree.scanMode": "workspace"
 }

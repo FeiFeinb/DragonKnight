@@ -18,7 +18,7 @@ namespace RPG.StateMachine
         public bool expectedResult;           // 期望结果
         public StateConditionSO condition;      // 条件
     }
-    [CreateAssetMenu(fileName = "New TransitionTable", menuName = "FSM/TransitionTable")]
+    [CreateAssetMenu(fileName = "New TransitionTable", menuName = "StateMachine/TransitionTable")]
     public class TransitionTableSO : ScriptableObject
     {
         public State rootState => cachedState[0];                   // 获取根节点

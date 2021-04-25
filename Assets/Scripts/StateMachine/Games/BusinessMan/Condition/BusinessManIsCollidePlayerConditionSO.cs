@@ -4,7 +4,7 @@ using UnityEngine;
 using RPG.Entity;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "BusinessManIsCollidePlayerConditionSO", menuName = "FSM/BusinessMan/Condition/IsCollidePlayer")]
+    [CreateAssetMenu(fileName = "BusinessManIsCollidePlayerConditionSO", menuName = "StateMachine/BusinessMan/Condition/IsCollidePlayer")]
     public class BusinessManIsCollidePlayerConditionSO : StateConditionSO<BusinessManIsCollidePlayerCondition> {}
     public class BusinessManIsCollidePlayerCondition : Condition
     {

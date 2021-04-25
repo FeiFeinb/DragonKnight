@@ -25,7 +25,11 @@ namespace RPG.DialogueSystem
             PlayerDialogueManager.Instance.onDialogueChange += (dialogueSO) =>
             {
                 if (dialogueSO == null) Hide();
-                else Show();
+                else
+                {
+                    Show();
+                    UpdateDialogue();
+                }
             };
             // 添加当对话节点改变时监听
             PlayerDialogueManager.Instance.onDialogueNodeChange += UpdateDialogue;
@@ -34,24 +38,16 @@ namespace RPG.DialogueSystem
             // 添加点击Quit按钮事件
             quitButton.onClick.AddListener(CloseDialogue);
         }
-        public override void Show()
-        {
-            // 打开对话UI
-            gameObject.SetActive(true);
-            UpdateDialogue();
-        }
-        public override void Hide()
-        {
-            gameObject.SetActive(false);
-        }
-        public void CloseDialogue()
-        {
-            PlayerDialogueManager.Instance.ResetDialogue();
-        }
+
         private void Next()
         {
             // 推进节点进度
             PlayerDialogueManager.Instance.Next();
+        }
+        public void CloseDialogue()
+        {
+            // 关闭对话框
+            PlayerDialogueManager.Instance.ResetDialogue();
         }
         private void UpdateDialogue()
         {

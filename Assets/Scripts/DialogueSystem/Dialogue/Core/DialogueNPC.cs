@@ -6,7 +6,6 @@ using UnityEngine.Events;
 using RPG.DialogueSystem;
 namespace RPG.DialogueSystem
 {
-    [RequireComponent(typeof(SphereCollider))]
     public class DialogueNPC : MonoBehaviour
     {
         public DialogueSO DialogueContent => dialogueContent;
@@ -23,7 +22,7 @@ namespace RPG.DialogueSystem
         {
             PlayerDialogueManager.Instance?.ResetDialogue();
         }
-        public void OnDialogueTriggerEvent(string _dialogueEventID, string _dialogueUniqueID)
+        internal void OnDialogueTriggerEvent(string _dialogueEventID, string _dialogueUniqueID)
         {
             if (string.IsNullOrEmpty(_dialogueEventID)) return;
             foreach (DialogueEvent dialogueEvent in dialogueEvents)
@@ -35,7 +34,7 @@ namespace RPG.DialogueSystem
                 }
             }
         }
-        public void AddDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
+        internal void AddDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
         {
             // 设置对话节点中的EventID
             dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(_dialogueEventID);
@@ -43,7 +42,7 @@ namespace RPG.DialogueSystem
             // 在NPC身上添加事件
             dialogueEvents.Add(new DialogueEvent(_dialogueEventID, _dialogueAction));
         }
-        public void RemoveDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
+        internal void RemoveDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
         {
             // TODO: 当任务完成时或游戏退出时移除监听
             dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(string.Empty);

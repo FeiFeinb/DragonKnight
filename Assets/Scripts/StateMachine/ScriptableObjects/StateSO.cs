@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "New StateSO", menuName = "FSM/StateSO")]
+    [CreateAssetMenu(fileName = "New StateSO", menuName = "StateMachine/StateSO")]
     public class StateSO : ScriptableObject
     {
         [SerializeField] private StateActionSO[] stateActionSOs;    // 状态事件数列

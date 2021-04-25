@@ -5,7 +5,7 @@ using UnityEngine;
 using RPG.Entity;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "GetKeyDownEConditionSO", menuName = "FSM/Condition/GetKeyDownE")]
+    [CreateAssetMenu(fileName = "GetKeyDownEConditionSO", menuName = "StateMachine/Condition/GetKeyDownE")]
     public class GetKeyDownEConditionSO : StateConditionSO<GetKeyDownECondition> {}
     public class GetKeyDownECondition : Condition
     {

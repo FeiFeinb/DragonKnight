@@ -4,7 +4,7 @@ using UnityEngine;
 using RPG.DialogueSystem;
 namespace RPG.StateMachine
 {
-    [CreateAssetMenu(fileName = "BusinessManIsTalkingConditionSO", menuName = "FSM/BusinessMan/Condition/IsTalkingCondition")]
+    [CreateAssetMenu(fileName = "BusinessManIsTalkingConditionSO", menuName = "StateMachine/BusinessMan/Condition/IsTalkingCondition")]
     public class BusinessManIsTalkingConditionSO : StateConditionSO<BusinessManIsTalkingCondition> {}
     public class BusinessManIsTalkingCondition : Condition
     {
