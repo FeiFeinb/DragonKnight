@@ -41,7 +41,7 @@ namespace RPG.QuestSystem
                 tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.ExperienceStr);
                 questToolTipsRewards.Add(tempQuestToolTipsReward);
             }
-            if (questReward.itemID > -1)
+            if (questReward.itemObjAmount > 0)
             {
                 QuestToolTipsReward tempQuestToolTipsReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsReward>();
                 tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.ItemIDStr);

@@ -8,7 +8,6 @@ namespace RPG.QuestSystem
     {
         public Coin coin = default;     // 奖励金币
         public int experience = 0;      // 奖励经验
-        public int itemID = -1;         // 奖励物品
         public BaseItemObject itemObj;  // 奖励物品
         public int itemObjAmount;       // 奖励物品数量
         public string CoinStr
@@ -29,7 +28,7 @@ namespace RPG.QuestSystem
         {
             get
             {
-                return $"{itemID}号物品";
+                return $"{itemObj.name} x{itemObjAmount}";
             }
         }
     }

@@ -2,29 +2,20 @@ using UnityEngine;
 using UnityEditor;
 namespace RPG.Utility
 {
-    public class OverlabSphereCheck : MonoBehaviour
+    public class OverlabSphereCheck : BaseOverlabCheck
     {
-        public bool IsCollide => isCollide;
-        [SerializeField, DisplayOnly] private bool isCollide;
-        [SerializeField] private Vector3 localCenter;
-        [SerializeField] private float radius;
-        [SerializeField] private LayerMask collideLayer;
-        [SerializeField] private Color gizmosColor;
-        private Collider[] results = new Collider[5];
+        [SerializeField] private float radius;  // 判断半径
         private void Update()
         {
-            int resultsValue = Physics.OverlapSphereNonAlloc(transform.position, radius, results, collideLayer.value);
+            Vector3 checkVec = transform.position + new Vector3(0, heightOffSet, 0);
+            int resultsValue = Physics.OverlapSphereNonAlloc(checkVec, radius, results, collideLayer.value);
             isCollide = resultsValue > 0;
         }
-        private void OnDrawGizmosSelected()
+        protected override void OnDrawGizmosSelected()
         {
-
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = new Color(0, 0, 0, 0.2f);
-            Gizmos.DrawWireSphere(transform.position, radius);
-            Gizmos.DrawSphere(transform.position, radius);
+            base.OnDrawGizmosSelected();
+            Vector3 checkVec = transform.position + new Vector3(0, heightOffSet, 0);
+            Gizmos.DrawSphere(checkVec, radius);
         }
     }
 }
