@@ -1,54 +1,53 @@
-﻿using System.Text;
+﻿using System.Timers;
+using System.Text;
 using UnityEngine;
 using RPG.UI;
 using RPG.Module;
 using UnityEngine.UI;
 namespace RPG.InventorySystem
 {
+    public class ItemToolTipsContent
+    {
+        public ItemToolTipsContent(BaseItemObject _baseItemObject, ItemBuff[] _itemBuffs)
+        {
+            baseItemObject = _baseItemObject;
+            itemBuffs = _itemBuffs;
+        }
+        public BaseItemObject baseItemObject;
+        public ItemBuff[] itemBuffs;
+    }
     public class MouseItemTipsController : ToolTipsController
     {
-        [SerializeField, Tooltip("启用面板的事件延迟")] private float viewShowDelay = 1.5f;     // 目标计时时间
-        private InventorySlot currentInventorySlot;   // 鼠标指向插槽
-        private MouseItemTipsView mouseItemTipsView;// UI面板
-        private float viewShowTimer;                // 面板显示计时器
-        private bool isStartTimer;                  // 是否开启计时
-
         public static string storePath = "UIView/MouseItemTipsView";   // 路径
         public static MouseItemTipsController controller;
+        [SerializeField, Tooltip("启用面板的事件延迟")] private float viewShowDelay = 1.5f;     // 目标计时时间
+        // private InventorySlot currentInventorySlot;         // 鼠标指向插槽
+        // private BaseItemObject currentBaseItemObject;       // 鼠标指向所记录物品
+        private ItemToolTipsContent content;
+        private MouseItemTipsView mouseItemTipsView;        // UI面板
+        private float viewShowTimer;                        // 面板显示计时器
+        private bool isStartTimer;                          // 是否开启计时
+
         public override void PreInit()
         {
             base.PreInit();
             MonoEvent.Instance.AddUpdateEvent(TimerCount);
         }
-        public void OnEnter(InventorySlot _inventorySlot)
-        {
-            // 操作对象为非空插槽
-            if (!_inventorySlot.isEmpty)
-            {
-                // 开始计时
-                SetControllerState(true, _inventorySlot);
-            }
-        }
-        public void OnEnter(BaseItemObject baseItemObject)
-        {
 
-        }
-        public void OnExit(InventorySlot _inventorySlot)
+
+        public void OnEnter(ItemToolTipsContent itemToolTipsContent)
         {
-            // 操作对象为非空插槽
-            if (!_inventorySlot.isEmpty)
-            {
-                // 结束计时
-                SetControllerState(false, null);
-                // 退出时立刻隐藏
-                Hide();
-            }
+            SetControllerState(true, itemToolTipsContent);
+        }
+        public void OnExit(ItemToolTipsContent itemToolTipsContent)
+        {
+            // 结束计时
+            SetControllerState(false, null);
+            // 退出时立刻隐藏
+            Hide();
         }
 
-        public void OnExit(BaseItemObject baseItemObject)
-        {
 
-        }
         private string ColorCodeSplicing(string colorStr, string str)
         {
             StringBuilder strBuilder = new StringBuilder();
@@ -58,16 +57,23 @@ namespace RPG.InventorySystem
         private string AttributeText(ItemBuff[] itemBuff)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            // 设置属性值
             for (int i = 0; i < itemBuff.Length; i++)
             {
+                // 判断显示数值还是数值范围
+                // TODO: 判断此装备的属性对于玩家来说是增益还是减弱（绿字增幅红字减弱）
+                string showValue = itemBuff[i].value <= 0 ? $"{itemBuff[i].minValue} - {itemBuff[i].maxValue}" : $"{itemBuff[i].value}";
                 if (itemBuff[i].itemAttributeType == AttributeType.Armor)
                 {
-                    stringBuilder.Append(itemBuff[i].value).Append("点护甲");
+                    stringBuilder.Append(showValue).Append("点护甲");
                 }
                 else
                 {
-                    stringBuilder.Append(ColorCodeSplicing(ItemTextColor.GetAttributeColorStr(itemBuff[i].itemAttributeType), $"+{itemBuff[i].value} {itemBuff[i].itemAttributeType.ToChinese()}"));
+                    string colorStr = ItemTextColor.GetAttributeColorStr(itemBuff[i].itemAttributeType);
+                    string itemAttributeStr = string.Concat(showValue, itemBuff[i].itemAttributeType.ToChinese());
+                    stringBuilder.Append(ColorCodeSplicing(colorStr, itemAttributeStr));
                 }
+                // 在结尾处拼接换行符
                 if (i < itemBuff.Length - 1)
                 {
                     stringBuilder.Append("\n");
@@ -76,11 +82,11 @@ namespace RPG.InventorySystem
             return stringBuilder.ToString();
         }
 
-        private void SetControllerState(bool _isStartTimer, InventorySlot _inventorySlot)
+        private void SetControllerState(bool _isStartTimer, ItemToolTipsContent _itemToolTipsContent)
         {
             isStartTimer = _isStartTimer;
             viewShowTimer = 0;
-            currentInventorySlot = _inventorySlot;
+            content = _itemToolTipsContent;
         }
         private void TimerCount()
         {
@@ -103,12 +109,14 @@ namespace RPG.InventorySystem
                 mouseItemTipsView = _toolTipsObj.GetComponent<MouseItemTipsView>();
             }
             // 设置名称
-            string colorStr = ItemTextColor.GetRareColorStr(currentInventorySlot.itemObject.itemType.itemRare);
-            mouseItemTipsView.SetTipName(ColorCodeSplicing(colorStr, currentInventorySlot.itemObject.name));
+            string colorStr = ItemTextColor.GetRareColorStr(content.baseItemObject.itemType.itemRare);
+            mouseItemTipsView.SetTipName(ColorCodeSplicing(colorStr, content.baseItemObject.name));
             // 设置位置
-            mouseItemTipsView.SetTipPosition(currentInventorySlot.itemObject.itemType.GetTypeString());
+            mouseItemTipsView.SetTipPosition(content.baseItemObject.itemType.GetTypeString());
             // 设置装备属性
-            string attributeStr = AttributeText(currentInventorySlot.slotData.itemData.itemBuffs);
+
+            string attributeStr = AttributeText(content.itemBuffs);
+
             mouseItemTipsView.SetTipAttribute(attributeStr);
             // TODO: 设置装备需求
 

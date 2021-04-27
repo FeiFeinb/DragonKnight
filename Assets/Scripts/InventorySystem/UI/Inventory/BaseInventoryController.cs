@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -42,7 +43,7 @@ namespace RPG.InventorySystem
                 uiInventorySlot.SetItemAmount(string.Empty);
             }
         }
-        
+
         protected void AddSlotEvent(GameObject obj)
         {
             // 添加监听事件
@@ -60,14 +61,22 @@ namespace RPG.InventorySystem
         // 指针进入插槽
         private void OnPointerEnterSlot(GameObject obj)
         {
-            MouseItemIcon.controller.SetHoverObj(GetSlot(obj));
-            MouseItemTipsController.controller.OnEnter(GetSlot(obj));
+            InventorySlot slot = GetSlot(obj);
+            MouseItemIcon.controller.SetHoverObj(slot);
+            if (!slot.isEmpty)
+            {
+                MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(slot.itemObject, slot.slotData.itemData.itemBuffs));
+            }
         }
         // 指针离开插槽
         private void OnPointerExitSlot(GameObject obj)
         {
+            InventorySlot slot = GetSlot(obj);
             MouseItemIcon.controller.SetHoverObj(null);
-            MouseItemTipsController.controller.OnExit(GetSlot(obj));
+            if (!slot.isEmpty)
+            {
+                MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(slot.itemObject, slot.slotData.itemData.itemBuffs));
+            }
         }
         // 指针进入UI
         private void OnPointerEnterUI()

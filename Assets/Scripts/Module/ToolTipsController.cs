@@ -14,7 +14,6 @@ namespace RPG.Module
             DownLeft,       // 左下角
             DownRight       // 右下角
         }
-        // private GameObject toolTipsObj;
         private RectTransform toolTipsRect;
         public override void PreInit()
         {

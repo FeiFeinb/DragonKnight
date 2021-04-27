@@ -6,10 +6,10 @@ namespace RPG.QuestSystem
 {
     public class QuestToolTipsController : ToolTipsController
     {
-        private QuestToolTipsView questToolTipsView;
-        private PlayerQuestStatus currentQuest;
         public static string storePath = "UIView/QuestToolTipsView";   // 路径
         public static QuestToolTipsController controller;
+        private QuestToolTipsView questToolTipsView;
+        private PlayerQuestStatus currentQuest;
 
         public override void UpdateToolTips(GameObject _toolTipsObj)
         {

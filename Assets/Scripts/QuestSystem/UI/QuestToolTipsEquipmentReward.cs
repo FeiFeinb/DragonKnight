@@ -26,11 +26,11 @@ namespace RPG.QuestSystem
         }
         private void OnPointerEnterSlot(BaseItemObject baseItemObject)
         {
-            MouseItemTipsController.controller.OnEnter(baseItemObject);
+            MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(baseItemObject, baseItemObject.item.itemBuffs));
         }
         private void OnPointerExitSlot(BaseItemObject baseItemObject)
         {
-            MouseItemTipsController.controller.OnExit(baseItemObject);
+            MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(baseItemObject, baseItemObject.item.itemBuffs));
 
         }
     }
