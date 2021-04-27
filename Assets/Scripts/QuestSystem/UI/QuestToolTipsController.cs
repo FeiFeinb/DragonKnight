@@ -4,10 +4,13 @@ using UnityEngine;
 using RPG.Module;
 namespace RPG.QuestSystem
 {
-    public class QuestToolTipsController : ToolTipsController<QuestToolTipsController>
+    public class QuestToolTipsController : ToolTipsController
     {
         private QuestToolTipsView questToolTipsView;
         private PlayerQuestStatus currentQuest;
+        public static string storePath = "UIView/QuestToolTipsView";   // 路径
+        public static QuestToolTipsController controller;
+
         public override void UpdateToolTips(GameObject _toolTipsObj)
         {
             if (questToolTipsView == null)

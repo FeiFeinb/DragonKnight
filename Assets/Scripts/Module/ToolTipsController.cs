@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using RPG.UI;
 namespace RPG.Module
 {
-    public abstract class ToolTipsController<T> : BaseSingletonWithMono<T> where T : MonoBehaviour
+    public abstract class ToolTipsController : BaseUIController
     {
         public enum ViewDirection
         {
@@ -14,38 +14,29 @@ namespace RPG.Module
             DownLeft,       // 左下角
             DownRight       // 右下角
         }
-        public bool isActive
-        {
-            get
-            {
-                return toolTipsObj.activeSelf;
-            }
-        }
-        [SerializeField] private string toolTipsPrefabPath;
-        private GameObject toolTipsObj;
+        // private GameObject toolTipsObj;
         private RectTransform toolTipsRect;
-        protected virtual void Start()
+        public override void PreInit()
         {
-            toolTipsObj = UIResourcesManager.Instance.LoadUserInterface(new UIStoreInfo(toolTipsPrefabPath));
-            toolTipsRect = toolTipsObj.transform as RectTransform;
+            toolTipsRect = gameObject.transform as RectTransform;
         }
-        protected void Show()
+        public override void Show()
         {
             // 与关闭状态重新开启时才需要UpdateToolTips
             if (ShouldUpdateToolTips())
             {
-                UpdateToolTips(toolTipsObj);
+                UpdateToolTips(gameObject);
             }
             SetRectTransform();
-            toolTipsObj?.SetActive(true);
+            gameObject?.SetActive(true);
         }
-        protected void Hide()
+        public override void Hide()
         {
-            toolTipsObj?.SetActive(false);
+            gameObject?.SetActive(false);
         }
         public virtual bool ShouldUpdateToolTips()
         {
-            return !toolTipsObj.activeSelf;
+            return !gameObject.activeSelf;
         }
         public abstract void UpdateToolTips(GameObject _toolTipsObj);
 

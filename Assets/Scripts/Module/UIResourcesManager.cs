@@ -15,8 +15,8 @@ namespace RPG.Module
         /// <summary>
         /// 自动加载UI至场景Canvas下 并调用PreInit
         /// </summary>
-        /// <param name="storeInfo"></param>
-        /// <returns></returns>
+        /// <param name="storeInfo">UI存储信息</param>
+        /// <returns>加载完成的GameObject</returns>
         public GameObject LoadUserInterface(UIStoreInfo storeInfo)
         {
             // 加载UI 并自动创建至场景中
@@ -29,6 +29,11 @@ namespace RPG.Module
             return tempUIRes;
         }
 
+        /// <summary>
+        /// 自动加载UI至场景Canvas下 并调用PreInit
+        /// </summary>
+        /// <param name="loadPrefab">UI预制体</param>
+        /// <returns>加载完成的GameObject</returns>
         public GameObject LoadUserInterface(GameObject loadPrefab)
         {
             // 克隆物件 并自动创建至场景中
@@ -40,6 +45,13 @@ namespace RPG.Module
             iPreInit?.PreInit();
             return tempUIRes;
         }
+        
+        /// <summary>
+        /// 自动加载UI至给定的父节点下 并调用PreInit
+        /// </summary>
+        /// <param name="loadPrefab">UI预制体</param>
+        /// <param name="parents">加载完成的GameObject</param>
+        /// <returns></returns>
         public GameObject LoadUserInterface(GameObject loadPrefab, Transform parents)
         {
             // 克隆物件 并自动创建至场景中

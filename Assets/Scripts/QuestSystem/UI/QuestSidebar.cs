@@ -20,13 +20,13 @@ namespace RPG.QuestSystem
             // 设置按钮点击事件
             questIndexButton.onClick.AddListener(() =>
             {
-                if (!QuestToolTipsController.Instance.isActive)
+                if (!QuestToolTipsController.controller.isActive)
                 {
-                    QuestToolTipsController.Instance.OnEnter(questStatus);
+                    QuestToolTipsController.controller.OnEnter(questStatus);
                 }
                 else
                 {
-                    QuestToolTipsController.Instance.OnExit(questStatus);
+                    QuestToolTipsController.controller.OnExit(questStatus);
                 }
             });
             // 设置任务标题

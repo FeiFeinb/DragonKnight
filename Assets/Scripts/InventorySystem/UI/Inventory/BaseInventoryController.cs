@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using RPG.UI;
+using RPG.Module;
+
 namespace RPG.InventorySystem
 {
     [RequireComponent(typeof(EventTrigger))]
@@ -19,48 +21,38 @@ namespace RPG.InventorySystem
                 slots[i].OnAfterUpdate += OnSlotUpdate;
             }
             // 鼠标进出UI背景事件
-            AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnPointerEnterUI(); });
-            AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnPointerExitUI(); });
+            EventTriggerManager.Instance.AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnPointerEnterUI(); });
+            EventTriggerManager.Instance.AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnPointerExitUI(); });
         }
         protected void OnSlotUpdate(int slotIndex)
         {
             //  获取到UI所记录的背包的插槽
             var slot = GetSlots()[slotIndex];
-            Transform slotUITrans = GetSlotUI(slot).transform;
+            UIInventorySlot uiInventorySlot = GetSlotUI(slot).GetComponent<UIInventorySlot>();
             // 该插槽有物体
             if (slot.slotData.itemData.id >= 0)
             {
-                slotUITrans.GetChild(0).GetComponentInChildren<Image>().sprite = slot.itemObject.sprite;
-                slotUITrans.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = slot.slotData.amount == 1 ? "" : slot.slotData.amount.ToString("n0");
+                uiInventorySlot.SetItemSprite(slot.itemObject.sprite);
+                uiInventorySlot.SetItemAmount(slot.slotData.amount == 1 ? string.Empty : slot.slotData.amount.ToString("n0"));
             }
             // 该插槽无物体
             else
             {
-                slotUITrans.GetChild(0).GetComponentInChildren<Image>().sprite = uiMask;
-                slotUITrans.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "";
+                uiInventorySlot.SetItemSprite(uiMask);
+                uiInventorySlot.SetItemAmount(string.Empty);
             }
         }
-        protected void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
-        {
-            // 获取EventTrigger
-            EventTrigger trigger = obj.GetComponent<EventTrigger>();
-            // 新建监听
-            var eventTrigger = new EventTrigger.Entry();
-            eventTrigger.eventID = type;
-            eventTrigger.callback.AddListener(action);
-            // 添加监听
-            trigger.triggers.Add(eventTrigger);
-        }
+        
         protected void AddSlotEvent(GameObject obj)
         {
             // 添加监听事件
-            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnPointerEnterSlot(obj); });  // 鼠标进入插槽
-            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnPointerExitSlot(obj); });    // 鼠标推出插槽
-            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnBeginDrag(obj); });            // 开始拖动插槽
-            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });                      // 拖动插槽途中
-            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnEndDrag(obj); });                // 结束拖动插槽
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnPointerEnterSlot(obj); });  // 鼠标进入插槽
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.PointerExit, delegate { OnPointerExitSlot(obj); });    // 鼠标推出插槽
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnBeginDrag(obj); });            // 开始拖动插槽
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });                      // 拖动插槽途中
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.EndDrag, delegate { OnEndDrag(obj); });                // 结束拖动插槽
             // 右键点击插槽
-            AddEvent(obj, EventTriggerType.PointerClick, (baseEventData) =>
+            EventTriggerManager.Instance.AddEvent(obj, EventTriggerType.PointerClick, (baseEventData) =>
             {
                 if ((baseEventData as PointerEventData)?.button == PointerEventData.InputButton.Right) { OnRightMouseClick(obj); }
             });
@@ -69,13 +61,13 @@ namespace RPG.InventorySystem
         private void OnPointerEnterSlot(GameObject obj)
         {
             MouseItemIcon.controller.SetHoverObj(GetSlot(obj));
-            MouseItemTipsController.Instance.OnEnter(GetSlot(obj));
+            MouseItemTipsController.controller.OnEnter(GetSlot(obj));
         }
         // 指针离开插槽
         private void OnPointerExitSlot(GameObject obj)
         {
             MouseItemIcon.controller.SetHoverObj(null);
-            MouseItemTipsController.Instance.OnExit(GetSlot(obj));
+            MouseItemTipsController.controller.OnExit(GetSlot(obj));
         }
         // 指针进入UI
         private void OnPointerEnterUI()
@@ -124,7 +116,7 @@ namespace RPG.InventorySystem
         public override void Hide()
         {
             // 如果两个界面打开 则禁止关闭
-            if (MouseItemIcon.controller.isActive || MouseItemTipsController.Instance.isActive) return;
+            if (MouseItemIcon.controller.isActive || MouseItemTipsController.controller.isActive) return;
             base.Hide();
         }
         protected abstract InventorySlot[] GetSlots();

@@ -7,10 +7,10 @@ namespace RPG.InventorySystem
     [System.Serializable]
     public class ItemBuff : IModifier
     {
-        public AttributeType itemAttributeType;                 // 物品属性
-        [DisplayOnly, Tooltip("属性值")] public int value;      // 属性值
-        [SerializeField] private int minValue;                  // 最小随机值
-        [SerializeField] private int maxValue;                  // 最大随机值
+        public AttributeType itemAttributeType;                         // 物品属性
+        [DisplayOnly, Tooltip("属性值")] public int value;              // 属性值
+        [Tooltip("属性最小值")] public int minValue;                    // 最小随机值
+        [Tooltip("属性最小值")] public int maxValue;                    // 最大随机值
         public ItemBuff(ItemBuff _itemBuff)
         {
             itemAttributeType = _itemBuff.itemAttributeType;

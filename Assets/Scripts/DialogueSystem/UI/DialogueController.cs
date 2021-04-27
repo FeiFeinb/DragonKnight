@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.UI;
+using RPG.Utility;
 namespace RPG.DialogueSystem
 {
     public class DialogueController : BaseUIController

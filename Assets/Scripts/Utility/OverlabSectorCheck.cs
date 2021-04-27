@@ -12,6 +12,11 @@ namespace RPG.Utility
         {
             Vector3 checkVec = transform.position + new Vector3(0, heightOffSet, 0);
             int resultsValue = Physics.OverlapSphereNonAlloc(checkVec, radius, results, collideLayer.value);
+            if (resultsValue <= 0)
+            {
+                isCollide = false;
+                return;
+            }
             isCollide = Mathf.Abs(Vector3.Angle(results[0].transform.position - transform.position, transform.forward)) < angle;
         }
         protected override void OnDrawGizmosSelected()

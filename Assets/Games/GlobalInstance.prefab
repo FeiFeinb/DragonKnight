@@ -17,8 +17,7 @@ GameObject:
   - component: {fileID: 179839966218944750}
   - component: {fileID: 179839966218944751}
   - component: {fileID: 179839966218944754}
-  - component: {fileID: 179839966218944749}
-  - component: {fileID: 179839966218944748}
+  - component: {fileID: 528081226838302861}
   m_Layer: 0
   m_Name: GlobalInstance
   m_TagString: Untagged
@@ -53,8 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDataBase: {fileID: 11400000, guid: 6d027878d5577ff45867b10932e7a7f2, type: 2}
-  characterInfoDataBase: {fileID: 11400000, guid: 3e7b9a6c77232a14d9d7c1d4d75e3c0e,
-    type: 2}
+  characterInfoDataBase: {fileID: 11400000, guid: 3e7b9a6c77232a14d9d7c1d4d75e3c0e, type: 2}
 --- !u!114 &179839966218944758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c526558b550dbf748b63d036a93ff1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &179839966218944749
+--- !u!114 &528081226838302861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,21 +149,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 179839966218944759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16216bf90ecbe84fa185fff430f7ead, type: 3}
+  m_Script: {fileID: 11500000, guid: 367ba7d9f9a75fa41883e711626f25a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolTipsPrefabPath: UIView/MouseItemTipsView
-  viewShowDelay: 0.3
---- !u!114 &179839966218944748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179839966218944759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3124e44b4e6d27c4c8888804ded79a18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolTipsPrefabPath: UiView/QuestToolTipsView

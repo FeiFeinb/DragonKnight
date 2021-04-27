@@ -5,7 +5,7 @@ using RPG.Module;
 using UnityEngine.UI;
 namespace RPG.InventorySystem
 {
-    public class MouseItemTipsController : ToolTipsController<MouseItemTipsController>
+    public class MouseItemTipsController : ToolTipsController
     {
         [SerializeField, Tooltip("启用面板的事件延迟")] private float viewShowDelay = 1.5f;     // 目标计时时间
         private InventorySlot currentInventorySlot;   // 鼠标指向插槽
@@ -13,10 +13,11 @@ namespace RPG.InventorySystem
         private float viewShowTimer;                // 面板显示计时器
         private bool isStartTimer;                  // 是否开启计时
 
-
-        protected override void Start()
+        public static string storePath = "UIView/MouseItemTipsView";   // 路径
+        public static MouseItemTipsController controller;
+        public override void PreInit()
         {
-            base.Start();
+            base.PreInit();
             MonoEvent.Instance.AddUpdateEvent(TimerCount);
         }
         public void OnEnter(InventorySlot _inventorySlot)
@@ -27,6 +28,10 @@ namespace RPG.InventorySystem
                 // 开始计时
                 SetControllerState(true, _inventorySlot);
             }
+        }
+        public void OnEnter(BaseItemObject baseItemObject)
+        {
+
         }
         public void OnExit(InventorySlot _inventorySlot)
         {
@@ -40,6 +45,10 @@ namespace RPG.InventorySystem
             }
         }
 
+        public void OnExit(BaseItemObject baseItemObject)
+        {
+
+        }
         private string ColorCodeSplicing(string colorStr, string str)
         {
             StringBuilder strBuilder = new StringBuilder();

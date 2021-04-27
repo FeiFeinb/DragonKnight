@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.Module;
+using RPG.Utility;
 namespace RPG.QuestSystem
 {
     public class QuestToolTipsView : MonoBehaviour
     {
         [SerializeField] private GameObject questToolTipsObjectivePrefab;       // 提示栏任务目标预制体
         [SerializeField] private GameObject questToolTipsRewardPrefab;          // 提示栏任务奖励预制体
+        [SerializeField] private GameObject questToolTipsEquipmentRewardPrefab; // 提示人任务装备奖励预制体
         [SerializeField] private RectTransform questToolTipsObjectiveContainer; // 提示栏任务目标Container
         [SerializeField] private RectTransform questToolTipsRewardContainer;    // 提示栏任务奖励Container
         [SerializeField] private Text questResumeText;
@@ -29,23 +31,26 @@ namespace RPG.QuestSystem
         public void SetQuestReward(QuestReward questReward)
         {
             // 检查有效奖励的数量
+            // 设置金币
             if (!questReward.coin.isEmpty)
             {
                 QuestToolTipsReward tempQuestToolTipsReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsReward>();
                 tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.CoinStr);
-                questToolTipsRewards.Add(tempQuestToolTipsReward);
+                // questToolTipsRewards.Add(tempQuestToolTipsReward);
             }
+            // 设置经验
             if (questReward.experience > 0)
             {
                 QuestToolTipsReward tempQuestToolTipsReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsReward>();
                 tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.ExperienceStr);
-                questToolTipsRewards.Add(tempQuestToolTipsReward);
+                // questToolTipsRewards.Add(tempQuestToolTipsReward);
             }
+            // 设置装备
             if (questReward.itemObjAmount > 0)
             {
-                QuestToolTipsReward tempQuestToolTipsReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsReward>();
-                tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.ItemIDStr);
-                questToolTipsRewards.Add(tempQuestToolTipsReward);
+                QuestToolTipsEquipmentReward tempQuestToolTipsEquipmentReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsEquipmentRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsEquipmentReward>();
+                tempQuestToolTipsEquipmentReward.SetQuestToolTipsReward(questReward.itemObj, questReward.itemObjAmount);
+                // questToolTipsRewards.Add(tempQuestToolTipsEquipmentReward);
             }
         }
         public void Clear()
@@ -56,11 +61,12 @@ namespace RPG.QuestSystem
                 Destroy(_questObjectiveUI.gameObject);
             }
             questObjectiveUIs.Clear();
-            foreach (var _questToolTipsReward in questToolTipsRewards)
-            {
-                Destroy(_questToolTipsReward.gameObject);
-            }
-            questToolTipsRewards.Clear();
+            questToolTipsRewardContainer.DestroyChildren();
+            // foreach (var _questToolTipsReward in questToolTipsRewards)
+            // {
+            //     Destroy(_questToolTipsReward.gameObject);
+            // }
+            // questToolTipsRewards.Clear();
         }
     }
 }

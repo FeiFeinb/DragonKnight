@@ -17,6 +17,8 @@ namespace RPG.Module
             SavingController.controller = InitController<SavingController>(SavingController.storePath);
             DialogueController.controller = InitController<DialogueController>(DialogueController.storePath);
             QuestSidebarController.controller = InitController<QuestSidebarController>(QuestSidebarController.storePath);
+            QuestToolTipsController.controller = InitController<QuestToolTipsController>(QuestToolTipsController.storePath);
+            MouseItemTipsController.controller = InitController<MouseItemTipsController>(MouseItemTipsController.storePath);
         }
         private T InitController<T>(string _storePath) where T : BaseUIController
         {
