@@ -10,11 +10,11 @@ namespace RPG.Module
         {
             get
             {
-                if (instance == null)
+                if (!instance)
                 {
                     instance = FindObjectOfType(typeof(T)) as T;
                 }
-                if (instance == null)
+                if (!instance)
                 {
                     var tempObj = new GameObject(typeof(T).ToString());
                     instance = tempObj.AddComponent<T>();

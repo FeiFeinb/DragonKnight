@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 using RPG.Utility;
 namespace RPG.Entity
 {
-    [RequireComponent(typeof(OverlabSphereCheck))]
+    [RequireComponent(typeof(OverlabSphereCheck), typeof(OverlabSectorCheck))]
     public class AimRigging : MonoBehaviour
     {
         [SerializeField] private float aimSpeed;                // 朝向速度

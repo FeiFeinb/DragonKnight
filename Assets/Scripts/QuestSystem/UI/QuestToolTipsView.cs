@@ -32,7 +32,7 @@ namespace RPG.QuestSystem
         {
             // 检查有效奖励的数量
             // 设置金币
-            if (!questReward.coin.isEmpty)
+            if (!questReward.coin.IsZero)
             {
                 QuestToolTipsReward tempQuestToolTipsReward = UIResourcesManager.Instance.LoadUserInterface(questToolTipsRewardPrefab, questToolTipsRewardContainer).GetComponent<QuestToolTipsReward>();
                 tempQuestToolTipsReward.SetQuestToolTipsReward(questReward.CoinStr);
