@@ -29,19 +29,9 @@ namespace RPG.Entity
 
         public void SubmitQuest(QuestSO quest)
         {
-            // TODO: 使任务UI显示奖励物品
-            // TODO: 完成与NPC对话AddItem
+            // TODO: 创建任务管理类 进行奖励的分配
             Debug.Log(string.Concat("完成了任务", quest.questTitle));
-            // TODO: 创建物品生成类
-            for (int i = 0; i < quest.questReward.itemObjAmount; i++)
-            {
-                ItemData newItem = new ItemData(quest.questReward.itemObj);
-                newItem.itemBuffs.RenerateValues();
-                if (!PlayerInventoryManager.Instance.inventoryObject.AddItem(newItem, 1))
-                {
-                    Debug.Log("背包已满");
-                }
-            }
+            PlayerQuestRewardManager.Instance.SendReward(quest.questReward);
             // 任务提交完成 移除任务
             PlayerQuestManager.Instance.RemoveQuest(quest);
         }

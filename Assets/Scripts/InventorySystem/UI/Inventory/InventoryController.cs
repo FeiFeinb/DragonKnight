@@ -1,38 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+using RPG.TradeSystem;
 using UnityEngine.UI;
-using TMPro;
+
 namespace RPG.InventorySystem
 {
     public class InventoryController : BaseInventoryController
     {
         public static string storePath = "UIView/InventoryView";
         public static InventoryController controller;
-
+        
         public PlayerInventoryObject playerInventoryObject;     // 显示哪个背包
-        public Dictionary<GameObject, InventorySlot> slotDic = new Dictionary<GameObject, InventorySlot>();   // 字典
-        public Dictionary<InventorySlot, GameObject> slotUIDic = new Dictionary<InventorySlot, GameObject>(); // 字典
-
+        
         [SerializeField] private GameObject inventorySlotPrefab;        // 物品插槽预制体
-        [SerializeField] private GameObject gridLayOutObj;              // 排列物件
+        [SerializeField] private Transform slotContainerTrans;          // 排列物品格子容器
+        [SerializeField] private Text coinText;                         // 货币Text
+        private Dictionary<GameObject, InventorySlot> slotDic = new Dictionary<GameObject, InventorySlot>();   // UI-插槽字典
+        private Dictionary<InventorySlot, GameObject> slotUIDic = new Dictionary<InventorySlot, GameObject>(); // 插槽-UI字典
+
 
         public override void PreInit()
         {
             base.PreInit();
             // 将对应的GameObject与对应的InventorySlot绑定
-            for (int i = 0; i < playerInventoryObject.inventorySlots.Length; i++)
+            foreach (InventorySlot slot in playerInventoryObject.inventorySlots)
             {
                 // 生成空物品栏
-                var itemObject = GameObject.Instantiate(inventorySlotPrefab, gridLayOutObj.transform);
-                slotDic.Add(itemObject, playerInventoryObject.inventorySlots[i]);
-                slotUIDic.Add(playerInventoryObject.inventorySlots[i], itemObject);
+                var itemObject = GameObject.Instantiate(inventorySlotPrefab, slotContainerTrans);
+                slotDic.Add(itemObject, slot);
+                slotUIDic.Add(slot, itemObject);
                 AddSlotEvent(itemObject);
-                // 开启之后做一次插槽的更新
-                // OnSlotUpdate(i);
             }
+            // 添加货币变更监听
+            PlayerTradeManager.Instance.AddListener(UpdateCoinText);
         }
 
 
@@ -49,6 +50,11 @@ namespace RPG.InventorySystem
         protected override GameObject GetSlotUI(InventorySlot keySlot)
         {
             return slotUIDic[keySlot];
+        }
+
+        private void UpdateCoinText(string coinStr)
+        {
+            coinText.text = coinStr;
         }
     }
 }

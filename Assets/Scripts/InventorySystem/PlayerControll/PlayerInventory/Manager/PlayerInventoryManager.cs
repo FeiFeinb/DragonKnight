@@ -27,7 +27,7 @@ namespace RPG.InventorySystem
                 }
                 else
                 {
-                    Debug.Log("背包已满，无法销毁物体");
+                    Debug.Log("背包已满，无法捡起物体");
                 }
                 // 背包已满逻辑
             }

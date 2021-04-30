@@ -17,6 +17,22 @@ namespace RPG.TradeSystem
                 return goldCoin == 0 && silverCoin == 0 && copperCoin == 0;
             }
         }
+
+        public int value
+        {
+            get
+            {
+                return goldCoin * 100 * 100 + silverCoin * 100 + copperCoin;
+            }
+        }
+
+        public string coinStr
+        {
+            get
+            {
+                return $"{goldCoin} 金 {silverCoin} 银 {copperCoin} 铜";
+            }
+        }
         public int goldCoin;            // 金币
         public int silverCoin;          // 银币
         public int copperCoin;          // 铜币
@@ -63,7 +79,7 @@ namespace RPG.TradeSystem
             }
             else
             {
-                silverCoin = addValue;
+                copperCoin = addValue;
             }
         }
 
@@ -96,7 +112,7 @@ namespace RPG.TradeSystem
             }
             else
             {
-                silverCoin = subValue;
+                copperCoin = subValue;
             }
         }
         

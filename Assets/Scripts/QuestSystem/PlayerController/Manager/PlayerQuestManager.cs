@@ -11,6 +11,7 @@ namespace RPG.QuestSystem
         [SerializeField] private List<PlayerQuestStatus> playerQuestStatuses = new List<PlayerQuestStatus>();     // 玩家任务数列
         private Action onQuestUpdate;              // 任务更新
         private Action onQuestObjectiveUpdate;     //  任务目标更新
+        // TODO: 保存任务进度
         public void UpdateQuest()
         {
             onQuestUpdate?.Invoke();

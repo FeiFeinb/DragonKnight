@@ -17,8 +17,8 @@ MonoBehaviour:
   questReward:
     coin:
       goldCoin: 0
-      silverCoin: 0
-      copperCoin: 0
+      silverCoin: 20
+      copperCoin: 60
     experience: 200
     itemObj: {fileID: 11400000, guid: 8b4c8fe3b31f9a44a963b0fa414d0a7b, type: 2}
     itemObjAmount: 3

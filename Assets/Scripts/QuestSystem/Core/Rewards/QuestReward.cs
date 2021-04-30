@@ -14,7 +14,7 @@ namespace RPG.QuestSystem
         {
             get
             {
-                return $"{coin.goldCoin}金 {coin.silverCoin}银 {coin.copperCoin}铜";
+                return coin.coinStr;
             }
         }
         public string ExperienceStr
