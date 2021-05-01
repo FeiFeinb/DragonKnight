@@ -29,14 +29,18 @@ namespace RPG.QuestSystem
                     QuestToolTipsController.controller.OnExit(questStatus);
                 }
             });
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestSOUniqueID, out QuestSO questSO))
+            {
+                Debug.LogError("Cant Find Quest");
+            }
             // 设置任务标题
-            questTitle.text = questStatus.quest.questTitle;
+            questTitle.text = questSO.questTitle;
             // 设置任务目标
-            foreach (QuestObjective questObjective in questStatus.quest.GetObjectives())
+            foreach (QuestObjective questObjective in questSO.GetObjectives())
             {
                 // 生成并初始化侧栏任务目标
                 QuestObjectiveUI tempQuestObjectiveUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
-                tempQuestObjectiveUI.SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.ObjectiveTarget, questObjective.ObjectiveDescription);
+                tempQuestObjectiveUI.SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.Target, questObjective.Description);
                 // 添加记录至数列中
                 objectiveDic.Add(questObjective, tempQuestObjectiveUI);
             }
@@ -54,11 +58,15 @@ namespace RPG.QuestSystem
         }
         public void UpdateState(PlayerQuestStatus questStatus)
         {
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestSOUniqueID, out QuestSO questSO))
+            {
+                Debug.LogError("Cant Find Quest");
+            }
             // 只更新进度
-            foreach (QuestObjective questObjective in questStatus.quest.GetObjectives())
+            foreach (QuestObjective questObjective in questSO.GetObjectives())
             {
                 // 生成并初始化侧栏任务目标
-                objectiveDic[questObjective].SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.ObjectiveTarget, questObjective.ObjectiveDescription);
+                objectiveDic[questObjective].SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.Target, questObjective.Description);
             }
         }
         public void Clear()

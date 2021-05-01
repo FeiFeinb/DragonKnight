@@ -33,7 +33,7 @@ namespace RPG.InventorySystem
                 AddSlotEvent(itemObject);
             }
             // 添加货币变更监听
-            PlayerTradeManager.Instance.AddListener(UpdateCoinText);
+            PlayerTradeManager.Instance.AddOnCoinUpdateListener(UpdateCoinText);
         }
 
 

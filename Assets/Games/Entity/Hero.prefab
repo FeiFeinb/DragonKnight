@@ -34151,12 +34151,12 @@ GameObject:
   - component: {fileID: 2293864111158712402}
   - component: {fileID: 2199260235067961538}
   - component: {fileID: 2199260235067961539}
+  - component: {fileID: 2199260235067961536}
   - component: {fileID: 2199260235067961548}
   - component: {fileID: 2199260235067961549}
   - component: {fileID: 2199260235067961541}
   - component: {fileID: 2199260235067961542}
   - component: {fileID: 2199260235067961543}
-  - component: {fileID: 2199260235067961536}
   - component: {fileID: 2199260235067961537}
   m_Layer: 6
   m_Name: Hero
@@ -34232,6 +34232,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2199260235067961536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199260235067961550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12129b9c25557224bbde8d1b58a35389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2199260235067961548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34340,18 +34352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialoguePlayerInfo: {fileID: 11400000, guid: 1db953ddf169d67419f8595c3c3de64f, type: 2}
---- !u!114 &2199260235067961536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199260235067961550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12129b9c25557224bbde8d1b58a35389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2199260235067961537
 MonoBehaviour:
   m_ObjectHideFlags: 0

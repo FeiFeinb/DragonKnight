@@ -34,22 +34,20 @@ namespace RPG.DialogueSystem
                 }
             }
         }
-        internal void AddDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
+        internal void AddDialogueEnterEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
         {
             // 设置对话节点中的EventID
             dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(_dialogueEventID);
             // TODO: 设置对话节点中的Condition
             // 在NPC身上添加事件
+            // TODO: 判定列表中是否存在此事件 若存在则直接往事件中AddListener
             dialogueEvents.Add(new DialogueEvent(_dialogueEventID, _dialogueAction));
         }
-        internal void RemoveDialogueEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
+        internal void RemoveDialogueEnterEvent(string _dialogueUniqueID, string _dialogueEventID)
         {
-            // TODO: 当任务完成时或游戏退出时移除监听
             dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(string.Empty);
-            dialogueEvents.Remove(dialogueEvents.Find((dialogueEvent) =>
-            {
-                return (dialogueEvent.dialogueEventID == _dialogueEventID);
-            }));
+            // 移除整个Event
+            dialogueEvents.Remove(dialogueEvents.Find((dialogueEvent) => (dialogueEvent.dialogueEventID == _dialogueEventID)));
         }
     }
 }

@@ -11,6 +11,7 @@ namespace RPG.Module
         // 进入场景时加载UI资源
         private void Start()
         {
+            // TODO: 新建资源初始化类 管理所有类的Start顺序和PreInit顺序
             InventoryController.controller = InitController<InventoryController>(InventoryController.storePath);
             EquipmentController.controller = InitController<EquipmentController>(EquipmentController.storePath);
             MouseItemIcon.controller = InitController<MouseItemIcon>(MouseItemIcon.storePath);

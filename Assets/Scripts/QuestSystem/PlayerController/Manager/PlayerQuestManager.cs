@@ -1,22 +1,32 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem;
+using RPG.SaveSystem;
+using UnityEngine.TextCore.LowLevel;
+
 namespace RPG.QuestSystem
 {
-    public class PlayerQuestManager : BaseSingletonWithMono<PlayerQuestManager>, IPredicateEvaluators
+    public class PlayerQuestManager : BaseSingletonWithMono<PlayerQuestManager>, IPredicateEvaluators, ISaveable
     {
+        public QuestSO testKillQuest;
+
+        [ContextMenu("AddTestKillQuest")]
+        public void AddTestKillQuest()
+        {
+            AddQuest(testKillQuest);
+        }
         [SerializeField] private List<PlayerQuestStatus> playerQuestStatuses = new List<PlayerQuestStatus>();     // 玩家任务数列
         private Action onQuestUpdate;              // 任务更新
         private Action onQuestObjectiveUpdate;     //  任务目标更新
-        // TODO: 保存任务进度
         public void UpdateQuest()
         {
             onQuestUpdate?.Invoke();
         }
-        public void QuestObjectiveUpdate()
+        public void UpdateQuestObjective()
         {
             onQuestObjectiveUpdate?.Invoke();
         }
@@ -46,19 +56,21 @@ namespace RPG.QuestSystem
         }
         public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : QuestSO
         {
+            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
             foreach (var playerQuestStatus in playerQuestStatuses)
             {
-                if (playerQuestStatus.quest is T)
+                if (tempQuestSODic[playerQuestStatus.QuestSOUniqueID] is T)
                 {
                     yield return playerQuestStatus;
                 }
             }
         }
-        public PlayerQuestStatus GetQuestStatus(string questTitle)
+        private PlayerQuestStatus GetQuestStatus(string questTitle)
         {
+            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
             foreach (PlayerQuestStatus status in playerQuestStatuses)
             {
-                if (status.quest.questTitle == questTitle)
+                if (tempQuestSODic[status.QuestSOUniqueID].questTitle == questTitle)
                 {
                     return status;
                 }
@@ -72,24 +84,24 @@ namespace RPG.QuestSystem
         }
         public void RemoveQuest(QuestSO removeQuest)
         {
+            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
             // 查找符合条件的Status
-            for (int i = 0; i < playerQuestStatuses.Count; i++)
+            foreach (PlayerQuestStatus playerQuestStatus in playerQuestStatuses)
             {
-                if (playerQuestStatuses[i].quest == removeQuest)
-                {
-                    // 移除
-                    playerQuestStatuses.RemoveAt(i);
-                    break;
-                }
+                if (tempQuestSODic[playerQuestStatus.QuestSOUniqueID] != removeQuest) continue;
+                playerQuestStatus.PreDestroy();
+                playerQuestStatuses.Remove(playerQuestStatus);
+                break;
             }
             UpdateQuest();
         }
+        
         public void KillQuestTrigger(string _entityID)
         {
             // 若玩家有多个击杀同一个目标的任务 都会更新
             foreach (PlayerQuestStatus playerQuestStatus in GetQuestStatuses<KillQuestSO>())
             {
-                playerQuestStatus.KillQuestProgress(_entityID);
+                playerQuestStatus.HandleReactiveQuestOnProgressListener(_entityID);
             }
         }
 
@@ -98,7 +110,7 @@ namespace RPG.QuestSystem
             switch (predicate)
             {
                 // 任务类型Condition
-                // TODO: 更改Condition检测QuestTitle
+                // TODO: 更改Condition为检测QuestSO
                 case DialogueConditionType.HasQuest:
                     return (GetQuestStatus(parameters) != null);
                 case DialogueConditionType.CompleteQuest:
@@ -106,6 +118,45 @@ namespace RPG.QuestSystem
             }
             // 此类型不具备任何Condition
             return null;
+        }
+
+        public object CreateState()
+        {
+            return playerQuestStatuses.Select(playerQuestStatus => playerQuestStatus.GetData()).ToList();
+        }
+
+        public void LoadState(object stateInfo)
+        {
+            if (!(stateInfo is List<object> saveQuestStoreInfos))
+            {
+                Debug.LogError("Cant Load State -- PlayerQuest");
+                return;
+            }
+            foreach (object saveQuestStoreInfo in saveQuestStoreInfos)
+            {
+                PlayerQuestStatus emptyPlayerQuestStatus = new PlayerQuestStatus();
+                emptyPlayerQuestStatus.LoadData(saveQuestStoreInfo);
+                playerQuestStatuses.Add(emptyPlayerQuestStatus);
+            }
+            UpdateQuest();
+            UpdateQuestObjective();
+        }
+
+        public void ResetState()
+        {
+            // 调用预清空方法
+            foreach (PlayerQuestStatus playerQuestStatus in playerQuestStatuses)
+            {
+                playerQuestStatus.PreDestroy();
+            }
+            // 清空数组
+            playerQuestStatuses.Clear();
+        }
+
+        private void OnApplicationQuit()
+        {
+            // 退出游戏前清空监听
+            ResetState();
         }
     }
 

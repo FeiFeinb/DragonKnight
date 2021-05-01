@@ -5,6 +5,6 @@ namespace RPG.QuestSystem
     public class KillQuestObjective : QuestObjective
     {
         public string EntityID => entityID;
-        [SerializeField] private string entityID;
+        [Tooltip("击杀实体ID"), SerializeField] private string entityID;
     }
 }

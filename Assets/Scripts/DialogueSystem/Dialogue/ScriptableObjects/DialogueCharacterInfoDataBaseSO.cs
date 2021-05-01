@@ -3,7 +3,7 @@ using UnityEngine;
 namespace RPG.DialogueSystem
 {
 
-    [CreateAssetMenu(fileName = "New DialogueCharacterInfoDataBaseObject", menuName = "Dialogue System/DialogueCharacterInfoDataBase Object")]
+    [CreateAssetMenu(fileName = "New DialogueCharacterInfoDataBaseSO", menuName = "Dialogue System/DialogueCharacterInfoDataBaseSO")]
     public class DialogueCharacterInfoDataBaseSO : ScriptableObject
     {
         public DialogueCharacterInfoSO[] dialogueCharacterInfos;

@@ -19,15 +19,19 @@ namespace RPG.QuestSystem
             }
             // 开始前先清空提示面板
             questToolTipsView.Clear();
-            // 设置提示栏任务简述
-            questToolTipsView.SetQuestResumeText(currentQuest.quest.questResume);
-            // 设置提示栏任务目标
-            foreach (QuestObjective questObjective in currentQuest.quest.GetObjectives())
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(currentQuest.QuestSOUniqueID, out QuestSO questSO))
             {
-                questToolTipsView.SetQuestObjective(currentQuest.GetProgress(questObjective), questObjective.ObjectiveTarget, questObjective.ObjectiveDescription);
+                Debug.LogError("Cant Find QuestSO");
+            }
+            // 设置提示栏任务简述
+            questToolTipsView.SetQuestResumeText(questSO.questResume);
+            // 设置提示栏任务目标
+            foreach (QuestObjective questObjective in questSO.GetObjectives())
+            {
+                questToolTipsView.SetQuestObjective(currentQuest.GetProgress(questObjective), questObjective.Target, questObjective.Description);
             }
             // 设置提示栏任务奖励
-            questToolTipsView.SetQuestReward(currentQuest.quest.questReward);
+            questToolTipsView.SetQuestReward(questSO.questReward);
         }
 
         public void OnEnter(PlayerQuestStatus _questStatus)

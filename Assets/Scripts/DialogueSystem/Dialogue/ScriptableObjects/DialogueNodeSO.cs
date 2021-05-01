@@ -36,10 +36,12 @@ namespace RPG.DialogueSystem
         }
         public void SetText(string _text)
         {
-            if (string.IsNullOrEmpty(_text)) return;
+            if (!string.IsNullOrEmpty(_text))
+            {
 #if UNITY_EDITOR
-            Undo.RecordObject(this, "Change DialogueNode Text");
+                Undo.RecordObject(this, "Change DialogueNode Text");
 #endif
+            }
             text = _text;
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
@@ -47,10 +49,12 @@ namespace RPG.DialogueSystem
         }
         public void SetEnterEventID(string _dialogueEventID)
         {
-            if (string.IsNullOrEmpty(_dialogueEventID)) return;
+            if (!string.IsNullOrEmpty(_dialogueEventID))
+            {
 #if UNITY_EDITOR
             Undo.RecordObject(this, "Change DialogueNode DialogueEventId");
 #endif
+            }
             dialogueEnterEventID = _dialogueEventID;
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
@@ -58,10 +62,12 @@ namespace RPG.DialogueSystem
         }
         public void SetExitEventID(string _dialogueEventID)
         {
-            if (string.IsNullOrEmpty(_dialogueEventID)) return;
+            if (string.IsNullOrEmpty(_dialogueEventID))
+            {
 #if UNITY_EDITOR
-            Undo.RecordObject(this, "Change DialogueNode DialogueEventId");
+                Undo.RecordObject(this, "Change DialogueNode DialogueEventId");
 #endif
+            }
             dialogueExitEventID = _dialogueEventID;
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
@@ -81,7 +87,7 @@ namespace RPG.DialogueSystem
         {
 #if UNITY_EDITOR
             Undo.RecordObject(this, "Link DialogueNode");
-            Undo.RecordObject(childNode, "Link DiagogueNode");
+            Undo.RecordObject(childNode, "Link DialogueNode");
 #endif
             children.Add(childNode.uniqueID);
             childNode.parents.Add(uniqueID);

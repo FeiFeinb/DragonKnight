@@ -149,16 +149,14 @@ namespace RPG.DialogueSystem
                 AddRecord(MakeNode(null));
             }
             // 场景中存在Dialogue资源
-            if (!string.IsNullOrEmpty(AssetDatabase.GetAssetPath(this)))
+            if (string.IsNullOrEmpty(AssetDatabase.GetAssetPath(this))) return;
+            // 遍历所有节点
+            foreach (DialogueNodeSO node in GetNodes())
             {
-                // 遍历所有节点
-                foreach (DialogueNodeSO node in GetNodes())
+                // 如果有子节点没有被保存
+                if (string.IsNullOrEmpty(AssetDatabase.GetAssetPath(node)))
                 {
-                    // 如果有子节点没有被保存
-                    if (string.IsNullOrEmpty(AssetDatabase.GetAssetPath(node)))
-                    {
-                        AssetDatabase.AddObjectToAsset(node, this);
-                    }
+                    AssetDatabase.AddObjectToAsset(node, this);
                 }
             }
 #endif

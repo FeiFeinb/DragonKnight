@@ -60,7 +60,7 @@ MonoBehaviour:
     andConditions: []
   rect:
     serializedVersion: 2
-    x: 849
+    x: 848
     y: 416
     width: 200
     height: 170
@@ -180,7 +180,7 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: 587
-    y: 419
+    y: 420
     width: 200
     height: 170
 --- !u!114 &7999449719308682041

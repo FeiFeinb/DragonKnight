@@ -95,7 +95,7 @@ MonoBehaviour:
   uniqueID: bca6ab24-3677-47ac-bf7d-339a3a0e61c5
   text: "\u597D\u7684\uFF01\u7ED9\u4F60"
   dialogueSpeaker: 0
-  dialogueEnterEventID: KELMFinish
+  dialogueEnterEventID: 
   dialogueExitEventID: 
   parents:
   - 57af082b-7541-4a65-a189-70ea9c5c94b2

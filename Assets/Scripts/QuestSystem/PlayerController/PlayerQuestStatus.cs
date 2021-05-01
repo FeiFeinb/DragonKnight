@@ -5,66 +5,100 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem;
+
 namespace RPG.QuestSystem
 {
     [System.Serializable]
     public class PlayerQuestStatus
     {
-        public class ObjectivePair
+        [System.Serializable]
+        public class ProgressPair
         {
-            public int progress = default;          // 进度
-            public bool isCompleted = default;      // 是否完成
+            public int progress = default;      // 进度
+            public bool isCompleted = default;  // 是否完成
         }
-        public QuestSO quest;
-        public bool IsFinish => isFinish;
-        [SerializeField] private bool isFinish;                                                                             // 是否完成任务
-        private Dictionary<QuestObjective, ObjectivePair> progressDic = new Dictionary<QuestObjective, ObjectivePair>();    // 任务目标字典
-        public PlayerQuestStatus(QuestSO _quest)
+        [System.Serializable]
+        public class QuestStoreInfo
         {
-            quest = _quest;
+            public string questSOUniqueID = default;
+            public Dictionary<string, ProgressPair> objectiveData = new Dictionary<string, ProgressPair>();
+        }
+        public bool IsFinish => isFinish;
+        public string QuestSOUniqueID => questSOUniqueID;
+
+        private string questSOUniqueID;         // 任务标识ID
+        private bool isFinish;                  // 是否完成任务
+        private Action onRemove;                // 销毁对象时回调
+
+        private Dictionary<QuestObjective, ProgressPair> objectiveDic = new Dictionary<QuestObjective, ProgressPair>(); // 任务目标字典
+
+        /// <summary>
+        /// 无参构造函数
+        /// </summary>
+        public PlayerQuestStatus() {}
+        
+        /// <summary>
+        /// 有参构造函数
+        /// </summary>
+        /// <param name="quest">任务SO</param>
+        public PlayerQuestStatus(QuestSO quest)
+        {
+            InitPlayerQuestStatus(quest);
+        }
+
+        private void InitPlayerQuestStatus(QuestSO quest, Dictionary<string, ProgressPair> objectiveData = null)
+        {
+            questSOUniqueID = quest.questUniqueID;
             foreach (QuestObjective questObjective in quest.GetObjectives())
             {
-                progressDic.Add(questObjective, new ObjectivePair());
-                AddOnProgressListener(questObjective);
+                objectiveDic.Add(questObjective, objectiveData == null ? new ProgressPair() : objectiveData[questObjective.UniqueID]);
+                // 处理主动任务监听
+                HandleProactiveQuestOnProgressListener(questObjective);
             }
         }
-        public IEnumerable<T> GetObjectiveOfType<T>() where T : QuestObjective
+        
+        public object GetData()
         {
-            foreach (var questObjective in progressDic)
+            QuestStoreInfo storeInfo = new QuestStoreInfo {questSOUniqueID = questSOUniqueID};
+            foreach (var objectivePair in objectiveDic)
             {
-                if (questObjective.Key is T)
-                {
-                    yield return questObjective.Key as T;
-                }
+                storeInfo.objectiveData.Add(objectivePair.Key.UniqueID, objectivePair.Value);
             }
+            return storeInfo;
         }
-        private void AddOnProgressListener(QuestObjective _questObjective)
-        {
-            if (_questObjective is DialogueQuestObjective)
-            {
-                DialogueQuestObjective dialogueQuestObjective = _questObjective as DialogueQuestObjective;
-                var sceneNPCDic = GlobalResource.Instance.characterInfoDataBase.sceneCharacterInfoDic;
-                if (sceneNPCDic.ContainsKey(dialogueQuestObjective.CharacterInfo))
-                {
-                    // 根据全局资源对话任务字典找到对应的NPC
-                    sceneNPCDic[dialogueQuestObjective.CharacterInfo].GetComponent<DialogueNPC>().AddDialogueEvent(
-                    dialogueQuestObjective.DialogueUniqueID, dialogueQuestObjective.EventID, delegate
-                    {
-                        OnProgress(_questObjective);
-                    });
-                }
-                if (_questObjective is SendItemDialogueQuestObjective)
-                {
-                    SendItemDialogueQuestObjective send = _questObjective as SendItemDialogueQuestObjective;
-                    
-                }
-            }
-            // TODO: 填补击杀任务的处理情况
-            else if (_questObjective is KillQuestObjective)
-            {
 
+        public void LoadData(object dataObj)
+        {
+            if (!(dataObj is QuestStoreInfo loadQuestStoreInfo))
+            {
+                Debug.LogError("LoadQuestStoreInfo Is Empty");
+                return;
+            }
+            QuestSO questSO = GlobalResource.Instance.questDataBaseSO.questSODic[loadQuestStoreInfo.questSOUniqueID];
+            InitPlayerQuestStatus(questSO, loadQuestStoreInfo.objectiveData);
+            CheckFinish();
+        }
+        
+        /// <summary>
+        /// 预备销毁
+        /// </summary>
+        public void PreDestroy()
+        {
+            onRemove?.Invoke();
+        }
+        
+        /// <summary>
+        /// 获取当前任务
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<QuestObjective> GetObjective()
+        {
+            foreach (var objectivePair in objectiveDic)
+            {
+                yield return objectivePair.Key;
             }
         }
+
         /// <summary>
         /// 获取当前任务的进度
         /// </summary>
@@ -72,11 +106,75 @@ namespace RPG.QuestSystem
         /// <returns></returns>
         public int GetProgress(QuestObjective _questObjective)
         {
-            if (progressDic.ContainsKey(_questObjective))
+            if (objectiveDic.ContainsKey(_questObjective))
             {
-                return progressDic[_questObjective].progress;
+                return objectiveDic[_questObjective].progress;
             }
             return -1;
+        }
+        
+        /// <summary>
+        /// 处理被动任务监听
+        /// </summary>
+        /// <param name="_entityID">实体ID</param>
+        public void HandleReactiveQuestOnProgressListener(string _entityID)
+        {
+            foreach (var questObjective in GetObjective())
+            {
+                // 判断被动任务监听的种类
+                if (questObjective is KillQuestObjective killQuestObjective)
+                {
+                    // 由被杀死的怪物主动对玩家任务类进行询问
+                    if (killQuestObjective.EntityID == _entityID)
+                    {
+                        // 推进
+                        OnProgress(questObjective);
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+
+        /// <summary>
+        /// 处理主动任务监听事件
+        /// </summary>
+        /// <param name="questObjective">任务目标</param>
+        private void HandleProactiveQuestOnProgressListener(QuestObjective questObjective)
+        {
+            // 判断任务类型
+            if (questObjective is DialogueQuestObjective dialogueQuestObjective)
+            {
+                // 获取场景NPC信息字典
+                var sceneNpcDic = GlobalResource.Instance.characterInfoDataBase.sceneCharacterInfoDic;
+                // 字典中存在该任务对话角色
+                if (sceneNpcDic.ContainsKey(dialogueQuestObjective.CharacterInfo))
+                {
+                    // 根据全局资源对话任务字典找到对应的NPC
+                    DialogueNPC questDialogueNpc = sceneNpcDic[dialogueQuestObjective.CharacterInfo].GetComponent<DialogueNPC>();
+                    // 往NPC身上添加监听事件
+                    questDialogueNpc.AddDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
+                        dialogueQuestObjective.EventID,
+                        delegate { OnProgress(questObjective); });
+                    // 添加销毁回调 清空NPC身上监听事件
+                    onRemove += delegate
+                    {
+                        questDialogueNpc.RemoveDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
+                            dialogueQuestObjective.EventID);
+                    };
+                }
+                // TODO: 若任务需要传递物品
+                if (dialogueQuestObjective is SendItemDialogueQuestObjective)
+                {
+                    SendItemDialogueQuestObjective send = dialogueQuestObjective as SendItemDialogueQuestObjective;
+                }
+            }
+            else
+            {
+                
+            }
         }
 
         /// <summary>
@@ -86,26 +184,27 @@ namespace RPG.QuestSystem
         /// <returns></returns>
         private void OnProgress(QuestObjective questObjective)
         {
-            if (progressDic.ContainsKey(questObjective))
+            if (!objectiveDic.ContainsKey(questObjective)) return;
+            ProgressPair pair = objectiveDic[questObjective];
+            // 若任务目标已完成 则不做处理
+            if (pair.isCompleted) return;
+            // 任务目标未完成
+            if (++pair.progress == questObjective.Target)
             {
-                ObjectivePair pair = progressDic[questObjective];
-                if (pair.isCompleted) return;
-                if (++pair.progress == questObjective.ObjectiveTarget)
-                {
-                    pair.isCompleted = true;
-                    CheckFinish();
-                }
-                // 进度字典值发生改变 通知外部
-                PlayerQuestManager.Instance.QuestObjectiveUpdate();
+                pair.isCompleted = true;
+                // 检查整个任务是否已完成
+                CheckFinish();
             }
+            // 进度字典值发生改变 通知外部
+            PlayerQuestManager.Instance.UpdateQuestObjective();
         }
 
         /// <summary>
-        /// 检测任务是否完成
+        /// 检测整个任务是否完成
         /// </summary>
         private void CheckFinish()
         {
-            foreach (var progressPair in progressDic)
+            foreach (var progressPair in objectiveDic)
             {
                 // 只要有一个目标未完成 则整个任务未完成
                 if (!progressPair.Value.isCompleted)
@@ -117,17 +216,5 @@ namespace RPG.QuestSystem
             // 任务完成
             isFinish = true;
         }
-        public void KillQuestProgress(string _entityID)
-        {
-            // 由被杀死的怪物主动对玩家任务类进行询问
-            foreach (var progressPair in GetObjectiveOfType<KillQuestObjective>())
-            {
-                if (progressPair.EntityID == _entityID)
-                {
-                    OnProgress(progressPair);
-                }
-            }
-        }
     }
 }
-

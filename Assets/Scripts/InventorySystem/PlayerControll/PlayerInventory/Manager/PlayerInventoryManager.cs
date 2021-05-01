@@ -42,29 +42,27 @@ namespace RPG.InventorySystem
         public object CreateState()
         {
             // 储存背包和装备栏的信息的字典
-            Dictionary<string, object> saveDic = new Dictionary<string, object>();
-            saveDic.Add(inventoryObject.GetHashCode().ToString(), inventoryObject.GetDatas());
-            saveDic.Add(equipmentObject.GetHashCode().ToString(), equipmentObject.GetDatas());
-            return saveDic;
+            Dictionary<string, object> saveSlotDic = new Dictionary<string, object>();
+            saveSlotDic.Add(inventoryObject.GetHashCode().ToString(), inventoryObject.GetData());
+            saveSlotDic.Add(equipmentObject.GetHashCode().ToString(), equipmentObject.GetData());
+            return saveSlotDic;
         }
 
         public void LoadState(object stateInfo)
         {
             // 将stateInfo转为储存背包信息的字典
-            Dictionary<string, object> saveDic = stateInfo as Dictionary<string, object>;
-            if (saveDic == null)
+            if (!(stateInfo is Dictionary<string, object> saveSlotDic))
             {
-                Debug.LogError("Cant Load State -- ISaveable");
+                Debug.LogError("Cant Load State -- PlayerInventory");
                 return;
             }
             // 加载字典中的信息
-            inventoryObject.LoadDatas(saveDic[inventoryObject.GetHashCode().ToString()] as InventorySlotData[]);
-            equipmentObject.LoadDatas(saveDic[equipmentObject.GetHashCode().ToString()] as InventorySlotData[]);
+            inventoryObject.LoadData(saveSlotDic[inventoryObject.GetHashCode().ToString()]);
+            equipmentObject.LoadData(saveSlotDic[equipmentObject.GetHashCode().ToString()]);
         }
 
         public void ResetState()
         {
-            Debug.Log("PlayerInventoryManager ResetState");
         }
 
         public bool? Evaluator(DialogueConditionType predicate, string parameters)
