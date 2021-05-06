@@ -4,18 +4,19 @@ using UnityEngine;
 using RPG.InventorySystem;
 using RPG.Module;
 using RPG.UI;
-using RPG.SaveSystem;
+using RPG.Module;
 namespace RPG.SaveSystem
 {
     public class SavingController : BaseUIController
     {
         public static string storePath = "UIView/SavingView";   // 路径
         public static SavingController controller;
-        public Color defaultColor;                              // 无存档颜色
-        public Color fillColor;                                 // 有存档颜色
-        public SavingSlot[] savingSlots;                        // 存档插槽
+        
+        [Tooltip("UI无存档颜色")]public Color defaultColor;
+        [Tooltip("UI有存档颜色")]public Color fillColor;
         [SerializeField] private Transform container;           // 插槽生成容器
         [SerializeField] private GameObject saveSlotPrefab;     // 插槽预制体
+        private SavingSlot[] savingSlots;                       // 存档插槽
         private void OnEnable()
         {
             ChangeSaveSlotState();
@@ -26,7 +27,7 @@ namespace RPG.SaveSystem
             savingSlots = new SavingSlot[SaveManager.Instance.maxSaveFileNum];
             for (int i = 0; i < SaveManager.Instance.maxSaveFileNum; i++)
             {
-                savingSlots[i] = GameObject.Instantiate(saveSlotPrefab, container).GetComponent<SavingSlot>();
+                savingSlots[i] = UIResourcesManager.Instance.LoadUserInterface(saveSlotPrefab, container).GetComponent<SavingSlot>(); 
                 savingSlots[i].InitSavingSlot(i);
             }
         }

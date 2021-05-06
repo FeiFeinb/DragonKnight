@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.InventorySystem;
+using RPG.QuestSystem;
 namespace RPG.DialogueSystem
 {
     public enum DialogueConditionType
@@ -48,15 +50,16 @@ namespace RPG.DialogueSystem
         [System.Serializable]
         public class OrCondition
         {
-            public DialogueConditionType predicate;         // 条件判断名
-            public string parameters;                       // 判断参数
+            public DialogueConditionType predicate;         // 条件判断类型
+            public ScriptableObject paramSO;                // 判断参数SO    
+            // public string parameters;                       // 判断参数
             public bool expectedResult = true;              // 期望结果
             public bool Check(IEnumerable<IPredicateEvaluators> iPredicateEvaluators)
             {
                 // 检测是否符合条件
                 foreach (var iEvaluator in iPredicateEvaluators)
                 {
-                    bool? result = iEvaluator.Evaluator(predicate, parameters);
+                    bool? result = iEvaluator.Evaluator(predicate, paramSO);
                     // 无类型Condition 跳过本次循环
                     if (result == null) continue;
                     // 不满足Condition 即不满足条件

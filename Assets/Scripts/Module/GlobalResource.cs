@@ -8,9 +8,9 @@ namespace RPG.Module
 {
     public class GlobalResource : BaseSingletonWithMono<GlobalResource>
     {
-        public ItemDataBaseSO itemDataBase;                             // 物品数据库
-        public DialogueCharacterInfoDataBaseSO characterInfoDataBase;   // NPC信息数据库
-        public QuestDataBaseSO questDataBaseSO;                         // 任务数据库
+        [Tooltip("物品数据库")] public ItemDataBaseSO itemDataBase;
+        [Tooltip("NPC信息数据库")] public DialogueCharacterInfoDataBaseSO characterInfoDataBase;
+        [Tooltip("任务数据库")] public QuestDataBaseSO questDataBaseSO;
         private void Awake()
         {
             // 开始游戏时初始化各个数据库

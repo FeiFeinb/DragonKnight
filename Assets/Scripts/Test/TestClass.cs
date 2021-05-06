@@ -4,6 +4,8 @@ using RPG.InventorySystem;
 using RPG.Module;
 using RPG.UI;
 using RPG.SaveSystem;
+using RPG.TradeSystem;
+
 public class TestClass : MonoBehaviour
 {
     private void Update()
@@ -41,6 +43,17 @@ public class TestClass : MonoBehaviour
             else
             {
                 SavingController.controller.Show();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (TradeController.controller.isActive)
+            {
+                TradeController.controller.Hide();
+            }
+            else
+            {
+                TradeController.controller.Show();
             }
         }
     }

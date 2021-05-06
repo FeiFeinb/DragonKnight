@@ -20,6 +20,10 @@ MonoBehaviour:
     itemRare: 0
   isStackable: 0
   stackAmount: 1
+  sellPrice:
+    goldCoin: 0
+    silverCoin: 10
+    copperCoin: 10
   item:
     id: 0
     itemBuffs:
@@ -32,5 +36,4 @@ MonoBehaviour:
       minValue: 10
       maxValue: 20
   description: 
-  equipmentPrefab: {fileID: 1440115863494796, guid: 892122ee87fc15149bc82d7f9d2cdb9f,
-    type: 3}
+  equipmentPrefab: {fileID: 1440115863494796, guid: 892122ee87fc15149bc82d7f9d2cdb9f, type: 3}

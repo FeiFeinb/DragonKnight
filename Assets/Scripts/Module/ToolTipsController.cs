@@ -27,12 +27,9 @@ namespace RPG.Module
                 UpdateToolTips(gameObject);
             }
             SetRectTransform();
-            gameObject?.SetActive(true);
+            base.Show();
         }
-        public override void Hide()
-        {
-            gameObject?.SetActive(false);
-        }
+        
         public virtual bool ShouldUpdateToolTips()
         {
             return !gameObject.activeSelf;

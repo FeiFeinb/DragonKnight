@@ -86,11 +86,11 @@ namespace RPG.InventorySystem
             }
         }
 
-        public bool HasItem(string _itemID)
+        public bool HasItem(int _itemID)
         {
             foreach (InventorySlot slot in inventorySlots)
             {
-                if (slot.slotData.itemData.id.ToString() == _itemID)
+                if (slot.slotData.itemData.id == _itemID)
                 {
                     return true;
                 }

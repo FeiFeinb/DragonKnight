@@ -20,7 +20,11 @@ MonoBehaviour:
     itemRare: 0
   isStackable: 1
   stackAmount: 64
+  sellPrice:
+    goldCoin: 0
+    silverCoin: 0
+    copperCoin: 5
   item:
-    id: 1
+    id: 2
     itemBuffs: []
   description: 

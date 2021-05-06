@@ -59,18 +59,17 @@ namespace RPG.QuestSystem
             Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
             foreach (var playerQuestStatus in playerQuestStatuses)
             {
-                if (tempQuestSODic[playerQuestStatus.QuestSOUniqueID] is T)
+                if (tempQuestSODic[playerQuestStatus.QuestUniqueID] is T)
                 {
                     yield return playerQuestStatus;
                 }
             }
         }
-        private PlayerQuestStatus GetQuestStatus(string questTitle)
+        private PlayerQuestStatus GetQuestStatus(QuestSO questSO)
         {
-            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
-            foreach (PlayerQuestStatus status in playerQuestStatuses)
+            foreach (PlayerQuestStatus status in GetQuestStatuses())
             {
-                if (tempQuestSODic[status.QuestSOUniqueID].questTitle == questTitle)
+                if (status.QuestUniqueID == questSO.questUniqueID)
                 {
                     return status;
                 }
@@ -88,7 +87,7 @@ namespace RPG.QuestSystem
             // 查找符合条件的Status
             foreach (PlayerQuestStatus playerQuestStatus in playerQuestStatuses)
             {
-                if (tempQuestSODic[playerQuestStatus.QuestSOUniqueID] != removeQuest) continue;
+                if (tempQuestSODic[playerQuestStatus.QuestUniqueID] != removeQuest) continue;
                 playerQuestStatus.PreDestroy();
                 playerQuestStatuses.Remove(playerQuestStatus);
                 break;
@@ -105,16 +104,16 @@ namespace RPG.QuestSystem
             }
         }
 
-        public bool? Evaluator(DialogueConditionType predicate, string parameters)
+        public bool? Evaluator(DialogueConditionType predicate, ScriptableObject paramSO)
         {
+            QuestSO questParamSO = paramSO as QuestSO;
             switch (predicate)
             {
                 // 任务类型Condition
-                // TODO: 更改Condition为检测QuestSO
                 case DialogueConditionType.HasQuest:
-                    return (GetQuestStatus(parameters) != null);
+                    return (GetQuestStatus(questParamSO) != null);
                 case DialogueConditionType.CompleteQuest:
-                    return GetQuestStatus(parameters).IsFinish;
+                    return GetQuestStatus(questParamSO).IsFinish;
             }
             // 此类型不具备任何Condition
             return null;

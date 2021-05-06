@@ -7,11 +7,8 @@ namespace RPG.Module
     public class UIResourcesManager : BaseSingletonWithMono<UIResourcesManager>
     {
         public Transform CanvasTrans => canvasTrans;    // 外部获取
-        private Transform canvasTrans;                  // 场景中Canvas
-        private void Awake()
-        {
-            canvasTrans = GameObject.FindObjectOfType<Canvas>().transform;
-        }
+        [Tooltip("UI生成所处Canvas"), SerializeField] private Transform canvasTrans;
+
         /// <summary>
         /// 自动加载UI至场景Canvas下 并调用PreInit
         /// </summary>

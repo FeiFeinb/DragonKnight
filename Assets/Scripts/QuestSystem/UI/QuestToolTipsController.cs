@@ -19,7 +19,7 @@ namespace RPG.QuestSystem
             }
             // 开始前先清空提示面板
             questToolTipsView.Clear();
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(currentQuest.QuestSOUniqueID, out QuestSO questSO))
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(currentQuest.QuestUniqueID, out QuestSO questSO))
             {
                 Debug.LogError("Cant Find QuestSO");
             }

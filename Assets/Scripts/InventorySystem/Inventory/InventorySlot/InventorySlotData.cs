@@ -22,7 +22,7 @@ namespace RPG.InventorySystem
                 return (itemData.id < 0 && amount == 0);
             }
         }
-        [DisplayOnly] public int amount;              // 物品数量
+        public int amount;              // 物品数量
         public ItemData itemData;       // 物品数据
         public InventorySlotData()
         {

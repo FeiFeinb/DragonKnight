@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c3bb56ff86467f99bbd8c568d17e96, type: 3}
+  m_Name: BusinessmanInventoryObject
+  m_EditorClassIdentifier: 
+  sellObjects:
+  - {fileID: 11400000, guid: ab74d5b4e72e2b74283c9bdff5853f21, type: 2}
+  - {fileID: 11400000, guid: c1540eeb16d4c684fb5e3289fca8afb8, type: 2}
+  - {fileID: 11400000, guid: 8b4c8fe3b31f9a44a963b0fa414d0a7b, type: 2}
+  - {fileID: 11400000, guid: d3e299fd6285d1747ba8ab24897c0206, type: 2}
+  - {fileID: 11400000, guid: d3e5ef21c3ec5f649a349262004535eb, type: 2}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RPG.TradeSystem;
+using UnityEngine;
 namespace RPG.InventorySystem
 {
     [System.Serializable]
@@ -8,6 +9,7 @@ namespace RPG.InventorySystem
         public ItemType itemType;           // 物品类型
         public bool isStackable;            // 是否堆叠
         public int stackAmount;             // 堆叠数量
+        public Coin sellPrice;              // 售价
         public ItemData item = new ItemData();              // 物品
         [TextArea(5, 10)] public string description;       // 物品描述
 

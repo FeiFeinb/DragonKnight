@@ -29,7 +29,7 @@ namespace RPG.QuestSystem
                     QuestToolTipsController.controller.OnExit(questStatus);
                 }
             });
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestSOUniqueID, out QuestSO questSO))
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestUniqueID, out QuestSO questSO))
             {
                 Debug.LogError("Cant Find Quest");
             }
@@ -58,7 +58,7 @@ namespace RPG.QuestSystem
         }
         public void UpdateState(PlayerQuestStatus questStatus)
         {
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestSOUniqueID, out QuestSO questSO))
+            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestUniqueID, out QuestSO questSO))
             {
                 Debug.LogError("Cant Find Quest");
             }

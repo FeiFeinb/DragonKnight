@@ -2,43 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="161f9443-abc8-474e-9b2b-5667ec209426" name="默认变更列表" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/QuestDataBaseSO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/QuestDataBaseSO.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/BusinessmanInventoryObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/BusinessmanInventoryObject.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/CommoditySlot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/CommoditySlot.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Core/DraggableUserInterface.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Core/DraggableUserInterface.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DragonKnight/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DragonKnight/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/卡尔·雷矛对话.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/卡尔·雷矛对话.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/弗伦·长须对话.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/弗伦·长须对话.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/Entity/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/Entity/Hero.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/InventorySystem/InventoryObject.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/InventorySystem/InventoryObject/EquipmentInventoryObject.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/InventorySystem/InventoryObject/EquipmentInventoryObject.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/InventorySystem/InventoryObject/PlayerInventoryObject.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/InventorySystem/InventoryObject/PlayerInventoryObject.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/QuestSystem/Objects.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/QuestSystem/Objects/卡尔·雷矛的订单.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/QuestSystem/Objects/卡尔·雷矛的订单.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/QuestSystem/Objects/消灭兽人.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/QuestSystem/Objects/消灭兽人.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalArts/BusinessManAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalArts/BusinessManAnimator.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalArts/Standing Idle.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalArts/Standing Idle.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/木剑.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/木剑.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/木盾.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/木盾.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/胡萝卜.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/胡萝卜.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/铁剑.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/铁剑.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/铁头盔.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/铁头盔.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/UIView/InventoryView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UIView/InventoryView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/UIView/MouseItemTipsView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UIView/MouseItemTipsView.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Demo_ExteriorOnly_Optimized.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Demo_ExteriorOnly_Optimized.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entity/NPC/BusinessMan.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entity/NPC/BusinessMan.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/BaseInventoryObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/BaseInventoryObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/ItemDataBaseObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/ItemDataBaseSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/ItemDataBaseObject.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/ItemDataBaseSO.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/PlayerInventoryObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/PlayerInventoryObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventorySlot/InventorySlotData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventorySlot/InventorySlotData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Datas/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Datas/ItemData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/BaseItemObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/BaseItemObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/BaseInventoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/BaseInventoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/InventoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/InventoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/ResourcesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/ResourcesManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/SceneResourceLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/SceneResourceLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/DialogueQuestObjective.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/DialogueQuestObjective.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/KillQuestObjective.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/KillQuestObjective.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/QuestObjective.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/QuestObjective.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/QuestSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/QuestSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/ToolTipsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/ToolTipsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/UIResourcesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/UIResourcesManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/PlayerQuestStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/PlayerQuestStatus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestSidebar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestSidebar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsEquipmentReward.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsEquipmentReward.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UI/SavingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UI/SavingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Test/TestClass.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Test/TestClass.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/Coin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/Coin.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Core/BaseUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Core/BaseUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,16 +81,11 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Utility/OverlabSphereCheck.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Module/BaseSingletonWithMono.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Rewards/QuestReward.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Test/TestTradeView.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/Coin.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/InventoryController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Utility/IListenable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Entity/NPC/BusinessMan.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestRewardManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Module/SceneResourceLoader.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/KillQuestSO.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/DialogueQuestSO.cs" />
@@ -87,19 +93,45 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/ItemDataBaseSO.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/ScriptableObjects/QuestDataBaseSO.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestSidebar.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/QuestObjective.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/KillQuestObjective.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/BaseInventoryObject.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/DialogueQuestObjective.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/PlayerQuestStatus.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsEquipmentReward.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/PlayerInventoryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/PlayerQuestStatus.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/BaseUI.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Module/ToolTipsController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Entity/NPC/BusinessMan.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Module/ResourcesManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Module/UIResourcesManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveSystem/Core/SaveManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UI/SavingController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/DragableUserInterface.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/DraggableUserInterface.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/InventoryController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Module/SceneResourceLoader.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/BaseInventoryController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Objects/BaseItemObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/Coin.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/Datas/ItemData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventorySlot/InventorySlotData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Test/TestClass.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/CommoditySlot.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/BaseInventoryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/BusinessmanInventoryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rkk6AM4un6VOfsqaNMXsH4hm9U" />
@@ -112,17 +144,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34962717" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34967586" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="所有位置" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.常规" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -178,6 +211,13 @@
       <workItem from="1619787473142" duration="8445000" />
       <workItem from="1619843093795" duration="18508000" />
       <workItem from="1619864265220" duration="912000" />
+      <workItem from="1619933165010" duration="65000" />
+      <workItem from="1619965139835" duration="2905000" />
+      <workItem from="1620051619589" duration="216000" />
+      <workItem from="1620051890736" duration="5127000" />
+      <workItem from="1620091121607" duration="3538000" />
+      <workItem from="1620105661576" duration="12480000" />
+      <workItem from="1620184046987" duration="5564000" />
     </task>
     <servers />
   </component>
@@ -218,17 +258,30 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/SaveSystem/Core/SaveManager.cs</url>
-          <line>43</line>
-          <properties documentPath="D:\Unity\DragonKnight\Assets\Scripts\SaveSystem\Core\SaveManager.cs" initialLine="43" containingFunctionPresentation="method 'Save'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/BaseInventoryController.cs</url>
+          <line>93</line>
+          <properties documentPath="D:\Unity\DragonKnight\Assets\Scripts\InventorySystem\UI\Inventory\BaseInventoryController.cs" initialLine="93" containingFunctionPresentation="method 'OnBeginDrag'">
             <startOffsets>
-              <option value="1608" />
+              <option value="3838" />
             </startOffsets>
             <endOffsets>
-              <option value="1639" />
+              <option value="3899" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs</url>
+          <line>58</line>
+          <properties documentPath="D:\Unity\DragonKnight\Assets\Scripts\TradeSystem\UI\TradeController.cs" initialLine="58" containingFunctionPresentation="method 'Show'">
+            <startOffsets>
+              <option value="2091" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2258" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

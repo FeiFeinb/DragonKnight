@@ -3,6 +3,6 @@ namespace RPG.DialogueSystem
 {
     public interface IPredicateEvaluators
     {
-        bool? Evaluator(DialogueConditionType predicate, string parameters);
+        bool? Evaluator(DialogueConditionType predicate, ScriptableObject paramSO);
     }
 }

@@ -5,11 +5,12 @@ namespace RPG.UI
     {
         public virtual void Show()
         {
-            gameObject.SetActive(true);
+            transform?.SetAsLastSibling();
+            gameObject?.SetActive(true);
         }
         public virtual void Hide()
         {
-            gameObject.SetActive(false);
+            gameObject?.SetActive(false);
         }
     }
 }

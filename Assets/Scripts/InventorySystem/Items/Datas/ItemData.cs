@@ -7,7 +7,7 @@ namespace RPG.InventorySystem
     [System.Serializable]
     public class ItemData
     {
-        [DisplayOnly] public int id;          // 物品Id
+        public int id;          // 物品Id
         public ItemBuff[] itemBuffs;
         public ItemData()
         {

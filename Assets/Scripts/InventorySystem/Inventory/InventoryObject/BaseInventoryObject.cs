@@ -9,7 +9,6 @@ namespace RPG.InventorySystem
 {
     public abstract class BaseInventoryObject : ScriptableObject
     {
-        public int backpackCapacity;                    // 背包容量上限
         [ContextMenu("InitSlot")]
         public void InitSlot()
         {

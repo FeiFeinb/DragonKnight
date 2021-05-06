@@ -121,6 +121,7 @@ namespace RPG.InventorySystem
             // TODO: 设置装备需求
 
             // TODO: 设置装备售价
+            mouseItemTipsView.SetTipSellPrice(content.baseItemObject.sellPrice.coinStr);
         }
     }
 }

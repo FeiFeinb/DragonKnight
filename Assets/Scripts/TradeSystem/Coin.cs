@@ -22,7 +22,7 @@ namespace RPG.TradeSystem
         {
             get
             {
-                return goldCoin * 100 * 100 + silverCoin * 100 + copperCoin;
+                return goldCoin * baseScale * baseScale + silverCoin * baseScale + copperCoin;
             }
         }
 
@@ -33,6 +33,7 @@ namespace RPG.TradeSystem
                 return $"{goldCoin} 金 {silverCoin} 银 {copperCoin} 铜";
             }
         }
+        private const int baseScale = 100;     // 进制
         public int goldCoin;            // 金币
         public int silverCoin;          // 银币
         public int copperCoin;          // 铜币
@@ -58,9 +59,9 @@ namespace RPG.TradeSystem
         public void AddSilverCoin(int _silverCoin)
         {
             int addValue = silverCoin + _silverCoin;
-            if (addValue >= 100)
+            if (addValue >= baseScale)
             {
-                silverCoin = addValue - 100;
+                silverCoin = addValue - baseScale;
                 AddGoldCoin(1);
             }
             else
@@ -72,9 +73,9 @@ namespace RPG.TradeSystem
         public void AddCopperCoin(int _copperCoin)
         {
             int addValue = copperCoin + _copperCoin;
-            if (addValue >= 100)
+            if (addValue >= baseScale)
             {
-                copperCoin = addValue - 100;
+                copperCoin = addValue - baseScale;
                 AddSilverCoin(1);
             }
             else
@@ -93,7 +94,7 @@ namespace RPG.TradeSystem
             int subValue = silverCoin - _silverCoin;
             if (subValue < 0)
             {
-                silverCoin = 100 + subValue;
+                silverCoin = baseScale + subValue;
                 SubGoldCoin(1);
             }
             else
@@ -107,7 +108,7 @@ namespace RPG.TradeSystem
             int subValue = copperCoin - _copperCoin;
             if (subValue < 0)
             {
-                copperCoin = 100 + subValue;
+                copperCoin = baseScale + subValue;
                 SubSilverCoin(1);
             }
             else

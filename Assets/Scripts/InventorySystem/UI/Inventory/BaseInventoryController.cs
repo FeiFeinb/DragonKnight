@@ -59,7 +59,7 @@ namespace RPG.InventorySystem
             });
         }
         // 指针进入插槽
-        private void OnPointerEnterSlot(GameObject obj)
+        protected void OnPointerEnterSlot(GameObject obj)
         {
             InventorySlot slot = GetSlot(obj);
             MouseItemIcon.controller.SetHoverObj(slot);
@@ -69,7 +69,7 @@ namespace RPG.InventorySystem
             }
         }
         // 指针离开插槽
-        private void OnPointerExitSlot(GameObject obj)
+        protected void OnPointerExitSlot(GameObject obj)
         {
             InventorySlot slot = GetSlot(obj);
             MouseItemIcon.controller.SetHoverObj(null);
@@ -79,26 +79,26 @@ namespace RPG.InventorySystem
             }
         }
         // 指针进入UI
-        private void OnPointerEnterUI()
+        protected void OnPointerEnterUI()
         {
             MouseItemIcon.controller.SetHoverUI(this);
         }
         // 指针离开UI
-        private void OnPointerExitUI()
+        protected void OnPointerExitUI()
         {
             MouseItemIcon.controller.SetHoverUI(null);
         }
-        private void OnBeginDrag(GameObject obj)
+        protected void OnBeginDrag(GameObject obj)
         {
             // 物体可拖动
             MouseItemIcon.controller.CreateDragObject(obj, GetSlot(obj));
         }
-        private void OnDrag(GameObject obj)
+        protected void OnDrag(GameObject obj)
         {
             // 拖拽过程移动
             MouseItemIcon.controller.MoveDragObject();
         }
-        private void OnEndDrag(GameObject obj)
+        protected void OnEndDrag(GameObject obj)
         {
             // 删除拖拽图标
             MouseItemIcon.controller.DestroyDragObject();
@@ -114,7 +114,7 @@ namespace RPG.InventorySystem
                 BaseInventoryObject.SwapItem(GetSlot(obj), MouseItemIcon.controller.hoverSlot);
             }
         }
-        private void OnRightMouseClick(GameObject obj)
+        protected void OnRightMouseClick(GameObject obj)
         {
             // 右键单击插槽
             InventorySlot slot = GetSlot(obj);

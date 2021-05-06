@@ -17,7 +17,6 @@ namespace RPG.QuestSystem
             EventTriggerManager.Instance.AddEvent(inventorySlotObj, EventTriggerType.PointerExit, delegate {
                 OnPointerExitSlot(baseItemObject);
             });
-            // TODO: 添加itemToolTips显示
             UIInventorySlot tempUIInventorySlot = inventorySlotObj.GetComponent<UIInventorySlot>();
             // 设置图标
             tempUIInventorySlot.SetItemSprite(baseItemObject.sprite);

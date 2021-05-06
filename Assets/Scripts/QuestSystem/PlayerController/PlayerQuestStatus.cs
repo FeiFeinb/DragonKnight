@@ -24,9 +24,9 @@ namespace RPG.QuestSystem
             public Dictionary<string, ProgressPair> objectiveData = new Dictionary<string, ProgressPair>();
         }
         public bool IsFinish => isFinish;
-        public string QuestSOUniqueID => questSOUniqueID;
+        public string QuestUniqueID => questUniqueID;
 
-        private string questSOUniqueID;         // 任务标识ID
+        private string questUniqueID;         // 任务标识ID
         private bool isFinish;                  // 是否完成任务
         private Action onRemove;                // 销毁对象时回调
 
@@ -48,7 +48,7 @@ namespace RPG.QuestSystem
 
         private void InitPlayerQuestStatus(QuestSO quest, Dictionary<string, ProgressPair> objectiveData = null)
         {
-            questSOUniqueID = quest.questUniqueID;
+            questUniqueID = quest.questUniqueID;
             foreach (QuestObjective questObjective in quest.GetObjectives())
             {
                 objectiveDic.Add(questObjective, objectiveData == null ? new ProgressPair() : objectiveData[questObjective.UniqueID]);
@@ -59,7 +59,7 @@ namespace RPG.QuestSystem
         
         public object GetData()
         {
-            QuestStoreInfo storeInfo = new QuestStoreInfo {questSOUniqueID = questSOUniqueID};
+            QuestStoreInfo storeInfo = new QuestStoreInfo {questSOUniqueID = questUniqueID};
             foreach (var objectivePair in objectiveDic)
             {
                 storeInfo.objectiveData.Add(objectivePair.Key.UniqueID, objectivePair.Value);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.TradeSystem;
 using UnityEngine.UI;
-
+using RPG.Module;
 namespace RPG.InventorySystem
 {
     public class InventoryController : BaseInventoryController
@@ -27,7 +27,7 @@ namespace RPG.InventorySystem
             foreach (InventorySlot slot in playerInventoryObject.inventorySlots)
             {
                 // 生成空物品栏
-                var itemObject = GameObject.Instantiate(inventorySlotPrefab, slotContainerTrans);
+                var itemObject = UIResourcesManager.Instance.LoadUserInterface(inventorySlotPrefab, slotContainerTrans);
                 slotDic.Add(itemObject, slot);
                 slotUIDic.Add(slot, itemObject);
                 AddSlotEvent(itemObject);

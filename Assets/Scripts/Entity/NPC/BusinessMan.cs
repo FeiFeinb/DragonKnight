@@ -29,7 +29,6 @@ namespace RPG.Entity
 
         public void SubmitQuest(QuestSO quest)
         {
-            // TODO: 创建任务管理类 进行奖励的分配
             Debug.Log(string.Concat("完成了任务", quest.questTitle));
             PlayerQuestRewardManager.Instance.SendReward(quest.questReward);
             // 任务提交完成 移除任务
