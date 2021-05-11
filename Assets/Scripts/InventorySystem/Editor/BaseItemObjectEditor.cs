@@ -18,12 +18,12 @@
 //         base.OnInspectorGUI();
 //         serializedObject.Update();
 //         EditorGUILayout.PropertyField(baseItemField);
-//         若为装备类型 则显示equipmentType与bodyType
+//         // 若为装备类型 则显示equipmentType与bodyType
 //         if (baseItemField.enumValueIndex == (int)BaseItemType.Equipment)
 //         {
 //             EditorGUILayout.PropertyField(equipmentField);
 //             EditorGUILayout.PropertyField(bodyField);
-//             若该物品能够装备显示
+//             // 若该物品能够装备显示
 //             serializedObject.ApplyModifiedProperties();
 //         }
 //     }

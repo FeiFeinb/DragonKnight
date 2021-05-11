@@ -725,9 +725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5044015e068e2f94f94a27fbcb7e7f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiMask: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   slotContainerTrans: {fileID: 5392116607301847875}
-  commoditySlotPrefab: {fileID: 622663230561774160, guid: f9b6dae73b274af4c876d2281ce0a89a, type: 3}
+  sellItemSlotPrefab: {fileID: 622663230561774160, guid: f9b6dae73b274af4c876d2281ce0a89a, type: 3}
   commodityObject: {fileID: 11400000, guid: 798d5854ea985424ab0dcdf27da361d9, type: 2}
   pageFlip: {fileID: 5669350835658150869}
 --- !u!114 &3994129114151817221

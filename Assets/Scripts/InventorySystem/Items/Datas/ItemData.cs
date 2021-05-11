@@ -21,6 +21,7 @@ namespace RPG.InventorySystem
         public ItemData(BaseItemObject itemObj)
         {
             InitItemData(itemObj.item);
+            itemBuffs.RenerateValues();
         }
         public void InitItemData(ItemData itemData)
         {

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RPG.StateMachine
 {
+    [System.Serializable]
     public class State
     {
-        private StateSO originStateSO;    // 状态对应的ScriptableObject
+        public string StateName => originStateSO == null ? "Null" : originStateSO.name;
+        
+        private StateSO originStateSO;                                  // 状态对应的ScriptableObject
         private StateMachine stateMachine;                              // 状态所处状态机
         private StateTransition[] transitions;                          // 转换关系数组
         private StateAction[] actions;                                  // 状态执行所调动的方法数组
-        public State()
-        {
-            Debug.Log(1);
-        }
         public State(StateSO _originStateSO, StateMachine _stateMachine)
         {
             originStateSO = _originStateSO;

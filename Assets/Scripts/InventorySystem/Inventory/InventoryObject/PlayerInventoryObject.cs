@@ -6,6 +6,7 @@ namespace RPG.InventorySystem
     [CreateAssetMenu(fileName = "New PlayerInventoryObject", menuName = "Inventory System/Inventory/PlayerInventory")]
     public class PlayerInventoryObject : BaseInventoryObject
     {
+        public int EmptySlotNum => GetFirstEmptySlot().Length;
         public InventorySlot[] inventorySlots;
         public bool AddItem(ItemData _item, int _amount)
         {

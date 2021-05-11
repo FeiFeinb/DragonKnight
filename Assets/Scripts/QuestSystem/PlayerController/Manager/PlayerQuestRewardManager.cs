@@ -14,11 +14,10 @@ namespace RPG.QuestSystem
         public bool SendReward(QuestReward reward)
         {
             // 发送物品
+            // TODO: 解决背包满载时应处理的情况
             for (int i = 0; i < reward.itemObjAmount; i++)
             {
-                ItemData newItem = new ItemData(reward.itemObj);
-                newItem.itemBuffs.RenerateValues();
-                if (!PlayerInventoryManager.Instance.inventoryObject.AddItem(newItem, 1))
+                if (!PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(reward.itemObj), 1))
                 {
                     Debug.Log("背包已满");
                     return false;

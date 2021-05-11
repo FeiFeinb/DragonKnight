@@ -29,10 +29,12 @@ namespace RPG.Entity
 
         public void SubmitQuest(QuestSO quest)
         {
-            Debug.Log(string.Concat("完成了任务", quest.questTitle));
-            PlayerQuestRewardManager.Instance.SendReward(quest.questReward);
-            // 任务提交完成 移除任务
-            PlayerQuestManager.Instance.RemoveQuest(quest);
+            if (PlayerQuestRewardManager.Instance.SendReward(quest.questReward))
+            {
+                Debug.Log(string.Concat("完成了任务", quest.questTitle));
+                // 任务提交完成 移除任务
+                PlayerQuestManager.Instance.RemoveQuest(quest);
+            }
         }
         public void SetTalkState()
         {

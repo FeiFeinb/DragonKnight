@@ -18,10 +18,7 @@ namespace RPG.InventorySystem
             var groundItem = other.GetComponent<GroundItem>();
             if (groundItem)
             {
-                ItemData newItem = new ItemData(groundItem.itemObj);
-                // 生成buff值
-                newItem.itemBuffs.RenerateValues();
-                if (inventoryObject.AddItem(newItem, 1))
+                if (inventoryObject.AddItem(new ItemData(groundItem.itemObj), 1))
                 {
                     Destroy(other.gameObject);
                 }

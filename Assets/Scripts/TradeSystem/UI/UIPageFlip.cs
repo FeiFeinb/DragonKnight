@@ -6,6 +6,8 @@ namespace RPG.TradeSystem
 {
     public class UIPageFlip : MonoBehaviour
     {
+        public int PageValue => pageValue;
+        public int MaxPage => maxPage;
         [SerializeField] private Button pageUpButtom;
         [SerializeField] private Button pageDownButton;
 
@@ -18,23 +20,26 @@ namespace RPG.TradeSystem
         [SerializeField] private int pageValue;
         [SerializeField] private int maxPage;
 
-        public void Init(int _maxPage)
+        public void Start()
         {
-            pageValue = 1;
-            maxPage = _maxPage;
-            FlipCheck();
             pageUpButtom.onClick.AddListener(delegate
             {
-                onPageUp?.Invoke();
                 pageValue--;
+                onPageUp?.Invoke();
                 FlipCheck();
             });
             pageDownButton.onClick.AddListener(delegate
             {
-                onPageDown?.Invoke();
                 pageValue++;
+                onPageDown?.Invoke();
                 FlipCheck();
             });
+        }
+        public void Reset(int _maxPage)
+        {
+            pageValue = 1;
+            maxPage = _maxPage;
+            FlipCheck();
         }
 
         private void FlipCheck()

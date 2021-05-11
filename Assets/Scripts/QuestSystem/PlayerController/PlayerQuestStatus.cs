@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.Design;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem;
@@ -97,18 +97,19 @@ namespace RPG.QuestSystem
             {
                 yield return objectivePair.Key;
             }
+            // return objectiveDic.Select(objectivePair => objectivePair.Key);
         }
 
         /// <summary>
         /// 获取当前任务的进度
         /// </summary>
-        /// <param name="_questObjective"></param>
+        /// <param name="questObjective"></param>
         /// <returns></returns>
-        public int GetProgress(QuestObjective _questObjective)
+        public int GetProgress(QuestObjective questObjective)
         {
-            if (objectiveDic.ContainsKey(_questObjective))
+            if (objectiveDic.ContainsKey(questObjective))
             {
-                return objectiveDic[_questObjective].progress;
+                return objectiveDic[questObjective].progress;
             }
             return -1;
         }
@@ -116,8 +117,8 @@ namespace RPG.QuestSystem
         /// <summary>
         /// 处理被动任务监听
         /// </summary>
-        /// <param name="_entityID">实体ID</param>
-        public void HandleReactiveQuestOnProgressListener(string _entityID)
+        /// <param name="entityID">实体ID</param>
+        public void HandleReactiveQuestOnProgressListener(string entityID)
         {
             foreach (var questObjective in GetObjective())
             {
@@ -125,7 +126,7 @@ namespace RPG.QuestSystem
                 if (questObjective is KillQuestObjective killQuestObjective)
                 {
                     // 由被杀死的怪物主动对玩家任务类进行询问
-                    if (killQuestObjective.EntityID == _entityID)
+                    if (killQuestObjective.EntityID == entityID)
                     {
                         // 推进
                         OnProgress(questObjective);

@@ -6,7 +6,6 @@ using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem;
 using RPG.SaveSystem;
-using UnityEngine.TextCore.LowLevel;
 
 namespace RPG.QuestSystem
 {
@@ -30,52 +29,41 @@ namespace RPG.QuestSystem
         {
             onQuestObjectiveUpdate?.Invoke();
         }
-        public void AddOnQuestUpdateListener(Action _onUpdate)
+        public void AddOnQuestUpdateListener(Action onUpdateAction)
         {
-            onQuestUpdate += _onUpdate;
+            onQuestUpdate += onUpdateAction;
         }
-        public void RemoveOnQuestUpdateListener(Action _onUpdate)
+        public void RemoveOnQuestUpdateListener(Action onUpdateAction)
         {
-            onQuestUpdate -= _onUpdate;
+            onQuestUpdate -= onUpdateAction;
         }
 
-        public void AddQuestObjectiveUpdateListener(Action _onObjectiveUpdate)
+        public void AddQuestObjectiveUpdateListener(Action onObjectiveUpdateAction)
         {
-            onQuestObjectiveUpdate += _onObjectiveUpdate;
+            onQuestObjectiveUpdate += onObjectiveUpdateAction;
         }
-        public void RemoveQuestObjectiveUpdateListener(Action _onObjectiveUpdate)
+        public void RemoveQuestObjectiveUpdateListener(Action onObjectiveUpdateAction)
         {
-            onQuestObjectiveUpdate -= _onObjectiveUpdate;
+            onQuestObjectiveUpdate -= onObjectiveUpdateAction;
         }
         public IEnumerable<PlayerQuestStatus> GetQuestStatuses()
         {
-            foreach (var playerQuestStatus in playerQuestStatuses)
+            return playerQuestStatuses;
+        }
+        
+        public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : QuestSO
+        {
+            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
+            foreach (var playerQuestStatus in playerQuestStatuses.Where(playerQuestStatus => tempQuestSODic[playerQuestStatus.QuestUniqueID] is T))
             {
                 yield return playerQuestStatus;
             }
         }
-        public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : QuestSO
-        {
-            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
-            foreach (var playerQuestStatus in playerQuestStatuses)
-            {
-                if (tempQuestSODic[playerQuestStatus.QuestUniqueID] is T)
-                {
-                    yield return playerQuestStatus;
-                }
-            }
-        }
         private PlayerQuestStatus GetQuestStatus(QuestSO questSO)
         {
-            foreach (PlayerQuestStatus status in GetQuestStatuses())
-            {
-                if (status.QuestUniqueID == questSO.questUniqueID)
-                {
-                    return status;
-                }
-            }
-            return null;
+            return GetQuestStatuses().FirstOrDefault(status => status.QuestUniqueID == questSO.questUniqueID);
         }
+        
         public void AddQuest(QuestSO addQuest)
         {
             playerQuestStatuses.Add(new PlayerQuestStatus(addQuest));
@@ -85,9 +73,8 @@ namespace RPG.QuestSystem
         {
             Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
             // 查找符合条件的Status
-            foreach (PlayerQuestStatus playerQuestStatus in playerQuestStatuses)
+            foreach (var playerQuestStatus in playerQuestStatuses.Where(tempPlayerQuestStatus => tempQuestSODic[tempPlayerQuestStatus.QuestUniqueID] == removeQuest))
             {
-                if (tempQuestSODic[playerQuestStatus.QuestUniqueID] != removeQuest) continue;
                 playerQuestStatus.PreDestroy();
                 playerQuestStatuses.Remove(playerQuestStatus);
                 break;
@@ -95,12 +82,12 @@ namespace RPG.QuestSystem
             UpdateQuest();
         }
         
-        public void KillQuestTrigger(string _entityID)
+        public void KillQuestTrigger(string entityID)
         {
             // 若玩家有多个击杀同一个目标的任务 都会更新
             foreach (PlayerQuestStatus playerQuestStatus in GetQuestStatuses<KillQuestSO>())
             {
-                playerQuestStatus.HandleReactiveQuestOnProgressListener(_entityID);
+                playerQuestStatus.HandleReactiveQuestOnProgressListener(entityID);
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.InventorySystem;
 using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;
@@ -10,7 +11,7 @@ namespace RPG.TradeSystem
 {
     public class PlayerTradeManager : BaseSingletonWithMono<PlayerTradeManager>, ISaveable
     {
-        [SerializeField] public Coin coin;          // 玩家上金币量
+        [SerializeField] private Coin coin;          // 玩家上金币量
         private Action<string> onCoinUpdate;        // 货币数量变更事件
 
         public void AddCoin(Coin _coin)
@@ -20,7 +21,7 @@ namespace RPG.TradeSystem
             coin.AddSilverCoin(_coin.silverCoin);
             coin.AddGoldCoin(_coin.goldCoin);
             // 调用事件
-            onCoinUpdate?.Invoke(_coin.coinStr);
+            onCoinUpdate?.Invoke(coin.coinStr);
         }
 
         public bool SubCoin(Coin _coin)
@@ -30,13 +31,21 @@ namespace RPG.TradeSystem
                 Debug.LogError("超出金额");
                 return false;
             }
+
             // 金币减法计算
             coin.SubCopperCoin(_coin.copperCoin);
             coin.SubSilverCoin(_coin.silverCoin);
             coin.SubGoldCoin(_coin.goldCoin);
             // 调用事件
-            onCoinUpdate?.Invoke(_coin.coinStr);
+            onCoinUpdate?.Invoke(coin.coinStr);
             return true;
+        }
+
+        public bool BuyItem(BaseItemObject itemObj)
+        {
+            if (PlayerInventoryManager.Instance.inventoryObject.EmptySlotNum == 0 || !SubCoin(itemObj.sellPrice)) return false;
+            // 成功购买物品
+            return PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(itemObj), 1);
         }
 
         public void AddOnCoinUpdateListener(Action<string> action)
@@ -62,6 +71,7 @@ namespace RPG.TradeSystem
                 Debug.LogError("Cant Load State -- PlayerCoin");
                 return;
             }
+
             coin = tempCoin;
             onCoinUpdate?.Invoke(coin.coinStr);
         }

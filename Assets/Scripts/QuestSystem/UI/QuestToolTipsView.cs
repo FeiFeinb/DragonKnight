@@ -56,17 +56,12 @@ namespace RPG.QuestSystem
         public void Clear()
         {
             questResumeText.text = string.Empty;
-            foreach (var _questObjectiveUI in questObjectiveUIs)
+            foreach (var questObjectiveUI in questObjectiveUIs)
             {
-                Destroy(_questObjectiveUI.gameObject);
+                Destroy(questObjectiveUI.gameObject);
             }
             questObjectiveUIs.Clear();
             questToolTipsRewardContainer.DestroyChildren();
-            // foreach (var _questToolTipsReward in questToolTipsRewards)
-            // {
-            //     Destroy(_questToolTipsReward.gameObject);
-            // }
-            // questToolTipsRewards.Clear();
         }
     }
 }
