@@ -11,14 +11,15 @@ namespace RPG.InventorySystem
     {
         public PlayerInventoryObject inventoryObject;       // 玩家背包
         public EquipmentInventoryObject equipmentObject;    // 装备栏
-
+        
         private void OnTriggerEnter(Collider other)
         {
             // 捡起物品
             var groundItem = other.GetComponent<GroundItem>();
             if (groundItem)
             {
-                if (inventoryObject.AddItem(new ItemData(groundItem.itemObj), 1))
+                var result = inventoryObject.AddItem(new ItemData(groundItem.itemObj), 1);
+                if (result == null)
                 {
                     Destroy(other.gameObject);
                 }

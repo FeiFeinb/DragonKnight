@@ -29,6 +29,7 @@ namespace RPG.Entity
 
         public void SubmitQuest(QuestSO quest)
         {
+            // 判断任务是否发送成功
             if (PlayerQuestRewardManager.Instance.SendReward(quest.questReward))
             {
                 Debug.Log(string.Concat("完成了任务", quest.questTitle));

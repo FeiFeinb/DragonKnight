@@ -6,14 +6,14 @@ namespace RPG.Module
 {
     public class MonoEvent : BaseSingletonWithMono<MonoEvent>
     {
-        private UnityAction UpdateEvent;
+        private UnityAction updateEvent;
         private void Update()
         {
-            if (UpdateEvent == null)
+            if (updateEvent == null)
                 return;
-            UpdateEvent.Invoke();
+            updateEvent.Invoke();
         }
-        public void AddUpdateEvent(UnityAction _action) { UpdateEvent += _action; }
-        public void RemoveUpdateEvent(UnityAction _action) { UpdateEvent -= _action; }
+        public void AddUpdateEvent(UnityAction action) { updateEvent += action; }
+        public void RemoveUpdateEvent(UnityAction action) { updateEvent -= action; }
     }
 }

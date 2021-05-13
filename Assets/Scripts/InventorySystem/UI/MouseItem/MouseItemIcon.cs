@@ -29,7 +29,7 @@ namespace RPG.InventorySystem
                 gameObject.SetActive(true);
                 // 设置图片
                 var objImage = gameObject.GetComponent<Image>();
-                objImage.sprite = slot.itemObject.sprite;
+                objImage.sprite = slot.ItemObj.sprite;
                 objImage.raycastTarget = false;
             }
         }

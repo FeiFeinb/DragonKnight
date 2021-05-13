@@ -7,7 +7,7 @@ namespace RPG.InventorySystem
     {
         public EquipmentInventorySlot[] equipmentInventorySlot;
 
-        protected override InventorySlot[] GetSlot()
+        protected override IEnumerable<InventorySlot> GetSlot()
         {
             return equipmentInventorySlot;
         }

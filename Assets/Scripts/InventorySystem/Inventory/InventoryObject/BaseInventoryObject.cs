@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 namespace RPG.InventorySystem
@@ -12,7 +13,7 @@ namespace RPG.InventorySystem
         [ContextMenu("InitSlot")]
         public void InitSlot()
         {
-            InventorySlot[] slots = GetSlot();
+            InventorySlot[] slots = GetSlot().ToArray();
             for (int i = 0; i < slots.Length; i++)
             {
                 slots[i].slotIndex = i;
@@ -21,12 +22,9 @@ namespace RPG.InventorySystem
         public static void SwapItem(InventorySlot originSlot, InventorySlot targetSlot)
         {
             // 禁止空物体与物体交换
-            if (originSlot.isEmpty && !targetSlot.isEmpty)
-            {
-                return;
-            }
+            if (originSlot.IsEmpty) return;
             // 检测是否能交换
-            if (originSlot.TypeMatch(targetSlot.itemObject) && targetSlot.TypeMatch(originSlot.itemObject))
+            if (originSlot.TypeMatch(targetSlot.ItemObj) && targetSlot.TypeMatch(originSlot.ItemObj))
             {
                 // 只更新物品和数量
                 InventorySlotData tempData = new InventorySlotData(originSlot.slotData);
@@ -37,12 +35,11 @@ namespace RPG.InventorySystem
 
         public void RemoveItem(ItemData item)
         {
-            InventorySlot[] slots = GetSlot();
-            for (int i = 0; i < slots.Length; i++)
+            foreach (InventorySlot inventorySlot in GetSlot())
             {
-                if (slots[i].slotData.itemData == item)
+                if (inventorySlot.slotData.itemData == item)
                 {
-                    slots[i].ClearSlot();
+                    inventorySlot.ClearSlot();
                 }
             }
         }
@@ -50,16 +47,15 @@ namespace RPG.InventorySystem
         [ContextMenu("Clear Inventory")]
         public void Clear()
         {
-            InventorySlot[] slots = GetSlot();
-            for (int i = 0; i < slots.Length; i++)
+            foreach (InventorySlot inventorySlot in GetSlot())
             {
-                slots[i].ClearSlot();
+                inventorySlot.ClearSlot();
             }
         }
 
         public object GetData()
         {
-            InventorySlot[] slots = GetSlot();
+            InventorySlot[] slots = GetSlot().ToArray();
             InventorySlotData[] slotData = new InventorySlotData[slots.Length];
             for (int i = 0; i < slotData.Length; i++)
             {
@@ -76,7 +72,7 @@ namespace RPG.InventorySystem
                 return;
             }
             // TODO: 修复加载的存档的格子数量与当前不一致问题
-            InventorySlot[] slots = GetSlot();
+            InventorySlot[] slots = GetSlot().ToArray();
             for (int i = 0; i < loadSlotData.Length; i++)
             {
                 // 只更新物品数据和数量
@@ -85,6 +81,6 @@ namespace RPG.InventorySystem
         }
         
         
-        protected abstract InventorySlot[] GetSlot();
+        protected abstract IEnumerable<InventorySlot> GetSlot();
     }
 }

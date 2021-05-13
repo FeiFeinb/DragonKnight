@@ -32,10 +32,10 @@ namespace RPG.InventorySystem
         private void OnTakeOff(int slotIndex)
         {
             EquipmentInventorySlot[] slots = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot;
-            if (!slots[slotIndex].isEmpty)
+            if (!slots[slotIndex].IsEmpty)
             {
                 // 脱下装备
-                var type = slots[slotIndex].itemObject.itemType;
+                var type = slots[slotIndex].ItemObj.itemType;
                 // 主手武器
                 if (slots[slotIndex].equipmentSlotType == EquipmentSlotType.MainHand)
                 {
@@ -57,11 +57,11 @@ namespace RPG.InventorySystem
         private void OnWear(int slotIndex)
         {
             EquipmentInventorySlot slot = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot[slotIndex];
-            if (!slot.isEmpty)
+            if (!slot.IsEmpty)
             {
                 // 穿上装备
-                var equipmentItemObject = slot.itemObject as EquipmentItemObject;
-                ItemType type = slot.itemObject.itemType;
+                var equipmentItemObject = slot.ItemObj as EquipmentItemObject;
+                ItemType type = slot.ItemObj.itemType;
                 // 主手武器
                 if (slot.equipmentSlotType == EquipmentSlotType.MainHand)
                 {

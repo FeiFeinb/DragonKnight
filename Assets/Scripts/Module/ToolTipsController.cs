@@ -59,40 +59,34 @@ namespace RPG.Module
                 return ViewDirection.DownLeft;
             }
             // 右下角显示
-            else if (horizontalRight > viewSize.x && newMousePositionY > viewSize.x)
+
+            if (horizontalRight > viewSize.x && newMousePositionY > viewSize.x)
             {
                 return ViewDirection.DownRight;
             }
             // 右上角显示
-            else if (verticalUp > viewSize.x && horizontalRight > viewSize.y)
+
+            if (verticalUp > viewSize.x && horizontalRight > viewSize.y)
             {
                 return ViewDirection.UpRight;
             }
             // 左上角显示
-            else
-            {
-                return ViewDirection.UpLeft;
-            }
+            return ViewDirection.UpLeft;
         }
         private Vector2 CalculatePivot(ViewDirection viewDirection)
         {
-            switch (viewDirection)
+            return viewDirection switch
             {
                 // 左上角
-                case ViewDirection.UpLeft:
-                    return new Vector2(1, 0);
+                ViewDirection.UpLeft => new Vector2(1, 0),
                 // 右上角
-                case ViewDirection.UpRight:
-                    return new Vector2(0, 0);
+                ViewDirection.UpRight => new Vector2(0, 0),
                 // 左下角
-                case ViewDirection.DownLeft:
-                    return new Vector2(1, 1);
+                ViewDirection.DownLeft => new Vector2(1, 1),
                 // 右下角
-                case ViewDirection.DownRight:
-                    return new Vector2(0, 1);
-                default:
-                    return new Vector2();
-            }
+                ViewDirection.DownRight => new Vector2(0, 1),
+                _ => new Vector2()
+            };
         }
     }
 }

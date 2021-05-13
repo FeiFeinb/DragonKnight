@@ -33,7 +33,7 @@ namespace RPG.InventorySystem
             // 该插槽有物体
             if (slot.slotData.itemData.id >= 0)
             {
-                uiInventorySlot.SetItemSprite(slot.itemObject.sprite);
+                uiInventorySlot.SetItemSprite(slot.ItemObj.sprite);
                 uiInventorySlot.SetItemAmount(slot.slotData.amount == 1 ? string.Empty : slot.slotData.amount.ToString("n0"));
             }
             // 该插槽无物体
@@ -63,9 +63,9 @@ namespace RPG.InventorySystem
         {
             InventorySlot slot = GetSlot(obj);
             MouseItemIcon.controller.SetHoverObj(slot);
-            if (!slot.isEmpty)
+            if (!slot.IsEmpty)
             {
-                MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(slot.itemObject, slot.slotData.itemData.itemBuffs));
+                MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(slot.ItemObj, slot.slotData.itemData.itemBuffs));
             }
         }
         // 指针离开插槽
@@ -73,9 +73,9 @@ namespace RPG.InventorySystem
         {
             InventorySlot slot = GetSlot(obj);
             MouseItemIcon.controller.SetHoverObj(null);
-            if (!slot.isEmpty)
+            if (!slot.IsEmpty)
             {
-                MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(slot.itemObject, slot.slotData.itemData.itemBuffs));
+                MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(slot.ItemObj, slot.slotData.itemData.itemBuffs));
             }
         }
         // 指针进入UI
@@ -118,9 +118,9 @@ namespace RPG.InventorySystem
         {
             // 右键单击插槽
             InventorySlot slot = GetSlot(obj);
-            if (slot.isEmpty) return;
+            if (slot.IsEmpty) return;
             // 使用该物体
-            slot.itemObject.Use(slot);
+            slot.ItemObj.Use(slot);
         }
         public override void Hide()
         {

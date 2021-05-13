@@ -4,7 +4,7 @@ namespace RPG.InventorySystem
     [System.Serializable]
     public class InventorySlotData
     {
-        public BaseItemObject itemObject
+        public BaseItemObject ItemObj
         {
             get
             {
@@ -15,7 +15,7 @@ namespace RPG.InventorySystem
                 return null;
             }
         }
-        public bool isEmpty
+        public bool IsEmpty
         {
             get
             {

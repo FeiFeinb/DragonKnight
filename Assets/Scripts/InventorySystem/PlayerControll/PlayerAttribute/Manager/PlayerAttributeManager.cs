@@ -33,9 +33,9 @@ namespace RPG.InventorySystem
         {
             EquipmentInventorySlot[] slots = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot;
             // 物体离开插槽
-            if (!slots[slotIndex].isEmpty)
+            if (!slots[slotIndex].IsEmpty)
             {
-                Debug.Log($"{slots[slotIndex].itemObject.name}离开插槽");
+                Debug.Log($"{slots[slotIndex].ItemObj.name}离开插槽");
                 var tempTuples = ModifiedIntTraverse(slots[slotIndex]);
                 foreach (var tempTuple in tempTuples)
                 {
@@ -48,9 +48,9 @@ namespace RPG.InventorySystem
         {
             EquipmentInventorySlot[] slots = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot;
             // 物体进入插槽
-            if (!slots[slotIndex].isEmpty)
+            if (!slots[slotIndex].IsEmpty)
             {
-                Debug.Log($"{slots[slotIndex].itemObject.name}进入插槽");
+                Debug.Log($"{slots[slotIndex].ItemObj.name}进入插槽");
                 var tempTuples = ModifiedIntTraverse(slots[slotIndex]);
                 foreach (var tempTuple in tempTuples)
                 {
@@ -60,7 +60,7 @@ namespace RPG.InventorySystem
         }
         private Tuple<ModifiedInt, IModifier>[] ModifiedIntTraverse(InventorySlot inventorySlot)
         {
-            if (!inventorySlot.isEmpty)
+            if (!inventorySlot.IsEmpty)
             {
                 var itemBuffs = inventorySlot.slotData.itemData.itemBuffs;
                 List<Tuple<ModifiedInt, IModifier>> tuples = new List<Tuple<ModifiedInt, IModifier>>();

@@ -1,137 +1,76 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RPG.Module;
+
 namespace RPG.InventorySystem
 {
     [CreateAssetMenu(fileName = "New PlayerInventoryObject", menuName = "Inventory System/Inventory/PlayerInventory")]
     public class PlayerInventoryObject : BaseInventoryObject
     {
-        public int EmptySlotNum => GetFirstEmptySlot().Length;
+        public int EmptySlotNum => GetEmptySlot().Count();
+
+
         public InventorySlot[] inventorySlots;
-        public bool AddItem(ItemData _item, int _amount)
+        
+        public Tuple<ItemData, int> AddItem(ItemData addItem, int amount)
         {
             // TODO: 优化AddItem的逻辑
-            InventorySlot[] sameItemSlots = GetSameItemSlots(_item.id);
-            // 不存在相同物品的插槽
-            if (sameItemSlots.Length == 0)
-            {
-                Debug.Log("不存在相同物品的插槽");
-                InventorySlot[] emptySlot = GetFirstEmptySlot();
-                // 背包已满
-                if (emptySlot.Length == 0)
-                {
-                    Debug.Log("背包已满");
-                    return false;
-                }
-                // 背包未满
-                else
-                {
-                    for (int i = 0; i < emptySlot.Length; i++)
-                    {
-                        Debug.Log("背包未满");
-                        // 能够一次性放下
-                        if (_amount <= GlobalResource.Instance.itemDataBase.itemObjs[_item.id].stackAmount)
-                        {
-                            emptySlot[i].UpdateSlot(new InventorySlotData(_item, _amount));
-                            return true;
-                        }
-                        // 不能一次性放下
-                        else
-                        {
-                            emptySlot[i].UpdateSlot(new InventorySlotData(_item, GlobalResource.Instance.itemDataBase.itemObjs[_item.id].stackAmount));
-                            _amount -= GlobalResource.Instance.itemDataBase.itemObjs[_item.id].stackAmount;
-                            continue;
-                        }
-                    }
-                    // 空插槽使用完了 还没放完
-                    Debug.Log("背包已满");
-                    return false;
-                }
-            }
             // 存在相同物品的插槽
-            else
+            foreach (InventorySlot sameItemSlot in GetSameItemSlots(addItem.id))
             {
-                Debug.Log("存在相同物品的插槽");
-                for (int i = 0; i < sameItemSlots.Length; i++)
+                // 此格已满
+                if (sameItemSlot.slotData.amount == sameItemSlot.ItemObj.stackAmount) continue;
+                // 此格子未满 剩余数量为
+                int amountLeft = sameItemSlot.ItemObj.stackAmount - sameItemSlot.slotData.amount;
+                // 此格子能够一次性放下
+                if (amount <= amountLeft)
                 {
-                    // 此格已满
-                    if (sameItemSlots[i].slotData.amount == sameItemSlots[i].itemObject.stackAmount)
-                    {
-                        Debug.Log($"第{i}个格子已满");
-                        continue;
-                    }
-                    //此格子未满
-                    else
-                    {
-                        Debug.Log($"第{i}个格子未满");
-                        // 此格剩余数量
-                        int amountLeft = sameItemSlots[i].itemObject.stackAmount - sameItemSlots[i].slotData.amount;
-                        // 此格子能够一次性放下
-                        if (_amount <= amountLeft)
-                        {
-                            Debug.Log($"第{i}个格子能一次性放下");
-                            sameItemSlots[i].AddAmount(_amount);
-                            return true;
-                        }
-                        // 此格子不能够一次性放下
-                        else
-                        {
-                            Debug.Log($"第{i}个格子不能一次性放下");
-                            sameItemSlots[i].AddAmount(amountLeft);
-                            _amount -= amountLeft;
-                            continue;
-                        }
-                    }
+                    sameItemSlot.AddAmount(amount);
+                    return null;
                 }
-                return AddItem(_item, _amount);
+                // 此格子不能够一次性放下
+                sameItemSlot.AddAmount(amountLeft);
+                amount -= amountLeft;
+                return AddItem(addItem, amount);
             }
+            // 不存在相同物品的插槽
+            // 遍历空插槽
+            foreach (InventorySlot emptySlot in GetEmptySlot())
+            {
+                // 能够一次性放下
+                if (amount <= GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount)
+                {
+                    emptySlot.UpdateSlot(new InventorySlotData(addItem, amount));
+                    return null;
+                }
+                // 不能一次性放下
+                emptySlot.UpdateSlot(new InventorySlotData(addItem, GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount));
+                amount -= GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount;
+            }
+            // 无空插槽 或 空插槽使用完了但还没放完 
+            return new Tuple<ItemData, int>(addItem, amount);
         }
 
-        public bool HasItem(int _itemID)
+        public bool HasItem(int itemID)
         {
-            foreach (InventorySlot slot in inventorySlots)
-            {
-                if (slot.slotData.itemData.id == _itemID)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return inventorySlots.Any(slot => slot.slotData.itemData.id == itemID);
         }
-        private InventorySlot[] GetSameItemSlots(int itemID)
+
+        private IEnumerable<InventorySlot> GetSameItemSlots(int itemID)
         {
-            List<InventorySlot> slots = new List<InventorySlot>();
             // 遍历插槽
-            for (int i = 0; i < inventorySlots.Length; i++)
-            {
-                // 如果该插槽为空 或已满 则跳过本次检查
-                if (inventorySlots[i].isEmpty ||
-                    inventorySlots[i].slotData.amount == GlobalResource.Instance.itemDataBase.itemObjs[itemID].stackAmount)
-                {
-                    continue;
-                }
-                if (itemID == inventorySlots[i].slotData.itemData.id)
-                {
-                    slots.Add(inventorySlots[i]);
-                }
-            }
-            return slots.ToArray();
-        }
-        private InventorySlot[] GetFirstEmptySlot()
-        {
-            List<InventorySlot> emptySlots = new List<InventorySlot>();
-            for (int i = 0; i < inventorySlots.Length; i++)
-            {
-                if (inventorySlots[i].isEmpty)
-                {
-                    emptySlots.Add(inventorySlots[i]);
-                }
-            }
-            // 背包已满
-            return emptySlots.ToArray();
+            // 找出不空不满的插槽 再找出编号匹对的插槽
+            return inventorySlots.Where(slot => !slot.IsEmpty && slot.slotData.amount != GlobalResource.Instance.itemDataBase.itemObjs[itemID].stackAmount).Where(flexSlot => itemID == flexSlot.slotData.itemData.id);
         }
 
-        protected override InventorySlot[] GetSlot()
+        private IEnumerable<InventorySlot> GetEmptySlot()
+        {
+            return inventorySlots.Where((inventorySlot) => inventorySlot.IsEmpty);
+        }
+
+        protected override IEnumerable<InventorySlot> GetSlot()
         {
             return inventorySlots;
         }

@@ -9,18 +9,18 @@ namespace RPG.InventorySystem
     [System.Serializable]
     public class InventorySlot
     {
-        public BaseItemObject itemObject
+        public BaseItemObject ItemObj
         {
             get
             {
-                return slotData.itemObject;
+                return slotData.ItemObj;
             }
         }
-        public bool isEmpty
+        public bool IsEmpty
         {
             get
             {
-                return slotData.isEmpty;
+                return slotData.IsEmpty;
             }
         }
         [DisplayOnly] public int slotIndex;         // 插槽编号
@@ -28,19 +28,20 @@ namespace RPG.InventorySystem
         public InventorySlotData slotData;          // 插槽存储数据
         [System.NonSerialized] public Action<int> OnBeforeUpdate;   // 插槽更新前事件
         [System.NonSerialized] public Action<int> OnAfterUpdate;    // 插槽更新后事件
-                                                                    // 添加数量
-        public void AddAmount(int _amount)
+        
+        // 添加数量
+        public void AddAmount(int amount)
         {
             OnBeforeUpdate?.Invoke(slotIndex);
-            slotData.amount += _amount;
+            slotData.amount += amount;
             OnAfterUpdate?.Invoke(slotIndex);
         }
         // 更新插槽值
-        public void UpdateSlot(InventorySlotData _data)
+        public void UpdateSlot(InventorySlotData _slotData)
         {
             OnBeforeUpdate?.Invoke(slotIndex);
-            slotData.itemData = _data.itemData;
-            slotData.amount = _data.amount;
+            slotData.itemData = _slotData.itemData;
+            slotData.amount = _slotData.amount;
             OnAfterUpdate?.Invoke(slotIndex);
         }
         // 清空插槽值

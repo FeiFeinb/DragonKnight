@@ -45,7 +45,7 @@ namespace RPG.TradeSystem
         {
             if (PlayerInventoryManager.Instance.inventoryObject.EmptySlotNum == 0 || !SubCoin(itemObj.sellPrice)) return false;
             // 成功购买物品
-            return PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(itemObj), 1);
+            return PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(itemObj), 1) == null;
         }
 
         public void AddOnCoinUpdateListener(Action<string> action)
