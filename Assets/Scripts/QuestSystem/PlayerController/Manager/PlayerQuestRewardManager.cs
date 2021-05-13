@@ -21,6 +21,7 @@ namespace RPG.QuestSystem
                 var result = PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(reward.itemObj), 1);
                 if (result != null)
                 {
+                    // TODO: 在地上生成未能放进背包的物品
                     Debug.Log("背包已满");
                     return false;
                 }

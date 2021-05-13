@@ -72,7 +72,6 @@ namespace RPG.TradeSystem
             pageFlip.Reset((commodityObject.sellObjects.Length - 1) / maxSlot + 1);
             UpdateTradeView();
         }
-
         
         private void OnPointerEnterSlot(SellItemSlotData sellData)
         {
@@ -93,6 +92,7 @@ namespace RPG.TradeSystem
             // 购买物品
             PlayerTradeManager.Instance.BuyItem(sellData.itemObj);
         }
+        
         private void UpdateTradeView()
         {
             // 获取第一页应显示的插槽数量

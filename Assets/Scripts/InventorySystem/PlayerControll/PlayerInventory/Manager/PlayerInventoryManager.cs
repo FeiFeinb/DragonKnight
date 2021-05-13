@@ -25,9 +25,8 @@ namespace RPG.InventorySystem
                 }
                 else
                 {
-                    Debug.Log("背包已满，无法捡起物体");
+                    Debug.Log($"背包已满，无法捡起{result.Item1.id}号物品-共{result.Item2}个");
                 }
-                // 背包已满逻辑
             }
         }
         private void OnApplicationQuit()

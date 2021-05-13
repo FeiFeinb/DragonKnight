@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 namespace RPG.InventorySystem
 {
     public static class ItemTextColor
     {
-        static public string GetRareColorStr(ItemRare itemRare)
+        public static string GetRareColorStr(ItemRare itemRare)
         {
             switch (itemRare)
             {
@@ -21,7 +22,7 @@ namespace RPG.InventorySystem
                     return "";
             }
         }
-        static public string GetAttributeColorStr(AttributeType itemAttributeType)
+        public static string GetAttributeColorStr(AttributeType itemAttributeType)
         {
             switch (itemAttributeType)
             {
@@ -36,6 +37,12 @@ namespace RPG.InventorySystem
                 case AttributeType.Mastery: return "green";
                 default: return "";
             }
+        }
+        public static string ColorCodeSplicing(string colorStr, string str)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            strBuilder.Append($"<color={colorStr}>").Append(str).Append("</color>");
+            return strBuilder.ToString();
         }
     }
 }

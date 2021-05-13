@@ -16,7 +16,6 @@ namespace RPG.InventorySystem
         
         public Tuple<ItemData, int> AddItem(ItemData addItem, int amount)
         {
-            // TODO: 优化AddItem的逻辑
             // 存在相同物品的插槽
             foreach (InventorySlot sameItemSlot in GetSameItemSlots(addItem.id))
             {
@@ -35,8 +34,7 @@ namespace RPG.InventorySystem
                 amount -= amountLeft;
                 return AddItem(addItem, amount);
             }
-            // 不存在相同物品的插槽
-            // 遍历空插槽
+            // 不存在相同物品的插槽 遍历空插槽
             foreach (InventorySlot emptySlot in GetEmptySlot())
             {
                 // 能够一次性放下
@@ -60,8 +58,7 @@ namespace RPG.InventorySystem
 
         private IEnumerable<InventorySlot> GetSameItemSlots(int itemID)
         {
-            // 遍历插槽
-            // 找出不空不满的插槽 再找出编号匹对的插槽
+            // 遍历插槽 找出不空不满的插槽 再找出编号匹对的插槽
             return inventorySlots.Where(slot => !slot.IsEmpty && slot.slotData.amount != GlobalResource.Instance.itemDataBase.itemObjs[itemID].stackAmount).Where(flexSlot => itemID == flexSlot.slotData.itemData.id);
         }
 

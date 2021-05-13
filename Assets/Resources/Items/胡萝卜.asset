@@ -19,7 +19,7 @@ MonoBehaviour:
     bodyType: 0
     itemRare: 0
   isStackable: 1
-  stackAmount: 64
+  stackAmount: 2
   sellPrice:
     goldCoin: 0
     silverCoin: 0

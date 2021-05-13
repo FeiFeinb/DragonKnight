@@ -20,9 +20,8 @@ namespace RPG.InventorySystem
     {
         public static string storePath = "UIView/MouseItemTipsView";   // 路径
         public static MouseItemTipsController controller;
+        
         [SerializeField, Tooltip("启用面板的事件延迟")] private float viewShowDelay = 1.5f;     // 目标计时时间
-        // private InventorySlot currentInventorySlot;         // 鼠标指向插槽
-        // private BaseItemObject currentBaseItemObject;       // 鼠标指向所记录物品
         private ItemToolTipsContent content;
         private MouseItemTipsView mouseItemTipsView;        // UI面板
         private float viewShowTimer;                        // 面板显示计时器
@@ -48,12 +47,7 @@ namespace RPG.InventorySystem
         }
 
 
-        private string ColorCodeSplicing(string colorStr, string str)
-        {
-            StringBuilder strBuilder = new StringBuilder();
-            strBuilder.Append($"<color={colorStr}>").Append(str).Append("</color>");
-            return strBuilder.ToString();
-        }
+        
         private string AttributeText(ItemBuff[] itemBuff)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -71,7 +65,7 @@ namespace RPG.InventorySystem
                 {
                     string colorStr = ItemTextColor.GetAttributeColorStr(itemBuff[i].itemAttributeType);
                     string itemAttributeStr = string.Concat(showValue, itemBuff[i].itemAttributeType.ToChinese());
-                    stringBuilder.Append(ColorCodeSplicing(colorStr, itemAttributeStr));
+                    stringBuilder.Append(ItemTextColor.ColorCodeSplicing(colorStr, itemAttributeStr));
                 }
                 // 在结尾处拼接换行符
                 if (i < itemBuff.Length - 1)
@@ -110,7 +104,7 @@ namespace RPG.InventorySystem
             }
             // 设置名称
             string colorStr = ItemTextColor.GetRareColorStr(content.baseItemObject.itemType.itemRare);
-            mouseItemTipsView.SetTipName(ColorCodeSplicing(colorStr, content.baseItemObject.name));
+            mouseItemTipsView.SetTipName(ItemTextColor.ColorCodeSplicing(colorStr, content.baseItemObject.name));
             // 设置位置
             mouseItemTipsView.SetTipPosition(content.baseItemObject.itemType.GetTypeString());
             // 设置装备属性

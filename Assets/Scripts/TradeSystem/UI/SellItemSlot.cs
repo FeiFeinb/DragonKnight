@@ -12,8 +12,12 @@ namespace RPG.TradeSystem
         public void InitSlot(BaseItemObject itemObject)
         {
             if (itemObject == null) return;
+            // 设置图标
             image.sprite = itemObject.sprite;
-            nameText.text = itemObject.name;
+            // 设置名称
+            string colorStr = ItemTextColor.GetRareColorStr(itemObject.itemType.itemRare);
+            nameText.text = ItemTextColor.ColorCodeSplicing(colorStr, itemObject.name);
+            // 设置售价
             priceText.text = itemObject.sellPrice.coinStr;
         }
     }

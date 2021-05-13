@@ -43,6 +43,7 @@ namespace RPG.TradeSystem
 
         public bool BuyItem(BaseItemObject itemObj)
         {
+            // 背包已满或没钱购买
             if (PlayerInventoryManager.Instance.inventoryObject.EmptySlotNum == 0 || !SubCoin(itemObj.sellPrice)) return false;
             // 成功购买物品
             return PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(itemObj), 1) == null;
