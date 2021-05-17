@@ -199,7 +199,7 @@ namespace RPG.DialogueSystem
                     break;
             }
             // 绘制信息
-            node.SetText(EditorGUILayout.TextField(node.Text, textFieldOption));
+            node.SetText(EditorGUILayout.TextField(node.Content, textFieldOption));
             // 开启横向布局
             GUILayout.BeginHorizontal();
             // 添加增加节点的按钮

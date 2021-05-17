@@ -1,53 +1,89 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using RPG.DialogueSystem;
+using UnityEngine.Serialization;
+
 namespace RPG.DialogueSystem
 {
+    /// <summary>
+    /// 可对话NPC类
+    /// </summary>
     public class DialogueNPC : MonoBehaviour
     {
-        public DialogueSO DialogueContent => dialogueContent;
-        public DialogueCharacterInfoSO NPCInfo => npcInfo;
-        [SerializeField] private DialogueCharacterInfoSO npcInfo;     // NPC角色信息
-        [SerializeField] private DialogueSO dialogueContent;          // NPC对话内容
-        [SerializeField] private List<DialogueEvent> dialogueEvents = new List<DialogueEvent>();    // 事件数列
+        public DialogueSO Content => _content;                              // 外部获取
+        public DialogueCharacterInfoSO NPCInfo => _npcInfo;                 // 外部获取
         
+        
+        [SerializeField] private DialogueCharacterInfoSO _npcInfo;                           // NPC角色信息
+        
+        [SerializeField] private DialogueSO _content;                                        // NPC对话内容
+        
+        [SerializeField] private List<DialogueEvent> _events = new List<DialogueEvent>();    // 事件数列
+        
+        /// <summary>
+        /// 开始对话
+        /// </summary>
         public void StartDialogue()
         {
             PlayerDialogueManager.Instance?.SetDialogue(this);
         }
+        
+        /// <summary>
+        /// 结束对话
+        /// </summary>
         public void ResetDialogue()
         {
             PlayerDialogueManager.Instance?.ResetDialogue();
         }
-        internal void OnDialogueTriggerEvent(string _dialogueEventID, string _dialogueUniqueID)
+        
+        /// <summary>
+        /// 尝试触发对话事件
+        /// </summary>
+        /// <param name="dialogueEventID">对话事件ID</param>
+        /// <param name="dialogueUniqueID">对话ID</param>
+        internal void TryTriggerDialogueEvent(string dialogueEventID, string dialogueUniqueID)
         {
-            if (string.IsNullOrEmpty(_dialogueEventID)) return;
-            foreach (DialogueEvent dialogueEvent in dialogueEvents)
+            if (string.IsNullOrEmpty(dialogueEventID)) return;
+            foreach (var dialogueEvent in _events.Where(dialogueEvent => dialogueEvent.EventID.Equals(dialogueEventID)))
             {
-                // 名称匹配 执行事件
-                if (dialogueEvent.dialogueEventID.Equals(_dialogueEventID))
-                {
-                    dialogueEvent.dialogueEvent?.Invoke(_dialogueUniqueID);
-                }
+                dialogueEvent.Event?.Invoke(dialogueUniqueID);
             }
         }
-        internal void AddDialogueEnterEvent(string _dialogueUniqueID, string _dialogueEventID, UnityAction<string> _dialogueAction)
+        
+        /// <summary>
+        /// 添加进入对话事件
+        /// </summary>
+        /// <param name="dialogueEventID">对话事件ID</param>
+        /// <param name="dialogueUniqueID">对话ID</param>
+        /// <param name="dialogueAction">对话Action</param>
+        internal void AddDialogueEnterEvent(string dialogueEventID, string dialogueUniqueID, UnityAction<string> dialogueAction)
         {
             // 设置对话节点中的EventID
-            dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(_dialogueEventID);
+            _content.GetNode(dialogueUniqueID).SetEnterEventID(dialogueEventID);
             // TODO: 设置对话节点中的Condition
             // 在NPC身上添加事件
-            // TODO: 判定列表中是否存在此事件 若存在则直接往事件中AddListener
-            dialogueEvents.Add(new DialogueEvent(_dialogueEventID, _dialogueAction));
+            foreach (var dialogueEvent in _events.Where(dialogueEvent => dialogueEvent.EventID == dialogueEventID))
+            {
+                dialogueEvent.Event.AddListener(dialogueAction);
+                return;
+            }
+            _events.Add(new DialogueEvent(dialogueEventID, dialogueAction));
         }
-        internal void RemoveDialogueEnterEvent(string _dialogueUniqueID, string _dialogueEventID)
+        
+        /// <summary>
+        /// 移除进入对话事件
+        /// </summary>
+        /// <param name="dialogueEventID">对话事件ID</param>
+        /// <param name="dialogueUniqueID">对话ID</param>
+        internal void RemoveDialogueEnterEvent(string dialogueEventID, string dialogueUniqueID)
         {
-            dialogueContent.GetNode(_dialogueUniqueID).SetEnterEventID(string.Empty);
+            _content.GetNode(dialogueUniqueID).SetEnterEventID(string.Empty);
             // 移除整个Event
-            dialogueEvents.Remove(dialogueEvents.Find((dialogueEvent) => (dialogueEvent.dialogueEventID == _dialogueEventID)));
+            _events.Remove(_events.Find(dialogueEvent => dialogueEvent.EventID == dialogueEventID));
         }
     }
 }

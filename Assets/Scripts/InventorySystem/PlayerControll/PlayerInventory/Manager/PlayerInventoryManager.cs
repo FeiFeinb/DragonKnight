@@ -62,10 +62,10 @@ namespace RPG.InventorySystem
         {
         }
 
-        public bool? Evaluator(DialogueConditionType predicate, ScriptableObject paramSO)
+        public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
         {
             BaseItemObject itemParamSO = paramSO as BaseItemObject;
-            switch (predicate)
+            switch (type)
             {
                 case DialogueConditionType.HasItem: return inventoryObject.HasItem(itemParamSO.item.id);
             }

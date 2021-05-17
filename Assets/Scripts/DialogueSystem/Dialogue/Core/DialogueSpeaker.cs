@@ -2,8 +2,19 @@ namespace RPG.DialogueSystem
 {
     public enum DialogueSpeaker
     {
-        NPC,                // NPC
-        PlayerChoice,       // 玩家选择
-        Player              // 玩家对话
+        /// <summary>
+        /// NPC发言
+        /// </summary>
+        NPC,
+        
+        /// <summary>
+        /// 玩家选择
+        /// </summary>
+        PlayerChoice,
+        
+        /// <summary>
+        /// 玩家发言
+        /// </summary>
+        Player
     }
 }

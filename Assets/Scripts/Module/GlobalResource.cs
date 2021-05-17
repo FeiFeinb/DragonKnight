@@ -15,7 +15,7 @@ namespace RPG.Module
         {
             // 开始游戏时初始化各个数据库
             itemDataBase.UpdateDateBaseID();
-            characterInfoDataBase.UpdateDateBaseID();
+            characterInfoDataBase.UpdateDateBase();
             questDataBaseSO.UpdateDataBaseID();
             DontDestroyOnLoad(gameObject);
         }

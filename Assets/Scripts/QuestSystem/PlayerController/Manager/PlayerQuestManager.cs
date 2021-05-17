@@ -61,7 +61,7 @@ namespace RPG.QuestSystem
         }
         private PlayerQuestStatus GetQuestStatus(QuestSO questSO)
         {
-            return GetQuestStatuses().FirstOrDefault(status => status.QuestUniqueID == questSO.questUniqueID);
+            return GetQuestStatuses()?.FirstOrDefault(status => status.QuestUniqueID == questSO.questUniqueID);
         }
         
         public void AddQuest(QuestSO addQuest)
@@ -91,16 +91,16 @@ namespace RPG.QuestSystem
             }
         }
 
-        public bool? Evaluator(DialogueConditionType predicate, ScriptableObject paramSO)
+        public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
         {
             QuestSO questParamSO = paramSO as QuestSO;
-            switch (predicate)
+            switch (type)
             {
                 // 任务类型Condition
                 case DialogueConditionType.HasQuest:
                     return (GetQuestStatus(questParamSO) != null);
                 case DialogueConditionType.CompleteQuest:
-                    return GetQuestStatus(questParamSO).IsFinish;
+                    return GetQuestStatus(questParamSO)?.IsFinish;
             }
             // 此类型不具备任何Condition
             return null;

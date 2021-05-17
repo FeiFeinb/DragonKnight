@@ -80,19 +80,19 @@ namespace RPG.DialogueSystem
                 foreach (DialogueNodeSO choice in PlayerDialogueManager.Instance.GetChoice())
                 {
                     GameObject choiceObj = GameObject.Instantiate(playerChoiceButtonPrefab, playerChoiceContainer.transform);
-                    choiceObj.GetComponentInChildren<Text>().text = choice.Text;
+                    choiceObj.GetComponentInChildren<Text>().text = choice.Content;
                     choiceObj.GetComponent<Button>().onClick.AddListener(delegate
                     {
                         PlayerDialogueManager.Instance.Choose(choice);
                     }); ;
-                    PlayerDialogueManager.Instance.CurrentDialogueNPC.OnDialogueTriggerEvent(choice.EnterEventID, choice?.UniqueID);
+                    PlayerDialogueManager.Instance.CurrentDialogueNPC.TryTriggerDialogueEvent(choice.EnterEventID, choice?.UniqueID);
                 }
             }
             else
             {
                 // 更新UI文字显示
-                PlayerDialogueManager.Instance.CurrentDialogueNPC.OnDialogueTriggerEvent(PlayerDialogueManager.Instance.CurrentDialogueNode?.EnterEventID, PlayerDialogueManager.Instance.CurrentDialogueNode?.UniqueID);
-                dialogueText.text = PlayerDialogueManager.Instance.CurrentDialogueNode?.Text;
+                PlayerDialogueManager.Instance.CurrentDialogueNPC.TryTriggerDialogueEvent(PlayerDialogueManager.Instance.CurrentDialogueNode?.EnterEventID, PlayerDialogueManager.Instance.CurrentDialogueNode?.UniqueID);
+                dialogueText.text = PlayerDialogueManager.Instance.CurrentDialogueNode?.Content;
             }
         }
 

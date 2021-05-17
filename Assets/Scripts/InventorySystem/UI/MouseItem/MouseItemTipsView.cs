@@ -14,26 +14,26 @@ namespace RPG.InventorySystem
         [SerializeField] private Text attributeText;
         [SerializeField] private Text requireText;
         [SerializeField] private Text sellPriceText;
-        public void SetTipName(string _tipName)
+        public void SetTipName(string tipName)
         {
-            nameText.text = _tipName;
+            nameText.text = tipName;
         }
-        public void SetTipPosition(string _tipPosition)
+        public void SetTipPosition(string tipPosition)
         {
-            positionText.text = _tipPosition;
+            positionText.text = tipPosition;
         }
-        public void SetTipAttribute(string _tipAttribute)
+        public void SetTipAttribute(string tipAttribute)
         {
-            attributeText.enabled = !string.IsNullOrEmpty(_tipAttribute);
-            attributeText.text = _tipAttribute;
+            attributeText.enabled = !string.IsNullOrEmpty(tipAttribute);
+            attributeText.text = tipAttribute;
         }
-        public void SetTipRequire(string _tipRequire)
+        public void SetTipRequire(string tipRequire)
         {
-            requireText.text = _tipRequire;
+            requireText.text = tipRequire;
         }
-        public void SetTipSellPrice(string _tipSellPrice)
+        public void SetTipSellPrice(string tipSellPrice)
         {
-            sellPriceText.text = _tipSellPrice;
+            sellPriceText.text = tipSellPrice;
         }
 
         

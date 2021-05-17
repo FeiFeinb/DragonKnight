@@ -108,13 +108,11 @@ namespace RPG.InventorySystem
             // 设置位置
             mouseItemTipsView.SetTipPosition(content.baseItemObject.itemType.GetTypeString());
             // 设置装备属性
-
             string attributeStr = AttributeText(content.itemBuffs);
-
             mouseItemTipsView.SetTipAttribute(attributeStr);
             // TODO: 设置装备需求
 
-            // TODO: 设置装备售价
+            // 设置装备售价
             mouseItemTipsView.SetTipSellPrice(content.baseItemObject.sellPrice.coinStr);
         }
     }

@@ -24,9 +24,10 @@ namespace RPG.DialogueSystem
         private DialogueNodeSO currentDialogueNode;               // 当前节点
         private DialogueNPC currentDialogueNPC;                 // 当前对话NPC
         private bool isPlayerChoice;                            // 是否位于玩家选择界面
+        
         public void SetDialogue(DialogueNPC _currentNPC)
         {
-            currentDialogue = _currentNPC.DialogueContent;
+            currentDialogue = _currentNPC.Content;
             currentDialogueNode = currentDialogue.GetRootNode();
             currentDialogueNPC = _currentNPC;
             isPlayerChoice = false;
@@ -78,13 +79,13 @@ namespace RPG.DialogueSystem
                 // 获取所有不可交互的对话节点
                 DialogueNodeSO[] nonInteractiveChildren = ConditionFitter(currentDialogue.GetNonInteractiveChildren(currentDialogueNode)).ToArray();
                 // 推动节点变换 移动至下一节点
-                currentDialogueNPC.OnDialogueTriggerEvent(currentDialogueNode?.ExitEventID, currentDialogueNode?.UniqueID);
+                currentDialogueNPC.TryTriggerDialogueEvent(currentDialogueNode?.ExitEventID, currentDialogueNode?.UniqueID);
                 currentDialogueNode = (nonInteractiveChildren.Length == 0 ? null : nonInteractiveChildren[0]);
                 onDialogueNodeChange?.Invoke();
                 return;
             }
             // 触发对话事件 此事件为下一个对话Enter事件
-            currentDialogueNPC.OnDialogueTriggerEvent(currentDialogueNode?.ExitEventID, currentDialogueNode?.UniqueID);
+            currentDialogueNPC.TryTriggerDialogueEvent(currentDialogueNode?.ExitEventID, currentDialogueNode?.UniqueID);
             // 调用节点变化事件
             onDialogueNodeChange?.Invoke();
         }

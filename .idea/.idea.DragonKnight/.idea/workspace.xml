@@ -2,21 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="161f9443-abc8-474e-9b2b-5667ec209426" name="默认变更列表" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/AndCondition.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/AndCondition.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/DialogueConditionType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/DialogueConditionType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/OrCondition.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/OrCondition.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DragonKnight/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DragonKnight/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/TradeSystem/BusinessmanInventoryObject.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/TradeSystem/BusinessmanInventoryObject.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Games/TradeSystem/SellItemSlotPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/TradeSystem/SellItemSlotPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Items/胡萝卜.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Items/胡萝卜.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/卡尔·雷矛对话.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/卡尔·雷矛对话.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/弗伦·长须对话.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Games/DialogueSystem/ScriptableObjects/弗伦·长须对话.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/UIView/TradeView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UIView/TradeView.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Demo_ExteriorOnly_Optimized.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Demo_ExteriorOnly_Optimized.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/PlayerInventoryObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory/InventoryObject/PlayerInventoryObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/ItemTextColor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/ItemTextColor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/DialogueCondition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/DialogueCondition.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueSpeaker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueSpeaker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Editor/DialogueEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Editor/DialogueEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/PlayerControll/PlayerDialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/PlayerControll/PlayerDialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/UI/DialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/UI/DialogueController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/PlayerControll/PlayerInventory/Manager/PlayerInventoryManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestRewardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestRewardManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/SellItemSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/SellItemSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Icons.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Icons/Help_Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Icons/Help_Icon.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Icons/UniversalIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Icons/UniversalIcon.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Layout.wlt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Layout.wlt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts/Readme.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialInfo/Scripts/Readme.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,69 +65,61 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Data/Graphs/Vector4ShaderProperty.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Utils/EditorLoadedTestAssemblyProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Window/ViewModel/TimelineAssetViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.3.1/Tests/Editor/SearcherTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://D:/UnityInstall/2020.3.5f1c1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://D:/UnityInstall/2020.3.5f1c1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Test/TestTradeView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEngine.TestRunner/Utils/CoroutineRunner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRun/Tasks/LegacyEditModeRunTask.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Editor/UniversalRenderPipelineCameraEditor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/RecompileScripts.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.4/Editor/Editors/CinemachineFreeLookEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.animation.rigging@1.0.3/Editor/Effectors/RigEffector.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Manipulators/Move/MoveItemModeReplace.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/EnterPlayMode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEngine.TestRunner/TestRunner/PlaymodeTestsController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Runtime/DeferredLights.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/WaitForDomainReload.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.4.0/Runtime/Utilities/HableCurve.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.3.1/Editor/Searcher/SearcherHighlighter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Tests/Runtime/TMP_RuntimeTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRun/Tasks/CleanupVerificationTask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRun/Tasks/BuildTestTreeTask.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/GUI/GuiHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Utilities/Graphics.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Runtime/TMP_Dropdown.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://D:/UnityInstall/2020.3.5f1c1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/InputModules/StandaloneInputModule.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Util/IndexSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Runtime/TMP_SpriteAnimator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Util/ListUtilities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/EditorEnumeratorTestWorkItem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.4.0/Editor/Volume/Drawers/ColorParameterDrawer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Runtime/TMP_CoroutineTween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Runtime/TextMeshProUGUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility/IListenable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEngine.TestRunner/Utils/MonoBehaviourTest/MonoBehaviourTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Runtime/2D/Passes/Utility/RendererLighting.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Editor/TMP_GlyphPropertyDrawer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Animation/BindingTreeViewDataSource.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Runtime/2D/Shadows/ShadowUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.4/Editor/Editors/CinemachinePathEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Utils/TestListProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Utils/TestListCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Utils/CachingTestListProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695D1CC9-3CCA-4506-9C52-8C15C9FDD749/b7/6a22e1d8/Environment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8390D9AA-6F32-4BE3-A3F8-981D73885A67/15/43482ddc/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Utils/EditorLoadedTestAssemblyProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Window/ViewModel/TimelineAssetViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/351E49E2-A5BF-4FD6-BEAB-B458CE2255F3/7c/3a548426/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.3.1/Tests/Editor/SearcherTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Editor/UniversalRenderPipelineCameraEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/RecompileScripts.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Manipulators/Move/MoveItemModeReplace.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/EnterPlayMode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEngine.TestRunner/TestRunner/PlaymodeTestsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Runtime/DeferredLights.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRunner/Messages/WaitForDomainReload.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.4.0/Runtime/Utilities/HableCurve.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.3.1/Editor/Searcher/SearcherHighlighter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Tests/Runtime/TMP_RuntimeTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/GUI/GuiHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Runtime/TMP_Dropdown.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AD9B32B1-45C5-4897-BE7C-609E1910B252/a1/54f2a56c/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.4.0/Editor/Volume/Drawers/ColorParameterDrawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility/IListenable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.1/Scripts/Editor/TMP_GlyphPropertyDrawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.7/Editor/Animation/BindingTreeViewDataSource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@10.4.0/Runtime/Passes/DepthNormalOnlyPass.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@10.4.0/Editor/Data/Graphs/Vector1MaterialSlot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.24/UnityEditor.TestRunner/TestRun/TestJobRunner.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/QuestObjective.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/KillQuestObjective.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Core/Objective/DialogueQuestObjective.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsEquipmentReward.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/BaseUI.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Module/GlobalResource.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Module/ResourcesManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Module/UIResourcesManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/SaveSystem/Core/SaveManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UI/SavingController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/DragableUserInterface.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/UI/Core/DraggableUserInterface.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/Inventory/InventoryController.cs" />
@@ -111,7 +132,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/BusinessmanInventoryObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/UI/QuestToolTipsView.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/PlayerQuestStatus.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Editor/BaseItemObjectEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StateMachine/Core/State.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StateMachine/Core/StateMachine.cs" />
@@ -131,10 +151,26 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestRewardManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/PlayerTradeManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Items/ItemTextColor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/SellItemSlot.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/UIPageFlip.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsView.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/UI/MouseItem/MouseItemTipsController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TradeSystem/UI/TradeController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueConditionType.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueCondition.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueSpeaker.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/IPredicateEvaluators.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/QuestSystem/PlayerController/Manager/PlayerQuestManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoDataBaseSO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueNPC.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/DialogueEvent.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/OrCondition.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/DialogueCondition.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/Core/Condition/AndCondition.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueCharacterInfoSO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueNodeSO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/Dialogue/ScriptableObjects/DialogueSO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/DialogueSystem/PlayerControll/PlayerDialogueManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rkk6AM4un6VOfsqaNMXsH4hm9U" />
@@ -158,7 +194,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -228,6 +264,8 @@
       <workItem from="1620736446762" duration="1783000" />
       <workItem from="1620743578710" duration="3000000" />
       <workItem from="1620910770280" duration="3990000" />
+      <workItem from="1620990174865" duration="12388000" />
+      <workItem from="1621058986891" duration="106000" />
     </task>
     <servers />
   </component>

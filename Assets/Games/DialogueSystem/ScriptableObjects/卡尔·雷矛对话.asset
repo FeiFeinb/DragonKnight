@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u6211\u7684\u76FE\u724C\u62FF\u6765\u4E86\u5417"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 235b12a8-3db3-42c7-8b50-749cee936c43
-  text: "\u6211\u7684\u76FE\u724C\u62FF\u6765\u4E86\u5417"
-  dialogueSpeaker: 0
-  dialogueEnterEventID: 
-  dialogueExitEventID: 
-  parents:
+  _content: 
+  _speaker: 0
+  _condition:
+    _andConditions:
+    - _orConditions:
+      - _type: 0
+        _paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+        _expectedResult: 1
+    - _orConditions:
+      - _type: 1
+        _paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+        _expectedResult: 0
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
   - 2ea33404-8f98-4a55-a9c6-9c6824008dd4
-  children: []
-  dialogueCondition:
-    andConditions:
-    - orConditions:
-      - predicate: 0
-        paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
-        expectedResult: 1
-    - orConditions:
-      - predicate: 1
-        paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
-        expectedResult: 0
-  rect:
+  _children: []
+  _rect:
     serializedVersion: 2
-    x: 582
-    y: 644
+    x: 595
+    y: 541
     width: 200
     height: 170
 --- !u!114 &-6019633106616696057
@@ -46,22 +46,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u592A\u611F\u8C22\u4F60\u4E86"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 47e80d3f-c6c4-4ded-b556-2eb91a44c68c
-  text: "\u592A\u611F\u8C22\u4F60\u4E86"
-  dialogueSpeaker: 0
-  dialogueEnterEventID: 
-  dialogueExitEventID: 
-  parents:
+  _content: 
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
   - aa81c837-70a3-43d5-ad22-7ddc0e8237c6
-  children: []
-  dialogueCondition:
-    andConditions: []
-  rect:
+  _children: []
+  _rect:
     serializedVersion: 2
-    x: 848
-    y: 416
+    x: 842
+    y: 332
     width: 200
     height: 170
 --- !u!114 &-5675738758849982873
@@ -74,28 +74,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u4F60\u80FD\u5E2E\u6211\u53BB\u627E\u5F17\u4F26\xB7\u957F\u987B\u8BA9\u4ED6\u5E2E\u6211\u6253\u9020\u4E00\u9762\u76FE\u724C\u5417"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 53613b41-2eb1-4152-836c-64eb4e5d72e2
-  text: "\u4F60\u80FD\u5E2E\u6211\u53BB\u627E\u5F17\u4F26\xB7\u957F\u987B\u8BA9\u4ED6\u5E2E\u6211\u6253\u9020\u4E00\u9762\u76FE\u724C\u5417"
-  dialogueSpeaker: 0
-  dialogueEnterEventID: 
-  dialogueExitEventID: 
-  parents:
+  _content: 
+  _speaker: 0
+  _condition:
+    _andConditions:
+    - _orConditions:
+      - _type: 0
+        _paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+        _expectedResult: 0
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
   - 2ea33404-8f98-4a55-a9c6-9c6824008dd4
-  children:
+  _children:
   - 60c37331-7fc9-4bed-92cb-bef5cc8c32db
   - 29e76fb5-2354-4196-b9a0-06ac3b78fbdf
-  dialogueCondition:
-    andConditions:
-    - orConditions:
-      - predicate: 0
-        paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
-        expectedResult: 0
-  rect:
+  _rect:
     serializedVersion: 2
-    x: 599
-    y: 215
+    x: 608
+    y: 106
     width: 200
     height: 170
 --- !u!114 &11400000
@@ -128,22 +128,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u90A3\u5F53\u7136"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 60c37331-7fc9-4bed-92cb-bef5cc8c32db
-  text: "\u90A3\u5F53\u7136"
-  dialogueSpeaker: 1
-  dialogueEnterEventID: 
-  dialogueExitEventID: KELMStart
-  parents:
+  _content: 
+  _speaker: 1
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: KELMStart
+  _parents:
   - 53613b41-2eb1-4152-836c-64eb4e5d72e2
-  children: []
-  dialogueCondition:
-    andConditions: []
-  rect:
+  _children: []
+  _rect:
     serializedVersion: 2
-    x: 1234
-    y: 56
+    x: 1206
+    y: 27
     width: 200
     height: 170
 --- !u!114 &3258713098752376758
@@ -156,31 +156,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u8FD9\u662F\u4F60\u7684\u76FE\u724C"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: aa81c837-70a3-43d5-ad22-7ddc0e8237c6
-  text: "\u8FD9\u662F\u4F60\u7684\u76FE\u724C"
-  dialogueSpeaker: 1
-  dialogueEnterEventID: 
-  dialogueExitEventID: KELMSubmit
-  parents:
+  _content: 
+  _speaker: 1
+  _condition:
+    _andConditions:
+    - _orConditions:
+      - _type: 0
+        _paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+        _expectedResult: 1
+    - _orConditions:
+      - _type: 1
+        _paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+        _expectedResult: 1
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: KELMSubmit
+  _parents:
   - 2ea33404-8f98-4a55-a9c6-9c6824008dd4
-  children:
+  _children:
   - 47e80d3f-c6c4-4ded-b556-2eb91a44c68c
-  dialogueCondition:
-    andConditions:
-    - orConditions:
-      - predicate: 0
-        paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
-        expectedResult: 1
-    - orConditions:
-      - predicate: 1
-        paramSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
-        expectedResult: 1
-  rect:
+  _rect:
     serializedVersion: 2
-    x: 587
-    y: 420
+    x: 597
+    y: 323
     width: 200
     height: 170
 --- !u!114 &7999449719308682041
@@ -193,22 +193,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u62B1\u6B49\u6211\u8FD8\u6709\u522B\u7684\u4E8B\u60C5\u8981\u505A"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 29e76fb5-2354-4196-b9a0-06ac3b78fbdf
-  text: "\u62B1\u6B49\u6211\u8FD8\u6709\u522B\u7684\u4E8B\u60C5\u8981\u505A"
-  dialogueSpeaker: 1
-  dialogueEnterEventID: 
-  dialogueExitEventID: 
-  parents:
+  _content: 
+  _speaker: 1
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
   - 53613b41-2eb1-4152-836c-64eb4e5d72e2
-  children: []
-  dialogueCondition:
-    andConditions: []
-  rect:
+  _children: []
+  _rect:
     serializedVersion: 2
-    x: 1235
-    y: 292
+    x: 1207
+    y: 244
     width: 200
     height: 170
 --- !u!114 &8626220353841807627
@@ -221,21 +221,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
-  m_Name: "\u4F60\u597D\u554A\u670B\u53CB"
+  m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 2ea33404-8f98-4a55-a9c6-9c6824008dd4
-  text: "\u4F60\u597D\u554A\u670B\u53CB"
-  dialogueSpeaker: 0
-  dialogueEnterEventID: 
-  dialogueExitEventID: 
-  parents: []
-  children:
+  _content: 
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents: []
+  _children:
   - 53613b41-2eb1-4152-836c-64eb4e5d72e2
   - aa81c837-70a3-43d5-ad22-7ddc0e8237c6
   - 235b12a8-3db3-42c7-8b50-749cee936c43
-  dialogueCondition:
-    andConditions: []
-  rect:
+  _rect:
     serializedVersion: 2
     x: 199
     y: 202
