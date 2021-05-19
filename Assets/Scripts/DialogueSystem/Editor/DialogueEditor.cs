@@ -5,6 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.Callbacks;
 using System;
+using System.Linq;
+
 namespace RPG.DialogueSystem
 {
     public class DialogueEditor : EditorWindow
@@ -17,7 +19,7 @@ namespace RPG.DialogueSystem
         [NonSerialized] private Vector2 dragOffSet;                     // 节点拖拽便宜量
         [NonSerialized] private Vector2 scrollerPos;                    // 滑动条坐标
         [NonSerialized] private Vector2 dragOriginPos;                  // 界面拖拽量
-        [NonSerialized] private bool isDragScene;                       // 是否拖拽界面
+        [NonSerialized] private bool isDraggingScene;                       // 是否拖拽界面
 
         [NonSerialized] private int canvasSize = 4000;                  // 画布大小
         [NonSerialized] private int backGroundSize = 30;                // 画布缩放
@@ -85,12 +87,13 @@ namespace RPG.DialogueSystem
             // 设置节点位置
             OnMoveNode();
             // 遍历对话
-            foreach (DialogueNodeSO node in selectedDialogue.GetNodes())
+            List<DialogueNodeSO> nodeSOs = selectedDialogue.GetNodes().ToList();
+            for (int i = 0; i < nodeSOs.Count; i++)
             {
                 // 绘制节点间贝塞尔曲线
-                DrawNodeConnection(node);
+                DrawNodeConnection(nodeSOs[i]);
                 // 绘制每个节点
-                DrawNode(node);
+                DrawNode(nodeSOs[i]);
             }
             // 结束滚动条区域
             EditorGUILayout.EndScrollView();
@@ -123,11 +126,11 @@ namespace RPG.DialogueSystem
                     dragOffSet = draggingNode.sizeRect.position - Event.current.mousePosition;
                 }
                 // 准备拖拽场景
-                else if (!isDragScene)
+                else if (!isDraggingScene)
                 {
                     // 设置Inspector窗口显示的物体
                     Selection.activeObject = selectedDialogue;
-                    isDragScene = true;
+                    isDraggingScene = true;
                     dragOriginPos = Event.current.mousePosition;
                 }
             }
@@ -140,7 +143,7 @@ namespace RPG.DialogueSystem
                 GUI.changed = true;
             }
             // 正在拖拽场景
-            else if (Event.current.type == EventType.MouseDrag && isDragScene)
+            else if (Event.current.type == EventType.MouseDrag && isDraggingScene)
             {
                 scrollerPos += dragOriginPos - Event.current.mousePosition;
                 GUI.changed = true;
@@ -152,9 +155,9 @@ namespace RPG.DialogueSystem
                 draggingNode = null;
             }
             // 结束拖拽场景
-            else if (Event.current.type == EventType.MouseUp && isDragScene)
+            else if (Event.current.type == EventType.MouseUp && isDraggingScene)
             {
-                isDragScene = false;
+                isDraggingScene = false;
             }
         }
         private DialogueNodeSO GetDragNode(Vector2 mousePosition)
@@ -250,6 +253,9 @@ namespace RPG.DialogueSystem
             {
                 // 删除节点
                 selectedDialogue.DeleteNode(node);
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+                return;
             }
             // 结束横向布局
             GUILayout.EndHorizontal();

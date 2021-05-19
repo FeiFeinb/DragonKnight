@@ -40,6 +40,10 @@ namespace RPG.DialogueSystem
 
         [SerializeField] private Rect _rect = new Rect(0, 0, 200, 170);     // 大小
 
+        /// <summary>
+        /// 初始化对话节点
+        /// </summary>
+        /// <param name="parentNode">父节点</param>
         public void InitDialogueNode(DialogueNodeSO parentNode)
         {
 #if UNITY_EDITOR
@@ -48,14 +52,20 @@ namespace RPG.DialogueSystem
 #endif
             _parents.Add(parentNode.uniqueID);
             parentNode._children.Add(uniqueID);
+            
         }
 
+        /// <summary>
+        /// 设置对话节点文字内容
+        /// </summary>
+        /// <param name="textStr">文字内容</param>
         public void SetText(string textStr)
         {
+            if (textStr == _content) return;
             if (!string.IsNullOrEmpty(textStr))
             {
 #if UNITY_EDITOR
-                Undo.RecordObject(this, "Change DialogueNode Text");
+                Undo.RecordObject(this, "Change NodeText");
 #endif
             }
             _content = textStr;
@@ -64,40 +74,52 @@ namespace RPG.DialogueSystem
 #endif
         }
 
+        /// <summary>
+        /// 设置进入对话事件ID
+        /// </summary>
+        /// <param name="dialogueEventID">ID</param>
         public void SetEnterEventID(string dialogueEventID)
         {
+            if (dialogueEventID == _dialogueEnterEventID) return;
             if (!string.IsNullOrEmpty(dialogueEventID))
             {
 #if UNITY_EDITOR
-                Undo.RecordObject(this, "Change DialogueNode DialogueEventId");
+                Undo.RecordObject(this, "Change EnterEventId");
 #endif
             }
-
             _dialogueEnterEventID = dialogueEventID;
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
         }
 
+        /// <summary>
+        /// 设置退出对话事件ID
+        /// </summary>
+        /// <param name="dialogueEventID">ID</param>
         public void SetExitEventID(string dialogueEventID)
         {
-            if (string.IsNullOrEmpty(dialogueEventID))
+            if (dialogueEventID == _dialogueExitEventID) return;
+            if (!string.IsNullOrEmpty(dialogueEventID) && dialogueEventID != _dialogueExitEventID)
             {
 #if UNITY_EDITOR
-                Undo.RecordObject(this, "Change DialogueNode DialogueEventId");
+                Undo.RecordObject(this, "Change ExitEventId");
 #endif
             }
-
             _dialogueExitEventID = dialogueEventID;
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
         }
 
+        /// <summary>
+        /// 设置节点位置
+        /// </summary>
+        /// <param name="rectPos">位置</param>
         public void SetRectPosition(Vector2 rectPos)
         {
 #if UNITY_EDITOR
-            Undo.RecordObject(this, "Move DialogueNode Position");
+            Undo.RecordObject(this, "Move DialogueNode");
 #endif
             _rect.position = rectPos;
 #if UNITY_EDITOR
@@ -105,6 +127,10 @@ namespace RPG.DialogueSystem
 #endif
         }
 
+        /// <summary>
+        /// 连接父子节点
+        /// </summary>
+        /// <param name="childNode">子节点</param>
         public void Link(DialogueNodeSO childNode)
         {
 #if UNITY_EDITOR
@@ -118,6 +144,10 @@ namespace RPG.DialogueSystem
 #endif
         }
 
+        /// <summary>
+        /// 解除连接父子节点
+        /// </summary>
+        /// <param name="childNode">子节点</param>
         public void UnLink(DialogueNodeSO childNode)
         {
 #if UNITY_EDITOR

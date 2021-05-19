@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9108499180729677595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
+  m_Name: "\u54C8\u54C8"
+  m_EditorClassIdentifier: 
+  uniqueID: a864029e-76a2-4333-b4df-db8e37c06bc5
+  _content: "\u54C8\u54C8"
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
+  - bca4f7db-5681-4420-8340-893b0b2c5115
+  _children:
+  - f983a7d2-18b5-4f92-ab06-9466b32a3b3d
+  _rect:
+    serializedVersion: 2
+    x: 953
+    y: 258
+    width: 200
+    height: 170
+--- !u!114 &-1958986046883887661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
+  m_Name: CSGO
+  m_EditorClassIdentifier: 
+  uniqueID: b18ae1cf-b7ba-4858-b6e0-ac3c7d2c479f
+  _content: CSGO
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
+  - f983a7d2-18b5-4f92-ab06-9466b32a3b3d
+  _children: []
+  _rect:
+    serializedVersion: 2
+    x: 1451
+    y: 256
+    width: 200
+    height: 170
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2adefdb5bae38246ba7fdbcdc381263, type: 3}
+  m_Name: "\u8304\u5B50"
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 6633393683204326440}
+  - {fileID: 7644109782458244557}
+  - {fileID: -9108499180729677595}
+  - {fileID: 7631738923448693088}
+  - {fileID: -1958986046883887661}
+--- !u!114 &6633393683204326440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
+  m_Name: "\u4F4F\u5728\u5C71\u91CC\u9762\u771F\u4E0D\u9519"
+  m_EditorClassIdentifier: 
+  uniqueID: 37d77348-a8b2-43db-b217-911466095038
+  _content: "\u4F4F\u5728\u5C71\u91CC\u9762\u771F\u4E0D\u9519"
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents: []
+  _children:
+  - bca4f7db-5681-4420-8340-893b0b2c5115
+  _rect:
+    serializedVersion: 2
+    x: 451
+    y: 256
+    width: 200
+    height: 170
+--- !u!114 &7631738923448693088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
+  m_Name: WDNMD
+  m_EditorClassIdentifier: 
+  uniqueID: f983a7d2-18b5-4f92-ab06-9466b32a3b3d
+  _content: WDNMD
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
+  - a864029e-76a2-4333-b4df-db8e37c06bc5
+  _children:
+  - b18ae1cf-b7ba-4858-b6e0-ac3c7d2c479f
+  _rect:
+    serializedVersion: 2
+    x: 1201
+    y: 256
+    width: 200
+    height: 170
+--- !u!114 &7644109782458244557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2fcbeec5720348beec64870a62746, type: 3}
+  m_Name: "\u771F\u4E0D\u9519"
+  m_EditorClassIdentifier: 
+  uniqueID: bca4f7db-5681-4420-8340-893b0b2c5115
+  _content: "\u771F\u4E0D\u9519"
+  _speaker: 0
+  _condition:
+    _andConditions: []
+  _dialogueEnterEventID: 
+  _dialogueExitEventID: 
+  _parents:
+  - 37d77348-a8b2-43db-b217-911466095038
+  _children:
+  - a864029e-76a2-4333-b4df-db8e37c06bc5
+  _rect:
+    serializedVersion: 2
+    x: 712
+    y: 169
+    width: 200
+    height: 170
