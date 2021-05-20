@@ -34,7 +34,7 @@ namespace RPG.DialogueSystem
 
         // 当选中资源切换时调用(双击)
         [OnOpenAsset(1)]
-        public static bool OnOpenAsset(int instanceID, int line)
+        public static bool OnDoubleClickAsset(int instanceID, int line)
         {
             // 检测打开资源
             DialogueSO dialogue = EditorUtility.InstanceIDToObject(instanceID) as DialogueSO;
@@ -49,9 +49,10 @@ namespace RPG.DialogueSystem
 
         private void OnEnable()
         {
+            Debug.Log("OnEnable");
             // 加载时添加监听
-            Selection.selectionChanged += OnSelectionChanged;
             // 初始化GUIStyle
+            Selection.selectionChanged += OnSelectionChanged;
             npcNodeStyle = new GUIStyle();
             playerNodeStyle = new GUIStyle();
             // 设置背景
@@ -60,6 +61,11 @@ namespace RPG.DialogueSystem
             // 设置信息与背景框间距
             npcNodeStyle.padding = new RectOffset(10, 10, 10, 10);
             playerNodeStyle.padding = new RectOffset(10, 10, 10, 10);
+        }
+
+        private void OnDisable()
+        {
+            Selection.selectionChanged -= OnSelectionChanged;
         }
 
         // 当点击资源切换时调用(单击)
