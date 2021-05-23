@@ -8,7 +8,7 @@ namespace RPG.DialogueSystem
     /// <summary>
     /// 对话SO
     /// </summary>
-    [CreateAssetMenu(fileName = "New DialogueObject", menuName = "Dialogue System/Dialogue")]
+    [CreateAssetMenu(fileName = "New DialogueObject", menuName = "Dialogue System/DialogueSO")]
     public class DialogueSO : ScriptableObject, ISerializationCallbackReceiver
     {
         public Dictionary<string, DialogueNodeSO> NodeDic => nodeDic;

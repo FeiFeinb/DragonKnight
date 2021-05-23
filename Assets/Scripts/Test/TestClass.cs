@@ -5,6 +5,7 @@ using RPG.Module;
 using RPG.UI;
 using RPG.SaveSystem;
 using RPG.TradeSystem;
+using UnityEditor;
 
 public class TestClass : MonoBehaviour
 {
@@ -59,3 +60,4 @@ public class TestClass : MonoBehaviour
     }
 
 }
+

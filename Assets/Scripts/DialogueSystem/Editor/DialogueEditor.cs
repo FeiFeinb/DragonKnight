@@ -49,15 +49,14 @@ namespace RPG.DialogueSystem
 
         private void OnEnable()
         {
-            Debug.Log("OnEnable");
             // 加载时添加监听
             // 初始化GUIStyle
             Selection.selectionChanged += OnSelectionChanged;
             npcNodeStyle = new GUIStyle();
             playerNodeStyle = new GUIStyle();
             // 设置背景
-            npcNodeStyle.normal.background = EditorGUIUtility.Load("DialogueEditor/NPCNodeBackGround.png") as Texture2D;
-            playerNodeStyle.normal.background = EditorGUIUtility.Load("DialogueEditor/PlayerNodeBackGround.png") as Texture2D;
+            npcNodeStyle.normal.background = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/LocalArts/EditorArts/DialogueEditor/NPCNodeBackGround.png");
+            playerNodeStyle.normal.background = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/LocalArts/EditorArts/DialogueEditor/PlayerNodeBackGround.png");
             // 设置信息与背景框间距
             npcNodeStyle.padding = new RectOffset(10, 10, 10, 10);
             playerNodeStyle.padding = new RectOffset(10, 10, 10, 10);
@@ -110,7 +109,7 @@ namespace RPG.DialogueSystem
             // 设置画布大小
             Rect cansvasRect = GUILayoutUtility.GetRect(canvasSize, canvasSize);
             // 绘制画布背景
-            Texture2D canvasTex = Resources.Load("CanvasBackGround") as Texture2D;
+            Texture2D canvasTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/LocalArts/EditorArts/DialogueEditor/CanvasBackGround.png");
             Rect canvasCoord = new Rect(0, 0, canvasSize / backGroundSize, canvasSize / backGroundSize);
             GUI.DrawTextureWithTexCoords(cansvasRect, canvasTex, canvasCoord);
         }

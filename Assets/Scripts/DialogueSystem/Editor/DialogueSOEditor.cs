@@ -1,33 +1,36 @@
 ﻿using System;
 using UnityEditor;
-using UnityEngine;
 
-namespace RPG.DialogueSystem
+namespace  RPG.DialogueSystem
 {
     [CustomEditor(typeof(DialogueSO))]
     public class DialogueSOEditor : Editor
     {
-        private DialogueSO selectSO;
-        
-        private bool showDictionary = true;
-        private string statusStr = "节点字典";
-        
+        private DialogueSO _selectSO;
+
+        private bool _showDictionary = true;
+        private string _statusStr = "节点字典";
+
         private void OnEnable()
         {
-            selectSO = target as DialogueSO;
+            _selectSO = target as DialogueSO;
         }
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            showDictionary = EditorGUILayout.BeginFoldoutHeaderGroup(showDictionary, statusStr);
-            if (showDictionary)
+            // 开启可折叠区域
+            _showDictionary = EditorGUILayout.BeginFoldoutHeaderGroup(_showDictionary, _statusStr);
+            // 若打开折叠
+            if (_showDictionary)
             {
                 HorizontalLabel("Key", "Value");
-                foreach (var nodePair in selectSO.NodeDic)
+                // 遍历字典 显示Key与Value
+                foreach (var nodePair in _selectSO.NodeDic)
                 {
                     HorizontalLabel(nodePair.Key, nodePair.Value.Content);
                 }
             }
+            // 结束可折叠区域
             EditorGUILayout.EndFoldoutHeaderGroup();
         }
 
