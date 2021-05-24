@@ -92,8 +92,7 @@ namespace RPG.DialogueSystem.Graph
             // 设置顶部信息显示栏Style
             StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphViewSheet.uss"); 
             rootVisualElement.styleSheets.Add(styleSheet);
-            // _selectSONameLabel.styleSheets.Add(styleSheet);
-            // _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
+            _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
             
             // 将Button加入Toolbar中
             windowToolbar.Add(saveButton);
@@ -110,6 +109,7 @@ namespace RPG.DialogueSystem.Graph
             {
                 style = {flexGrow = 1},
             };
+            // _selectView.StretchToParentSize();
             // 将节点编辑器加入窗口绘制中
             rootVisualElement.Add(_selectView);
         }
