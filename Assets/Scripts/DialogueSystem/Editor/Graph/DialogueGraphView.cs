@@ -34,7 +34,7 @@ namespace RPG.DialogueSystem.Graph
             // 设置创建节点回调
             nodeCreationRequest += (info) =>
             {
-                AddElement(new DialogueGraphNodeView());
+                AddElement(new DialogueGraphBaseNode());
             };
             
             // 添加界面移动

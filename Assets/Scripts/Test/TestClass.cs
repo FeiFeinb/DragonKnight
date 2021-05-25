@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using RPG.InventorySystem;
 using RPG.Module;
@@ -13,6 +16,7 @@ public class TestClass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            
             // 显示背包界面
             if (InventoryController.controller.isActive)
             {
