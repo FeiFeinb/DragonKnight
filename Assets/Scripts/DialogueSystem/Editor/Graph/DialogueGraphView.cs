@@ -1,4 +1,5 @@
-﻿using UnityEditor.Experimental.GraphView;
+﻿using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -34,7 +35,7 @@ namespace RPG.DialogueSystem.Graph
             // 设置创建节点回调
             nodeCreationRequest += (info) =>
             {
-                AddElement(new DialogueGraphBaseNode());
+                AddElement(new DialogueGraphEndNode(new Vector2(0, 0), _editorWindow, this));
             };
             
             // 添加界面移动
@@ -44,6 +45,33 @@ namespace RPG.DialogueSystem.Graph
             
             // 创建背景
             Insert(0, new GridBackground());
+            
+            // nodeCreationRequest += (info) =>
+            // {
+            //     AddElement(new DialogueGraphStartNode());
+            // };
+            
+            DialogueSearchWindowProvider provider = ScriptableObject.CreateInstance<DialogueSearchWindowProvider>();
+            provider.OnSelectEntryCallback = OnEntry;
+            nodeCreationRequest = (info) =>
+            {
+                SearchWindow.Open(new SearchWindowContext(info.screenMousePosition), provider);
+            };
+        }
+
+        private bool OnEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        {
+            switch (SearchTreeEntry.userData)
+            {
+                case nameof(DialogueGraphStartNode):
+                    AddElement(new DialogueGraphStartNode(context.screenMousePosition, _editorWindow, this));
+                    return true;
+                case nameof(DialogueGraphEndNode):
+                    AddElement(new DialogueGraphEndNode(context.screenMousePosition, _editorWindow, this));
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

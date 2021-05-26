@@ -6,7 +6,6 @@ namespace RPG.DialogueSystem.Graph
 {
     public class DialogueGraphStartNode : DialogueGraphBaseNode
     {
-        public DialogueGraphStartNode() {}
 
         public DialogueGraphStartNode(Vector2 position, DialogueGraphEditorWindow editorWindow,
             DialogueGraphView graphView) : base(editorWindow, graphView)
