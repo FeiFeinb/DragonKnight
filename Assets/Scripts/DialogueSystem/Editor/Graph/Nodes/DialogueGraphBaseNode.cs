@@ -12,14 +12,16 @@ namespace RPG.DialogueSystem.Graph
         protected DialogueGraphEditorWindow _editorWindow;
         protected DialogueGraphView _graphView;
         protected Vector2 _defaultNodeSize = new Vector2(200, 100);
-        public DialogueGraphBaseNode(DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
+
+        public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
         {
             _nodeGuid = Guid.NewGuid().ToString();
             _editorWindow = editorWindow;
             _graphView = graphView;
+            SetPosition(new Rect(position, _defaultNodeSize));
         }
 
-        public Port AddInputNode(string portName, Port.Capacity capacity)
+        protected virtual Port AddInputPort(string portName, Port.Capacity capacity)
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
             inputPort.portName = portName;
@@ -28,7 +30,7 @@ namespace RPG.DialogueSystem.Graph
             return inputPort;
         }
 
-        public Port AddOutputNode(string portName, Port.Capacity capacity)
+        protected virtual Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;
@@ -42,13 +44,37 @@ namespace RPG.DialogueSystem.Graph
             return InstantiatePort(orientation, direction, capacity, typeof(float));
         }
 
-        protected EnumField CreateEnumField(Enum type, EventCallback<ChangeEvent<Enum>> valueChangedCallback)
+        protected EnumField CreateEnumField(Enum defaultValue, EventCallback<ChangeEvent<Enum>> valueChangedCallback)
         {
             EnumField enumField = new EnumField();
-            enumField.Init(type);
+            enumField.Init(defaultValue);
             enumField.RegisterValueChangedCallback(valueChangedCallback);
-            mainContainer.Add(enumField);
             return enumField;
+        }
+
+        protected TextField CreateTextField(EventCallback<ChangeEvent<string>> valueChangedCallback)
+        {
+            TextField textField = new TextField() { multiline = true };
+            textField.RegisterValueChangedCallback(valueChangedCallback);
+            return textField;
+        }
+
+        protected ObjectField CreateObjectField<T>(EventCallback<ChangeEvent<UnityEngine.Object>> valueChangedCallback)
+        {
+            ObjectField objectField = new ObjectField()
+            {
+                objectType = typeof(T),
+                allowSceneObjects = false,
+            };
+            objectField.RegisterValueChangedCallback(valueChangedCallback);
+            return objectField;
+        }
+
+        protected Button CreateButton(string buttonName, Action buttonClickCallback)
+        {
+            Button button = new Button(buttonClickCallback);
+            button.text = buttonName;
+            return button;
         }
     }
 }

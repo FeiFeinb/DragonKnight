@@ -29,6 +29,7 @@ namespace RPG.InventorySystem
                 }
             }
         }
+        
         private void OnApplicationQuit()
         {
             // 退出游戏时清空背包

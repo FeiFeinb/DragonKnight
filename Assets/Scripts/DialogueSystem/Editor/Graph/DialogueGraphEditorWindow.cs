@@ -58,7 +58,7 @@ namespace RPG.DialogueSystem.Graph
             
             _selectSO = selectSO;
             // 刷新窗口上端Label显示
-            _selectSONameLabel.text = _selectSO == null ? "当前无选择物体" : $"所选物体为: {_selectSO.name}";
+            _selectSONameLabel.text = _selectSO == null ? "Current Object is Null" : $"Current Object: {_selectSO.name}";
         }
         
         private void OnEnable()

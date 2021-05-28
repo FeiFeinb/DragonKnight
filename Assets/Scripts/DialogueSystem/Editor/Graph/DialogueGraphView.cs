@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,7 +32,7 @@ namespace RPG.DialogueSystem.Graph
             this.AddManipulator(dragger);
             
             // 设置界面缩放
-            SetupZoom(ContentZoomer.DefaultMinScale, 2);
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             // this.AddManipulator(new ContentZoomer());
             
             // 设置创建节点回调
@@ -45,12 +48,7 @@ namespace RPG.DialogueSystem.Graph
             
             // 创建背景
             Insert(0, new GridBackground());
-            
-            // nodeCreationRequest += (info) =>
-            // {
-            //     AddElement(new DialogueGraphStartNode());
-            // };
-            
+
             DialogueSearchWindowProvider provider = ScriptableObject.CreateInstance<DialogueSearchWindowProvider>();
             provider.OnSelectEntryCallback = OnEntry;
             nodeCreationRequest = (info) =>
@@ -58,20 +56,21 @@ namespace RPG.DialogueSystem.Graph
                 SearchWindow.Open(new SearchWindowContext(info.screenMousePosition), provider);
             };
         }
+        
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            // 节点不允许自我连接 只允许方向不同且类型相同的端口连接
+            return ports.Where(port => startPort.node != port.node && startPort.direction != port.direction && port.portType == startPort.portType).ToList();
+        }
 
         private bool OnEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
         {
-            switch (SearchTreeEntry.userData)
-            {
-                case nameof(DialogueGraphStartNode):
-                    AddElement(new DialogueGraphStartNode(context.screenMousePosition, _editorWindow, this));
-                    return true;
-                case nameof(DialogueGraphEndNode):
-                    AddElement(new DialogueGraphEndNode(context.screenMousePosition, _editorWindow, this));
-                    return true;
-                default:
-                    return false;
-            }
+            if (!(SearchTreeEntry.userData is Type nodeType)) return false;
+            Vector2 nodePosition = contentViewContainer.WorldToLocal(context.screenMousePosition - _editorWindow.position.position);
+            DialogueGraphBaseNode node = Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as DialogueGraphBaseNode;
+            AddElement(node);
+            return true;
         }
     }
 }

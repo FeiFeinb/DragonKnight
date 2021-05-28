@@ -15,20 +15,21 @@ namespace RPG.DialogueSystem.Graph
             Restart
         }
 
-        private EndDialogueType endDialogueType = EndDialogueType.Restart;
-        private EnumField enumField;
+        private EndDialogueType _endDialogueType = EndDialogueType.Restart;
+        private EnumField _enumField;
 
 
         public DialogueGraphEndNode(Vector2 position, DialogueGraphEditorWindow editorWindow,
-            DialogueGraphView graphView) : base(editorWindow, graphView)
+            DialogueGraphView graphView) : base(position, editorWindow, graphView)
         {
             title = "End Node";
-            SetPosition(new Rect(position, _defaultNodeSize));
-            AddInputNode("Parent", Port.Capacity.Multi);
-            CreateEnumField(endDialogueType, (value) =>
+            AddInputPort("Parents", Port.Capacity.Multi);
+            _enumField = CreateEnumField(_endDialogueType, (value) =>
             {
-                endDialogueType = (EndDialogueType) value.newValue;
+                _endDialogueType = (EndDialogueType) value.newValue;
             });
+            extensionContainer.Add(_enumField);
+            RefreshExpandedState();
         }
     }
 }

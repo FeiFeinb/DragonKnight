@@ -8,11 +8,10 @@ namespace RPG.DialogueSystem.Graph
     {
 
         public DialogueGraphStartNode(Vector2 position, DialogueGraphEditorWindow editorWindow,
-            DialogueGraphView graphView) : base(editorWindow, graphView)
+            DialogueGraphView graphView) : base(position, editorWindow, graphView)
         {
             title = "Start Node";
-            SetPosition(new Rect(position, _defaultNodeSize));
-            AddOutputNode("Children", Port.Capacity.Single);
+            AddOutputPort("Children", Port.Capacity.Single);
         }
     }
 }
