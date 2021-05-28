@@ -30,11 +30,11 @@ namespace RPG.DialogueSystem.Graph
             
             AddOutputPort("Children", Port.Capacity.Single);
             
-            _addChoiceButton = CreateButton("Add Button", delegate
+            _addChoiceButton = CreateButton("+", delegate
             {
                 AddOutputPort("Children", Port.Capacity.Single);
             });
-            titleButtonContainer.Add(_addChoiceButton);
+            topContainer.Insert(1, _addChoiceButton);
             
             _interlocutorField = CreateEnumField(_interlocutorType, (value) =>
             {

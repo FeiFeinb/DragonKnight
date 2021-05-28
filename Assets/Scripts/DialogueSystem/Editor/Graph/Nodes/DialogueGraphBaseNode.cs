@@ -3,10 +3,10 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using UnityEditor;
 namespace RPG.DialogueSystem.Graph
 {
-    public abstract class DialogueGraphBaseNode : Node
+    public class DialogueGraphBaseNode : Node
     {
         protected string _nodeGuid;
         protected DialogueGraphEditorWindow _editorWindow;
@@ -19,6 +19,10 @@ namespace RPG.DialogueSystem.Graph
             _editorWindow = editorWindow;
             _graphView = graphView;
             SetPosition(new Rect(position, _defaultNodeSize));
+            
+            // 设置顶部信息显示栏Style
+            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphNodeViewSheet.uss");
+            styleSheets.Add(styleSheet);
         }
 
         protected virtual Port AddInputPort(string portName, Port.Capacity capacity)
