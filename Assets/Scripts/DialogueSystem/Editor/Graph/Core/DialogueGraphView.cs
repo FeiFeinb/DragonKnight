@@ -68,8 +68,7 @@ namespace RPG.DialogueSystem.Graph
         {
             if (!(SearchTreeEntry.userData is Type nodeType)) return false;
             Vector2 nodePosition = contentViewContainer.WorldToLocal(context.screenMousePosition - _editorWindow.position.position);
-            DialogueGraphBaseNode node = Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as DialogueGraphBaseNode;
-            AddElement(node);
+            AddElement(Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as DialogueGraphBaseNode);
             return true;
         }
     }

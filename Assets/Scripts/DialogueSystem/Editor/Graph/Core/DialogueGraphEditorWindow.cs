@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using DialogueSystem.Graph;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -11,6 +14,7 @@ namespace RPG.DialogueSystem.Graph
     {
         private DialogueGraphSO _selectSO;          // 对话SO
         private DialogueGraphView _selectView;      // 对话节点编辑器窗口
+        
         private Label _selectSONameLabel;           // 当前对话SO显示标签
 
         [MenuItem("Window/DialogueGraph")]
@@ -88,7 +92,11 @@ namespace RPG.DialogueSystem.Graph
             
             // 传统艺能
             saveButton.text = "Save";
-            saveButton.clicked += delegate { Debug.Log("Save Button Clicked"); };
+            saveButton.clicked += delegate
+            {
+                Debug.Log("Save Button Clicked");
+                _selectSO.Save(_selectView);
+            };
             
             // 设置顶部信息显示栏Style
             StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphViewSheet.uss"); 

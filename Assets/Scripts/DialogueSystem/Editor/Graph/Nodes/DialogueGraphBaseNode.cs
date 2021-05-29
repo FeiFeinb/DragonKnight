@@ -1,4 +1,5 @@
 ﻿using System;
+using RPG.SaveSystem;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -6,16 +7,16 @@ using UnityEngine.UIElements;
 using UnityEditor;
 namespace RPG.DialogueSystem.Graph
 {
-    public class DialogueGraphBaseNode : Node
+    public abstract class DialogueGraphBaseNode : Node
     {
-        protected string _nodeGuid;
+        protected string _guid;
         protected DialogueGraphEditorWindow _editorWindow;
         protected DialogueGraphView _graphView;
         protected Vector2 _defaultNodeSize = new Vector2(200, 100);
 
         public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
         {
-            _nodeGuid = Guid.NewGuid().ToString();
+            _guid = Guid.NewGuid().ToString();
             _editorWindow = editorWindow;
             _graphView = graphView;
             SetPosition(new Rect(position, _defaultNodeSize));
@@ -80,5 +81,9 @@ namespace RPG.DialogueSystem.Graph
             button.text = buttonName;
             return button;
         }
+
+        public abstract DialogueGraphBaseNodeSaveData CreateState();
+
+        public abstract void LoadState(DialogueGraphBaseNodeSaveData stateInfo);
     }
 }

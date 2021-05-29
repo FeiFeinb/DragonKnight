@@ -8,14 +8,7 @@ namespace RPG.DialogueSystem.Graph
 {
     public class DialogueGraphEndNode : DialogueGraphBaseNode
     {
-        private enum EndDialogueType
-        {
-            End,
-            Repeat,
-            Restart
-        }
-
-        private EndDialogueType _endDialogueType = EndDialogueType.Restart;
+        private EndDialogueNodeType _endDialogueNodeType = EndDialogueNodeType.Restart;
         private EnumField _enumField;
 
 
@@ -24,12 +17,25 @@ namespace RPG.DialogueSystem.Graph
         {
             title = "End Node";
             AddInputPort("Parents", Port.Capacity.Multi);
-            _enumField = CreateEnumField(_endDialogueType, (value) =>
+            _enumField = CreateEnumField(_endDialogueNodeType, (value) =>
             {
-                _endDialogueType = (EndDialogueType) value.newValue;
+                _endDialogueNodeType = (EndDialogueNodeType) value.newValue;
             });
             extensionContainer.Add(_enumField);
             RefreshExpandedState();
+        }
+
+        public override DialogueGraphBaseNodeSaveData CreateState()
+        {
+            return new DialogueGraphEndNodeSaveData(_guid, title, GetPosition())
+            {
+                _endType = this._endDialogueNodeType
+            };
+        }
+
+        public override void LoadState(DialogueGraphBaseNodeSaveData stateInfo)
+        {
+            throw new NotImplementedException();
         }
     }
 }

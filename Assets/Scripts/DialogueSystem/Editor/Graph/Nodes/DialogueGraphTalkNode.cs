@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Runtime.InteropServices;
+using RPG.SaveSystem;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace RPG.DialogueSystem.Graph
         private AudioClip _audioClip;                           // 对话音频
         private InterlocutorType _interlocutorType;             // 对话方
         private DialogueCharacterInfoSO _characterInfoSO;       // 对话角色信息
-
+    
         private Label _characterNameLabel;
         private EnumField _interlocutorField;
         private TextField _contentField;
@@ -86,6 +87,22 @@ namespace RPG.DialogueSystem.Graph
             outputContainer.Add(outputPort);
             RefreshPorts();
             return outputPort;
+        }
+
+        public override DialogueGraphBaseNodeSaveData CreateState()
+        {
+            return new DialogueGraphTalkNodeSaveData(_guid, title, GetPosition())
+            {
+                _content = this._content,
+                _audioClip = this._audioClip,
+                _interlocutorType = this._interlocutorType,
+                _characterInfoSO = this._characterInfoSO
+            };
+        }
+
+        public override void LoadState(DialogueGraphBaseNodeSaveData stateInfo)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
