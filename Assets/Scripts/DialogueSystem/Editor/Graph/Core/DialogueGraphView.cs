@@ -48,7 +48,6 @@ namespace RPG.DialogueSystem.Graph
             
             // 创建背景
             Insert(0, new GridBackground());
-
             DialogueSearchWindowProvider provider = ScriptableObject.CreateInstance<DialogueSearchWindowProvider>();
             provider.OnSelectEntryCallback = OnEntry;
             nodeCreationRequest = (info) =>
@@ -57,7 +56,6 @@ namespace RPG.DialogueSystem.Graph
             };
         }
         
-
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             // 节点不允许自我连接 只允许方向不同且类型相同的端口连接
@@ -68,7 +66,7 @@ namespace RPG.DialogueSystem.Graph
         {
             if (!(SearchTreeEntry.userData is Type nodeType)) return false;
             Vector2 nodePosition = contentViewContainer.WorldToLocal(context.screenMousePosition - _editorWindow.position.position);
-            AddElement(Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as DialogueGraphBaseNode);
+            AddElement(Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as Node);
             return true;
         }
     }

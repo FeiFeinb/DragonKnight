@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 namespace RPG.DialogueSystem.Graph
 {
-    public class DialogueGraphStartNode : DialogueGraphBaseNode
+    public sealed class DialogueGraphStartNode : DialogueGraphBaseNode
     {
         public DialogueGraphStartNode(Vector2 position, DialogueGraphEditorWindow editorWindow,
             DialogueGraphView graphView) : base(position, editorWindow, graphView)
@@ -13,12 +13,12 @@ namespace RPG.DialogueSystem.Graph
             AddOutputPort("Children", Port.Capacity.Single);
         }
 
-        public override DialogueGraphBaseNodeSaveData CreateState()
+        public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphStartNodeSaveData(_guid, title, GetPosition());
+            return new DialogueGraphStartNodeSaveData(_uniqueID, title, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView);
         }
 
-        public override void LoadState(DialogueGraphBaseNodeSaveData stateInfo)
+        public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
             throw new System.NotImplementedException();
         }

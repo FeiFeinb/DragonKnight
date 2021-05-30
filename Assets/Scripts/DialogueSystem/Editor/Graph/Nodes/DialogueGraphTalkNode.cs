@@ -78,20 +78,23 @@ namespace RPG.DialogueSystem.Graph
                     edge.output.Disconnect(edge);
                     _graphView.RemoveElement(edge);
                 }
+
+                _outputBasePorts.Remove(outputPort);
                 outputContainer.Remove(outputPort);
                 RefreshPorts();
             });
             deleteButton.text = "X";
             outputPort.contentContainer.Add(deleteButton);
             
+            _outputBasePorts.Add(outputPort);
             outputContainer.Add(outputPort);
             RefreshPorts();
             return outputPort;
         }
 
-        public override DialogueGraphBaseNodeSaveData CreateState()
+        public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphTalkNodeSaveData(_guid, title, GetPosition())
+            return new DialogueGraphTalkNodeSaveData(_uniqueID, title, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
             {
                 _content = this._content,
                 _audioClip = this._audioClip,
@@ -100,7 +103,7 @@ namespace RPG.DialogueSystem.Graph
             };
         }
 
-        public override void LoadState(DialogueGraphBaseNodeSaveData stateInfo)
+        public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
             throw new System.NotImplementedException();
         }

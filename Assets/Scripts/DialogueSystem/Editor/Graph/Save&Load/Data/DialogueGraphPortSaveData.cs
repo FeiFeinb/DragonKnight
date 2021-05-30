@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 namespace RPG.DialogueSystem.Graph
@@ -7,5 +8,6 @@ namespace RPG.DialogueSystem.Graph
     {
         public string _portName;
         public Port.Capacity _capacity;
+        public List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>();
     }
 }

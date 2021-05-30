@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
@@ -11,7 +13,7 @@ namespace RPG.DialogueSystem.Graph
         public InterlocutorType _interlocutorType;            // 对话方
         public DialogueCharacterInfoSO _characterInfoSO;      // 对话角色信息
 
-        public DialogueGraphTalkNodeSaveData(string guid, string title, Rect rectPos) : base(guid, title, rectPos)
+        public DialogueGraphTalkNodeSaveData(string uniqueID, string title, Rect rectPos, List<Port> inputPorts, List<Port> outputPorts, DialogueGraphView graphView) : base(uniqueID, title, rectPos, inputPorts, outputPorts, graphView)
         {
         }
     }

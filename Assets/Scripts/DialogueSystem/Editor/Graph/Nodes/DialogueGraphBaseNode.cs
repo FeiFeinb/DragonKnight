@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RPG.SaveSystem;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -7,16 +8,21 @@ using UnityEngine.UIElements;
 using UnityEditor;
 namespace RPG.DialogueSystem.Graph
 {
-    public abstract class DialogueGraphBaseNode : Node
+    public abstract class DialogueGraphBaseNode : Node, ISavableNode
     {
-        protected string _guid;
+        public string UniqueID => _uniqueID;
+        protected string _uniqueID;
+        protected List<Port> _inputBasePorts = new List<Port>();
+        protected List<Port> _outputBasePorts = new List<Port>();
+        protected Vector2 _defaultNodeSize = new Vector2(200, 100);
+        
+        
         protected DialogueGraphEditorWindow _editorWindow;
         protected DialogueGraphView _graphView;
-        protected Vector2 _defaultNodeSize = new Vector2(200, 100);
-
+        
         public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
         {
-            _guid = Guid.NewGuid().ToString();
+            _uniqueID = Guid.NewGuid().ToString();
             _editorWindow = editorWindow;
             _graphView = graphView;
             SetPosition(new Rect(position, _defaultNodeSize));
@@ -30,6 +36,7 @@ namespace RPG.DialogueSystem.Graph
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
             inputPort.portName = portName;
+            _inputBasePorts.Add(inputPort);
             inputContainer.Add(inputPort);
             RefreshPorts();
             return inputPort;
@@ -39,6 +46,7 @@ namespace RPG.DialogueSystem.Graph
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;
+            _outputBasePorts.Add(outputPort);
             outputContainer.Add(outputPort);
             RefreshPorts();
             return outputPort;
@@ -82,8 +90,8 @@ namespace RPG.DialogueSystem.Graph
             return button;
         }
 
-        public abstract DialogueGraphBaseNodeSaveData CreateState();
+        public abstract DialogueGraphBaseNodeSaveData CreateNodeData();
 
-        public abstract void LoadState(DialogueGraphBaseNodeSaveData stateInfo);
+        public abstract void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo);
     }
 }

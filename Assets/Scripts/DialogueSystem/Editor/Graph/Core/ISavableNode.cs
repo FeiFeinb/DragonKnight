@@ -1,9 +1,9 @@
 namespace RPG.DialogueSystem.Graph
 {
-    public interface ISavableNode<T>
+    public interface ISavableNode
     {
-        T CreateNodeData();
+        DialogueGraphBaseNodeSaveData CreateNodeData();
 
-        void LoadNodeData(T data);
+        void LoadNodeData(DialogueGraphBaseNodeSaveData data);
     }
 }

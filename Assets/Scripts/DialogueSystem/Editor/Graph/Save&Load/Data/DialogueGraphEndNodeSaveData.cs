@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
@@ -7,7 +9,7 @@ namespace RPG.DialogueSystem.Graph
     {
         public EndDialogueNodeType _endType;
 
-        public DialogueGraphEndNodeSaveData(string guid, string title, Rect rectPos) : base(guid, title, rectPos)
+        public DialogueGraphEndNodeSaveData(string uniqueID, string title, Rect rectPos, List<Port> inputPorts, List<Port> outputPorts, DialogueGraphView graphView) : base(uniqueID, title, rectPos, inputPorts, outputPorts, graphView)
         {
         }
     }

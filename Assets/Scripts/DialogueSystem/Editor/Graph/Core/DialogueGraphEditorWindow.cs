@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Graph;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -20,7 +20,7 @@ namespace RPG.DialogueSystem.Graph
         [MenuItem("Window/DialogueGraph")]
         private static DialogueGraphEditorWindow ShowDialogueGraphWindow()
         {
-            DialogueGraphEditorWindow window = GetWindow<DialogueGraphEditorWindow>(false, "DialogueGraph");
+            var window = GetWindow<DialogueGraphEditorWindow>(false, "DialogueGraph");
             window.minSize = new Vector2(400, 300);
             return window;
         }
@@ -34,10 +34,10 @@ namespace RPG.DialogueSystem.Graph
         [OnOpenAsset(0)]
         private static bool OnDoubleClickAsset(int instanceID, int line)
         {
-            DialogueGraphSO selectSO = EditorUtility.InstanceIDToObject(instanceID) as DialogueGraphSO;
+            var selectSO = EditorUtility.InstanceIDToObject(instanceID) as DialogueGraphSO;
             if (selectSO == null) return false;
 
-            DialogueGraphEditorWindow window = ShowDialogueGraphWindow();
+            var window = ShowDialogueGraphWindow();
             // OnOpenAsset回调不包含Selection Change
             window.Load(selectSO);
             return true;
@@ -86,8 +86,9 @@ namespace RPG.DialogueSystem.Graph
         private void CreateWindowComponents()
         {
             // 创建各个组件
-            Toolbar windowToolbar = new Toolbar();
-            Button saveButton = new Button();
+            var windowToolbar = new Toolbar();
+            var saveButton = new Button();
+            var loadButton = new Button();
             _selectSONameLabel = new Label();
             
             // 传统艺能
@@ -97,14 +98,35 @@ namespace RPG.DialogueSystem.Graph
                 Debug.Log("Save Button Clicked");
                 _selectSO.Save(_selectView);
             };
+
+            loadButton.text = "Load";
+            loadButton.clicked += delegate
+            {
+                // 清空元素
+                foreach (Edge edge in _selectView.edges)
+                {
+                    _selectView.RemoveElement(edge);
+                }
+
+                foreach (Node selectViewPort in _selectView.nodes)
+                {
+                    _selectView.RemoveElement(selectViewPort);
+                }
+                _selectSO.Load(this, _selectView);
+                
+                
+                
+            };
+            
             
             // 设置顶部信息显示栏Style
-            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphViewSheet.uss"); 
+            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphViewSheet.uss"); 
             rootVisualElement.styleSheets.Add(styleSheet);
             _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
             
             // 将Button加入Toolbar中
             windowToolbar.Add(saveButton);
+            windowToolbar.Add(loadButton);
             // 将Label加入Toolbar中
             windowToolbar.Add(_selectSONameLabel);
             // 将Toolbar加入窗口绘制中
