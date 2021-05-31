@@ -29,7 +29,7 @@ namespace RPG.DialogueSystem.Graph
             Port inputPort = AddInputPort("Parents", Port.Capacity.Multi);
             inputPort.style.flexGrow = 1;
             
-            AddOutputPort("Children", Port.Capacity.Single);
+            // AddOutputPort("Children", Port.Capacity.Single);
             
             _addChoiceButton = CreateButton("+", delegate
             {
@@ -64,7 +64,7 @@ namespace RPG.DialogueSystem.Graph
             RefreshExpandedState();
         }
 
-        protected override Port AddOutputPort(string portName, Port.Capacity capacity)
+        public override Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;

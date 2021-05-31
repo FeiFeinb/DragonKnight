@@ -113,9 +113,7 @@ namespace RPG.DialogueSystem.Graph
                     _selectView.RemoveElement(selectViewPort);
                 }
                 _selectSO.Load(this, _selectView);
-                
-                
-                
+
             };
             
             

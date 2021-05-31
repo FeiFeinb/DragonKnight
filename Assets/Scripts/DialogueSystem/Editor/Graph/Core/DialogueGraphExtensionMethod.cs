@@ -11,12 +11,6 @@ namespace DialogueSystem.Editor.Graph
     {
         public static List<DialogueGraphPortSaveData> ToPortData(this IEnumerable<Port> basePorts, DialogueGraphView graphView)
         {
-            // foreach (var basePort in basePorts)
-            // {
-            //     if (!basePort.connected) continue;
-            //     Edge connectedEdge = graphView.edges.FirstOrDefault(edge => edge.output == basePort || edge.input == basePort);
-            // }
-            // return null;
             return basePorts.Select(basePort =>
                 {
                     var connectedEdge = graphView.edges.Where(edge => edge.output == basePort || edge.input == basePort).ToList();

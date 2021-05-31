@@ -11,14 +11,14 @@ namespace RPG.DialogueSystem.Graph
     public abstract class DialogueGraphBaseNode : Node, ISavableNode
     {
         public string UniqueID => _uniqueID;
-        protected string _uniqueID;
-        protected List<Port> _inputBasePorts = new List<Port>();
-        protected List<Port> _outputBasePorts = new List<Port>();
-        protected Vector2 _defaultNodeSize = new Vector2(200, 100);
+        public string _uniqueID;
+        public List<Port> _inputBasePorts = new List<Port>();
+        public List<Port> _outputBasePorts = new List<Port>();
+        public Vector2 _defaultNodeSize = new Vector2(200, 100);
         
         
-        protected DialogueGraphEditorWindow _editorWindow;
-        protected DialogueGraphView _graphView;
+        public DialogueGraphEditorWindow _editorWindow;
+        public DialogueGraphView _graphView;
         
         public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
         {
@@ -32,7 +32,7 @@ namespace RPG.DialogueSystem.Graph
             styleSheets.Add(styleSheet);
         }
 
-        protected virtual Port AddInputPort(string portName, Port.Capacity capacity)
+        public virtual Port AddInputPort(string portName, Port.Capacity capacity)
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
             inputPort.portName = portName;
@@ -42,7 +42,7 @@ namespace RPG.DialogueSystem.Graph
             return inputPort;
         }
 
-        protected virtual Port AddOutputPort(string portName, Port.Capacity capacity)
+        public virtual Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;

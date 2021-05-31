@@ -40,24 +40,48 @@ namespace RPG.DialogueSystem.Graph
         public void Load(DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
         {
             
-            foreach (DialogueGraphStartNodeSaveData saveData in startNodesSaveData)
+            foreach (DialogueGraphStartNodeSaveData startNode in startNodesSaveData)
             {
-                graphView.AddElement(new DialogueGraphStartNode(saveData._rectPos.position, editorWindow, graphView));
+                graphView.AddElement(new DialogueGraphStartNode(startNode._rectPos.position, editorWindow, graphView)
+                {
+                    _uniqueID = startNode._uniqueID,
+                    title = startNode._title
+                });
             }
 
             foreach (DialogueGraphEndNodeSaveData endNode in endNodesSaveData)
             {
-                graphView.AddElement(new DialogueGraphEndNode(endNode._rectPos.position, editorWindow, graphView));
+                graphView.AddElement(new DialogueGraphEndNode(endNode._rectPos.position, editorWindow, graphView)
+                {
+                    _uniqueID = endNode._uniqueID,
+                    title = endNode._title
+                });
             }
 
             foreach (DialogueGraphTalkNodeSaveData talkNode in talkNodesSaveData)
             {
-                graphView.AddElement(new DialogueGraphTalkNode(talkNode._rectPos.position, editorWindow, graphView));
+                DialogueGraphTalkNode tempNode = new DialogueGraphTalkNode(talkNode._rectPos.position, editorWindow, graphView)
+                {
+                    _uniqueID = talkNode._uniqueID,
+                    title = talkNode._title
+                };
+                foreach (var temp in talkNode._outputPortsData)
+                {
+                    tempNode.AddOutputPort(temp._portName, temp._capacity);
+                }
+                graphView.AddElement(tempNode);
             }
 
-            foreach (DialogueGraphEdgeSaveData edgeSaveData in edgesSaveData)
+
+            foreach (Node graphViewNode in graphView.nodes)
             {
-                
+                // 只找出口
+                var edges = edgesSaveData.Where(edge => edge.outputNodeUniqueID == (graphViewNode as DialogueGraphBaseNode).UniqueID);
+                foreach (var edge in edges)
+                {
+                    int inputIndex = GetOutIndex((graphViewNode as DialogueGraphBaseNode).UniqueID, edge.inputNodeUniqueID);
+                    Debug.Log(inputIndex);
+                }
             }
         }
         
@@ -65,5 +89,18 @@ namespace RPG.DialogueSystem.Graph
         {
             return nodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>().ToList();
         }
+
+        private int GetInputIndex(string originUniqueID, string uniqueID)
+        {
+            var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
+            return saveData.GetInputPortIndex(uniqueID);
+        }
+
+        private int GetOutIndex(string originUniqueID, string uniqueID)
+        {
+            var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
+            return saveData.GetOutputPortIndex(uniqueID);
+        }
+
     }
 }
