@@ -22,9 +22,13 @@ namespace RPG.DialogueSystem.Graph
         [SerializeField]
         private List<DialogueGraphTalkNodeSaveData> talkNodesSaveData = new List<DialogueGraphTalkNodeSaveData>();
 
+
+        private Dictionary<string, DialogueGraphBaseNodeSaveData> saveDataDic =
+            new Dictionary<string, DialogueGraphBaseNodeSaveData>();
         public void Save(DialogueGraphView graphView)
         {
             var nodes = graphView.nodes;
+            saveDataDic.Clear();
             edgesSaveData = graphView.edges.Where(edge => edge.input != null).Select(graphViewEdge =>
                 new DialogueGraphEdgeSaveData()
                 {
@@ -79,27 +83,45 @@ namespace RPG.DialogueSystem.Graph
                 var edges = edgesSaveData.Where(edge => edge.outputNodeUniqueID == (graphViewNode as DialogueGraphBaseNode).UniqueID);
                 foreach (var edge in edges)
                 {
-                    int inputIndex = GetOutIndex((graphViewNode as DialogueGraphBaseNode).UniqueID, edge.inputNodeUniqueID);
-                    Debug.Log(inputIndex);
+                    int outputIndex = GetOutIndex((graphViewNode as DialogueGraphBaseNode).UniqueID, edge.inputNodeUniqueID);
+                    int inputIndex = GetInputIndex(edge.inputNodeUniqueID,
+                        ((graphViewNode as DialogueGraphBaseNode).UniqueID));
+                    // Edge newEdge = new Edge()
+                    // {
+                    //     output = (graphViewNode as DialogueGraphBaseNode)._outputBasePorts[outputIndex],
+                    //     input = (graphView.nodes.FirstOrDefault(node => (node as DialogueGraphBaseNode).UniqueID == edge.inputNodeUniqueID) as DialogueGraphBaseNode)._inputBasePorts[inputIndex]
+                    // };
+                    // newEdge.output.Connect(newEdge);
+                    // newEdge.input.Connect(newEdge);
+                    Port ip = (graphView.nodes.FirstOrDefault(node => (node as DialogueGraphBaseNode).UniqueID == edge.inputNodeUniqueID) as DialogueGraphBaseNode)._inputBasePorts[inputIndex];
+                    (graphViewNode as DialogueGraphBaseNode)._outputBasePorts[outputIndex].ConnectTo(ip);
+                    graphView.AddElement((graphViewNode as DialogueGraphBaseNode)._outputBasePorts[outputIndex].ConnectTo(ip));
                 }
             }
         }
         
         private List<SaveT> Save<T, SaveT>(UQueryState<Node> nodes) where T : DialogueGraphBaseNode
         {
-            return nodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>().ToList();
+            return nodes.Where(node => node is T).Cast<T>().Select(node =>
+            {
+                var data = node.CreateNodeData();
+                saveDataDic.Add(data._uniqueID, data);
+                return data;
+            }).Cast<SaveT>().ToList();
         }
 
         private int GetInputIndex(string originUniqueID, string uniqueID)
         {
-            var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
-            return saveData.GetInputPortIndex(uniqueID);
+            // var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
+            // return saveData.GetInputPortIndex(uniqueID);
+            return saveDataDic[originUniqueID].GetInputPortIndex(uniqueID);
         }
 
         private int GetOutIndex(string originUniqueID, string uniqueID)
         {
-            var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
-            return saveData.GetOutputPortIndex(uniqueID);
+            // var saveData = talkNodesSaveData.FirstOrDefault(data => data._uniqueID == originUniqueID);
+            // return saveData.GetOutputPortIndex(uniqueID);
+            return saveDataDic[originUniqueID].GetOutputPortIndex(uniqueID);
         }
 
     }

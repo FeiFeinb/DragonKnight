@@ -29,7 +29,7 @@ namespace RPG.DialogueSystem.Graph
         {
             for (int i = 0; i < _inputPortsData.Count; i++)
             {
-                if (_inputPortsData[i].edgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.inputNodeUniqueID == outputNodeUniqueID))
+                if (_inputPortsData[i].edgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.outputNodeUniqueID == outputNodeUniqueID))
                 {
                     return i;
                 }
