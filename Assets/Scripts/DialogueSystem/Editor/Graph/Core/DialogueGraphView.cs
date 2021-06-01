@@ -66,7 +66,7 @@ namespace RPG.DialogueSystem.Graph
         {
             if (!(SearchTreeEntry.userData is Type nodeType)) return false;
             Vector2 nodePosition = contentViewContainer.WorldToLocal(context.screenMousePosition - _editorWindow.position.position);
-            AddElement(Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this) as Node);
+            AddElement(Activator.CreateInstance(nodeType, nodePosition, _editorWindow, this, null) as Node);
             return true;
         }
     }

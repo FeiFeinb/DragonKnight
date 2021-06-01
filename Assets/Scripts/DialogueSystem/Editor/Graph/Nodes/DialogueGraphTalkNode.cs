@@ -22,15 +22,25 @@ namespace RPG.DialogueSystem.Graph
         private ObjectField _audioClipField;
         private Button _addChoiceButton;
         
-        public DialogueGraphTalkNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView) : base(position, editorWindow, graphView)
+        public DialogueGraphTalkNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, editorWindow, graphView, talkNodeSaveData?._uniqueID)
         {
             title = "Talk Node";
             
             Port inputPort = AddInputPort("Parents", Port.Capacity.Multi);
             inputPort.style.flexGrow = 1;
-            
-            // AddOutputPort("Children", Port.Capacity.Single);
-            
+
+            if (talkNodeSaveData == null)
+            {
+                AddOutputPort("Children", Port.Capacity.Single);
+            }
+            else
+            {
+                foreach (var portSaveData in talkNodeSaveData._outputPortsData)
+                {
+                    AddOutputPort(portSaveData._portName, portSaveData._capacity);
+                }
+            }
+
             _addChoiceButton = CreateButton("+", delegate
             {
                 AddOutputPort("Children", Port.Capacity.Single);
@@ -94,7 +104,7 @@ namespace RPG.DialogueSystem.Graph
 
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphTalkNodeSaveData(_uniqueID, title, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
+            return new DialogueGraphTalkNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
             {
                 _content = this._content,
                 _audioClip = this._audioClip,

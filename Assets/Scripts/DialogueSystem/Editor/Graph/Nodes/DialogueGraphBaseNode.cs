@@ -20,18 +20,17 @@ namespace RPG.DialogueSystem.Graph
         public DialogueGraphEditorWindow _editorWindow;
         public DialogueGraphView _graphView;
         
-        public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView)
+        public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView, string uniqueID = null)
         {
-            _uniqueID = Guid.NewGuid().ToString();
+            _uniqueID = uniqueID ?? Guid.NewGuid().ToString();
             _editorWindow = editorWindow;
             _graphView = graphView;
             SetPosition(new Rect(position, _defaultNodeSize));
             
-            // 设置顶部信息显示栏Style
+            // 设置节点Style
             StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphNodeViewSheet.uss");
             styleSheets.Add(styleSheet);
         }
-
         public virtual Port AddInputPort(string portName, Port.Capacity capacity)
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
