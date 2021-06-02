@@ -1,6 +1,5 @@
+using System;
 using System.Linq;
-using System.Runtime.InteropServices;
-using RPG.SaveSystem;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -10,19 +9,12 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphTalkNode : DialogueGraphBaseNode
     {
-        private string _content;                                // 对话内容
-        private AudioClip _audioClip;                           // 对话音频
-        private InterlocutorType _interlocutorType;             // 对话方
-        private DialogueCharacterInfoSO _characterInfoSO;       // 对话角色信息
-    
-        private Label _characterNameLabel;
-        private EnumField _interlocutorField;
-        private TextField _contentField;
-        private ObjectField _characterInfoField;
-        private ObjectField _audioClipField;
-        private Button _addChoiceButton;
+        private readonly TextField _contentField;
+        private readonly EnumField _interlocutorField;
+        private readonly ObjectField _characterInfoField;
+        private readonly ObjectField _audioClipField;
         
-        public DialogueGraphTalkNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, editorWindow, graphView, talkNodeSaveData?._uniqueID)
+        public DialogueGraphTalkNode(Vector2 position, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, graphView, talkNodeSaveData?.UniqueID)
         {
             title = "Talk Node";
             
@@ -35,46 +27,34 @@ namespace RPG.DialogueSystem.Graph
             }
             else
             {
-                foreach (var portSaveData in talkNodeSaveData._outputPortsData)
+                foreach (var portSaveData in talkNodeSaveData.OutputPortsData)
                 {
-                    AddOutputPort(portSaveData._portName, portSaveData._capacity);
+                    AddOutputPort(portSaveData.PortName, portSaveData.Capacity);
                 }
             }
 
-            _addChoiceButton = CreateButton("+", delegate
+            Button _addChoiceButton = CreateButton("+", delegate
             {
                 AddOutputPort("Children", Port.Capacity.Single);
             });
             topContainer.Insert(1, _addChoiceButton);
             
-            _interlocutorField = CreateEnumField(_interlocutorType, (value) =>
-            {
-                _interlocutorType = (InterlocutorType) value.newValue;
-            });
+            _interlocutorField = CreateEnumField(InterlocutorType.NPC);
             extensionContainer.Add(_interlocutorField);
             
-            _contentField = CreateTextField((value) =>
-            {
-                _content = value.newValue;
-            });
+            _contentField = CreateTextField();
             extensionContainer.Add(_contentField);
             
-            _characterInfoField = CreateObjectField<DialogueCharacterInfoSO>((value) =>
-            {
-                _characterInfoSO = value.newValue as DialogueCharacterInfoSO;
-            });
+            _characterInfoField = CreateObjectField<DialogueCharacterInfoSO>();
             extensionContainer.Add(_characterInfoField);
             
-            _audioClipField = CreateObjectField<AudioClip>((value) =>
-            {
-                _audioClip = value.newValue as AudioClip;
-            });
+            _audioClipField = CreateObjectField<AudioClip>();
             extensionContainer.Add(_audioClipField);
             
             RefreshExpandedState();
         }
 
-        public override Port AddOutputPort(string portName, Port.Capacity capacity)
+        protected override Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;
@@ -106,16 +86,20 @@ namespace RPG.DialogueSystem.Graph
         {
             return new DialogueGraphTalkNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
             {
-                _content = this._content,
-                _audioClip = this._audioClip,
-                _interlocutorType = this._interlocutorType,
-                _characterInfoSO = this._characterInfoSO
+                Content = _contentField.value,
+                Interlocutor = (InterlocutorType)_interlocutorField.value,
+                TalkAudioClip = _audioClipField.value as AudioClip,
+                CharacterInfoSO = _characterInfoField.value as DialogueCharacterInfoSO
             };
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
-            throw new System.NotImplementedException();
+            DialogueGraphTalkNodeSaveData talkNodeSaveData = stateInfo as DialogueGraphTalkNodeSaveData;
+            _contentField.value = talkNodeSaveData.Content;
+            _interlocutorField.value = talkNodeSaveData.Interlocutor;
+            _audioClipField.value = talkNodeSaveData.TalkAudioClip;
+            _characterInfoField.value = talkNodeSaveData.CharacterInfoSO;
         }
     }
 }

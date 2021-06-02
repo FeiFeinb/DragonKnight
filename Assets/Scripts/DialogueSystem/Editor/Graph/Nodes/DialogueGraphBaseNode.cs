@@ -11,19 +11,19 @@ namespace RPG.DialogueSystem.Graph
     public abstract class DialogueGraphBaseNode : Node, ISavableNode
     {
         public string UniqueID => _uniqueID;
-        public string _uniqueID;
-        public List<Port> _inputBasePorts = new List<Port>();
-        public List<Port> _outputBasePorts = new List<Port>();
-        public Vector2 _defaultNodeSize = new Vector2(200, 100);
+        public List<Port> InputBasePorts => _inputBasePorts;
+        public List<Port> OutPutBasePorts => _outputBasePorts;
         
-        
-        public DialogueGraphEditorWindow _editorWindow;
-        public DialogueGraphView _graphView;
-        
-        public DialogueGraphBaseNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView, string uniqueID = null)
+        protected readonly string _uniqueID;
+        protected readonly List<Port> _inputBasePorts = new List<Port>();
+        protected readonly List<Port> _outputBasePorts = new List<Port>();
+        protected readonly DialogueGraphView _graphView;
+
+        private readonly Vector2 _defaultNodeSize = new Vector2(200, 100);
+
+        public DialogueGraphBaseNode(Vector2 position, DialogueGraphView graphView, string uniqueID = null)
         {
             _uniqueID = uniqueID ?? Guid.NewGuid().ToString();
-            _editorWindow = editorWindow;
             _graphView = graphView;
             SetPosition(new Rect(position, _defaultNodeSize));
             
@@ -31,7 +31,8 @@ namespace RPG.DialogueSystem.Graph
             StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphNodeViewSheet.uss");
             styleSheets.Add(styleSheet);
         }
-        public virtual Port AddInputPort(string portName, Port.Capacity capacity)
+
+        protected virtual Port AddInputPort(string portName, Port.Capacity capacity)
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
             inputPort.portName = portName;
@@ -41,7 +42,7 @@ namespace RPG.DialogueSystem.Graph
             return inputPort;
         }
 
-        public virtual Port AddOutputPort(string portName, Port.Capacity capacity)
+        protected virtual Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;
@@ -56,29 +57,38 @@ namespace RPG.DialogueSystem.Graph
             return InstantiatePort(orientation, direction, capacity, typeof(float));
         }
 
-        protected EnumField CreateEnumField(Enum defaultValue, EventCallback<ChangeEvent<Enum>> valueChangedCallback)
+        protected EnumField CreateEnumField(Enum defaultValue, EventCallback<ChangeEvent<Enum>> valueChangedCallback = null)
         {
             EnumField enumField = new EnumField();
             enumField.Init(defaultValue);
-            enumField.RegisterValueChangedCallback(valueChangedCallback);
+            if (valueChangedCallback != null)
+            {
+                enumField.RegisterValueChangedCallback(valueChangedCallback);
+            }
             return enumField;
         }
 
-        protected TextField CreateTextField(EventCallback<ChangeEvent<string>> valueChangedCallback)
+        protected TextField CreateTextField(EventCallback<ChangeEvent<string>> valueChangedCallback = null)
         {
             TextField textField = new TextField() { multiline = true };
-            textField.RegisterValueChangedCallback(valueChangedCallback);
+            if (valueChangedCallback != null)
+            {
+                textField.RegisterValueChangedCallback(valueChangedCallback);
+            }
             return textField;
         }
 
-        protected ObjectField CreateObjectField<T>(EventCallback<ChangeEvent<UnityEngine.Object>> valueChangedCallback)
+        protected ObjectField CreateObjectField<T>(EventCallback<ChangeEvent<UnityEngine.Object>> valueChangedCallback = null)
         {
             ObjectField objectField = new ObjectField()
             {
                 objectType = typeof(T),
                 allowSceneObjects = false,
             };
-            objectField.RegisterValueChangedCallback(valueChangedCallback);
+            if (valueChangedCallback != null)
+            {
+                objectField.RegisterValueChangedCallback(valueChangedCallback);
+            }
             return objectField;
         }
 

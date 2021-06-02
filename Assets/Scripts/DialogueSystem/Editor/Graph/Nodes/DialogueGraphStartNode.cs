@@ -7,7 +7,7 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphStartNode : DialogueGraphBaseNode
     {
-        public DialogueGraphStartNode(Vector2 position, DialogueGraphEditorWindow editorWindow, DialogueGraphView graphView, DialogueGraphStartNodeSaveData startNodeSaveData = null) : base(position, editorWindow, graphView, startNodeSaveData?._uniqueID)
+        public DialogueGraphStartNode(Vector2 position, DialogueGraphView graphView, DialogueGraphStartNodeSaveData startNodeSaveData = null) : base(position, graphView, startNodeSaveData?.UniqueID)
         {
             title = "Start Node";
             AddOutputPort("Children", Port.Capacity.Single);
@@ -21,7 +21,7 @@ namespace RPG.DialogueSystem.Graph
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

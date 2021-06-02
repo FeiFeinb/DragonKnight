@@ -10,10 +10,15 @@ namespace RPG.DialogueSystem.Graph
     [System.Serializable]
     public class DialogueGraphBaseNodeSaveData
     {
-        public string _uniqueID;
-        public Rect _rectPos;
-        public List<DialogueGraphPortSaveData> _inputPortsData;
-        public List<DialogueGraphPortSaveData> _outputPortsData;
+        public string UniqueID => _uniqueID;
+        public Rect RectPos => _rectPos;
+        public List<DialogueGraphPortSaveData> InputPortsData => _inputPortsData;
+        public List<DialogueGraphPortSaveData> OutputPortsData => _outputPortsData;
+        
+        [SerializeField] private string _uniqueID;
+        [SerializeField] private Rect _rectPos;
+        [SerializeField] private List<DialogueGraphPortSaveData> _inputPortsData;
+        [SerializeField] private List<DialogueGraphPortSaveData> _outputPortsData;
         
         public DialogueGraphBaseNodeSaveData(string uniqueID, Rect rectPos, List<Port> inputPorts, List<Port> outputPorts, DialogueGraphView graphView)
         {
@@ -21,29 +26,6 @@ namespace RPG.DialogueSystem.Graph
             _rectPos = rectPos;
             _inputPortsData = inputPorts.ToPortData(graphView);
             _outputPortsData = outputPorts.ToPortData(graphView);
-        }
-        public int GetInputPortIndex(string outputNodeUniqueID)
-        {
-            for (int i = 0; i < _inputPortsData.Count; i++)
-            {
-                if (_inputPortsData[i].edgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.outputNodeUniqueID == outputNodeUniqueID))
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public int GetOutputPortIndex(string inputNodeUniqueID)
-        {
-            for (int i = 0; i < _outputPortsData.Count; i++)
-            {
-                if (_outputPortsData[i].edgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.inputNodeUniqueID == inputNodeUniqueID))
-                {
-                    return i;
-                }
-            }
-            return -1;
         }
     }
 }

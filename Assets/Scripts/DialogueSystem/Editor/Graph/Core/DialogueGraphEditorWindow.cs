@@ -14,7 +14,6 @@ namespace RPG.DialogueSystem.Graph
     {
         private DialogueGraphSO _selectSO;          // 对话SO
         private DialogueGraphView _selectView;      // 对话节点编辑器窗口
-        
         private Label _selectSONameLabel;           // 当前对话SO显示标签
 
         [MenuItem("Window/DialogueGraph")]
@@ -58,22 +57,29 @@ namespace RPG.DialogueSystem.Graph
         /// <param name="selectSO">对话SO</param>
         private void Load(DialogueGraphSO selectSO)
         {
-            if (selectSO == null) return;
+            if (selectSO == null)
+            {
+                _selectSONameLabel.text = "Current Object is Null";
+                return;
+            }
             
             _selectSO = selectSO;
-            // 刷新窗口上端Label显示
-            _selectSONameLabel.text = _selectSO == null ? "Current Object is Null" : $"Current Object: {_selectSO.name}";
+            _selectSONameLabel.text = $"Current Object: {_selectSO.name}";
+            _selectSO.Load(_selectView);
         }
         
         private void OnEnable()
         {
             // 添加单击资源监听
             Selection.selectionChanged += OnClickAsset;
-            
+
             // 先创建窗口组件(Toolbar)
             CreateWindowComponents();
             // 再创建对话节点编辑器界面
             CreateDialogueGraphView();
+            
+            // 加载
+            Load(_selectSO);
         }
 
         private void OnDisable()
@@ -95,25 +101,13 @@ namespace RPG.DialogueSystem.Graph
             saveButton.text = "Save";
             saveButton.clicked += delegate
             {
-                Debug.Log("Save Button Clicked");
                 _selectSO.Save(_selectView);
             };
 
             loadButton.text = "Load";
             loadButton.clicked += delegate
             {
-                // 清空元素
-                foreach (Edge edge in _selectView.edges)
-                {
-                    _selectView.RemoveElement(edge);
-                }
-
-                foreach (Node selectViewPort in _selectView.nodes)
-                {
-                    _selectView.RemoveElement(selectViewPort);
-                }
-                _selectSO.Load(this, _selectView);
-
+                _selectSO.Load(_selectView);
             };
             
             

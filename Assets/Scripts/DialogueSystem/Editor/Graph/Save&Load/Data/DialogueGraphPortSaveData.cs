@@ -6,8 +6,8 @@ namespace RPG.DialogueSystem.Graph
     [System.Serializable]
     public class DialogueGraphPortSaveData
     {
-        public string _portName;
-        public Port.Capacity _capacity;
-        public List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>();
+        public string PortName;
+        public Port.Capacity Capacity;
+        public List<DialogueGraphEdgeSaveData> EdgesSaveData;
     }
 }

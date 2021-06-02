@@ -9,20 +9,14 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphEndNode : DialogueGraphBaseNode
     {
-        private EndDialogueNodeType _endDialogueNodeType;
-        
-        private EnumField _enumField;
+        private readonly EnumField _enumField;
 
-        public DialogueGraphEndNode(Vector2 position, DialogueGraphEditorWindow editorWindow,
-            DialogueGraphView graphView, DialogueGraphEndNodeSaveData endNodeSaveData = null) : base(position, editorWindow, graphView, endNodeSaveData?._uniqueID)
+        public DialogueGraphEndNode(Vector2 position,
+            DialogueGraphView graphView, DialogueGraphEndNodeSaveData endNodeSaveData = null) : base(position, graphView, endNodeSaveData?.UniqueID)
         {
             title = "End Node";
-            _endDialogueNodeType = endNodeSaveData?._endType ?? EndDialogueNodeType.End;
             AddInputPort("Parents", Port.Capacity.Multi);
-            _enumField = CreateEnumField(_endDialogueNodeType, (value) =>
-            {
-                _endDialogueNodeType = (EndDialogueNodeType) value.newValue;
-            });
+            _enumField = CreateEnumField(EndDialogueNodeType.End);
             extensionContainer.Add(_enumField);
             RefreshExpandedState();
         }
@@ -31,13 +25,13 @@ namespace RPG.DialogueSystem.Graph
         {
             return new DialogueGraphEndNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
             {
-                _endType = this._endDialogueNodeType
+                EndType = (EndDialogueNodeType)_enumField.value
             };
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
-            throw new NotImplementedException();
+            _enumField.value = (stateInfo as DialogueGraphEndNodeSaveData).EndType;
         }
     }
 }
