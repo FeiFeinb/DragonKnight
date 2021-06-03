@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
 {
+    /// <summary>
+    /// 开始节点数据类
+    /// </summary>
     [System.Serializable]
     public class DialogueGraphStartNodeSaveData : DialogueGraphBaseNodeSaveData
     {

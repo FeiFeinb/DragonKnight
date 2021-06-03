@@ -1,5 +1,8 @@
 namespace RPG.DialogueSystem.Graph
 {
+    /// <summary>
+    /// 对话方类型
+    /// </summary>
     public enum InterlocutorType
     {
         /// <summary>

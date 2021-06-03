@@ -12,58 +12,56 @@ namespace RPG.DialogueSystem.Graph
     [CreateAssetMenu(fileName = "New DialogueGraphSO", menuName = "Dialogue System/Graph/DialogueGraphSO", order = 0)]
     public class DialogueGraphSO : ScriptableObject
     {
-        [SerializeField] private List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>();
+        [SerializeField] private List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>();                 // 连线数据数列
 
-        [SerializeField] private List<DialogueGraphStartNodeSaveData> startNodesSaveData = new List<DialogueGraphStartNodeSaveData>();
+        [SerializeField] private List<DialogueGraphStartNodeSaveData> startNodesSaveData = new List<DialogueGraphStartNodeSaveData>();  // 开始节点数列
+    
+        [SerializeField] private List<DialogueGraphEndNodeSaveData> endNodesSaveData = new List<DialogueGraphEndNodeSaveData>();        // 结束节点数列
 
-        [SerializeField] private List<DialogueGraphEndNodeSaveData> endNodesSaveData = new List<DialogueGraphEndNodeSaveData>();
+        [SerializeField] private List<DialogueGraphTalkNodeSaveData> talkNodesSaveData = new List<DialogueGraphTalkNodeSaveData>();     // 对话节点数列
 
-        [SerializeField] private List<DialogueGraphTalkNodeSaveData> talkNodesSaveData = new List<DialogueGraphTalkNodeSaveData>();
-
+        /// <summary>
+        /// 保存图中节点
+        /// </summary>
+        /// <param name="graphView">节点图</param>
         public void Save(DialogueGraphView graphView)
         {
-            List<SaveT> Save<T, SaveT>(UQueryState<Node> graphNodes) where T : DialogueGraphBaseNode
+            List<SaveT> CaptureNodesData<T, SaveT>(UQueryState<Node> graphNodes) where T : DialogueGraphBaseNode
             {
                 return graphNodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>().ToList();
             }
             
             var nodes = graphView.nodes;
-            startNodesSaveData = Save<DialogueGraphStartNode, DialogueGraphStartNodeSaveData>(nodes);
-            endNodesSaveData = Save<DialogueGraphEndNode, DialogueGraphEndNodeSaveData>(nodes);
-            talkNodesSaveData = Save<DialogueGraphTalkNode, DialogueGraphTalkNodeSaveData>(nodes);
+            // 储存节点数据
+            startNodesSaveData = CaptureNodesData<DialogueGraphStartNode, DialogueGraphStartNodeSaveData>(nodes);
+            endNodesSaveData = CaptureNodesData<DialogueGraphEndNode, DialogueGraphEndNodeSaveData>(nodes);
+            talkNodesSaveData = CaptureNodesData<DialogueGraphTalkNode, DialogueGraphTalkNodeSaveData>(nodes);
             
+            // 储存连线数据
             edgesSaveData.Clear();
             foreach (Edge edge in graphView.edges.Where(edge => edge.input != null))
             {
-                string originNodeUniqueID = (edge.output.node as DialogueGraphBaseNode).UniqueID;
-                string targetNodeUniqueID = (edge.input.node as DialogueGraphBaseNode).UniqueID;
-                edgesSaveData.Add(new DialogueGraphEdgeSaveData()
+                edgesSaveData.Add(new DialogueGraphEdgeSaveData
                 {
-                    outputNodeUniqueID = originNodeUniqueID,
-                    inputNodeUniqueID = targetNodeUniqueID
+                    OutputNodeUniqueID = ((DialogueGraphBaseNode)edge.output.node).UniqueID,
+                    InputNodeUniqueID = ((DialogueGraphBaseNode)edge.input.node).UniqueID
                 });
             }
-
+            
+            // 脏标记
             EditorUtility.SetDirty(this);
         }
 
-
+        /// <summary>
+        /// 加载对话节点
+        /// </summary>
+        /// <param name="graphView">目标对话图</param>
         public void Load(DialogueGraphView graphView)
         {
-            // 清空连线
-            foreach (Edge edge in graphView.edges)
-            {
-                graphView.RemoveElement(edge);
-            }
-                
-            // 清空节点
-            foreach (Node selectViewPort in graphView.nodes)
-            {
-                graphView.RemoveElement(selectViewPort);
-            }
+            // 清空
+            graphView.ClearEdgesAndNodes();
             
-            var saveDataDic = new Dictionary<string, DialogueGraphBaseNodeSaveData>();
-            
+            var nodeDataDic = new Dictionary<string, DialogueGraphBaseNodeSaveData>();
             // originNodeUniqueID - List<originPortIndex, targetNodeUniqueID, targetPortIndex>
             var edgeDataDic = new Dictionary<string, List<Tuple<int, string, int>>>();
 
@@ -71,8 +69,11 @@ namespace RPG.DialogueSystem.Graph
             {
                 foreach (DialogueGraphBaseNodeSaveData dialogueGraphBaseNodeSaveData in nodesSaveData)
                 {
-                    saveDataDic.Add(dialogueGraphBaseNodeSaveData.UniqueID, dialogueGraphBaseNodeSaveData);
-                    T dialogueNode = Activator.CreateInstance(typeof(T), dialogueGraphBaseNodeSaveData.RectPos.position, graphView, dialogueGraphBaseNodeSaveData) as T;
+                    // 缓存节点数据进字典中
+                    nodeDataDic.Add(dialogueGraphBaseNodeSaveData.UniqueID, dialogueGraphBaseNodeSaveData);
+                    // 生成节点
+                    T dialogueNode = (T)Activator.CreateInstance(typeof(T), dialogueGraphBaseNodeSaveData.RectPos.position, graphView, dialogueGraphBaseNodeSaveData);
+                    // 加载节点数据
                     dialogueNode.LoadNodeData(dialogueGraphBaseNodeSaveData);
                     graphView.AddElement(dialogueNode);
                 }
@@ -81,14 +82,14 @@ namespace RPG.DialogueSystem.Graph
             LoadNode<DialogueGraphStartNode>(startNodesSaveData);
             LoadNode<DialogueGraphEndNode>(endNodesSaveData);
             LoadNode<DialogueGraphTalkNode>(talkNodesSaveData);
-
-
+            
             foreach (DialogueGraphEdgeSaveData edgeSaveData in edgesSaveData)
             {
-                string originNodeUniqueID = edgeSaveData.outputNodeUniqueID;
-                string targetNodeUniqueID = edgeSaveData.inputNodeUniqueID;
-                int outputPortIndex = saveDataDic.GetOutputPortIndex(originNodeUniqueID, targetNodeUniqueID);
-                int inputPortIndex = saveDataDic.GetInputPortIndex(targetNodeUniqueID, originNodeUniqueID);
+                string originNodeUniqueID = edgeSaveData.OutputNodeUniqueID;
+                string targetNodeUniqueID = edgeSaveData.InputNodeUniqueID;
+                int outputPortIndex = nodeDataDic.GetOutputPortIndex(originNodeUniqueID, targetNodeUniqueID);
+                int inputPortIndex = nodeDataDic.GetInputPortIndex(targetNodeUniqueID, originNodeUniqueID);
+                // 缓存连线数据进字典中
                 if (edgeDataDic.ContainsKey(originNodeUniqueID))
                 {
                     edgeDataDic[originNodeUniqueID].Add(new Tuple<int, string, int>(outputPortIndex, targetNodeUniqueID, inputPortIndex));
@@ -103,7 +104,7 @@ namespace RPG.DialogueSystem.Graph
             }
 
             // 连线
-            var baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>();
+            var baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>().ToList();
             foreach (DialogueGraphBaseNode originNode in baseNodes)
             {
                 // 只检测出口端口的节点连线
@@ -112,6 +113,7 @@ namespace RPG.DialogueSystem.Graph
                     foreach (var (originPortIndex, targetNodeUniqueID, targetPortIndex) in edgeDataDic[originNode.UniqueID])
                     {
                         DialogueGraphBaseNode targetNode = baseNodes.FirstOrDefault(node => node.UniqueID == targetNodeUniqueID);
+                        if (targetNode == null) continue;
                         Edge edge = originNode.OutPutBasePorts[originPortIndex].ConnectTo(targetNode.InputBasePorts[targetPortIndex]);
                         graphView.AddElement(edge);
                     }

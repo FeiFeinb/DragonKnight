@@ -9,29 +9,31 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphEndNode : DialogueGraphBaseNode
     {
-        private readonly EnumField _enumField;
+        private readonly EnumField _endTypeEnumField;      // 节点结束类型EnumField
 
         public DialogueGraphEndNode(Vector2 position,
             DialogueGraphView graphView, DialogueGraphEndNodeSaveData endNodeSaveData = null) : base(position, graphView, endNodeSaveData?.UniqueID)
         {
             title = "End Node";
             AddInputPort("Parents", Port.Capacity.Multi);
-            _enumField = CreateEnumField(EndDialogueNodeType.End);
-            extensionContainer.Add(_enumField);
+            
+            _endTypeEnumField = CreateEnumField(EndDialogueNodeType.End);
+            extensionContainer.Add(_endTypeEnumField);
+            
             RefreshExpandedState();
         }
-
+        
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
             return new DialogueGraphEndNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
             {
-                EndType = (EndDialogueNodeType)_enumField.value
+                EndType = (EndDialogueNodeType)_endTypeEnumField.value
             };
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
-            _enumField.value = (stateInfo as DialogueGraphEndNodeSaveData).EndType;
+            _endTypeEnumField.value = (stateInfo as DialogueGraphEndNodeSaveData).EndType;
         }
     }
 }

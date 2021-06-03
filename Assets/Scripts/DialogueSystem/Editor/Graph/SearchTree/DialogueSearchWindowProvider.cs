@@ -9,28 +9,43 @@ namespace RPG.DialogueSystem.Graph
     {
         public delegate bool SearchWindowOnSelectEntryCallback(SearchTreeEntry SearchTreeEntry, SearchWindowContext context);
 
-        public SearchWindowOnSelectEntryCallback OnSelectEntryCallback;
+        public SearchWindowOnSelectEntryCallback OnSelectEntryCallback;     // 选项点击委托
 
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            List<SearchTreeEntry> entries = new List<SearchTreeEntry>();
-            entries.Add(CreateSearchTreeGroupEntry("Create Nodes", 0));
-            entries.Add(CreateSearchTreeGroupEntry("Basic Nodes", 1));
-            entries.Add(CreateSearchTreeEntry<DialogueGraphStartNode>("Start Node", 2));
-            entries.Add(CreateSearchTreeEntry<DialogueGraphEndNode>("End Node", 2));
-            entries.Add(CreateSearchTreeGroupEntry("Main Nodes", 1));
-            entries.Add(CreateSearchTreeEntry<DialogueGraphTalkNode>("Talk Node", 2));
+            List<SearchTreeEntry> entries = new List<SearchTreeEntry>
+            {
+                CreateSearchTreeGroupEntry("Create Nodes", 0),
+                CreateSearchTreeGroupEntry("Basic Nodes", 1),
+                CreateSearchTreeEntry<DialogueGraphStartNode>("Start Node", 2),
+                CreateSearchTreeEntry<DialogueGraphEndNode>("End Node", 2),
+                CreateSearchTreeGroupEntry("Main Nodes", 1),
+                CreateSearchTreeEntry<DialogueGraphTalkNode>("Talk Node", 2)
+            };
             return entries;
         }
 
+        /// <summary>
+        /// 创建搜索树组
+        /// </summary>
+        /// <param name="groupName">组名称</param>
+        /// <param name="levelIndex">深度索引</param>
+        /// <returns>创建的搜索树组</returns>
         private SearchTreeGroupEntry CreateSearchTreeGroupEntry(string groupName, int levelIndex)
         {
             return new SearchTreeGroupEntry(new GUIContent(groupName)) {level = levelIndex};
         }
 
-        private SearchTreeEntry CreateSearchTreeEntry<T>(string nodeName, int levelIndex) where T : DialogueGraphBaseNode
+        /// <summary>
+        /// 创建搜索树选项
+        /// </summary>
+        /// <param name="selectionName">选项名称</param>
+        /// <param name="levelIndex">深度索引</param>
+        /// <typeparam name="T">创建节点类型</typeparam>
+        /// <returns>创建的搜索树选项</returns>
+        private SearchTreeEntry CreateSearchTreeEntry<T>(string selectionName, int levelIndex) where T : DialogueGraphBaseNode
         {
-            return new SearchTreeEntry(new GUIContent(nodeName)) {level = levelIndex, userData = typeof(T)};
+            return new SearchTreeEntry(new GUIContent(selectionName)) {level = levelIndex, userData = typeof(T)};
         }
 
         public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)

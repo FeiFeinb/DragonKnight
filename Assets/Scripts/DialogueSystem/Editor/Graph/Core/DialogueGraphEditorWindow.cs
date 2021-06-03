@@ -13,11 +13,15 @@ namespace RPG.DialogueSystem.Graph
     public class DialogueGraphEditorWindow : EditorWindow
     {
         private DialogueGraphSO _selectSO;          // 对话SO
-        private DialogueGraphView _selectView;      // 对话节点编辑器窗口
+        private DialogueGraphView _selectView;      // 对话节点编辑器图
         private Label _selectSONameLabel;           // 当前对话SO显示标签
 
+        /// <summary>
+        /// 打开编辑器窗口
+        /// </summary>
+        /// <returns>窗口</returns>
         [MenuItem("Window/DialogueGraph")]
-        private static DialogueGraphEditorWindow ShowDialogueGraphWindow()
+        private static DialogueGraphEditorWindow ShowDialogueEditorWindow()
         {
             var window = GetWindow<DialogueGraphEditorWindow>(false, "DialogueGraph");
             window.minSize = new Vector2(400, 300);
@@ -36,7 +40,7 @@ namespace RPG.DialogueSystem.Graph
             var selectSO = EditorUtility.InstanceIDToObject(instanceID) as DialogueGraphSO;
             if (selectSO == null) return false;
 
-            var window = ShowDialogueGraphWindow();
+            var window = ShowDialogueEditorWindow();
             // OnOpenAsset回调不包含Selection Change
             window.Load(selectSO);
             return true;
@@ -88,7 +92,9 @@ namespace RPG.DialogueSystem.Graph
             Selection.selectionChanged -= OnClickAsset;
         }
         
-
+        /// <summary>
+        /// 创建窗口组件
+        /// </summary>
         private void CreateWindowComponents()
         {
             // 创建各个组件
@@ -125,6 +131,9 @@ namespace RPG.DialogueSystem.Graph
             rootVisualElement.Add(windowToolbar);
         }
 
+        /// <summary>
+        /// 创建节点编辑器
+        /// </summary>
         private void CreateDialogueGraphView()
         {
             // 往窗口中添加GraphView
@@ -132,7 +141,6 @@ namespace RPG.DialogueSystem.Graph
             {
                 style = {flexGrow = 1},
             };
-            // _selectView.StretchToParentSize();
             // 将节点编辑器加入窗口绘制中
             rootVisualElement.Add(_selectView);
         }

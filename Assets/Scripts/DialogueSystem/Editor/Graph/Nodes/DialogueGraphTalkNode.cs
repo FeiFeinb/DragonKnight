@@ -9,10 +9,10 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphTalkNode : DialogueGraphBaseNode
     {
-        private readonly TextField _contentField;
-        private readonly EnumField _interlocutorField;
-        private readonly ObjectField _characterInfoField;
-        private readonly ObjectField _audioClipField;
+        private readonly TextField _contentField;               // 对话内容TextField
+        private readonly EnumField _interlocutorField;          // 对话方类型EnumField
+        private readonly ObjectField _characterInfoField;       // 对话角色信息ObjectField
+        private readonly ObjectField _audioClipField;           // 音频片段ObjectField
         
         public DialogueGraphTalkNode(Vector2 position, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, graphView, talkNodeSaveData?.UniqueID)
         {
@@ -33,11 +33,12 @@ namespace RPG.DialogueSystem.Graph
                 }
             }
 
-            Button _addChoiceButton = CreateButton("+", delegate
+            // 创建添加端口Button
+            Button _addPortButton = CreateButton("+", delegate
             {
                 AddOutputPort("Children", Port.Capacity.Single);
             });
-            topContainer.Insert(1, _addChoiceButton);
+            topContainer.Insert(1, _addPortButton);
             
             _interlocutorField = CreateEnumField(InterlocutorType.NPC);
             extensionContainer.Add(_interlocutorField);
@@ -53,30 +54,35 @@ namespace RPG.DialogueSystem.Graph
             
             RefreshExpandedState();
         }
-
+        
         protected override Port AddOutputPort(string portName, Port.Capacity capacity)
         {
             Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
             outputPort.portName = portName;
 
-            Button deleteButton = new Button(delegate
+            // 创建删除端口Button
+            Button deleteButton = CreateButton("X", delegate
             {
+                // 不允许清空所有端口
                 if (outputContainer.childCount <= 1) return;
+                // 移除端口间连线
                 foreach (var edge in _graphView.edges.Where(edge => edge.output == outputPort))
                 {
                     edge.input.Disconnect(edge);
                     edge.output.Disconnect(edge);
                     _graphView.RemoveElement(edge);
                 }
-
+                // 移除输出节点记录
                 _outputBasePorts.Remove(outputPort);
+                // 从节点中移除端口
                 outputContainer.Remove(outputPort);
                 RefreshPorts();
             });
-            deleteButton.text = "X";
             outputPort.contentContainer.Add(deleteButton);
             
+            // 添加输入端口记录
             _outputBasePorts.Add(outputPort);
+            // 往节点中添加此端口
             outputContainer.Add(outputPort);
             RefreshPorts();
             return outputPort;

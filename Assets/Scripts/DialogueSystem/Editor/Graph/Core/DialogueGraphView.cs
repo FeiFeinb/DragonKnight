@@ -10,7 +10,7 @@ namespace RPG.DialogueSystem.Graph
 {
     public class DialogueGraphView : GraphView
     {
-        private DialogueGraphEditorWindow _editorWindow;        // 编辑器窗口
+        private readonly DialogueGraphEditorWindow _editorWindow;        // 所在编辑器窗口
         public DialogueGraphView(DialogueGraphEditorWindow editorWindow)
         {
             _editorWindow = editorWindow;
@@ -48,7 +48,7 @@ namespace RPG.DialogueSystem.Graph
             // 创建背景
             Insert(0, new GridBackground());
             DialogueSearchWindowProvider provider = ScriptableObject.CreateInstance<DialogueSearchWindowProvider>();
-            provider.OnSelectEntryCallback = OnEntry;
+            provider.OnSelectEntryCallback = CreateNode;
             nodeCreationRequest = (info) =>
             {
                 SearchWindow.Open(new SearchWindowContext(info.screenMousePosition), provider);
@@ -61,7 +61,13 @@ namespace RPG.DialogueSystem.Graph
             return ports.Where(port => startPort.node != port.node && startPort.direction != port.direction && port.portType == startPort.portType).ToList();
         }
 
-        private bool OnEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        /// <summary>
+        /// SearchTree中单击节点选项回调
+        /// </summary>
+        /// <param name="SearchTreeEntry">点击节点信息</param>
+        /// <param name="context">当前上下文</param>
+        /// <returns>是否已处理点击事件</returns>
+        private bool CreateNode(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
         {
             if (!(SearchTreeEntry.userData is Type nodeType)) return false;
             Vector2 nodePosition = contentViewContainer.WorldToLocal(context.screenMousePosition - _editorWindow.position.position);

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: DialogueGraph1
   m_EditorClassIdentifier: 
   edgesSaveData:
-  - inputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-    outputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
-  - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-    outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-  - inputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-    outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-  - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-    outputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+  - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+    OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+  - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+    OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+  - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+    OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+  - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+    OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
   startNodesSaveData:
   - _uniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
     _rectPos:
@@ -34,8 +34,8 @@ MonoBehaviour:
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - inputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-        outputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+      - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+        OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
   endNodesSaveData:
   - _uniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
     _rectPos:
@@ -43,15 +43,15 @@ MonoBehaviour:
       x: 1326
       y: 132
       width: 102
-      height: 98
+      height: 97.5
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
       EdgesSaveData:
-      - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-      - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        outputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+        OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+        OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
     _outputPortsData: []
     EndType: 2
   talkNodesSaveData:
@@ -60,25 +60,25 @@ MonoBehaviour:
       serializedVersion: 2
       x: 399
       y: 181
-      width: 233
-      height: 206
+      width: 232.5
+      height: 205.5
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
       EdgesSaveData:
-      - inputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-        outputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+      - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+        OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
     _outputPortsData:
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+        OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - inputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-        outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+      - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+        OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
     - PortName: Children
       Capacity: 0
       EdgesSaveData: []
@@ -91,20 +91,20 @@ MonoBehaviour:
       serializedVersion: 2
       x: 733
       y: 339
-      width: 233
-      height: 158
+      width: 232.5
+      height: 157.5
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
       EdgesSaveData:
-      - inputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-        outputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+      - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+        OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
     _outputPortsData:
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - inputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        outputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+        OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
     Content: Sure
     TalkAudioClip: {fileID: 0}
     Interlocutor: 1
