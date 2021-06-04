@@ -17,10 +17,10 @@ MonoBehaviour:
     OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
   - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
     OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-  - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-    OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
   - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
     OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+  - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+    OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
   startNodesSaveData:
   - _uniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
     _rectPos:
@@ -61,7 +61,7 @@ MonoBehaviour:
       x: 399
       y: 181
       width: 232.5
-      height: 205.5
+      height: 181.5
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
@@ -79,9 +79,6 @@ MonoBehaviour:
       EdgesSaveData:
       - InputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
         OutputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-    - PortName: Children
-      Capacity: 0
-      EdgesSaveData: []
     Content: Nice Day
     TalkAudioClip: {fileID: 0}
     Interlocutor: 0
