@@ -87,17 +87,20 @@ namespace RPG.DialogueSystem.Graph
             extensionContainer.Add(textFieldGroup);
             return textField;
         }
-        
+
         /// <summary>
         /// 创建端口
         /// </summary>
         /// <param name="orientation">连线方向</param>
         /// <param name="direction">输入/输出类型</param>
         /// <param name="capacity">端口连接多重性</param>
+        /// <param name="elementName">组件名称</param>
         /// <returns>生成的端口</returns>
-        protected Port CreatePort(Orientation orientation, Direction direction, Port.Capacity capacity)
+        protected Port CreatePort(Orientation orientation, Direction direction, Port.Capacity capacity, string elementName = "realPort")
         {
-            return InstantiatePort(orientation, direction, capacity, typeof(float));
+            Port newPort = InstantiatePort(orientation, direction, capacity, typeof(float));
+            newPort.name = elementName;
+            return newPort;
         }
 
         /// <summary>

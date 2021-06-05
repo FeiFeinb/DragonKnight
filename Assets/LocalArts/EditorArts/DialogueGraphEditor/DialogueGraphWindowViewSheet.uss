@@ -2,3 +2,8 @@
     -unity-text-align: middle-center;
     color: white;
 }
+
+#dialogue-graph
+{
+    flex-grow: 1;
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -14,6 +15,12 @@ namespace RPG.DialogueSystem.Graph
         public DialogueGraphView(DialogueGraphEditorWindow editorWindow)
         {
             _editorWindow = editorWindow;
+            
+            // 添加对话编辑器Style
+            name = DialogueGraphUSSName.DIALOGUE_GRAPH;
+            StyleSheet styleSheet =
+                AssetDatabase.LoadAssetAtPath<StyleSheet>(DialogueGraphAssetsPath.DialogueGraphWindowViewSheet);
+            styleSheets.Add(styleSheet);
             
             // 设置节点拖拽
             var dragger = new SelectionDragger()
@@ -32,7 +39,7 @@ namespace RPG.DialogueSystem.Graph
             this.AddManipulator(dragger);
             
             // 设置界面缩放
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale * 5);
             
             // 设置创建节点回调
             nodeCreationRequest += (info) =>

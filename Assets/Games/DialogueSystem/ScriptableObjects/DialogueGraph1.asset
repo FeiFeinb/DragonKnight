@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: DialogueGraph1
   m_EditorClassIdentifier: 
   edgesSaveData:
-  - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-    OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-  - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-    OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+  - InputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+    OutputNodeUniqueID: aafda952-f843-48d7-a59a-d676403423e2
+  - InputNodeUniqueID: 45ff6f8d-ffa9-4f0b-b8b1-abc3ad627d3d
+    OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+  - InputNodeUniqueID: bcf8570b-9662-4fb6-bf08-545fa393aaca
+    OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
   startNodesSaveData:
-  - _uniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+  - _uniqueID: aafda952-f843-48d7-a59a-d676403423e2
     _rectPos:
       serializedVersion: 2
-      x: 133
-      y: 181
+      x: 86
+      y: 221
       width: 108
       height: 77
     _inputPortsData: []
@@ -30,69 +32,77 @@ MonoBehaviour:
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-        OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+      - InputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+        OutputNodeUniqueID: aafda952-f843-48d7-a59a-d676403423e2
   endNodesSaveData:
-  - _uniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
+  - _uniqueID: 45ff6f8d-ffa9-4f0b-b8b1-abc3ad627d3d
     _rectPos:
       serializedVersion: 2
-      x: 1326
-      y: 132
+      x: 951
+      y: 172
       width: 102
-      height: 97.5
+      height: 98
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
       EdgesSaveData:
-      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+      - InputNodeUniqueID: 45ff6f8d-ffa9-4f0b-b8b1-abc3ad627d3d
+        OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
     _outputPortsData: []
-    EndType: 2
+    EndType: 0
   talkNodesSaveData:
-  - _uniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
+  - _uniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
     _rectPos:
       serializedVersion: 2
-      x: 733
-      y: 339
-      width: 359.5
-      height: 198.5
+      x: 363
+      y: 230
+      width: 360
+      height: 254
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
-      EdgesSaveData: []
+      EdgesSaveData:
+      - InputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+        OutputNodeUniqueID: aafda952-f843-48d7-a59a-d676403423e2
     _outputPortsData:
     - PortName: Children
       Capacity: 0
       EdgesSaveData:
-      - InputNodeUniqueID: 93449c2f-0619-443e-8cc3-0c8a524d8513
-        OutputNodeUniqueID: 7091d7e2-7583-432a-b3d9-b22d41acbe30
-    Content: 'Sure
+      - InputNodeUniqueID: 45ff6f8d-ffa9-4f0b-b8b1-abc3ad627d3d
+        OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: bcf8570b-9662-4fb6-bf08-545fa393aaca
+        OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
+    Content: 'Nice dat
 
-      How are you?'
+      today
+
+      how are you
+
+      are you fine?'
     TalkAudioClip: {fileID: 0}
-    Interlocutor: 1
+    Interlocutor: 0
     CharacterInfoSO: {fileID: 0}
-  - _uniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
+  - _uniqueID: bcf8570b-9662-4fb6-bf08-545fa393aaca
     _rectPos:
       serializedVersion: 2
-      x: 302
-      y: -62
-      width: 359.5
-      height: 208
+      x: 1108
+      y: 364
+      width: 360
+      height: 186
     _inputPortsData:
     - PortName: Parents
       Capacity: 1
       EdgesSaveData:
-      - InputNodeUniqueID: 94ea5267-0a3e-4e29-9956-cf60087bcf9d
-        OutputNodeUniqueID: 508de375-acc2-4781-82bc-8635cbf933a8
+      - InputNodeUniqueID: bcf8570b-9662-4fb6-bf08-545fa393aaca
+        OutputNodeUniqueID: 63dd76d0-077a-4be1-87dc-fcd806df4801
     _outputPortsData:
     - PortName: Children
       Capacity: 0
       EdgesSaveData: []
-    - PortName: Children
-      Capacity: 0
-      EdgesSaveData: []
-    Content: Nice Day
+    Content: 
     TalkAudioClip: {fileID: 0}
     Interlocutor: 0
     CharacterInfoSO: {fileID: 0}

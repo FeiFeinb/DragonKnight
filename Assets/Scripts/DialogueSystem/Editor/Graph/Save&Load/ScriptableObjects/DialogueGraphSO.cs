@@ -114,7 +114,7 @@ namespace RPG.DialogueSystem.Graph
                     {
                         DialogueGraphBaseNode targetNode = baseNodes.FirstOrDefault(node => node.UniqueID == targetNodeUniqueID);
                         if (targetNode == null) continue;
-                        Edge edge = originNode.OutPutBasePorts[originPortIndex].ConnectTo(targetNode.InputBasePorts[targetPortIndex]);
+                        Edge edge = originNode.OutPutBasePorts.ToList()[originPortIndex].ConnectTo(targetNode.InputBasePorts[targetPortIndex]);
                         graphView.AddElement(edge);
                     }
                 }

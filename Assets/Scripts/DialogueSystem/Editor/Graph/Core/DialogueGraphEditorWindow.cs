@@ -97,44 +97,13 @@ namespace RPG.DialogueSystem.Graph
         /// </summary>
         private void CreateWindowComponents()
         {
-            // // 创建各个组件
-            // var windowToolbar = new Toolbar();
-            // var saveButton = new Button();
-            // var loadButton = new Button();
-            // _selectSONameLabel = new Label();
-            //
-            // // 传统艺能
-            // saveButton.text = "Save";
-            // saveButton.clicked += delegate
-            // {
-            //     _selectSO.Save(_selectView);
-            // };
-            //
-            // loadButton.text = "Load";
-            // loadButton.clicked += delegate
-            // {
-            //     _selectSO.Load(_selectView);
-            // };
-            //
-            //
-            // // 设置顶部信息显示栏Style
-            // var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(DialogueGraphAssetsPath.DialogueGraphWindowViewSheet); 
-            // rootVisualElement.styleSheets.Add(styleSheet);
-            // _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
-            //
-            // // 将Button加入Toolbar中
-            // windowToolbar.Add(saveButton);
-            // windowToolbar.Add(loadButton);
-            // // 将Label加入Toolbar中
-            // windowToolbar.Add(_selectSONameLabel);
-            // // 将Toolbar加入窗口绘制中
-            // rootVisualElement.Add(windowToolbar);
-            VisualTreeAsset treeAsset =
-                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath.DialogueGraphWindowToolbar);
+            VisualTreeAsset treeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath.DialogueGraphWindowToolbar);
             VisualElement toolbarField = treeAsset.Instantiate();
-            Button saveButton = toolbarField.Q<Button>("save-button");
-            Button loadButton = toolbarField.Q<Button>("load-button");
-            _selectSONameLabel = toolbarField.Q<Label>("select-label");
+            // 查早三个组件
+            Button saveButton = toolbarField.Q<Button>(DialogueGraphUSSName.DIALOGUE_WINDOW_SAVE_BUTTON);
+            Button loadButton = toolbarField.Q<Button>(DialogueGraphUSSName.DIALOGUE_WINDOW_LOAD_BUTTON);
+            _selectSONameLabel = toolbarField.Q<Label>(DialogueGraphUSSName.DIALOGUE_WINDOW_SELECT_LABEL);
+            // 按钮回调设置
             saveButton.clicked += delegate
             {
                 _selectSO.Save(_selectView);
@@ -152,10 +121,7 @@ namespace RPG.DialogueSystem.Graph
         private void CreateDialogueGraphView()
         {
             // 往窗口中添加GraphView
-            _selectView = new DialogueGraphView(this)
-            {
-                style = {flexGrow = 1},
-            };
+            _selectView = new DialogueGraphView(this);
             // 将节点编辑器加入窗口绘制中
             rootVisualElement.Add(_selectView);
         }

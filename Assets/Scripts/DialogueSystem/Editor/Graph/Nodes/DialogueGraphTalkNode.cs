@@ -26,27 +26,18 @@ namespace RPG.DialogueSystem.Graph
             set
             {
                 base.expanded = value;
-                if (expanded)
-                {
-                    // 显示
-                    _addPortButton.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-                }
-                else
-                {
-                    // 不显示
-                    _addPortButton.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-                }
+                SetElementDisplay(_addPortButton, expanded);
+                RefreshExpandedState();
             }
         }
 
-        protected override void ToggleCollapse()
+        private void SetElementDisplay(VisualElement element, bool display)
         {
-            // base:
-            // this.expanded = !this.expanded;
-            base.ToggleCollapse();
-            Debug.Log("收缩");
+            element.style.display = display
+                ? new StyleEnum<DisplayStyle>(DisplayStyle.Flex)
+                : new StyleEnum<DisplayStyle>(DisplayStyle.None);
         }
-
+        
         public DialogueGraphTalkNode(Vector2 position, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, graphView, talkNodeSaveData?.UniqueID)
         {
             title = "Talk Node";
@@ -54,8 +45,8 @@ namespace RPG.DialogueSystem.Graph
             Port inputPort = AddInputPort("Parents", Port.Capacity.Multi);
             inputPort.style.flexGrow = 1;
 
-            var testPort = AddOutputPort("Test", Port.Capacity.Single);
-            testPort.AddToClassList("fake"); 
+            // 创建隐藏的节点
+            outputContainer.Add(CreatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, "fakePort")); 
             
             if (talkNodeSaveData == null)
             {
@@ -99,7 +90,7 @@ namespace RPG.DialogueSystem.Graph
             Button deleteButton = CreateButton("X", delegate
             {
                 // 不允许清空所有端口
-                if (outputContainer.childCount <= 1) return;
+                if (_outputBasePorts.Count <= 1) return;
                 // 移除端口间连线
                 foreach (var edge in _graphView.edges.Where(edge => edge.output == outputPort))
                 {

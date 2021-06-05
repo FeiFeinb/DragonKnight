@@ -12,6 +12,7 @@ namespace RPG.DialogueSystem.Graph
     [System.Serializable]
     public class DialogueGraphTalkNodeSaveData : DialogueGraphBaseNodeSaveData
     {
+        [TextArea(1, 10)]
         public string Content;                              // 对话内容
         public AudioClip TalkAudioClip;                     // 对话音频
         public InterlocutorType Interlocutor;               // 对话方
