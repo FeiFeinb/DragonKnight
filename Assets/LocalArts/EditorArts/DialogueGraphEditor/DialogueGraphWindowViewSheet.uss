@@ -1,0 +1,4 @@
+#select-label {
+    -unity-text-align: middle-center;
+    color: white;
+}

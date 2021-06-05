@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="DialogueGraphWindowViewSheet.uss" />
+    <uie:Toolbar>
+        <ui:Button text="Save" display-tooltip-when-elided="true" name="save-button" />
+        <ui:Button text="Load" display-tooltip-when-elided="true" name="load-button" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="select-label" />
+    </uie:Toolbar>
+</ui:UXML>

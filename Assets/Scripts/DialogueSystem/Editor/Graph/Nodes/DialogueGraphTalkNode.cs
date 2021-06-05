@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -9,11 +10,43 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphTalkNode : DialogueGraphBaseNode
     {
+        private readonly Button _addPortButton;                 // 添加端口Button
+        
         private readonly TextField _contentField;               // 对话内容TextField
         private readonly EnumField _interlocutorField;          // 对话方类型EnumField
         private readonly ObjectField _characterInfoField;       // 对话角色信息ObjectField
         private readonly ObjectField _audioClipField;           // 音频片段ObjectField
-        
+
+        public override bool expanded
+        {
+            get
+            {
+                return base.expanded;
+            }
+            set
+            {
+                base.expanded = value;
+                if (expanded)
+                {
+                    // 显示
+                    _addPortButton.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+                }
+                else
+                {
+                    // 不显示
+                    _addPortButton.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                }
+            }
+        }
+
+        protected override void ToggleCollapse()
+        {
+            // base:
+            // this.expanded = !this.expanded;
+            base.ToggleCollapse();
+            Debug.Log("收缩");
+        }
+
         public DialogueGraphTalkNode(Vector2 position, DialogueGraphView graphView, DialogueGraphTalkNodeSaveData talkNodeSaveData = null) : base(position, graphView, talkNodeSaveData?.UniqueID)
         {
             title = "Talk Node";
@@ -21,6 +54,9 @@ namespace RPG.DialogueSystem.Graph
             Port inputPort = AddInputPort("Parents", Port.Capacity.Multi);
             inputPort.style.flexGrow = 1;
 
+            var testPort = AddOutputPort("Test", Port.Capacity.Single);
+            testPort.AddToClassList("fake"); 
+            
             if (talkNodeSaveData == null)
             {
                 AddOutputPort("Children", Port.Capacity.Single);
@@ -34,24 +70,23 @@ namespace RPG.DialogueSystem.Graph
             }
 
             // 创建添加端口Button
-            Button _addPortButton = CreateButton("+", delegate
+            _addPortButton = CreateButton("+", delegate
             {
                 AddOutputPort("Children", Port.Capacity.Single);
             });
             topContainer.Insert(1, _addPortButton);
             
-            _interlocutorField = CreateEnumField(InterlocutorType.NPC);
+            _interlocutorField = CreateEnumField(InterlocutorType.NPC, "Interlocutor:");
             extensionContainer.Add(_interlocutorField);
-            
-            _contentField = CreateTextField();
-            extensionContainer.Add(_contentField);
-            
-            _characterInfoField = CreateObjectField<DialogueCharacterInfoSO>();
+
+            _characterInfoField = CreateObjectField<DialogueCharacterInfoSO>("CharacterInfo:");
             extensionContainer.Add(_characterInfoField);
             
-            _audioClipField = CreateObjectField<AudioClip>();
+            _audioClipField = CreateObjectField<AudioClip>("AudioClip:");
             extensionContainer.Add(_audioClipField);
             
+            _contentField = AddTextField();
+
             RefreshExpandedState();
         }
         

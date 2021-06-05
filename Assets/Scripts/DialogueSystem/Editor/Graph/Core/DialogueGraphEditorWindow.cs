@@ -97,38 +97,53 @@ namespace RPG.DialogueSystem.Graph
         /// </summary>
         private void CreateWindowComponents()
         {
-            // 创建各个组件
-            var windowToolbar = new Toolbar();
-            var saveButton = new Button();
-            var loadButton = new Button();
-            _selectSONameLabel = new Label();
-            
-            // 传统艺能
-            saveButton.text = "Save";
+            // // 创建各个组件
+            // var windowToolbar = new Toolbar();
+            // var saveButton = new Button();
+            // var loadButton = new Button();
+            // _selectSONameLabel = new Label();
+            //
+            // // 传统艺能
+            // saveButton.text = "Save";
+            // saveButton.clicked += delegate
+            // {
+            //     _selectSO.Save(_selectView);
+            // };
+            //
+            // loadButton.text = "Load";
+            // loadButton.clicked += delegate
+            // {
+            //     _selectSO.Load(_selectView);
+            // };
+            //
+            //
+            // // 设置顶部信息显示栏Style
+            // var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(DialogueGraphAssetsPath.DialogueGraphWindowViewSheet); 
+            // rootVisualElement.styleSheets.Add(styleSheet);
+            // _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
+            //
+            // // 将Button加入Toolbar中
+            // windowToolbar.Add(saveButton);
+            // windowToolbar.Add(loadButton);
+            // // 将Label加入Toolbar中
+            // windowToolbar.Add(_selectSONameLabel);
+            // // 将Toolbar加入窗口绘制中
+            // rootVisualElement.Add(windowToolbar);
+            VisualTreeAsset treeAsset =
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath.DialogueGraphWindowToolbar);
+            VisualElement toolbarField = treeAsset.Instantiate();
+            Button saveButton = toolbarField.Q<Button>("save-button");
+            Button loadButton = toolbarField.Q<Button>("load-button");
+            _selectSONameLabel = toolbarField.Q<Label>("select-label");
             saveButton.clicked += delegate
             {
                 _selectSO.Save(_selectView);
             };
-
-            loadButton.text = "Load";
             loadButton.clicked += delegate
             {
                 _selectSO.Load(_selectView);
             };
-            
-            
-            // 设置顶部信息显示栏Style
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphViewSheet.uss"); 
-            rootVisualElement.styleSheets.Add(styleSheet);
-            _selectSONameLabel.AddToClassList("_selectSONameLabelSheet");
-            
-            // 将Button加入Toolbar中
-            windowToolbar.Add(saveButton);
-            windowToolbar.Add(loadButton);
-            // 将Label加入Toolbar中
-            windowToolbar.Add(_selectSONameLabel);
-            // 将Toolbar加入窗口绘制中
-            rootVisualElement.Add(windowToolbar);
+            rootVisualElement.Add(toolbarField);
         }
 
         /// <summary>

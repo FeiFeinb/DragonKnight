@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="DialogueGraphNodeViewSheet.uss" />
+    <ui:VisualElement name="VisualElement" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px;">
+        <ui:Label text="Talk Content:" display-tooltip-when-elided="true" name="dialogue-node-label" class="unity-base-field__label" />
+        <ui:TextField picking-mode="Ignore" value="filler text" text="&#10;" multiline="true" name="dialogue-node-text-field" />
+    </ui:VisualElement>
+</ui:UXML>

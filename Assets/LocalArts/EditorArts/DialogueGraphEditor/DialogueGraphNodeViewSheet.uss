@@ -1,28 +1,35 @@
-DialogueGraphStartNode #title
-{
+DialogueGraphStartNode #title {
     background-color: rgb(112, 243, 82);
 }
-DialogueGraphEndNode #title
-{
-    background-color: rgba(226, 10, 10, 255);
+
+DialogueGraphEndNode #title {
+    background-color: rgb(226, 10, 10);
 }
 
-DialogueGraphTalkNode #title
-{
+DialogueGraphTalkNode #title {
     background-color: rgb(97, 180, 241);
 }
 
-DialogueGraphStartNode #title-label
-{
+DialogueGraphStartNode #title-label {
     color: black;
 }
 
-DialogueGraphEndNode #title-label
-{
+DialogueGraphEndNode #title-label {
     color: black;
 }
 
-DialogueGraphTalkNode #title-label
-{
+DialogueGraphTalkNode #title-label {
     color: black;
+}
+
+.fake
+{
+    display: none;
+}
+
+#dialogue-node-label {
+    color: white;
+    min-width: 125px;
+    padding: 3px;
+    -unity-text-align: middle-left;
 }

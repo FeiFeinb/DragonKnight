@@ -29,7 +29,7 @@ namespace RPG.DialogueSystem.Graph
             SetPosition(new Rect(position, _defaultNodeSize));
             
             // 设置节点Style
-            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/LocalArts/EditorArts/DialogueGraphEditor/DialogueGraphNodeViewSheet.uss");
+            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(DialogueGraphAssetsPath.DialogueGraphNodeViewSheet);
             styleSheets.Add(styleSheet);
         }
 
@@ -70,6 +70,25 @@ namespace RPG.DialogueSystem.Graph
         }
 
         /// <summary>
+        /// 创建TextField
+        /// </summary>
+        /// <param name="valueChangedCallback">值变更回调</param>
+        /// <returns>生成的TextField</returns>
+        protected TextField AddTextField(EventCallback<ChangeEvent<string>> valueChangedCallback = null)
+        {
+            VisualTreeAsset treeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath.DialogueGraphNodeHorizontalTextField);
+            VisualElement textFieldGroup = treeAsset.Instantiate();
+            
+            TextField textField = textFieldGroup.Q<TextField>(DialogueGraphUSSName.DIALOGUE_NODE_TEXT_FIELD);
+            if (valueChangedCallback != null)
+            {
+                textField.RegisterValueChangedCallback(valueChangedCallback);
+            }
+            extensionContainer.Add(textFieldGroup);
+            return textField;
+        }
+        
+        /// <summary>
         /// 创建端口
         /// </summary>
         /// <param name="orientation">连线方向</param>
@@ -85,13 +104,18 @@ namespace RPG.DialogueSystem.Graph
         /// 创建EnumField
         /// </summary>
         /// <param name="defaultValue">默认值</param>
+        /// <param name="labelStr">标签字符</param>
         /// <param name="valueChangedCallback">值变更回调</param>
         /// <returns>生成的EnumField</returns>
-        protected EnumField CreateEnumField(Enum defaultValue, EventCallback<ChangeEvent<Enum>> valueChangedCallback = null)
+        protected EnumField CreateEnumField(Enum defaultValue, string labelStr = null, EventCallback<ChangeEvent<Enum>> valueChangedCallback = null)
         {
-            EnumField enumField = new EnumField();
+            EnumField enumField = new EnumField
+            {
+                label = labelStr
+            };
             // EnumField初始化
             enumField.Init(defaultValue);
+            enumField.labelElement.name = DialogueGraphUSSName.DIALOGUE_NODE_LABEL;
             if (valueChangedCallback != null)
             {
                 enumField.RegisterValueChangedCallback(valueChangedCallback);
@@ -100,33 +124,21 @@ namespace RPG.DialogueSystem.Graph
         }
 
         /// <summary>
-        /// 创建TextField
-        /// </summary>
-        /// <param name="valueChangedCallback">值变更回调</param>
-        /// <returns>生成的TextField</returns>
-        protected TextField CreateTextField(EventCallback<ChangeEvent<string>> valueChangedCallback = null)
-        {
-            TextField textField = new TextField() { multiline = true };
-            if (valueChangedCallback != null)
-            {
-                textField.RegisterValueChangedCallback(valueChangedCallback);
-            }
-            return textField;
-        }
-
-        /// <summary>
         /// 创建ObjectField
         /// </summary>
+        /// <param name="labelStr">标签字符</param>
         /// <param name="valueChangedCallback">值变更回调</param>
         /// <typeparam name="T">资源类型</typeparam>
         /// <returns>生成的ObjectField</returns>
-        protected ObjectField CreateObjectField<T>(EventCallback<ChangeEvent<UnityEngine.Object>> valueChangedCallback = null)
+        protected ObjectField CreateObjectField<T>(string labelStr = null, EventCallback<ChangeEvent<UnityEngine.Object>> valueChangedCallback = null)
         {
             ObjectField objectField = new ObjectField()
             {
                 objectType = typeof(T),
                 allowSceneObjects = false,
+                label = labelStr
             };
+            objectField.labelElement.name = DialogueGraphUSSName.DIALOGUE_NODE_LABEL;
             if (valueChangedCallback != null)
             {
                 objectField.RegisterValueChangedCallback(valueChangedCallback);

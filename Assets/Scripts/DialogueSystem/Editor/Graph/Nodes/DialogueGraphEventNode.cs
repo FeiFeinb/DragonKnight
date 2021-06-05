@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
-public class DialogueGraphEventNode : MonoBehaviour
+namespace RPG.DialogueSystem.Graph
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class DialogueGraphEventNode : DialogueGraphBaseNode
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private readonly ObjectField _eventSOField;
+
+
+        public DialogueGraphEventNode(Vector2 position, DialogueGraphView graphView, string uniqueID = null) : base(position, graphView, uniqueID)
+        {
+            title = "Event Node";
+        }
+
+        public override DialogueGraphBaseNodeSaveData CreateNodeData()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
+
+     
