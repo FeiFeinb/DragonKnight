@@ -20,7 +20,8 @@ namespace RPG.DialogueSystem.Graph
                 CreateSearchTreeEntry<DialogueGraphStartNode>("Start Node", 2),
                 CreateSearchTreeEntry<DialogueGraphEndNode>("End Node", 2),
                 CreateSearchTreeGroupEntry("Main Nodes", 1),
-                CreateSearchTreeEntry<DialogueGraphTalkNode>("Talk Node", 2)
+                CreateSearchTreeEntry<DialogueGraphTalkNode>("Talk Node", 2),
+                CreateSearchTreeEntry<DialogueGraphConditionNode>("Condition Node", 2)
             };
             return entries;
         }

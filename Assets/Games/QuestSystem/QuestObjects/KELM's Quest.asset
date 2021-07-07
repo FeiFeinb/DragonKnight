@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96257c1224745384c91a6c223887bf79, type: 3}
-  m_Name: "\u5361\u5C14\xB7\u96F7\u77DB\u7684\u8BA2\u5355"
+  m_Name: KELM's Quest
   m_EditorClassIdentifier: 
   questUniqueID: "\u5361\u5C14\xB7\u96F7\u77DB\u7684\u8BA2\u5355"
   questTitle: "\u5361\u5C14\xB7\u96F7\u77DB\u7684\u8BA2\u5355"

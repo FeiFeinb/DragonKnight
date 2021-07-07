@@ -119,7 +119,11 @@ MonoBehaviour:
   _content: "\u6211\u662F\u5E03\u6D1B\u7279\u4EA8\u5FB7\u5C14"
   _speaker: 0
   _condition:
-    _andConditions: []
+    _andConditions:
+    - _orConditions:
+      - _type: 0
+        _paramSO: {fileID: 0}
+        _expectedResult: 0
   _dialogueEnterEventID: 
   _dialogueExitEventID: 
   _parents:

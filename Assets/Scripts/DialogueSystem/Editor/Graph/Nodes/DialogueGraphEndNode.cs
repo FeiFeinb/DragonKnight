@@ -17,18 +17,22 @@ namespace RPG.DialogueSystem.Graph
             title = "End Node";
             AddInputPort("Parents", Port.Capacity.Multi);
             
-            _endTypeEnumField = CreateEnumField(EndDialogueNodeType.End);
+            _endTypeEnumField = CreateEnumField(EndDialogueNodeType.End, "EndType:");
             extensionContainer.Add(_endTypeEnumField);
             
             RefreshExpandedState();
         }
-        
+
+        public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
+        {
+            return true;
+        }
+
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphEndNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
-            {
-                EndType = (EndDialogueNodeType)_endTypeEnumField.value
-            };
+            DialogueGraphEndNodeSaveData endNodeSavaData = CreateBaseNodeData<DialogueGraphEndNodeSaveData>();
+            endNodeSavaData.EndType = (EndDialogueNodeType) _endTypeEnumField.value;
+            return endNodeSavaData;
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)

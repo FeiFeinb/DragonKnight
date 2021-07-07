@@ -20,6 +20,7 @@ namespace RPG.DialogueSystem.Graph
 
         [SerializeField] private List<DialogueGraphTalkNodeSaveData> talkNodesSaveData = new List<DialogueGraphTalkNodeSaveData>();     // 对话节点数列
 
+        [SerializeField] private List<DialogueGraphConditionNodeSaveData> conditionNodesSaveData = new List<DialogueGraphConditionNodeSaveData>();       // 条件节点数列
         /// <summary>
         /// 保存图中节点
         /// </summary>
@@ -36,7 +37,7 @@ namespace RPG.DialogueSystem.Graph
             startNodesSaveData = CaptureNodesData<DialogueGraphStartNode, DialogueGraphStartNodeSaveData>(nodes);
             endNodesSaveData = CaptureNodesData<DialogueGraphEndNode, DialogueGraphEndNodeSaveData>(nodes);
             talkNodesSaveData = CaptureNodesData<DialogueGraphTalkNode, DialogueGraphTalkNodeSaveData>(nodes);
-            
+            conditionNodesSaveData = CaptureNodesData<DialogueGraphConditionNode, DialogueGraphConditionNodeSaveData>(nodes);
             // 储存连线数据
             edgesSaveData.Clear();
             foreach (Edge edge in graphView.edges.Where(edge => edge.input != null))
@@ -82,6 +83,7 @@ namespace RPG.DialogueSystem.Graph
             LoadNode<DialogueGraphStartNode>(startNodesSaveData);
             LoadNode<DialogueGraphEndNode>(endNodesSaveData);
             LoadNode<DialogueGraphTalkNode>(talkNodesSaveData);
+            LoadNode<DialogueGraphConditionNode>(conditionNodesSaveData);
             
             foreach (DialogueGraphEdgeSaveData edgeSaveData in edgesSaveData)
             {

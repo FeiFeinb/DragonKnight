@@ -65,7 +65,13 @@ namespace RPG.DialogueSystem.Graph
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             // 节点不允许自我连接 只允许方向不同且类型相同的端口连接
-            return ports.Where(port => startPort.node != port.node && startPort.direction != port.direction && port.portType == startPort.portType).ToList();
+            return ports.Where(port =>
+            {
+                DialogueGraphBaseNode targetNode = port.node as DialogueGraphBaseNode;
+                DialogueGraphBaseNode startNode = startPort.node as DialogueGraphBaseNode;
+                bool isTypaMatch = targetNode.CanConnectNode(startNode) && startNode.CanConnectNode(targetNode);
+                return startPort.node != port.node && startPort.direction != port.direction && isTypaMatch;
+            }).ToList();
         }
 
         /// <summary>

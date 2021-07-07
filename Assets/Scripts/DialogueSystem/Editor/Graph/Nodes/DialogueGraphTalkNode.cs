@@ -46,7 +46,9 @@ namespace RPG.DialogueSystem.Graph
             inputPort.style.flexGrow = 1;
 
             // 创建隐藏的节点
-            outputContainer.Add(CreatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, "fakePort")); 
+            Port fakePort = CreatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(DialogueGraphBaseNode));
+            fakePort.name = "fakePort";
+            outputContainer.Add(fakePort); 
             
             if (talkNodeSaveData == null)
             {
@@ -67,7 +69,7 @@ namespace RPG.DialogueSystem.Graph
             });
             topContainer.Insert(1, _addPortButton);
             
-            _interlocutorField = CreateEnumField(InterlocutorType.NPC, "Interlocutor:");
+            _interlocutorField = CreateEnumField(InterlocutorType.NPC, "InterlocutorType:");
             extensionContainer.Add(_interlocutorField);
 
             _characterInfoField = CreateObjectField<DialogueCharacterInfoSO>("CharacterInfo:");
@@ -81,11 +83,9 @@ namespace RPG.DialogueSystem.Graph
             RefreshExpandedState();
         }
         
-        protected override Port AddOutputPort(string portName, Port.Capacity capacity)
+        protected override Port AddOutputPort(string portName, Port.Capacity capacity, Type portType = null)
         {
-            Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
-            outputPort.portName = portName;
-
+            Port outputPort = base.AddOutputPort(portName, capacity, portType);
             // 创建删除端口Button
             Button deleteButton = CreateButton("X", delegate
             {
@@ -106,23 +106,23 @@ namespace RPG.DialogueSystem.Graph
             });
             outputPort.contentContainer.Add(deleteButton);
             
-            // 添加输入端口记录
-            _outputBasePorts.Add(outputPort);
-            // 往节点中添加此端口
-            outputContainer.Add(outputPort);
             RefreshPorts();
             return outputPort;
         }
 
+        public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
+        {
+            return true;
+        }
+
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphTalkNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts, _outputBasePorts, _graphView)
-            {
-                Content = _contentField.value,
-                Interlocutor = (InterlocutorType)_interlocutorField.value,
-                TalkAudioClip = _audioClipField.value as AudioClip,
-                CharacterInfoSO = _characterInfoField.value as DialogueCharacterInfoSO
-            };
+            DialogueGraphTalkNodeSaveData talkNodeSaveData = CreateBaseNodeData<DialogueGraphTalkNodeSaveData>();
+            talkNodeSaveData.Content = _contentField.value;
+            talkNodeSaveData.Interlocutor = (InterlocutorType) _interlocutorField.value;
+            talkNodeSaveData.TalkAudioClip = _audioClipField.value as AudioClip;
+            talkNodeSaveData.CharacterInfoSO = _characterInfoField.value as DialogueCharacterInfoSO;
+            return talkNodeSaveData;
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)

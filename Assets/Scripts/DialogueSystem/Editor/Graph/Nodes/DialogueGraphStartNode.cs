@@ -11,12 +11,18 @@ namespace RPG.DialogueSystem.Graph
         {
             title = "Start Node";
             AddOutputPort("Children", Port.Capacity.Single);
+            
+            
+        }
+
+        public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
+        {
+            return true;
         }
 
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
-            return new DialogueGraphStartNodeSaveData(_uniqueID, GetPosition(), _inputBasePorts,
-                _outputBasePorts, _graphView);
+            return CreateBaseNodeData<DialogueGraphStartNodeSaveData>();
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)

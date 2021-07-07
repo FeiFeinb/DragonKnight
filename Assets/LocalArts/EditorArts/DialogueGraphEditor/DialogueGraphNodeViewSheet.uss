@@ -10,15 +10,12 @@ DialogueGraphTalkNode #title {
     background-color: rgb(97, 180, 241);
 }
 
-DialogueGraphStartNode #title-label {
-    color: black;
+DialogueGraphConditionNode #title {
+    background-color: yellow;
 }
 
-DialogueGraphEndNode #title-label {
-    color: black;
-}
 
-DialogueGraphTalkNode #title-label {
+#title-label {
     color: black;
 }
 

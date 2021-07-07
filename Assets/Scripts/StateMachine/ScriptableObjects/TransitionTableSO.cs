@@ -23,7 +23,7 @@ namespace RPG.StateMachine
     {
         public State rootState => cachedState[0];                   // 获取根节点
         [SerializeField] private TransitionItem[] transitionItems;  // 状态及其转换
-        [SerializeField] private List<State> cachedState;                             // 缓存初始化完毕的状态数列
+        [SerializeField] private List<State> cachedState;           // 缓存初始化完毕的状态数列
         public void InitTransitionTable(StateMachine stateMachine)
         {
             // 缓存数列与缓存字典

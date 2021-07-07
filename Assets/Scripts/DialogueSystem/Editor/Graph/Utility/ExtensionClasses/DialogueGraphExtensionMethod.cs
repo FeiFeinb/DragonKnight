@@ -18,7 +18,7 @@ namespace DialogueSystem.Editor.Graph
         public static List<DialogueGraphPortSaveData> ToPortData(this IEnumerable<Port> basePorts,
             DialogueGraphView graphView)
         {
-            return basePorts.Where(basePort => basePort.name == "realPort").Select(basePort =>
+            return basePorts.Select(basePort =>
                 {
                     var connectedEdge = graphView.edges.Where(edge => edge.output == basePort || edge.input == basePort)
                         .ToList();
@@ -47,13 +47,14 @@ namespace DialogueSystem.Editor.Graph
             {
                 graphView.RemoveElement(edge);
             }
+
             // 清空节点
             foreach (Node selectViewPort in graphView.nodes)
             {
                 graphView.RemoveElement(selectViewPort);
             }
         }
-        
+
         /// <summary>
         /// 计算得到输入端口索引
         /// </summary>
@@ -69,7 +70,8 @@ namespace DialogueSystem.Editor.Graph
             for (int i = 0; i < baseNodeSaveData.InputPortsData.Count; i++)
             {
                 // 找到输入节点的第一个匹配的输出节点
-                if (baseNodeSaveData.InputPortsData[i].EdgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.OutputNodeUniqueID == targetUniqueID))
+                if (baseNodeSaveData.InputPortsData[i].EdgesSaveData.Any(dialogueGraphEdgeSaveData =>
+                    dialogueGraphEdgeSaveData.OutputNodeUniqueID == targetUniqueID))
                 {
                     return i;
                 }
@@ -93,7 +95,8 @@ namespace DialogueSystem.Editor.Graph
             for (int i = 0; i < baseNodeSaveData.OutputPortsData.Count; i++)
             {
                 // 找到输出节点的第一个匹配的输入节点
-                if (baseNodeSaveData.OutputPortsData[i].EdgesSaveData.Any(dialogueGraphEdgeSaveData => dialogueGraphEdgeSaveData.InputNodeUniqueID == targetUniqueID))
+                if (baseNodeSaveData.OutputPortsData[i].EdgesSaveData.Any(dialogueGraphEdgeSaveData =>
+                    dialogueGraphEdgeSaveData.InputNodeUniqueID == targetUniqueID))
                 {
                     return i;
                 }

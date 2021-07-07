@@ -12,3 +12,121 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d154d8499b408baaefd051beae8ada, type: 3}
   m_Name: New DialogueGraphSO2
   m_EditorClassIdentifier: 
+  edgesSaveData:
+  - InputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    OutputNodeUniqueID: ad82ee23-9a0d-4205-b827-ff240aaead16
+  - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+    OutputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+  - InputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+    OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+  - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+    OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+  - InputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+    OutputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+  startNodesSaveData:
+  - _uniqueID: ad82ee23-9a0d-4205-b827-ff240aaead16
+    _rectPos:
+      serializedVersion: 2
+      x: 517
+      y: 418
+      width: 108
+      height: 77
+    _inputPortsData: []
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+        OutputNodeUniqueID: ad82ee23-9a0d-4205-b827-ff240aaead16
+  endNodesSaveData:
+  - _uniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+    _rectPos:
+      serializedVersion: 2
+      x: 2313
+      y: 409
+      width: 181
+      height: 100
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+        OutputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+      - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+        OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    _outputPortsData: []
+    EndType: 0
+  talkNodesSaveData:
+  - _uniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    _rectPos:
+      serializedVersion: 2
+      x: 788
+      y: 509
+      width: 360
+      height: 210
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - InputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+        OutputNodeUniqueID: ad82ee23-9a0d-4205-b827-ff240aaead16
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+        OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+        OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    Content: 
+    TalkAudioClip: {fileID: 0}
+    Interlocutor: 0
+    CharacterInfoSO: {fileID: 0}
+  - _uniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+    _rectPos:
+      serializedVersion: 2
+      x: 1672
+      y: 719
+      width: 360
+      height: 186
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - InputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+        OutputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: bc470ae5-f972-4f38-85e5-4f6d6a191016
+        OutputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+    Content: 
+    TalkAudioClip: {fileID: 0}
+    Interlocutor: 0
+    CharacterInfoSO: {fileID: 0}
+  conditionNodesSaveData:
+  - _uniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+    _rectPos:
+      serializedVersion: 2
+      x: 1307
+      y: 758
+      width: 268
+      height: 122
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+        OutputNodeUniqueID: 1b203660-879a-4bc8-92a8-38154e0957fc
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - InputNodeUniqueID: 5c72007d-677e-445d-93bd-5e34e1e3e0e0
+        OutputNodeUniqueID: f3fc3434-7e8a-4b1f-8290-149179974b4a
+    ConditionType: 1
+    ConditionSO: {fileID: 0}

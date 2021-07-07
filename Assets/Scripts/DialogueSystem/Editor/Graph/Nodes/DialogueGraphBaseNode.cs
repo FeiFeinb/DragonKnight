@@ -38,10 +38,11 @@ namespace RPG.DialogueSystem.Graph
         /// </summary>
         /// <param name="portName">端口名字</param>
         /// <param name="capacity">端口连接多重性</param>
+        /// <param name="portType">端口类型</param>
         /// <returns>生成的端口</returns>
-        protected virtual Port AddInputPort(string portName, Port.Capacity capacity)
+        protected virtual Port AddInputPort(string portName, Port.Capacity capacity, Type portType = null)
         {
-            Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity);
+            Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity, portType ?? typeof(DialogueGraphBaseNode));
             inputPort.portName = portName;
             // 添加输入端口记录
             _inputBasePorts.Add(inputPort);
@@ -56,10 +57,11 @@ namespace RPG.DialogueSystem.Graph
         /// </summary>
         /// <param name="portName">端口名字</param>
         /// <param name="capacity">端口连接多重性</param>
+        /// <param name="portType">端口类型</param>
         /// <returns>生成的端口</returns>
-        protected virtual Port AddOutputPort(string portName, Port.Capacity capacity)
+        protected virtual Port AddOutputPort(string portName, Port.Capacity capacity, Type portType = null)
         {
-            Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity);
+            Port outputPort = CreatePort(Orientation.Horizontal, Direction.Output, capacity, portType ?? typeof(DialogueGraphBaseNode));
             outputPort.portName = portName;
             // 添加输出端口记录
             _outputBasePorts.Add(outputPort);
@@ -94,12 +96,11 @@ namespace RPG.DialogueSystem.Graph
         /// <param name="orientation">连线方向</param>
         /// <param name="direction">输入/输出类型</param>
         /// <param name="capacity">端口连接多重性</param>
-        /// <param name="elementName">组件名称</param>
+        /// <param name="portType">端口类型</param>
         /// <returns>生成的端口</returns>
-        protected Port CreatePort(Orientation orientation, Direction direction, Port.Capacity capacity, string elementName = "realPort")
+        protected Port CreatePort(Orientation orientation, Direction direction, Port.Capacity capacity, Type portType)
         {
-            Port newPort = InstantiatePort(orientation, direction, capacity, typeof(float));
-            newPort.name = elementName;
+            Port newPort = InstantiatePort(orientation, direction, capacity, portType);
             return newPort;
         }
 
@@ -164,6 +165,14 @@ namespace RPG.DialogueSystem.Graph
             return button;
         }
 
+        protected T CreateBaseNodeData<T>() where T : DialogueGraphBaseNodeSaveData
+        {
+            return Activator.CreateInstance(typeof(T), _uniqueID, GetPosition(), _inputBasePorts,
+                _outputBasePorts, _graphView) as T;
+        }
+
+        public abstract bool CanConnectNode(DialogueGraphBaseNode targetNode);
+        
         public abstract DialogueGraphBaseNodeSaveData CreateNodeData();
 
         public abstract void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo);
