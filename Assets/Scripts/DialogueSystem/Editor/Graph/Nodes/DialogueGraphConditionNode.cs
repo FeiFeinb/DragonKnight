@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
 {
-    public class DialogueGraphConditionNode : DialogueGraphBaseNode
+    public sealed class DialogueGraphConditionNode : DialogueGraphBaseNode
     {
         private readonly EnumField _conditionField;
         private readonly ObjectField _determineField;
@@ -18,9 +18,10 @@ namespace RPG.DialogueSystem.Graph
         {
             title = "Condition Node";
             
-            AddInputPort("Parents", Port.Capacity.Single);
-            AddOutputPort("Children", Port.Capacity.Single);
-
+            AddInputPort("Source", Port.Capacity.Single);
+            AddOutputPort("True", Port.Capacity.Single);
+            AddOutputPort("False", Port.Capacity.Single);
+            
             // 初值设定为是否拥有任务
             _conditionField = CreateEnumField(ConditionDialogueNodeType.CompleteQuest, "ConditionType", SwitchObjectFieldType);
             extensionContainer.Add(_conditionField);
@@ -33,7 +34,7 @@ namespace RPG.DialogueSystem.Graph
 
         public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
         {
-            return targetNode is DialogueGraphTalkNode;
+            return !(targetNode is DialogueGraphStartNode || targetNode is DialogueGraphEndNode);
         }
 
         public override DialogueGraphBaseNodeSaveData CreateNodeData()

@@ -9,12 +9,7 @@ namespace RPG.DialogueSystem.Graph
         /// 结束
         /// </summary>
         End,
-        
-        /// <summary>
-        /// 重复
-        /// </summary>
-        Repeat,
-        
+
         /// <summary>
         /// 重新开始
         /// </summary>

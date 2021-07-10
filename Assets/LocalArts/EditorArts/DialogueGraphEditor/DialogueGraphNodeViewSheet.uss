@@ -14,18 +14,34 @@ DialogueGraphConditionNode #title {
     background-color: yellow;
 }
 
+DialogueGraphEventNode #title {
+    background-color: coral;
+}
 
+DialogueGraphChoiceNode #title {
+    background-color: mediumpurple;
+}
+
+/*
+    节点顶部标题Style
+ */
 #title-label {
     color: black;
 }
 
-#fakePort {
-    display: none;
-}
-
+/*
+    节点左部文字Style
+ */
 #dialogue-node-label {
     color: white;
     min-width: 125px;
     padding: 3px;
     -unity-text-align: middle-left;
+}
+
+/*
+    隐藏端口Style
+ */
+#fakePort {
+    display: none;
 }

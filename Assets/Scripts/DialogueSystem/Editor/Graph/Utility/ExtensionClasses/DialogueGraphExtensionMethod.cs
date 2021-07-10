@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RPG.DialogueSystem.Graph;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace DialogueSystem.Editor.Graph
 {
@@ -103,6 +106,28 @@ namespace DialogueSystem.Editor.Graph
             }
 
             return -1;
+        }
+
+        public static ObjectField AddObjectFieldFromUXML<T>(this Foldout foldout, string labelStr, T objectValue = null) where T : ScriptableObject
+        {
+            // TODO: 建立VisualTreeAsset资源创建类
+            VisualTreeAsset buttonPairTreeAsset = 
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath
+                    .DialogueGraphNodeObjectFieldButtonPair);
+            VisualElement objectFieldButtonPair = buttonPairTreeAsset.Instantiate();
+
+            ObjectField objectField = objectFieldButtonPair.Q<ObjectField>(DialogueGraphUSSName.DIALOGUE_NODE_OBJECT_FIELD);
+            objectField.objectType = typeof(T);
+            objectField.value = objectValue;
+            objectField.label = labelStr;
+            objectField.labelElement.name = DialogueGraphUSSName.DIALOGUE_NODE_LABEL;
+
+            Button deleteButton = objectFieldButtonPair.Q<Button>(DialogueGraphUSSName.DIALOGUE_NODE_DELETE_BUTTON);
+            // TODO: 设置按钮样式
+            deleteButton.clickable.clicked += () => foldout.contentContainer.Remove(objectFieldButtonPair);
+
+            foldout.contentContainer.Add(objectFieldButtonPair);
+            return objectField;
         }
     }
 }

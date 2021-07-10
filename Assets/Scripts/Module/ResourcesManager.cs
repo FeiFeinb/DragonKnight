@@ -31,31 +31,6 @@ namespace RPG.Module
         }
         
         
-        private T LoadResource<T>(string resPath, bool isCached, bool isInstantiate, Transform parents) where T : UnityEngine.Object
-        {
-            T tempRes = null;
-            // 缓存中包含
-            if (cacheDic.ContainsKey(resPath))
-            {
-                tempRes = cacheDic[resPath] as T;
-            }
-            // 缓存中不包含 需重新加载
-            else
-            {
-                tempRes = Resources.Load<T>(resPath);
-                if (isCached)
-                {
-                    cacheDic.Add(resPath, tempRes);
-                }
-            }
-            // 判空
-            if (tempRes == null)
-            {
-                Debug.LogError("Load Failed!");
-            }
-            // 如果资源是GameObject 则创建一个实例
-            return (tempRes is GameObject && isInstantiate) ? GameObject.Instantiate(tempRes, parents) : tempRes;
-        }
         
         /// <summary>
         /// 异步加载资源 不会实例化
@@ -118,5 +93,32 @@ namespace RPG.Module
                 callBack(tempRes);
             }
         }
+        
+        private T LoadResource<T>(string resPath, bool isCached, bool isInstantiate, Transform parents) where T : UnityEngine.Object
+        {
+            T tempRes = null;
+            // 缓存中包含
+            if (cacheDic.ContainsKey(resPath))
+            {
+                tempRes = cacheDic[resPath] as T;
+            }
+            // 缓存中不包含 需重新加载
+            else
+            {
+                tempRes = Resources.Load<T>(resPath);
+                if (isCached)
+                {
+                    cacheDic.Add(resPath, tempRes);
+                }
+            }
+            // 判空
+            if (tempRes == null)
+            {
+                Debug.LogError("Load Failed!");
+            }
+            // 如果资源是GameObject 则创建一个实例
+            return (tempRes is GameObject && isInstantiate) ? GameObject.Instantiate(tempRes, parents) : tempRes;
+        }
+
     }
 }

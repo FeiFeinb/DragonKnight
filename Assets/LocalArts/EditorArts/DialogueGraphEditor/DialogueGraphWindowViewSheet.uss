@@ -1,8 +1,14 @@
+/*
+    顶部Toolbar中Select文字Style
+ */
 #select-label {
     -unity-text-align: middle-center;
     color: white;
 }
 
+/*
+    整个对话组件的Style
+ */
 #dialogue-graph
 {
     flex-grow: 1;

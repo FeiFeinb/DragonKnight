@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace RPG.DialogueSystem.Graph
 {
-    [CreateAssetMenu(fileName = "New DialogueGraphSO", menuName = "Dialogue System/Graph/DialogueGraphSO", order = 0)]
+    [CreateAssetMenu(fileName = "New DialogueGraphSO", menuName = "Dialogue System/Graph/DialogueGraphSO")]
     public class DialogueGraphSO : ScriptableObject
     {
         [SerializeField] private List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>();                 // 连线数据数列
@@ -21,6 +21,11 @@ namespace RPG.DialogueSystem.Graph
         [SerializeField] private List<DialogueGraphTalkNodeSaveData> talkNodesSaveData = new List<DialogueGraphTalkNodeSaveData>();     // 对话节点数列
 
         [SerializeField] private List<DialogueGraphConditionNodeSaveData> conditionNodesSaveData = new List<DialogueGraphConditionNodeSaveData>();       // 条件节点数列
+
+        [SerializeField] private List<DialogueGraphEventNodeSaveData> eventNodesSaveData = new List<DialogueGraphEventNodeSaveData>();
+
+        [SerializeField] private List<DialogueGraphChoiceNodeSaveData> choiceNodesSaveData = new List<DialogueGraphChoiceNodeSaveData>();
+        
         /// <summary>
         /// 保存图中节点
         /// </summary>
@@ -38,6 +43,8 @@ namespace RPG.DialogueSystem.Graph
             endNodesSaveData = CaptureNodesData<DialogueGraphEndNode, DialogueGraphEndNodeSaveData>(nodes);
             talkNodesSaveData = CaptureNodesData<DialogueGraphTalkNode, DialogueGraphTalkNodeSaveData>(nodes);
             conditionNodesSaveData = CaptureNodesData<DialogueGraphConditionNode, DialogueGraphConditionNodeSaveData>(nodes);
+            eventNodesSaveData = CaptureNodesData<DialogueGraphEventNode, DialogueGraphEventNodeSaveData>(nodes);
+            choiceNodesSaveData = CaptureNodesData<DialogueGraphChoiceNode, DialogueGraphChoiceNodeSaveData>(nodes);
             // 储存连线数据
             edgesSaveData.Clear();
             foreach (Edge edge in graphView.edges.Where(edge => edge.input != null))
@@ -84,6 +91,9 @@ namespace RPG.DialogueSystem.Graph
             LoadNode<DialogueGraphEndNode>(endNodesSaveData);
             LoadNode<DialogueGraphTalkNode>(talkNodesSaveData);
             LoadNode<DialogueGraphConditionNode>(conditionNodesSaveData);
+            LoadNode<DialogueGraphEventNode>(eventNodesSaveData);
+            LoadNode<DialogueGraphChoiceNode>(choiceNodesSaveData);
+            
             
             foreach (DialogueGraphEdgeSaveData edgeSaveData in edgesSaveData)
             {

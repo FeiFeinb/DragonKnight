@@ -10,13 +10,13 @@ namespace RPG.DialogueSystem.Graph
 {
     public sealed class DialogueGraphTalkNode : DialogueGraphBaseNode
     {
-        private readonly Button _addPortButton;                 // 添加端口Button
+        private readonly Button _addPortButton;                 // 添加端口
         
-        private readonly TextField _contentField;               // 对话内容TextField
-        private readonly EnumField _interlocutorField;          // 对话方类型EnumField
-        private readonly ObjectField _characterInfoField;       // 对话角色信息ObjectField
-        private readonly ObjectField _audioClipField;           // 音频片段ObjectField
-
+        private readonly TextField _contentField;               // 对话内容
+        private readonly EnumField _interlocutorField;          // 对话方类型
+        private readonly ObjectField _characterInfoField;       // 对话角色信息
+        private readonly ObjectField _audioClipField;           // 音频片段
+        
         public override bool expanded
         {
             get
@@ -26,6 +26,7 @@ namespace RPG.DialogueSystem.Graph
             set
             {
                 base.expanded = value;
+                // 使折叠时按钮能隐藏
                 SetElementDisplay(_addPortButton, expanded);
                 RefreshExpandedState();
             }
@@ -43,16 +44,12 @@ namespace RPG.DialogueSystem.Graph
             title = "Talk Node";
             
             Port inputPort = AddInputPort("Parents", Port.Capacity.Multi);
+            // 使其在输出节点拓展时位置能够居中
             inputPort.style.flexGrow = 1;
 
-            // 创建隐藏的节点
-            Port fakePort = CreatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(DialogueGraphBaseNode));
-            fakePort.name = "fakePort";
-            outputContainer.Add(fakePort); 
-            
             if (talkNodeSaveData == null)
             {
-                AddOutputPort("Children", Port.Capacity.Single);
+                AddOutputPort("Child", Port.Capacity.Single);
             }
             else
             {
@@ -65,7 +62,7 @@ namespace RPG.DialogueSystem.Graph
             // 创建添加端口Button
             _addPortButton = CreateButton("+", delegate
             {
-                AddOutputPort("Children", Port.Capacity.Single);
+                AddOutputPort("Child", Port.Capacity.Single);
             });
             topContainer.Insert(1, _addPortButton);
             
