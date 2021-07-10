@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueSystem.Old.PlayerControl;
 using UnityEngine;
 using RPG.DialogueSystem;
 namespace RPG.StateMachine

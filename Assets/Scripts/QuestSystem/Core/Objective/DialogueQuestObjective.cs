@@ -1,3 +1,4 @@
+using DialogueSystem.Old.Dialogue.ScriptableObjects;
 using UnityEngine;
 using RPG.DialogueSystem;
 using RPG.InventorySystem;

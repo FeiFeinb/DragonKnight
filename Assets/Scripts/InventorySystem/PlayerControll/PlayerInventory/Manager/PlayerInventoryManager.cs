@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DialogueSystem.Old.Dialogue.Core;
+using DialogueSystem.Old.Dialogue.Core.Condition;
 using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;

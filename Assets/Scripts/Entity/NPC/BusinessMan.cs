@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueSystem.Old.Dialogue.Core;
 using UnityEngine;
 using RPG.QuestSystem;
 using RPG.InventorySystem;

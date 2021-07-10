@@ -1,3 +1,4 @@
+using DialogueSystem.Old.UI;
 using UnityEngine;
 using RPG.InventorySystem;
 using RPG.UI;

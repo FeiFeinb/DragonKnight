@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DialogueSystem.Old.Dialogue.Core;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem;

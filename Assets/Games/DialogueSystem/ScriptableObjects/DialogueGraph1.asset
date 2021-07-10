@@ -12,37 +12,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d154d8499b408baaefd051beae8ada, type: 3}
   m_Name: DialogueGraph1
   m_EditorClassIdentifier: 
-  edgesSaveData: []
+  edgesSaveData:
+  - InputNodeUniqueID: 9a02c032-b1af-4669-98eb-8efb3b304dc7
+    OutputNodeUniqueID: 8cc71529-a647-4be2-ab4d-45009b05c33a
   startNodesSaveData:
   - _uniqueID: 8cc71529-a647-4be2-ab4d-45009b05c33a
     _rectPos:
       serializedVersion: 2
       x: 248
-      y: 253
+      y: 253.33334
       width: 108
-      height: 77
+      height: 76.66666
     _inputPortsData: []
     _outputPortsData:
     - PortName: Children
       Capacity: 0
-      EdgesSaveData: []
-  endNodesSaveData: []
+      EdgesSaveData:
+      - InputNodeUniqueID: 9a02c032-b1af-4669-98eb-8efb3b304dc7
+        OutputNodeUniqueID: 8cc71529-a647-4be2-ab4d-45009b05c33a
+  endNodesSaveData:
+  - _uniqueID: 9a02c032-b1af-4669-98eb-8efb3b304dc7
+    _rectPos:
+      serializedVersion: 2
+      x: 574.6667
+      y: 280
+      width: 181.33331
+      height: 99.33334
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - InputNodeUniqueID: 9a02c032-b1af-4669-98eb-8efb3b304dc7
+        OutputNodeUniqueID: 8cc71529-a647-4be2-ab4d-45009b05c33a
+    _outputPortsData: []
+    EndType: 0
   talkNodesSaveData: []
   conditionNodesSaveData:
   - _uniqueID: 657a5939-9ff7-46b8-8617-9f93585132ef
     _rectPos:
       serializedVersion: 2
-      x: 655
-      y: 311
+      x: 956
+      y: 185.33333
       width: 268
-      height: 122
+      height: 144.66667
     _inputPortsData:
-    - PortName: Parents
+    - PortName: Source
       Capacity: 0
       EdgesSaveData: []
     _outputPortsData:
-    - PortName: Children
+    - PortName: True
+      Capacity: 0
+      EdgesSaveData: []
+    - PortName: False
       Capacity: 0
       EdgesSaveData: []
     ConditionType: 0
     ConditionSO: {fileID: 0}
+  eventNodesSaveData: []
+  choiceNodesSaveData: []
