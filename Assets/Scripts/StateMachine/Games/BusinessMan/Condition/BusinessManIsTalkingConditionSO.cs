@@ -11,7 +11,7 @@ namespace RPG.StateMachine
     {
         public override bool Statement()
         {
-            return !PlayerDialogueManager.Instance.IsEmpty;
+            return !OldPlayerDialogueManager.Instance.IsEmpty;
         }
     }
 }

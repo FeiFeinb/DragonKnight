@@ -139,26 +139,46 @@ namespace RPG.DialogueSystem
         /// <param name="graphView">节点图</param>
         public static void Save(this DialogueGraphSO _selectSO, DialogueGraphView graphView)
         {
-            List<SaveT> CaptureNodesData<T, SaveT>(UQueryState<Node> graphNodes) where T : DialogueGraphBaseNode
-            {
-                return graphNodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>()
-                    .ToList();
-            }
+            // List<SaveT> CaptureNodesData<T, SaveT>(UQueryState<Node> graphNodes) where T : DialogueGraphBaseNode
+            // {
+            //     return graphNodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>()
+            //         .ToList();
+            // }
 
-            var nodes = graphView.nodes;
+            Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData =
+                new Dictionary<string, DialogueGraphBaseNodeSaveData>();
+            
             // 储存节点数据
-            _selectSO.startNodesSaveData =
-                CaptureNodesData<DialogueGraphStartNode, DialogueGraphStartNodeSaveData>(nodes);
-            _selectSO.endNodesSaveData = CaptureNodesData<DialogueGraphEndNode, DialogueGraphEndNodeSaveData>(nodes);
-            _selectSO.talkNodesSaveData = CaptureNodesData<DialogueGraphTalkNode, DialogueGraphTalkNodeSaveData>(nodes);
-            _selectSO.conditionNodesSaveData =
-                CaptureNodesData<DialogueGraphConditionNode, DialogueGraphConditionNodeSaveData>(nodes);
-            _selectSO.eventNodesSaveData =
-                CaptureNodesData<DialogueGraphEventNode, DialogueGraphEventNodeSaveData>(nodes);
-            _selectSO.choiceNodesSaveData =
-                CaptureNodesData<DialogueGraphChoiceNode, DialogueGraphChoiceNodeSaveData>(nodes);
-            // 储存连线数据
-            _selectSO.edgesSaveData.Clear();
+            _selectSO.Clear();
+            IEnumerable<DialogueGraphBaseNode> baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>();
+            foreach (DialogueGraphBaseNode baseNode in baseNodes)
+            {
+                DialogueGraphBaseNodeSaveData baseNodeSaveData = baseNode.CreateNodeData();
+                cachedData.Add(baseNodeSaveData.UniqueID, baseNodeSaveData);
+                switch (baseNode)
+                {
+                    case DialogueGraphStartNode _:
+                        _selectSO.startNodesSaveData.Add(baseNodeSaveData as DialogueGraphStartNodeSaveData);
+                        break;
+                    case DialogueGraphEndNode _:
+                        _selectSO.endNodesSaveData.Add(baseNodeSaveData as DialogueGraphEndNodeSaveData);
+                        break;
+                    case DialogueGraphTalkNode _:
+                        _selectSO.talkNodesSaveData.Add(baseNodeSaveData as DialogueGraphTalkNodeSaveData);
+                        break;
+                    case DialogueGraphEventNode _:
+                        _selectSO.eventNodesSaveData.Add(baseNodeSaveData as DialogueGraphEventNodeSaveData);
+                        break;
+                    case DialogueGraphConditionNode _:
+                        _selectSO.conditionNodesSaveData.Add(baseNodeSaveData as DialogueGraphConditionNodeSaveData);
+                        break;
+                    case DialogueGraphChoiceNode _:
+                        _selectSO.choiceNodesSaveData.Add(baseNodeSaveData as DialogueGraphChoiceNodeSaveData);
+                        break;
+                }
+            }
+            
+            // 构建节点连线数组
             foreach (Edge edge in graphView.edges.Where(edge => edge.input != null))
             {
                 _selectSO.edgesSaveData.Add(new DialogueGraphEdgeSaveData
@@ -166,6 +186,37 @@ namespace RPG.DialogueSystem
                     OutputNodeUniqueID = ((DialogueGraphBaseNode) edge.output.node).UniqueID,
                     InputNodeUniqueID = ((DialogueGraphBaseNode) edge.input.node).UniqueID
                 });
+            }
+
+            // 生成节点树
+            void CreateNodeTree(DialogueGraphBaseNodeSaveData baseNodeSaveData, DialogueTreeNode startTreeNode)
+            {
+                DialogueTreeNode currentNode = startTreeNode;
+                foreach (var outputPortData in baseNodeSaveData.OutputPortsData)
+                {
+                    var edgesSaveData = outputPortData.EdgesSaveData;
+                    if (edgesSaveData == null || edgesSaveData.Count == 0)
+                        continue;
+                    // 找对孩子的UniqueID
+                    string childUniqueID = edgesSaveData[0].InputNodeUniqueID;
+                    DialogueGraphBaseNodeSaveData childNode = cachedData[childUniqueID];
+                    
+                    var newTreeNode = new DialogueTreeNode() {BaseNodeSaveData = childNode};
+                    currentNode.childrenNode.Add(newTreeNode);
+                    // 根据UniqueID找到对应的节点 
+                    CreateNodeTree(cachedData[childUniqueID], newTreeNode);
+                }
+            }
+
+            if (_selectSO.startNodesSaveData == null || _selectSO.startNodesSaveData.Count == 0)
+            {
+                Debug.LogError("缺少Start Node");
+            }
+            else
+            {
+                DialogueGraphBaseNodeSaveData startNodeSaveData = _selectSO.startNodesSaveData[0];
+                _selectSO.rootNode = new DialogueTreeNode() {BaseNodeSaveData = startNodeSaveData};
+                CreateNodeTree(startNodeSaveData, _selectSO.rootNode);
             }
 
             // 脏标记

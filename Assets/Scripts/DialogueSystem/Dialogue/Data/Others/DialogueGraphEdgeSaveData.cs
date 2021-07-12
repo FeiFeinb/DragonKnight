@@ -6,7 +6,7 @@ namespace RPG.DialogueSystem
     [System.Serializable]
     public class  DialogueGraphEdgeSaveData
     {
-        public string InputNodeUniqueID;        // 输入节点ID
         public string OutputNodeUniqueID;       // 输出节点ID
+        public string InputNodeUniqueID;        // 输入节点ID
     }
 }

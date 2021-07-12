@@ -28,7 +28,7 @@ namespace DialogueSystem.Old.Dialogue.Core
         /// </summary>
         public void StartDialogue()
         {
-            PlayerDialogueManager.Instance?.SetDialogue(this);
+            OldPlayerDialogueManager.Instance?.SetDialogue(this);
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace DialogueSystem.Old.Dialogue.Core
         /// </summary>
         public void ResetDialogue()
         {
-            PlayerDialogueManager.Instance?.ResetDialogue();
+            OldPlayerDialogueManager.Instance?.ResetDialogue();
         }
         
         /// <summary>

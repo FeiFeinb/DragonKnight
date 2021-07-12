@@ -11,8 +11,6 @@ namespace RPG.DialogueSystem
         {
             title = "Start Node";
             AddOutputPort("Children", Port.Capacity.Single);
-            
-            
         }
 
         public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
@@ -27,7 +25,6 @@ namespace RPG.DialogueSystem
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
-            
         }
     }
 }
