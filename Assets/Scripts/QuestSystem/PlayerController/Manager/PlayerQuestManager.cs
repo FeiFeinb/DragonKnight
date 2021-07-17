@@ -6,7 +6,7 @@ using DialogueSystem.Old.Dialogue.Core;
 using DialogueSystem.Old.Dialogue.Core.Condition;
 using UnityEngine;
 using RPG.Module;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using RPG.SaveSystem;
 
 namespace RPG.QuestSystem
@@ -93,6 +93,17 @@ namespace RPG.QuestSystem
             }
         }
 
+        public bool HasQuest(QuestSO questSO)
+        {
+            return GetQuestStatus(questSO) != null;
+        }
+
+        public bool IsQuestComplete(QuestSO questSO)
+        {
+            PlayerQuestStatus questStatus = GetQuestStatus(questSO);
+            return questStatus is {IsFinish: true} ;
+        }
+        
         public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
         {
             QuestSO questParamSO = paramSO as QuestSO;

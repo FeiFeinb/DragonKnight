@@ -1,7 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine.UIElements;
-
-namespace RPG.DialogueSystem
+﻿namespace DialogueSystem.Editor
 {
     public static class DialogueGraphAssetsPath
     {

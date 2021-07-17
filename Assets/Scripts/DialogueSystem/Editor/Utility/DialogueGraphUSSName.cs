@@ -1,12 +1,8 @@
-﻿using UnityEditor;
-using UnityEngine.UIElements;
-
-namespace RPG.DialogueSystem
+﻿namespace DialogueSystem.Editor
 {
     public static class DialogueGraphUSSName
     {
         // 采用以名称匹配的方式添加插件样式
-        
         public const string DIALOGUE_GRAPH = "dialogue-graph";
         public const string DIALOGUE_NODE_LABEL = "dialogue-node-label";
         public const string DIALOGUE_NODE_TEXT_FIELD = "dialogue-node-text-field";

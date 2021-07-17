@@ -1,16 +1,15 @@
-using System;
 using System.Collections.Generic;
+using DialogueSystem.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public class DialogueSearchWindowProvider : ScriptableObject, ISearchWindowProvider
     {
         public delegate bool SearchWindowOnSelectEntryCallback(SearchTreeEntry SearchTreeEntry, SearchWindowContext context);
 
         public SearchWindowOnSelectEntryCallback OnSelectEntryCallback;     // 选项点击委托
-
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             List<SearchTreeEntry> entries = new List<SearchTreeEntry>

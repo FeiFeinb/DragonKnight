@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.InventorySystem;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using RPG.QuestSystem;
 namespace RPG.Module
 {

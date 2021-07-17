@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DialogueSystem.Old.PlayerControl;
 using UnityEngine;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 namespace RPG.StateMachine
 {
     [CreateAssetMenu(fileName = "BusinessManIsTalkingConditionSO", menuName = "StateMachine/BusinessMan/Condition/IsTalkingCondition")]

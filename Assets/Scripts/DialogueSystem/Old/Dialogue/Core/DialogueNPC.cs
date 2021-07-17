@@ -2,7 +2,7 @@
 using System.Linq;
 using DialogueSystem.Old.Dialogue.ScriptableObjects;
 using DialogueSystem.Old.PlayerControl;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using UnityEngine;
 using UnityEngine.Events;
 

@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEditor;
+﻿using RPG.DialogueSystem.Graph;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using UnityEngine;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public sealed class DialogueGraphEndNode : DialogueGraphBaseNode
     {

@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using RPG.DialogueSystem.Graph;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public class DialogueGraphEditorWindow : EditorWindow
     {

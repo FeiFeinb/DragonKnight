@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public static class DialogueGraphExtensionMethod
     {
@@ -31,8 +31,8 @@ namespace RPG.DialogueSystem
                         Capacity = basePort.capacity.SwitchType(),
                         EdgesSaveData = connectedEdge.Select(edge => new DialogueGraphEdgeSaveData()
                         {
-                            InputNodeUniqueID = (edge.input.node as DialogueGraphBaseNode)?.UniqueID,
-                            OutputNodeUniqueID = (edge.output.node as DialogueGraphBaseNode)?.UniqueID
+                            InputNodeUniqueID = edge.input.GetDialogueNode()?.UniqueID,
+                            OutputNodeUniqueID = edge.output.GetDialogueNode()?.UniqueID
                         }).ToList(),
                     };
                 }
@@ -108,6 +108,14 @@ namespace RPG.DialogueSystem
             return -1;
         }
 
+        /// <summary>
+        /// 从UXML中创建ObjectField
+        /// </summary>
+        /// <param name="foldout">源类</param>
+        /// <param name="labelStr">ObjectField中的标签</param>
+        /// <param name="objectValue">记录的数据</param>
+        /// <typeparam name="T">记录的数据类型</typeparam>
+        /// <returns>创建的ObjectField</returns>
         public static ObjectField AddObjectFieldFromUXML<T>(this Foldout foldout, string labelStr, T objectValue = null)
             where T : ScriptableObject
         {
@@ -145,8 +153,7 @@ namespace RPG.DialogueSystem
             //         .ToList();
             // }
 
-            Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData =
-                new Dictionary<string, DialogueGraphBaseNodeSaveData>();
+            Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData = new Dictionary<string, DialogueGraphBaseNodeSaveData>();
             
             // 储存节点数据
             _selectSO.Clear();
@@ -188,37 +195,6 @@ namespace RPG.DialogueSystem
                 });
             }
 
-            // 生成节点树
-            void CreateNodeTree(DialogueGraphBaseNodeSaveData baseNodeSaveData, DialogueTreeNode startTreeNode)
-            {
-                DialogueTreeNode currentNode = startTreeNode;
-                foreach (var outputPortData in baseNodeSaveData.OutputPortsData)
-                {
-                    var edgesSaveData = outputPortData.EdgesSaveData;
-                    if (edgesSaveData == null || edgesSaveData.Count == 0)
-                        continue;
-                    // 找对孩子的UniqueID
-                    string childUniqueID = edgesSaveData[0].InputNodeUniqueID;
-                    DialogueGraphBaseNodeSaveData childNode = cachedData[childUniqueID];
-                    
-                    var newTreeNode = new DialogueTreeNode() {BaseNodeSaveData = childNode};
-                    currentNode.childrenNode.Add(newTreeNode);
-                    // 根据UniqueID找到对应的节点 
-                    CreateNodeTree(cachedData[childUniqueID], newTreeNode);
-                }
-            }
-
-            if (_selectSO.startNodesSaveData == null || _selectSO.startNodesSaveData.Count == 0)
-            {
-                Debug.LogError("缺少Start Node");
-            }
-            else
-            {
-                DialogueGraphBaseNodeSaveData startNodeSaveData = _selectSO.startNodesSaveData[0];
-                _selectSO.rootNode = new DialogueTreeNode() {BaseNodeSaveData = startNodeSaveData};
-                CreateNodeTree(startNodeSaveData, _selectSO.rootNode);
-            }
-
             // 脏标记
             EditorUtility.SetDirty(_selectSO);
         }
@@ -233,16 +209,12 @@ namespace RPG.DialogueSystem
             // 清空
             graphView.ClearEdgesAndNodes();
 
-            var nodeDataDic = new Dictionary<string, DialogueGraphBaseNodeSaveData>();
-            // originNodeUniqueID - List<originPortIndex, targetNodeUniqueID, targetPortIndex>
-            var edgeDataDic = new Dictionary<string, List<Tuple<int, string, int>>>();
+            var nodeDataDic = _selectSO.GetCachedDictionary();
 
             void LoadNode<T>(IEnumerable<DialogueGraphBaseNodeSaveData> nodesSaveData) where T : DialogueGraphBaseNode
             {
                 foreach (DialogueGraphBaseNodeSaveData dialogueGraphBaseNodeSaveData in nodesSaveData)
                 {
-                    // 缓存节点数据进字典中
-                    nodeDataDic.Add(dialogueGraphBaseNodeSaveData.UniqueID, dialogueGraphBaseNodeSaveData);
                     // 生成节点
                     T dialogueNode = (T) Activator.CreateInstance(typeof(T),
                         dialogueGraphBaseNodeSaveData.RectPos.position, graphView, dialogueGraphBaseNodeSaveData);
@@ -259,7 +231,9 @@ namespace RPG.DialogueSystem
             LoadNode<DialogueGraphEventNode>(_selectSO.eventNodesSaveData);
             LoadNode<DialogueGraphChoiceNode>(_selectSO.choiceNodesSaveData);
 
-
+            // originNodeUniqueID - List<originPortIndex, targetNodeUniqueID, targetPortIndex>
+            var edgeDataDic = new Dictionary<string, List<Tuple<int, string, int>>>();
+            
             foreach (DialogueGraphEdgeSaveData edgeSaveData in _selectSO.edgesSaveData)
             {
                 string originNodeUniqueID = edgeSaveData.OutputNodeUniqueID;
@@ -282,44 +256,57 @@ namespace RPG.DialogueSystem
             }
 
             // 连线
-            var baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>().ToList();
-            foreach (DialogueGraphBaseNode originNode in baseNodes)
+            List<DialogueGraphBaseNode> baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>().ToList();
+            foreach (var originNode in baseNodes.Where(originNode => edgeDataDic.ContainsKey(originNode.UniqueID)))
             {
-                // 只检测出口端口的节点连线
-                if (edgeDataDic.ContainsKey(originNode.UniqueID))
+                foreach (var (originPortIndex, targetNodeUniqueID, targetPortIndex) in edgeDataDic[
+                    originNode.UniqueID])
                 {
-                    foreach (var (originPortIndex, targetNodeUniqueID, targetPortIndex) in edgeDataDic[
-                        originNode.UniqueID])
-                    {
-                        DialogueGraphBaseNode targetNode =
-                            baseNodes.FirstOrDefault(node => node.UniqueID == targetNodeUniqueID);
-                        if (targetNode == null) continue;
-                        Edge edge = originNode.OutPutBasePorts.ToList()[originPortIndex]
-                            .ConnectTo(targetNode.InputBasePorts[targetPortIndex]);
-                        graphView.AddElement(edge);
-                    }
+                    DialogueGraphBaseNode targetNode =
+                        baseNodes.FirstOrDefault(node => node.UniqueID == targetNodeUniqueID);
+                    if (targetNode == null) continue;
+                    Edge edge = originNode.OutPutBasePorts.ToList()[originPortIndex]
+                        .ConnectTo(targetNode.InputBasePorts[targetPortIndex]);
+                    graphView.AddElement(edge);
                 }
             }
         }
 
+        /// <summary>
+        /// 在Unity自带的Port类型与自己创建的Port类型进行转换
+        /// </summary>
+        /// <param name="editorCapacity">Unity自带类型</param>
+        /// <returns>自己创建类型</returns>
+        /// <exception cref="Exception">类型不匹配异常</exception>
         public static DialogueGraphPortSaveData.PortCapacity SwitchType(this Port.Capacity editorCapacity)
         {
             return editorCapacity switch
             {
                 Port.Capacity.Multi => DialogueGraphPortSaveData.PortCapacity.Multi,
                 Port.Capacity.Single => DialogueGraphPortSaveData.PortCapacity.Single,
-                _ => throw new Exception()
+                _ => throw new Exception("Port Type Switch Failed")
             };
         }
 
+        /// <summary>
+        /// 在自己创建的Port类型和Unity自带的Port类型进行转换
+        /// </summary>
+        /// <param name="myCapacity">自己创建类型</param>
+        /// <returns>Unity自带类型</returns>
+        /// <exception cref="Exception">类型不匹配异常</exception>
         public static Port.Capacity SwitchType(this DialogueGraphPortSaveData.PortCapacity myCapacity)
         {
             return myCapacity switch
             {
                 DialogueGraphPortSaveData.PortCapacity.Multi => Port.Capacity.Multi,
                 DialogueGraphPortSaveData.PortCapacity.Single => Port.Capacity.Single,
-                _ => throw new Exception()
+                _ => throw new Exception("Port Type Switch Failed")
             };
+        }
+
+        public static DialogueGraphBaseNode GetDialogueNode(this Port port)
+        {
+            return port.node as DialogueGraphBaseNode;
         }
     }
 }

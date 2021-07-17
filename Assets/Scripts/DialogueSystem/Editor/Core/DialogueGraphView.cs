@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public class DialogueGraphView : GraphView
     {
@@ -56,6 +55,8 @@ namespace RPG.DialogueSystem
             Insert(0, new GridBackground());
             DialogueSearchWindowProvider provider = ScriptableObject.CreateInstance<DialogueSearchWindowProvider>();
             provider.OnSelectEntryCallback = CreateNode;
+            
+            // 节点创建请求
             nodeCreationRequest = (info) =>
             {
                 SearchWindow.Open(new SearchWindowContext(info.screenMousePosition), provider);
@@ -64,14 +65,18 @@ namespace RPG.DialogueSystem
         
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
+            DialogueGraphBaseNode startNode = startPort.GetDialogueNode();
+            var startNodeEdges = edges.Where(edge => edge.output?.GetDialogueNode()?.UniqueID == startNode.UniqueID).ToList();
             return ports.Where(port =>
             {
-                DialogueGraphBaseNode targetNode = port.node as DialogueGraphBaseNode;
-                DialogueGraphBaseNode startNode = startPort.node as DialogueGraphBaseNode;
-                bool isTypaMatch = targetNode.CanConnectNode(startNode) && startNode.CanConnectNode(targetNode);
+                DialogueGraphBaseNode targetNode = port.GetDialogueNode();
+                // 一个节点与另一个节点间只能有一条连线
+                bool isTypeMatch = targetNode.CanConnectNode(startNode) && startNode.CanConnectNode(targetNode);
+                bool isSingle = startNodeEdges.All(edge => edge.input?.GetDialogueNode()?.UniqueID != targetNode.UniqueID);
                 // 连接的节点不是自身 && 节点的方向需要不同(进与出)
-                return startPort.node != port.node && startPort.direction != port.direction && isTypaMatch;
+                return startPort.node != port.node && startPort.direction != port.direction && isTypeMatch && isSingle;
             }).ToList();
+            
         }
 
         /// <summary>

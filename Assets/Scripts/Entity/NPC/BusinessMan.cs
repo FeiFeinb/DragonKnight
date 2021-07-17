@@ -4,7 +4,7 @@ using DialogueSystem.Old.Dialogue.Core;
 using UnityEngine;
 using RPG.QuestSystem;
 using RPG.InventorySystem;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using RPG.Utility;
 namespace RPG.Entity
 {

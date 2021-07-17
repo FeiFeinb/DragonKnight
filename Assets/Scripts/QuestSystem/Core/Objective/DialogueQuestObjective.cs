@@ -1,6 +1,6 @@
 using DialogueSystem.Old.Dialogue.ScriptableObjects;
 using UnityEngine;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 using RPG.InventorySystem;
 namespace RPG.QuestSystem
 {

@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974a7beaec1db224fa16b107b27c8fda, type: 3}
   m_Name: DialogueCharacterInfoDataBase
   m_EditorClassIdentifier: 
-  dialogueCharacterInfos:
-  - {fileID: 11400000, guid: 1db953ddf169d67419f8595c3c3de64f, type: 2}
-  - {fileID: 11400000, guid: a8b5d43b5fd226d44b84ef92e45cb2ce, type: 2}
-  - {fileID: 11400000, guid: 09595d7981b5ddd489adefd2e07ab3b3, type: 2}
+  characterInfos:
+  - {fileID: 11400000, guid: 61f208e9614f10b44891223ef7163409, type: 2}

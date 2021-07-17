@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using RPG.DialogueSystem.Graph;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
-    public abstract class DialogueGraphBaseNode : Node, ISavableNode
+    public abstract class DialogueGraphBaseNode : Node
     {
         public string UniqueID => _uniqueID; // 外部获取
         public List<Port> InputBasePorts => _inputBasePorts; // 外部获取
@@ -40,15 +41,15 @@ namespace RPG.DialogueSystem
         /// <summary>
         /// 添加输入端口
         /// </summary>
-        /// <param name="portName">端口名字</param>
+        /// <param name="portStr">端口名字</param>
         /// <param name="capacity">端口连接多重性</param>
         /// <param name="portType">端口类型</param>
         /// <returns>生成的端口</returns>
-        protected virtual Port AddInputPort(string portName, Port.Capacity capacity, Type portType = null)
+        protected virtual Port AddInputPort(string portStr, Port.Capacity capacity, Type portType = null)
         {
             Port inputPort = CreatePort(Orientation.Horizontal, Direction.Input, capacity,
                 portType ?? typeof(DialogueGraphBaseNode));
-            inputPort.portName = portName;
+            inputPort.portName = portStr;
             // 添加输入端口记录
             _inputBasePorts.Add(inputPort);
             // 往节点中添加此端口
@@ -215,8 +216,16 @@ namespace RPG.DialogueSystem
 
         public abstract bool CanConnectNode(DialogueGraphBaseNode targetNode);
 
+        /// <summary>
+        /// 创建节点保存信息
+        /// </summary>
+        /// <returns>节点保存信息</returns>
         public abstract DialogueGraphBaseNodeSaveData CreateNodeData();
 
+        /// <summary>
+        /// 加载节点保存信息
+        /// </summary>
+        /// <param name="stateInfo">节点保存信息</param>
         public abstract void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo);
     }
 }

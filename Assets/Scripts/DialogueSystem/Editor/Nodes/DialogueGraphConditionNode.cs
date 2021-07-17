@@ -1,14 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using RPG.DialogueSystem.Graph;
 using RPG.InventorySystem;
 using RPG.QuestSystem;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
-using UnityEngine.UIElements;
 using UnityEngine;
 
-namespace RPG.DialogueSystem
+namespace DialogueSystem.Editor
 {
     public sealed class DialogueGraphConditionNode : DialogueGraphBaseNode
     {
@@ -23,7 +20,7 @@ namespace RPG.DialogueSystem
             AddOutputPort("False", Port.Capacity.Single);
             
             // 初值设定为是否拥有任务
-            _conditionField = CreateEnumField(ConditionDialogueNodeType.CompleteQuest, "ConditionType", SwitchObjectFieldType);
+            _conditionField = CreateEnumField(ConditionDialogueNodeType.CompleteQuest, "ConditionType", evt => SwitchObjectFieldType((ConditionDialogueNodeType)evt.newValue));
             extensionContainer.Add(_conditionField);
 
             _determineField = CreateObjectField<QuestSO>("Quest:");
@@ -41,7 +38,7 @@ namespace RPG.DialogueSystem
         {
             DialogueGraphConditionNodeSaveData conditionNodeSaveData = CreateBaseNodeData<DialogueGraphConditionNodeSaveData>();
             conditionNodeSaveData.ConditionType = (ConditionDialogueNodeType) _conditionField.value;
-            conditionNodeSaveData.ConditionSO = _determineField.value as ScriptableObject;
+            conditionNodeSaveData.SourceSO = _determineField.value as ScriptableObject;
             return conditionNodeSaveData;
         }
 
@@ -49,12 +46,13 @@ namespace RPG.DialogueSystem
         {
             DialogueGraphConditionNodeSaveData conditionNodeSaveData = stateInfo as DialogueGraphConditionNodeSaveData;
             _conditionField.value = conditionNodeSaveData.ConditionType;
-            _determineField.value = conditionNodeSaveData.ConditionSO;
+            SwitchObjectFieldType(conditionNodeSaveData.ConditionType);
+            _determineField.value = conditionNodeSaveData.SourceSO;
         }
 
-        private void SwitchObjectFieldType(ChangeEvent<Enum> newEnum)
+        private void SwitchObjectFieldType(ConditionDialogueNodeType nodeType)
         {
-            switch ((ConditionDialogueNodeType)newEnum.newValue)
+            switch (nodeType)
             {
                 case ConditionDialogueNodeType.CompleteQuest:
                 case ConditionDialogueNodeType.HasQuest:
@@ -66,6 +64,11 @@ namespace RPG.DialogueSystem
                     _determineField.value = null;
                     _determineField.objectType = typeof(BaseItemObject);
                     _determineField.label = "Item:";
+                    break;
+                default:
+                    _determineField.value = null;
+                    _determineField.objectType = typeof(DialogueConditionSO);
+                    _determineField.label = "Others:";
                     break;
             }
         }

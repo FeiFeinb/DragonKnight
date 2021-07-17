@@ -6,7 +6,7 @@ using DialogueSystem.Old.Dialogue.Core.Condition;
 using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;
-using RPG.DialogueSystem;
+using RPG.DialogueSystem.Graph;
 namespace RPG.InventorySystem
 {
     public class PlayerInventoryManager : BaseSingletonWithMono<PlayerInventoryManager>, ISaveable, IPredicateEvaluators
@@ -63,6 +63,11 @@ namespace RPG.InventorySystem
 
         public void ResetState()
         {
+        }
+
+        public bool HasItem(BaseItemObject baseItemObject)
+        {
+            return inventoryObject.HasItem(baseItemObject.item.id);
         }
 
         public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
