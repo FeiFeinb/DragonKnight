@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DialogueSystem.Old.Dialogue.Core;
-using DialogueSystem.Old.Dialogue.Core.Condition;
 using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;
 using RPG.DialogueSystem.Graph;
 namespace RPG.InventorySystem
 {
-    public class PlayerInventoryManager : BaseSingletonWithMono<PlayerInventoryManager>, ISaveable, IPredicateEvaluators
+    public class PlayerInventoryManager : BaseSingletonWithMono<PlayerInventoryManager>, ISaveable
     {
         public PlayerInventoryObject inventoryObject;       // 玩家背包
         public EquipmentInventoryObject equipmentObject;    // 装备栏
@@ -68,16 +66,6 @@ namespace RPG.InventorySystem
         public bool HasItem(BaseItemObject baseItemObject)
         {
             return inventoryObject.HasItem(baseItemObject.item.id);
-        }
-
-        public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
-        {
-            BaseItemObject itemParamSO = paramSO as BaseItemObject;
-            switch (type)
-            {
-                case DialogueConditionType.HasItem: return inventoryObject.HasItem(itemParamSO.item.id);
-            }
-            return null;
         }
     }
 }

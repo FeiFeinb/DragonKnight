@@ -11,7 +11,6 @@ namespace DialogueSystem.Graph
         /// <summary>
         /// 条件处理
         /// </summary>
-        /// <param name="treeNode">对话树节点</param>
         /// <param name="sourceSO">源条件SO</param>
         /// <param name="obj">NPC挂载GameObject</param>
         /// <returns></returns>

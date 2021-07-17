@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DialogueSystem.Old.Dialogue.ScriptableObjects;
 using RPG.Module;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,10 +12,10 @@ namespace RPG.DialogueSystem.Graph
         private DialogueTreeNode _rootNode;
         private GameObject _currentObj;
 
-        public void StartDialogue(ConversationalNPC conversationalNpc)
+        public void StartDialogue(DialogueNPC dialogueNpc)
         {
             // 获取根节点(StartNode)
-            _rootNode = conversationalNpc.dialogueSO.GetDialogueTree();
+            _rootNode = dialogueNpc.dialogueSO.GetDialogueTree();
             _cacheDic.Clear();
             _rootNode.Traverse(treeNode =>
             {
@@ -27,7 +26,7 @@ namespace RPG.DialogueSystem.Graph
                 }
             });
             
-            _currentObj = conversationalNpc.gameObject;
+            _currentObj = dialogueNpc.gameObject;
             
             DialogueController.controller.Show();
             HandleTreeNode(_rootNode);

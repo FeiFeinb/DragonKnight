@@ -1,4 +1,3 @@
-using DialogueSystem.Old.UI;
 using UnityEngine;
 using RPG.InventorySystem;
 using RPG.UI;
@@ -15,16 +14,14 @@ namespace RPG.Module
         private void Start()
         {
             // TODO: 新建资源初始化类 管理所有类的Start顺序和PreInit顺序
-            // InventoryController.controller = InitController<InventoryController>(InventoryController.storePath);
-            // EquipmentController.controller = InitController<EquipmentController>(EquipmentController.storePath);
-            // MouseItemIcon.controller = InitController<MouseItemIcon>(MouseItemIcon.storePath);
-            // SavingController.controller = InitController<SavingController>(SavingController.storePath);
-            // OldDialogueController.controller = InitController<OldDialogueController>(OldDialogueController.storePath);
-            // QuestSidebarController.controller = InitController<QuestSidebarController>(QuestSidebarController.storePath);
-            // QuestToolTipsController.controller = InitController<QuestToolTipsController>(QuestToolTipsController.storePath);
-            // TradeController.controller = InitController<TradeController>(TradeController.storePath);
-            // MouseItemTipsController.controller = InitController<MouseItemTipsController>(MouseItemTipsController.storePath);
-
+            InventoryController.controller = InitController<InventoryController>(InventoryController.storePath);
+            EquipmentController.controller = InitController<EquipmentController>(EquipmentController.storePath);
+            MouseItemIcon.controller = InitController<MouseItemIcon>(MouseItemIcon.storePath);
+            SavingController.controller = InitController<SavingController>(SavingController.storePath);
+            QuestSidebarController.controller = InitController<QuestSidebarController>(QuestSidebarController.storePath);
+            QuestToolTipsController.controller = InitController<QuestToolTipsController>(QuestToolTipsController.storePath);
+            TradeController.controller = InitController<TradeController>(TradeController.storePath);
+            MouseItemTipsController.controller = InitController<MouseItemTipsController>(MouseItemTipsController.storePath);
             DialogueController.controller = InitController<DialogueController>(DialogueController.storePath);
             InteractionController.controller = InitController<InteractionController>(InteractionController.storePath);
         }

@@ -112,10 +112,10 @@ RectTransform:
   m_Father: {fileID: 7743090814507304151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 128, y: -128}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7743090813994268983
 CanvasRenderer:
@@ -371,7 +371,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7679282977943223861}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -563,10 +563,10 @@ RectTransform:
   m_Father: {fileID: 7743090814507304151}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1408, y: -128}
+  m_SizeDelta: {x: 2304, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7743090814679851865
 MonoBehaviour:
@@ -628,10 +628,10 @@ RectTransform:
   m_Father: {fileID: 7743090814679851866}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1152, y: -37.625}
+  m_SizeDelta: {x: 2294, y: 65.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7743090814709279873
 CanvasRenderer:
@@ -725,10 +725,10 @@ RectTransform:
   m_Father: {fileID: 7743090814679851866}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1152, y: -163.125}
+  m_SizeDelta: {x: 2294, y: 175.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7743090814926851397
 CanvasRenderer:
@@ -853,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7743090815736446399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -941,4 +941,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueView: {fileID: 7743090815736446398}
-  _continueButton: {fileID: 0}
+  _continueButton: {fileID: 1250259901443462993}

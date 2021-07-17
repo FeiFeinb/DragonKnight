@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Old.Dialogue.Core;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem.Graph;
+using UnityTemplateProjects.Test;
 
 namespace RPG.QuestSystem
 {
@@ -145,37 +145,29 @@ namespace RPG.QuestSystem
         /// </summary>
         /// <param name="questObjective">任务目标</param>
         private void HandleProactiveQuestOnProgressListener(QuestObjective questObjective)
-        {
+        { 
             // 判断任务类型
             if (questObjective is DialogueQuestObjective dialogueQuestObjective)
             {
                 // 获取场景NPC信息字典
-                var sceneNpcDic = GlobalResource.Instance.characterInfoDataBase.sceneCharacterInfoDic;
-                // 字典中存在该任务对话角色
-                if (sceneNpcDic.ContainsKey(dialogueQuestObjective.CharacterInfo))
-                {
-                    // 根据全局资源对话任务字典找到对应的NPC
-                    DialogueNPC questDialogueNpc = sceneNpcDic[dialogueQuestObjective.CharacterInfo].GetComponent<DialogueNPC>();
-                    // 往NPC身上添加监听事件
-                    questDialogueNpc.AddDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
-                        dialogueQuestObjective.EventID,
-                        delegate { OnProgress(questObjective); });
-                    // 添加销毁回调 清空NPC身上监听事件
-                    onRemove += delegate
-                    {
-                        questDialogueNpc.RemoveDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
-                            dialogueQuestObjective.EventID);
-                    };
-                }
-                // TODO: 若任务需要传递物品
-                if (dialogueQuestObjective is SendItemDialogueQuestObjective)
-                {
-                    SendItemDialogueQuestObjective send = dialogueQuestObjective as SendItemDialogueQuestObjective;
-                }
-            }
-            else
-            {
-                
+                TestDialogueListenerCenter.Instance.AddListener("KELM01", delegate { OnProgress(questObjective); });
+                // var sceneNpcDic = GlobalResource.Instance.characterInfoDataBase.sceneCharacterInfoDic;
+                // // 字典中存在该任务对话角色
+                // if (sceneNpcDic.ContainsKey(dialogueQuestObjective.CharacterInfo))
+                // {
+                //     // 根据全局资源对话任务字典找到对应的NPC
+                //     DialogueNPC questDialogueNpc = sceneNpcDic[dialogueQuestObjective.CharacterInfo].GetComponent<DialogueNPC>();
+                //     // 往NPC身上添加监听事件
+                //     questDialogueNpc.AddDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
+                //         dialogueQuestObjective.EventID,
+                //         delegate { OnProgress(questObjective); });
+                //     // 添加销毁回调 清空NPC身上监听事件
+                //     onRemove += delegate
+                //     {
+                //         questDialogueNpc.RemoveDialogueEnterEvent(dialogueQuestObjective.DialogueNode.UniqueID,
+                //             dialogueQuestObjective.EventID);
+                //     };
+                // }
             }
         }
 

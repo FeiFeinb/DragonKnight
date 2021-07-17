@@ -17,7 +17,7 @@ namespace RPG.StateMachine
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-            businessMan.SetIdleState();
+            // businessMan.SetIdleState();
             Debug.Log("进入Idle状态");
 
         }

@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d154d8499b408baaefd051beae8ada, type: 3}
+  m_Name: FLCXDialogue
+  m_EditorClassIdentifier: 
+  edgesSaveData:
+  - OutputNodeUniqueID: 7bcd86b8-2c1f-46d6-a0a3-45acf49b18b7
+    InputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+  - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+    InputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+  - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+    InputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+  - OutputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+    InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+  - OutputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+    InputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+  - OutputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+    InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+  startNodesSaveData:
+  - _uniqueID: 7bcd86b8-2c1f-46d6-a0a3-45acf49b18b7
+    _rectPos:
+      serializedVersion: 2
+      x: 97.333336
+      y: 103.33333
+      width: 107.99999
+      height: 76.66667
+    _inputPortsData: []
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: 7bcd86b8-2c1f-46d6-a0a3-45acf49b18b7
+        InputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+  endNodesSaveData:
+  - _uniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+    _rectPos:
+      serializedVersion: 2
+      x: 2162.6667
+      y: 46.666664
+      width: 180.6665
+      height: 99.333336
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - OutputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+        InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+      - OutputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+        InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+    _outputPortsData: []
+    EndType: 0
+  talkNodesSaveData:
+  - _uniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+    _rectPos:
+      serializedVersion: 2
+      x: 844
+      y: -89.33333
+      width: 359.33337
+      height: 183.33333
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+        InputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+    _outputPortsData:
+    - PortName: Child
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+        InputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+    Content: OK, I'll build a shield for him
+    TalkAudioClip: {fileID: 0}
+    Interlocutor: 0
+    CharacterInfoSO: {fileID: 11400000, guid: 38b71655eef4e124a8dca7abd6c8dc7d, type: 2}
+  - _uniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+    _rectPos:
+      serializedVersion: 2
+      x: 829.3333
+      y: 174.66667
+      width: 359.3333
+      height: 182.66667
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 1
+      EdgesSaveData:
+      - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+        InputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+    _outputPortsData:
+    - PortName: Child
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+        InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+    Content: What can I do for you
+    TalkAudioClip: {fileID: 0}
+    Interlocutor: 0
+    CharacterInfoSO: {fileID: 11400000, guid: 38b71655eef4e124a8dca7abd6c8dc7d, type: 2}
+  conditionNodesSaveData:
+  - _uniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+    _rectPos:
+      serializedVersion: 2
+      x: 326
+      y: 71.333336
+      width: 360
+      height: 144.66666
+    _inputPortsData:
+    - PortName: Source
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: 7bcd86b8-2c1f-46d6-a0a3-45acf49b18b7
+        InputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+    _outputPortsData:
+    - PortName: True
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+        InputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+    - PortName: False
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: e4350b6a-6d3c-4cc7-959a-7586c57ae47a
+        InputNodeUniqueID: fe599e7c-304d-4d4b-bcab-f9b142159803
+    ConditionType: 0
+    SourceSO: {fileID: 11400000, guid: 40683a88962ad5146a3ae6a4d80af212, type: 2}
+  eventNodesSaveData:
+  - _uniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+    _rectPos:
+      serializedVersion: 2
+      x: 1316
+      y: -68.666664
+      width: 611.3334
+      height: 124.666664
+    _inputPortsData:
+    - PortName: Parents
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: 71c9ce4c-f7a6-4676-8c9b-0bff49610ce5
+        InputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+    _outputPortsData:
+    - PortName: Children
+      Capacity: 0
+      EdgesSaveData:
+      - OutputNodeUniqueID: 5e8c5235-e7d3-4ed3-8845-c82628ab8468
+        InputNodeUniqueID: 288439c8-53f3-41ce-8c16-6d6b0c88fdf9
+    ObjectFields:
+    - {fileID: 11400000, guid: 66a1ab9ff77e5e544b6b6a6f13455358, type: 2}
+  choiceNodesSaveData: []

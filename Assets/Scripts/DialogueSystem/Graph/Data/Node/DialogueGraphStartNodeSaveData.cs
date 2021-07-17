@@ -16,7 +16,7 @@ namespace RPG.DialogueSystem.Graph
 
         public override bool HandleData(DialogueTreeNode treeNode, GameObject obj)
         {
-            treeNode.Traverse(dialogueTreeNode => { (dialogueTreeNode as DialoguePreInit)?.PreInit(obj); });
+            treeNode.Traverse(dialogueTreeNode => { (dialogueTreeNode.BaseNodeSaveData as DialoguePreInit)?.PreInit(obj); });
             return true;
         }
     }

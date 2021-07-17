@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Old.Dialogue.Core;
-using DialogueSystem.Old.Dialogue.Core.Condition;
 using UnityEngine;
 using RPG.Module;
 using RPG.DialogueSystem.Graph;
@@ -11,7 +9,7 @@ using RPG.SaveSystem;
 
 namespace RPG.QuestSystem
 {
-    public class PlayerQuestManager : BaseSingletonWithMono<PlayerQuestManager>, IPredicateEvaluators, ISaveable
+    public class PlayerQuestManager : BaseSingletonWithMono<PlayerQuestManager>, ISaveable
     {
         public QuestSO testKillQuest;
 
@@ -102,21 +100,6 @@ namespace RPG.QuestSystem
         {
             PlayerQuestStatus questStatus = GetQuestStatus(questSO);
             return questStatus is {IsFinish: true} ;
-        }
-        
-        public bool? Evaluator(DialogueConditionType type, ScriptableObject paramSO)
-        {
-            QuestSO questParamSO = paramSO as QuestSO;
-            switch (type)
-            {
-                // 任务类型Condition
-                case DialogueConditionType.HasQuest:
-                    return (GetQuestStatus(questParamSO) != null);
-                case DialogueConditionType.CompleteQuest:
-                    return GetQuestStatus(questParamSO)?.IsFinish;
-            }
-            // 此类型不具备任何Condition
-            return null;
         }
 
         public object CreateState()

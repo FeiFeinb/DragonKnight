@@ -31,7 +31,7 @@ namespace DialogueSystem.Editor
 
         public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
         {
-            return !(targetNode is DialogueGraphStartNode || targetNode is DialogueGraphEndNode);
+            return !(targetNode is DialogueGraphEndNode);
         }
 
         public override DialogueGraphBaseNodeSaveData CreateNodeData()

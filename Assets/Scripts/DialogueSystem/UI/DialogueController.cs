@@ -31,8 +31,9 @@ namespace RPG.DialogueSystem.Graph
         public void ContinueDialogue()
         {
             if (_nodeUniqueID == string.Empty) return;
-            PlayerDialogueManager.Instance.ContinueDialogue(_nodeUniqueID);
+            string newStr = _nodeUniqueID;
             _nodeUniqueID = string.Empty;
+            PlayerDialogueManager.Instance.ContinueDialogue(newStr);
         }
     }
 }

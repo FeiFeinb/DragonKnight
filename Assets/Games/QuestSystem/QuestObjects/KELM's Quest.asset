@@ -28,6 +28,3 @@ MonoBehaviour:
   - uniqueID: KELM01
     description: "\u4E0E\u5F17\u4F26\xB7\u957F\u987B\u4EA4\u8C08"
     target: 1
-    characterInfo: {fileID: 11400000, guid: 09595d7981b5ddd489adefd2e07ab3b3, type: 2}
-    dialogueNode: {fileID: 1728009397059438599, guid: 922000f9e7c53f9469a596f5b4222082, type: 2}
-    eventID: KELMFinish

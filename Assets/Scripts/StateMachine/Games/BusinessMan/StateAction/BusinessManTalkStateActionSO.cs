@@ -17,7 +17,8 @@ namespace RPG.StateMachine
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-            businessMan.SetTalkState();
+            // businessMan.SetTalkState();
+            Debug.Log("进入Talk状态");
         }
         public override void OnUpdate()
         {

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DialogueSystem.Old.Dialogue.Core;
 using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
@@ -27,7 +26,7 @@ namespace RPG.DialogueSystem.Graph
             // 序列化场景NPC记录字典
             foreach (var sceneNPC in FindObjectsOfType<DialogueNPC>())
             {
-                sceneCharacterInfoDic.Add(sceneNPC.NPCInfo, sceneNPC.gameObject);
+                sceneCharacterInfoDic.Add(sceneNPC.npcInfo, sceneNPC.gameObject);
             }
         }
     }
