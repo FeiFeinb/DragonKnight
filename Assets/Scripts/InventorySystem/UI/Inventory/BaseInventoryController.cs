@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using RPG.UI;
 using RPG.Module;
+using UnityTemplateProjects.InventorySystem;
 
 namespace RPG.InventorySystem
 {
@@ -19,7 +20,7 @@ namespace RPG.InventorySystem
             InventorySlot[] slots = GetSlots();
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].OnAfterUpdate += OnSlotUpdate;
+                slots[i].AddAfterUpdateListener(OnSlotUpdate);
             }
             // 鼠标进出UI背景事件
             EventTriggerManager.Instance.AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnPointerEnterUI(); });
@@ -105,13 +106,13 @@ namespace RPG.InventorySystem
             // 移除物品
             if (MouseItemIcon.controller.hoverUI == null)
             {
-                GetSlot(obj).ClearSlot();
+                InventoryHelper.Instance.ClearSlot(GetSlot(obj));
                 return;
             }
             // 拖拽移动
             if (MouseItemIcon.controller.hoverSlot != null)
             {
-                BaseInventoryObject.SwapItem(GetSlot(obj), MouseItemIcon.controller.hoverSlot);
+                InventoryHelper.Instance.SwapItem(GetSlot(obj), MouseItemIcon.controller.hoverSlot);
             }
         }
         protected void OnRightMouseClick(GameObject obj)

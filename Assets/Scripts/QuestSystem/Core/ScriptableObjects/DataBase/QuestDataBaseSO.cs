@@ -15,7 +15,7 @@ namespace RPG.QuestSystem
             // 清空字典
             questSODic.Clear();
             // 根据数组创建字典
-            questSODic = questSOs.ToDictionary((questSO) => questSO.questUniqueID, (questSO) => questSO);
+            questSODic = questSOs.ToDictionary(questSO => questSO.QuestUniqueID, questSO => questSO);
         }
     }
 }

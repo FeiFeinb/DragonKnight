@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using RPG.DialogueSystem.Graph;
 using UnityEditor.Experimental.GraphView;
@@ -32,9 +33,9 @@ namespace DialogueSystem.Editor
             return foldoutPair;
         }
 
-        private void AddObjectFieldInFoldout(Foldout foldout, DialogueEventSO objectValue = null)
+        private void AddObjectFieldInFoldout(Foldout foldout, DialogueEventType eventType = DialogueEventType.Others, ScriptableObject objectValue = null)
         {
-            foldout.AddObjectFieldFromUXML<DialogueEventSO>("Event:", objectValue);
+            foldout.AddEventFieldFromUXML(eventType, objectValue);
         }
 
         public override bool CanConnectNode(DialogueGraphBaseNode targetNode)
@@ -45,15 +46,19 @@ namespace DialogueSystem.Editor
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
             DialogueGraphEventNodeSaveData eventNodeSaveData = CreateBaseNodeData<DialogueGraphEventNodeSaveData>();
-            eventNodeSaveData.ObjectFields = _objectFieldFoldout.contentContainer.Query<ObjectField>()
-                .ForEach(field => field.value as DialogueEventSO).ToList();
+            eventNodeSaveData.EventFieldsData = _objectFieldFoldout.contentContainer.Query<VisualElement>(DialogueGraphUSSName.DIALOGUE_NODE_EVENT_FIELD)
+                .ForEach(eventField => new DialogueGraphEventNodeSaveData.EventTuple()
+                {
+                    EventType = (DialogueEventType)eventField.Q<EnumField>().value,
+                    SO = eventField.Q<ObjectField>().value as ScriptableObject
+                }).ToList();
             return eventNodeSaveData;
         }
 
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
             DialogueGraphEventNodeSaveData eventNodeSaveData = stateInfo as DialogueGraphEventNodeSaveData;
-            eventNodeSaveData.ObjectFields.ForEach(objectValue => AddObjectFieldInFoldout(_objectFieldFoldout, objectValue));
+            eventNodeSaveData.EventFieldsData.ForEach(eventFieldData => AddObjectFieldInFoldout(_objectFieldFoldout, eventFieldData.EventType, eventFieldData.SO));
         }
     }
 }

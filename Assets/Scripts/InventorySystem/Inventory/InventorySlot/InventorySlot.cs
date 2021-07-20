@@ -26,23 +26,52 @@ namespace RPG.InventorySystem
         [DisplayOnly] public int slotIndex;         // 插槽编号
         public AllowType allowType;                 // 允许防止的类型
         public InventorySlotData slotData;          // 插槽存储数据
-        [System.NonSerialized] public Action<int> OnBeforeUpdate;   // 插槽更新前事件
-        [System.NonSerialized] public Action<int> OnAfterUpdate;    // 插槽更新后事件
+        
+        private Action<int> _onBeforeUpdate;   // 插槽更新前事件
+        private Action<int> _onAfterUpdate;    // 插槽更新后事件
+
+        public void AddBeforeUpdateListener(Action<int> callBack)
+        {
+            _onBeforeUpdate += callBack;
+        }
+
+        public void AddAfterUpdateListener(Action<int> callBack)
+        {
+            _onAfterUpdate += callBack;
+        }
+
+        public void RemoveBeforeUpdateListener(Action<int> callBack)
+        {
+            _onBeforeUpdate -= callBack;
+        }
+
+        public void RemoveAfterUpdateListener(Action<int> callBack)
+        {
+            _onAfterUpdate -= callBack;
+        }
         
         // 添加数量
         public void AddAmount(int amount)
         {
-            OnBeforeUpdate?.Invoke(slotIndex);
+            _onBeforeUpdate?.Invoke(slotIndex);
             slotData.amount += amount;
-            OnAfterUpdate?.Invoke(slotIndex);
+            _onAfterUpdate?.Invoke(slotIndex);
         }
+
+        public void RemoveAmount(int amount)
+        {
+            _onBeforeUpdate?.Invoke(slotIndex);
+            slotData.amount -= amount;
+            _onAfterUpdate?.Invoke(slotIndex);
+        }
+        
         // 更新插槽值
         public void UpdateSlot(InventorySlotData _slotData)
         {
-            OnBeforeUpdate?.Invoke(slotIndex);
+            _onBeforeUpdate?.Invoke(slotIndex);
             slotData.itemData = _slotData.itemData;
             slotData.amount = _slotData.amount;
-            OnAfterUpdate?.Invoke(slotIndex);
+            _onAfterUpdate?.Invoke(slotIndex);
         }
         // 清空插槽值
         public void ClearSlot()

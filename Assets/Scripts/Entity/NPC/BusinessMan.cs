@@ -11,7 +11,6 @@ namespace RPG.Entity
     [RequireComponent(typeof(Animator), typeof(DialogueNPC), typeof(CapsuleCollider))]
     public class BusinessMan : BaseEntity
     {
-        public QuestSO Quest;
         public bool IsCollidePlayer => collidePlayerCheck.IsCollide;
         [SerializeField] private LayerMask targetLayer;             // 对象层级
         private Animator animator;
@@ -30,22 +29,6 @@ namespace RPG.Entity
             if (collidePlayerCheck.IsCollide && Input.GetKeyDown(KeyCode.E))
             {
                 dialogueNPC.StartDialogue();
-            }
-        }
-
-        public void StartQuest(QuestSO quest)
-        {
-            PlayerQuestManager.Instance.AddQuest(quest);
-        }
-
-        public void SubmitQuest(QuestSO quest)
-        {
-            // 判断任务是否发送成功
-            if (PlayerQuestRewardManager.Instance.SendReward(quest.questReward))
-            {
-                Debug.Log(string.Concat("完成了任务", quest.questTitle));
-                // 任务提交完成 移除任务
-                PlayerQuestManager.Instance.RemoveQuest(quest);
             }
         }
     }

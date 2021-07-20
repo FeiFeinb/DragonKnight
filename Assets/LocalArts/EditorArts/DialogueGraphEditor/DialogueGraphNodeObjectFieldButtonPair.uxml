@@ -1,6 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <ui:VisualElement style="flex-direction: row;">
+    <ui:VisualElement name="dialogue-node-event-field" style="flex-direction: column; border-top-width: 5px; border-bottom-width: 5px;">
+        <ui:VisualElement style="flex-direction: row; align-items: stretch; justify-content: space-between;">
+            <uie:EnumField label="Enum" value="Center" style="width: auto;" />
+            <ui:Button text="X" display-tooltip-when-elided="true" name="dialogue-node-delete-button" style="white-space: nowrap;" />
+        </ui:VisualElement>
         <uie:ObjectField label="Object Field" name="dialogue-node-object-field" />
-        <ui:Button text="X" display-tooltip-when-elided="true" name="dialogue-node-delete-button" />
     </ui:VisualElement>
 </ui:UXML>

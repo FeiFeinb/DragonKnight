@@ -14,11 +14,11 @@ namespace RPG.QuestSystem
         private Dictionary<PlayerQuestStatus, QuestSidebar> statusDic = new Dictionary<PlayerQuestStatus, QuestSidebar>();
         public override void PreInit()
         {
-            PlayerQuestManager.Instance.AddOnQuestUpdateListener(RenerateQuestSidebars);
+            PlayerQuestManager.Instance.AddOnQuestUpdateListener(RegenerateQuestSidebars);
             PlayerQuestManager.Instance.AddQuestObjectiveUpdateListener(ReDrawQuestState);
-            RenerateQuestSidebars();
+            RegenerateQuestSidebars();
         }
-        private void RenerateQuestSidebars()
+        private void RegenerateQuestSidebars()
         {
             // 清空任务列表
             Clear();
@@ -37,16 +37,7 @@ namespace RPG.QuestSystem
             // 遍历已记录的任务列表
             foreach (PlayerQuestStatus questStatus in PlayerQuestManager.Instance.GetQuestStatuses())
             {
-                // 已完成的任务
-                if (questStatus.IsFinish)
-                {
-                    statusDic[questStatus].SetFinishState(questStatus);
-                }
-                // 未完成的任务
-                else
-                {
-                    statusDic[questStatus].UpdateState(questStatus);
-                }
+                statusDic[questStatus].Test(questStatus);
             }
         }
         private void Clear()

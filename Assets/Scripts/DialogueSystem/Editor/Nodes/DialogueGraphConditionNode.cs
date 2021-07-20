@@ -20,7 +20,7 @@ namespace DialogueSystem.Editor
             AddOutputPort("False", Port.Capacity.Single);
             
             // 初值设定为是否拥有任务
-            _conditionField = CreateEnumField(ConditionDialogueNodeType.CompleteQuest, "ConditionType", evt => SwitchObjectFieldType((ConditionDialogueNodeType)evt.newValue));
+            _conditionField = CreateEnumField(DialogueConditionType.HasQuest, "ConditionType", evt => SwitchObjectFieldType((DialogueConditionType)evt.newValue, (DialogueConditionType)evt.previousValue));
             extensionContainer.Add(_conditionField);
 
             _determineField = CreateObjectField<QuestSO>("Quest:");
@@ -37,7 +37,7 @@ namespace DialogueSystem.Editor
         public override DialogueGraphBaseNodeSaveData CreateNodeData()
         {
             DialogueGraphConditionNodeSaveData conditionNodeSaveData = CreateBaseNodeData<DialogueGraphConditionNodeSaveData>();
-            conditionNodeSaveData.ConditionType = (ConditionDialogueNodeType) _conditionField.value;
+            conditionNodeSaveData.dialogueConditionType = (DialogueConditionType) _conditionField.value;
             conditionNodeSaveData.SourceSO = _determineField.value as ScriptableObject;
             return conditionNodeSaveData;
         }
@@ -45,22 +45,25 @@ namespace DialogueSystem.Editor
         public override void LoadNodeData(DialogueGraphBaseNodeSaveData stateInfo)
         {
             DialogueGraphConditionNodeSaveData conditionNodeSaveData = stateInfo as DialogueGraphConditionNodeSaveData;
-            _conditionField.value = conditionNodeSaveData.ConditionType;
-            SwitchObjectFieldType(conditionNodeSaveData.ConditionType);
+            _conditionField.value = conditionNodeSaveData.dialogueConditionType;
+            SwitchObjectFieldType(conditionNodeSaveData.dialogueConditionType, DialogueConditionType.Others);
             _determineField.value = conditionNodeSaveData.SourceSO;
         }
 
-        private void SwitchObjectFieldType(ConditionDialogueNodeType nodeType)
+        private void SwitchObjectFieldType(DialogueConditionType nodeType, DialogueConditionType oldType)
         {
             switch (nodeType)
             {
-                case ConditionDialogueNodeType.CompleteQuest:
-                case ConditionDialogueNodeType.HasQuest:
-                    _determineField.value = null;
-                    _determineField.objectType = typeof(QuestSO);
-                    _determineField.label = "Quest:";
+                case DialogueConditionType.CompleteQuest:
+                case DialogueConditionType.HasQuest:
+                    if (oldType != DialogueConditionType.CompleteQuest && oldType != DialogueConditionType.HasQuest)
+                    {
+                        _determineField.value = null;
+                        _determineField.objectType = typeof(QuestSO);
+                        _determineField.label = "Quest:";
+                    }
                     break;
-                case ConditionDialogueNodeType.HasItem:
+                case DialogueConditionType.HasItem:
                     _determineField.value = null;
                     _determineField.objectType = typeof(BaseItemObject);
                     _determineField.label = "Item:";

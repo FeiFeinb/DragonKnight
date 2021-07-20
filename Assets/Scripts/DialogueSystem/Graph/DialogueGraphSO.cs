@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DialogueSystem.Graph;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,7 @@ namespace RPG.DialogueSystem.Graph
     [CreateAssetMenu(fileName = "New DialogueGraphSO", menuName = "Dialogue System/Graph/DialogueGraphSO")]
     public class DialogueGraphSO : ScriptableObject
     {
+        public string UniqueID = Guid.NewGuid().ToString();
         public List<DialogueGraphEdgeSaveData> edgesSaveData = new List<DialogueGraphEdgeSaveData>(); // 连线数据数列
 
         public List<DialogueGraphStartNodeSaveData>
@@ -49,7 +51,7 @@ namespace RPG.DialogueSystem.Graph
                         // 找对孩子的UniqueID
                     string childUniqueID = dialogueGraphEdgesSaveData[0].InputNodeUniqueID;
                     DialogueGraphBaseNodeSaveData childNode = cacheDic[childUniqueID];
-                    var newTreeNode = new DialogueTreeNode {BaseNodeSaveData = childNode};
+                    var newTreeNode = new DialogueTreeNode(UniqueID, childNode);
                     
                     currentNode.childrenNodePair.Add(new DialogueTreeNode.TreeNodePair(newTreeNode, true));
                     // 根据UniqueID找到对应的节点 
@@ -68,7 +70,7 @@ namespace RPG.DialogueSystem.Graph
             else
             {
                 DialogueGraphBaseNodeSaveData startNodeSaveData = startNodesSaveData[0];
-                DialogueTreeNode rootNode = new DialogueTreeNode() {BaseNodeSaveData = startNodeSaveData};
+                DialogueTreeNode rootNode = new DialogueTreeNode(UniqueID, startNodeSaveData);
                 CreateNodeTree(startNodeSaveData, rootNode);
                 return rootNode;
             }
@@ -80,7 +82,7 @@ namespace RPG.DialogueSystem.Graph
             {
                 _cachedDic.Add(saveData.UniqueID, saveData);
             }
-
+            
             // if (_cachedDic.Count != 0) 
             // return _cachedDic;
             _cachedDic.Clear();

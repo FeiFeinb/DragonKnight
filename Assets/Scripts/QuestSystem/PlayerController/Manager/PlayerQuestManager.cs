@@ -18,6 +18,13 @@ namespace RPG.QuestSystem
         {
             AddQuest(testKillQuest);
         }
+
+        [ContextMenu("FinishTestKillQuest")]
+        public void FinishTestKillQuest()
+        {
+            FinishQuest(testKillQuest);
+        }
+        
         [SerializeField] private List<PlayerQuestStatus> playerQuestStatuses = new List<PlayerQuestStatus>();     // 玩家任务数列
         private Action onQuestUpdate;              // 任务更新
         private Action onQuestObjectiveUpdate;     //  任务目标更新
@@ -61,25 +68,38 @@ namespace RPG.QuestSystem
         }
         private PlayerQuestStatus GetQuestStatus(QuestSO questSO)
         {
-            return GetQuestStatuses()?.FirstOrDefault(status => status.QuestUniqueID == questSO.questUniqueID);
+            return GetQuestStatuses()?.FirstOrDefault(status => status.QuestUniqueID == questSO.QuestUniqueID);
         }
         
         public void AddQuest(QuestSO addQuest)
         {
             playerQuestStatuses.Add(new PlayerQuestStatus(addQuest));
             UpdateQuest();
+            UpdateQuestObjective();
         }
-        public void RemoveQuest(QuestSO removeQuest)
+        
+        public void FinishQuest(QuestSO removeQuest)
         {
-            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
-            // 查找符合条件的Status
-            foreach (var playerQuestStatus in playerQuestStatuses.Where(tempPlayerQuestStatus => tempQuestSODic[tempPlayerQuestStatus.QuestUniqueID] == removeQuest))
+            if (!IsQuestComplete(removeQuest))
             {
-                playerQuestStatus.PreDestroy();
-                playerQuestStatuses.Remove(playerQuestStatus);
-                break;
+                Debug.Log("任务还未完成");
+                return;
             }
-            UpdateQuest();
+            // 判断任务是否发送成功
+            if (PlayerQuestRewardManager.Instance.SendReward(removeQuest.Reward))
+            {
+                Debug.Log(string.Concat("完成了任务", removeQuest.Title));
+                // 任务提交完成 移除任务
+                Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
+                // 查找符合条件的Status
+                foreach (var playerQuestStatus in playerQuestStatuses.Where(tempPlayerQuestStatus => tempQuestSODic[tempPlayerQuestStatus.QuestUniqueID] == removeQuest))
+                {
+                    playerQuestStatus.PreDestroy();
+                    playerQuestStatuses.Remove(playerQuestStatus);
+                    break;
+                }
+                UpdateQuest();
+            }
         }
         
         public void KillQuestTrigger(string entityID)
@@ -91,15 +111,27 @@ namespace RPG.QuestSystem
             }
         }
 
+        /// <summary>
+        /// 是否拥有任务
+        /// </summary>
+        /// <param name="questSO">任务</param>
+        /// <returns>结果</returns>
         public bool HasQuest(QuestSO questSO)
         {
             return GetQuestStatus(questSO) != null;
         }
 
+        /// <summary>
+        /// 任务是否完成
+        /// </summary>
+        /// <param name="questSO">任务</param>
+        /// <returns>若无此任务返回false 有则返回任务状态</returns>
         public bool IsQuestComplete(QuestSO questSO)
         {
             PlayerQuestStatus questStatus = GetQuestStatus(questSO);
-            return questStatus is {IsFinish: true} ;
+            if (questStatus == null)
+                return false;
+            return questStatus.IsFinish;
         }
 
         public object CreateState()

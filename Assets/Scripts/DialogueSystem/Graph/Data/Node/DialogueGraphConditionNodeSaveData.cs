@@ -11,7 +11,7 @@ namespace RPG.DialogueSystem.Graph
     [System.Serializable]
     public class DialogueGraphConditionNodeSaveData : DialogueGraphBaseNodeSaveData, DialoguePreInit
     {
-        public ConditionDialogueNodeType ConditionType;
+        public DialogueConditionType dialogueConditionType;
 
         public ScriptableObject SourceSO;
 
@@ -24,7 +24,7 @@ namespace RPG.DialogueSystem.Graph
 
         public override bool HandleData(DialogueTreeNode treeNode, GameObject obj)
         { 
-            bool result = DialogueConditionHandler.Instance.switchDic[ConditionType].HandleCondition(SourceSO, obj);
+            bool result = DialogueHandler.Instance.ConditionHandlers[dialogueConditionType].HandleCondition(SourceSO, obj);
             treeNode.childrenNodePair[0].SetCanThrough(result);
             treeNode.childrenNodePair[1].SetCanThrough(!result);
             return true;
@@ -32,7 +32,10 @@ namespace RPG.DialogueSystem.Graph
 
         public void PreInit(GameObject obj)
         {
-            (SourceSO as DialogueConditionSO)?.Init(obj);
+            if (dialogueConditionType == DialogueConditionType.Others && SourceSO is DialogueConditionSO conditionSO)
+            {
+                conditionSO.Init(obj);
+            }
         }
     }
 }

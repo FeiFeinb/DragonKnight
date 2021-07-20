@@ -20,8 +20,7 @@ namespace RPG.Inertact
         {
             _interactionView.ClearButton();
         }
-
-
+        
         public void AddButton(string content, Action callBack)
         {
             InteractButton newButton = UIResourcesManager.Instance

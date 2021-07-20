@@ -16,8 +16,8 @@ namespace RPG.InventorySystem
             EquipmentInventorySlot[] slots = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot;
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].OnBeforeUpdate += OnBeforeUpdateEquipmentSlot;
-                slots[i].OnAfterUpdate += OnAfterUpdateEquipmentSlot;
+                slots[i].AddBeforeUpdateListener(OnBeforeUpdateEquipmentSlot);
+                slots[i].AddAfterUpdateListener(OnAfterUpdateEquipmentSlot);
             }
             // 属性变化时监听
             for (int i = 0; i < playerAttributes.Length; i++)

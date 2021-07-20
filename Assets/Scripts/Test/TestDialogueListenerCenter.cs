@@ -1,24 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using RPG.DialogueSystem.Graph;
 using RPG.Module;
+using UnityEngine;
 
 namespace UnityTemplateProjects.Test
 {
     public class TestDialogueListenerCenter : BaseSingletonWithMono<TestDialogueListenerCenter>
     {
+        private Dictionary<DialogueGraphSO, Action> dic = new Dictionary<DialogueGraphSO, Action>();
 
-        private Dictionary<string, Action> test = new Dictionary<string, Action>();
-        
-        
-        
-        public void AddListener(string matchID, Action callBack)
+        public void AddListener(DialogueGraphSO matchSO, Action callBack)
         {
-            test.Add(matchID, callBack);
+            if (dic.ContainsKey(matchSO))
+            {
+                dic[matchSO] += callBack;
+            }
+            else
+            {
+                dic.Add(matchSO, callBack);
+            }
+        }
+
+        public void RemoveListener(DialogueGraphSO matchSO, Action callBack)
+        {
+            if (dic.ContainsKey(matchSO))
+            {
+                dic[matchSO] -= callBack;
+                if (dic[matchSO] == null)
+                {
+                    dic.Remove(matchSO);
+                }
+            }
         }
         
-        public void Raise(string matchID)
+        public void Raise(DialogueGraphSO matchSO)
         {
-            test[matchID].Invoke();
+            dic[matchSO].Invoke();
         }
     }
 }

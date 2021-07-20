@@ -34263,9 +34263,9 @@ GameObject:
   - component: {fileID: 2199260235067961549}
   - component: {fileID: 2199260235067961541}
   - component: {fileID: 2199260235067961542}
-  - component: {fileID: 2199260235067961543}
   - component: {fileID: 2199260235067961537}
   - component: {fileID: 693494647}
+  - component: {fileID: 5342081370960170989}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -34448,19 +34448,6 @@ MonoBehaviour:
     modifiedInt:
       baseValue: 0
       modifiedValue: 0
---- !u!114 &2199260235067961543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199260235067961550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5526932fce65a4aa2dd5e8360b4a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialoguePlayerInfo: {fileID: 11400000, guid: 1db953ddf169d67419f8595c3c3de64f, type: 2}
 --- !u!114 &2199260235067961537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34487,10 +34474,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcdd9c167012c147893d2133b281f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coin:
+  _coin:
     goldCoin: 0
     silverCoin: 0
     copperCoin: 0
+--- !u!114 &5342081370960170989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199260235067961550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f48e75c44a64b0e8902e61862443f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2199260592243329924
 GameObject:
   m_ObjectHideFlags: 0

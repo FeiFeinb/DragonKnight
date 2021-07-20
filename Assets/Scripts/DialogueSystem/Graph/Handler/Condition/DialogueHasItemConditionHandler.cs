@@ -1,14 +1,14 @@
 ﻿using RPG.DialogueSystem.Graph;
-using RPG.QuestSystem;
+using RPG.InventorySystem;
 using UnityEngine;
 
 namespace DialogueSystem.Graph
 {
-    public class DialogueCompleteQuestConditionHandler : DialogueBaseConditionHandler
+    public class DialogueHasItemConditionHandler : IDialogueConditionHandler
     {
         public bool HandleCondition(ScriptableObject sourceSO, GameObject obj)
         {
-            return PlayerQuestManager.Instance.IsQuestComplete(sourceSO as QuestSO);
+            return PlayerInventoryManager.Instance.HasItem(sourceSO as BaseItemObject);
         }
     }
 }

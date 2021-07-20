@@ -1,35 +1,38 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;
 using RPG.DialogueSystem.Graph;
+
 namespace RPG.InventorySystem
 {
     public class PlayerInventoryManager : BaseSingletonWithMono<PlayerInventoryManager>, ISaveable
     {
-        public PlayerInventoryObject inventoryObject;       // 玩家背包
-        public EquipmentInventoryObject equipmentObject;    // 装备栏
-        
+        public PlayerInventoryObject inventoryObject; // 玩家背包
+        public EquipmentInventoryObject equipmentObject; // 装备栏
+
         private void OnTriggerEnter(Collider other)
         {
             // 捡起物品
+            // TODO: 将从地上捡起改为UI界面中拾取
             var groundItem = other.GetComponent<GroundItem>();
             if (groundItem)
             {
-                var result = inventoryObject.AddItem(new ItemData(groundItem.itemObj), 1);
-                if (result == null)
+                int itemLeft = inventoryObject.AddWithoutCheck(new ItemData(groundItem.itemObj), 1);
+                if (itemLeft == 0)
                 {
                     Destroy(other.gameObject);
                 }
                 else
                 {
-                    Debug.Log($"背包已满，无法捡起{result.Item1.id}号物品-共{result.Item2}个");
+                    Debug.Log($"背包已满 剩下{itemLeft}个无法装下");
                 }
             }
         }
-        
+
         private void OnApplicationQuit()
         {
             // 退出游戏时清空背包
@@ -54,6 +57,7 @@ namespace RPG.InventorySystem
                 Debug.LogError("Cant Load State -- PlayerInventory");
                 return;
             }
+
             // 加载字典中的信息
             inventoryObject.LoadData(saveSlotDic[inventoryObject.GetHashCode().ToString()]);
             equipmentObject.LoadData(saveSlotDic[equipmentObject.GetHashCode().ToString()]);
@@ -66,6 +70,15 @@ namespace RPG.InventorySystem
         public bool HasItem(BaseItemObject baseItemObject)
         {
             return inventoryObject.HasItem(baseItemObject.item.id);
+        }
+
+        public BaseInventoryObject GetInventoryObjectFromSlot(InventorySlot slot)
+        {
+            if (inventoryObject.inventorySlots.Any(tempSlot => tempSlot == slot))
+                return inventoryObject;
+            if (equipmentObject.equipmentInventorySlot.Any(tempSlot => tempSlot == slot))
+                return equipmentObject;
+            return null;
         }
     }
 }

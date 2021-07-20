@@ -10,7 +10,7 @@
         public const string DIALOGUE_NODE_ADD_BUTTON = "dialogue-node-add-button";
         public const string DIALOGUE_NODE_DELETE_BUTTON = "dialogue-node-delete-button";
         public const string DIALOGUE_NODE_OBJECT_FIELD = "dialogue-node-object-field";
-        
+        public const string DIALOGUE_NODE_EVENT_FIELD = "dialogue-node-event-field";
         public const string DIALOGUE_WINDOW_SAVE_BUTTON = "save-button";
         public const string DIALOGUE_WINDOW_LOAD_BUTTON = "load-button";
         public const string DIALOGUE_WINDOW_SELECT_LABEL = "select-label";

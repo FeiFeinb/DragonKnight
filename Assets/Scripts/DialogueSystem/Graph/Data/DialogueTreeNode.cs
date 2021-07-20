@@ -23,7 +23,13 @@ namespace RPG.DialogueSystem.Graph
             public readonly DialogueTreeNode Node;
             public bool CanThrough;
         }
-        
+
+        public DialogueTreeNode(string dialogueGraphSOUniqueID, DialogueGraphBaseNodeSaveData baseNodeSaveData)
+        {
+            DialogueGraphSOUniqueID = dialogueGraphSOUniqueID;
+            BaseNodeSaveData = baseNodeSaveData;
+        }
+        public string DialogueGraphSOUniqueID;
         public DialogueGraphBaseNodeSaveData BaseNodeSaveData;
         public readonly List<TreeNodePair> childrenNodePair = new List<TreeNodePair>();
         

@@ -6,14 +6,11 @@ namespace RPG.QuestSystem
 
     public class KillQuestSO : QuestSO
     {
-        public List<KillQuestObjective> killQuestObjectives;        // 任务目标
+        public List<KillQuestObjective> KillQuestObjectives;        // 任务目标
 
         public override IEnumerable<QuestObjective> GetObjectives()
         {
-            foreach (KillQuestObjective _objective in killQuestObjectives)
-            {
-                yield return _objective;
-            }
+            return KillQuestObjectives;
         }
     }
 }

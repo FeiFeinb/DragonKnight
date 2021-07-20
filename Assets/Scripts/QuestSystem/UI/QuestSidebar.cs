@@ -14,6 +14,8 @@ namespace RPG.QuestSystem
         [SerializeField] private Text questTitle;       // 侧栏任务标题
         private Dictionary<QuestObjective, QuestObjectiveUI> objectiveDic = new Dictionary<QuestObjective, QuestObjectiveUI>();
 
+        private QuestObjectiveUI finishUI;
+        
         public void InitQuestSidebarInfo(PlayerQuestStatus questStatus)
         {
             objectiveDic = new Dictionary<QuestObjective, QuestObjectiveUI>();
@@ -29,53 +31,50 @@ namespace RPG.QuestSystem
                     QuestToolTipsController.controller.OnExit(questStatus);
                 }
             });
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestUniqueID, out QuestSO questSO))
-            {
-                Debug.LogError("Cant Find Quest");
-            }
             // 设置任务标题
-            questTitle.text = questSO.questTitle;
+            questTitle.text = questStatus.Title;
             // 设置任务目标
-            foreach (QuestObjective questObjective in questSO.GetObjectives())
+            foreach (QuestObjective questObjective in questStatus.GetObjectives())
             {
                 // 生成并初始化侧栏任务目标
                 QuestObjectiveUI tempQuestObjectiveUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
-                tempQuestObjectiveUI.SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.Target, questObjective.Description);
+                tempQuestObjectiveUI.SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.TargetAmount, questObjective.Description);
                 // 添加记录至数列中
                 objectiveDic.Add(questObjective, tempQuestObjectiveUI);
             }
-        }
-        public void SetFinishState(PlayerQuestStatus questStatus)
-        {
-            // 清空所有任务目标UI
-            Clear();
             // 判断任务是否完成 完成则清空 不完成则更新进度
-            QuestObjectiveUI tempQuestObjectiveUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
+            finishUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
             // 生成并初始化侧栏任务目标
-            tempQuestObjectiveUI.SetQuestObjectiveSidebar("已完成");
-            // 添加记录至数列中
-            objectiveDic.Add(new QuestObjective(), tempQuestObjectiveUI);
+            finishUI.SetQuestObjectiveSidebar("已完成");
+            finishUI.gameObject.SetActive(false);
         }
-        public void UpdateState(PlayerQuestStatus questStatus)
+
+        public void Test(PlayerQuestStatus questStatus)
         {
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(questStatus.QuestUniqueID, out QuestSO questSO))
+            bool isQuestFinish = questStatus.IsFinish;
+            SetCompleteObjectiveActive(!isQuestFinish);
+            finishUI.gameObject.SetActive(isQuestFinish);
+            if (!isQuestFinish)
             {
-                Debug.LogError("Cant Find Quest");
+                UpdateState(questStatus);
             }
+        }
+        private void UpdateState(PlayerQuestStatus questStatus)
+        {
+            SetCompleteObjectiveActive(true);
             // 只更新进度
-            foreach (QuestObjective questObjective in questSO.GetObjectives())
+            foreach (QuestObjective questObjective in questStatus.GetObjectives())
             {
                 // 生成并初始化侧栏任务目标
-                objectiveDic[questObjective].SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.Target, questObjective.Description);
+                objectiveDic[questObjective].SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.TargetAmount, questObjective.Description);
             }
         }
-        public void Clear()
+        private void SetCompleteObjectiveActive(bool isActive)
         {
             foreach (var objectivePair in objectiveDic)
             {
-                Destroy(objectivePair.Value.gameObject);
+                objectivePair.Value.gameObject.SetActive(isActive);
             }
-            objectiveDic.Clear();
         }
     }
 }

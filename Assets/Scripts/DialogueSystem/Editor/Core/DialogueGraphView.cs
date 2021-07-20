@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RPG.DialogueSystem.Graph;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace DialogueSystem.Editor
         public DialogueGraphView(DialogueGraphEditorWindow editorWindow)
         {
             _editorWindow = editorWindow;
-            
             // 添加对话编辑器Style
             name = DialogueGraphUSSName.DIALOGUE_GRAPH;
             StyleSheet styleSheet =

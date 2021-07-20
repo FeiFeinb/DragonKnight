@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityTemplateProjects.InventorySystem;
+
 namespace RPG.InventorySystem
 {
     [CreateAssetMenu(fileName = "New EquipmentItemObject", menuName = "Inventory System/ItemObject/EquipmentItemObject")]
@@ -24,7 +26,7 @@ namespace RPG.InventorySystem
             {
                 Debug.Log("物品未被装备，将其装备");
                 InventorySlot targetSlot = EquipmentController.controller.GetTypeSlot(itemType.equipmentType);
-                BaseInventoryObject.SwapItem(originSlot, targetSlot);
+                InventoryHelper.Instance.SwapItem(originSlot, targetSlot);
             }
         }
     }

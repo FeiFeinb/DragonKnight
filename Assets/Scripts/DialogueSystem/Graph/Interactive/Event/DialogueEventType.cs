@@ -1,24 +1,24 @@
-namespace RPG.DialogueSystem.Graph
+﻿namespace RPG.DialogueSystem.Graph
 {
-    public enum ConditionDialogueNodeType
+    public enum DialogueEventType
     {
         /// <summary>
-        /// 拥有任务
+        /// 接受任务
         /// </summary>
-        HasQuest,
+        AcceptQuest,
         
         /// <summary>
-        /// 完成任务
+        /// 推进任务
         /// </summary>
-        CompleteQuest,
+        ProgressQuest,
         
         /// <summary>
-        /// 拥有物品
+        /// 提交任务
         /// </summary>
-        HasItem,
+        SubmitQuest,
         
         /// <summary>
-        /// 其他
+        /// 其他事件
         /// </summary>
         Others
     }

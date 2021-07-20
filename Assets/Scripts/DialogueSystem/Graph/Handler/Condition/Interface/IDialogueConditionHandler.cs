@@ -6,7 +6,7 @@ namespace DialogueSystem.Graph
     /// <summary>
     /// 对话条件处理接口
     /// </summary>
-    public interface DialogueBaseConditionHandler
+    public interface IDialogueConditionHandler
     {
         /// <summary>
         /// 条件处理

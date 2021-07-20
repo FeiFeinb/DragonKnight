@@ -6,62 +6,68 @@ using UnityEngine;
 using RPG.Module;
 using RPG.SaveSystem;
 using RPG.Utility;
+using UnityEditor;
 
 namespace RPG.TradeSystem
 {
     public class PlayerTradeManager : BaseSingletonWithMono<PlayerTradeManager>, ISaveable
     {
-        [SerializeField] private Coin coin;          // 玩家上金币量
-        private Action<string> onCoinUpdate;        // 货币数量变更事件
+        [SerializeField] private Coin _coin;          // 玩家上金币量
+        
+        private Action<string> _onCoinUpdate;        // 货币数量变更事件
 
-        public void AddCoin(Coin _coin)
+        public void AddCoin(Coin coin)
         {
             // 金币累加计算
-            coin.AddCopperCoin(_coin.copperCoin);
-            coin.AddSilverCoin(_coin.silverCoin);
-            coin.AddGoldCoin(_coin.goldCoin);
+            _coin.AddCopperCoin(coin.copperCoin);
+            _coin.AddSilverCoin(coin.silverCoin);
+            _coin.AddGoldCoin(coin.goldCoin);
             // 调用事件
-            onCoinUpdate?.Invoke(coin.coinStr);
+            _onCoinUpdate?.Invoke(_coin.coinStr);
         }
-
-        public bool SubCoin(Coin _coin)
+        
+        private void SubCoin(Coin coin)
         {
-            if (_coin.value > coin.value)
-            {
-                Debug.LogError("超出金额");
-                return false;
-            }
-
             // 金币减法计算
-            coin.SubCopperCoin(_coin.copperCoin);
-            coin.SubSilverCoin(_coin.silverCoin);
-            coin.SubGoldCoin(_coin.goldCoin);
+            _coin.SubCopperCoin(coin.copperCoin);
+            _coin.SubSilverCoin(coin.silverCoin);
+            _coin.SubGoldCoin(coin.goldCoin);
             // 调用事件
-            onCoinUpdate?.Invoke(coin.coinStr);
-            return true;
+            _onCoinUpdate?.Invoke(_coin.coinStr);
         }
 
+        public bool IsCoinEnough(Coin coin)
+        {
+            return _coin.value > coin.value;
+        }
+        
         public bool BuyItem(BaseItemObject itemObj)
         {
-            // 背包已满或没钱购买
-            if (PlayerInventoryManager.Instance.inventoryObject.EmptySlotNum == 0 || !SubCoin(itemObj.sellPrice)) return false;
-            // 成功购买物品
-            return PlayerInventoryManager.Instance.inventoryObject.AddItem(new ItemData(itemObj), 1) == null;
+            int buyAmount = 1;
+            Coin sellPrice = itemObj.sellPrice;
+            
+            if (IsCoinEnough(sellPrice) && PlayerInventoryManager.Instance.inventoryObject.AddWithCheck(new ItemData(itemObj), buyAmount))
+            {
+                // 成功购买物品
+                SubCoin(sellPrice);
+                return true;
+            }
+            return false;
         }
 
         public void AddOnCoinUpdateListener(Action<string> action)
         {
-            onCoinUpdate += action;
+            _onCoinUpdate += action;
         }
 
         public void RemoveOnCoinUpdateListener(Action<string> action)
         {
-            onCoinUpdate -= action;
+            _onCoinUpdate -= action;
         }
 
         public object CreateState()
         {
-            return coin as object;
+            return _coin as object;
         }
 
         public void LoadState(object stateInfo)
@@ -73,8 +79,8 @@ namespace RPG.TradeSystem
                 return;
             }
 
-            coin = tempCoin;
-            onCoinUpdate?.Invoke(coin.coinStr);
+            _coin = tempCoin;
+            _onCoinUpdate?.Invoke(_coin.coinStr);
         }
 
         public void ResetState()

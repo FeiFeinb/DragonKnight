@@ -1,55 +1,66 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using System.Linq;
+using RPG.Module;
 using UnityEngine;
 using UnityEditor;
+
 namespace RPG.InventorySystem
 {
     public abstract class BaseInventoryObject : ScriptableObject
     {
-        [ContextMenu("InitSlot")]
-        public void InitSlot()
+        protected readonly Dictionary<int, Action<int>> itemAddedCallBackDic = new Dictionary<int, Action<int>>();
+
+        public void RegisterAddItemListener(int itemID, Action<int> callBack)
         {
-            InventorySlot[] slots = GetSlot().ToArray();
-            for (int i = 0; i < slots.Length; i++)
+            if (itemAddedCallBackDic.ContainsKey(itemID))
             {
-                slots[i].slotIndex = i;
+                itemAddedCallBackDic[itemID] += callBack;
             }
-        }
-        public static void SwapItem(InventorySlot originSlot, InventorySlot targetSlot)
-        {
-            // 禁止空物体与物体交换
-            if (originSlot.IsEmpty) return;
-            // 检测是否能交换
-            if (originSlot.TypeMatch(targetSlot.ItemObj) && targetSlot.TypeMatch(originSlot.ItemObj))
+            else
             {
-                // 只更新物品和数量
-                InventorySlotData tempData = new InventorySlotData(originSlot.slotData);
-                originSlot.UpdateSlot(targetSlot.slotData);
-                targetSlot.UpdateSlot(tempData);
+                itemAddedCallBackDic.Add(itemID, callBack);
             }
         }
 
-        public void RemoveItem(ItemData item)
+        public void RemoveAddItemListener(int itemID, Action<int> callBack)
         {
-            foreach (InventorySlot inventorySlot in GetSlot())
+            if (itemAddedCallBackDic.ContainsKey(itemID))
             {
-                if (inventorySlot.slotData.itemData == item)
-                {
-                    inventorySlot.ClearSlot();
-                }
+                itemAddedCallBackDic[itemID] -= callBack;
+            }
+            else
+            {
+                Debug.LogError("字典中不包含此物品回调");
             }
         }
+        
+        public void HandleCallBack(int itemId, int amount)
+        {
+            if (itemId >= 0)
+            {
+                Debug.Log( $"{GlobalResource.Instance.itemDataBase.itemObjs[itemId].name}的数量变换了{amount}个");
+            }
+            if (itemAddedCallBackDic.ContainsKey(itemId))
+            {
+                itemAddedCallBackDic[itemId]?.Invoke(amount);
+            }
+        }
+
 
         [ContextMenu("Clear Inventory")]
         public void Clear()
         {
             foreach (InventorySlot inventorySlot in GetSlot())
             {
+                int itemID = inventorySlot.slotData.itemData.id;
+                int amount = inventorySlot.slotData.amount;
                 inventorySlot.ClearSlot();
+                HandleCallBack(itemID, -amount);
             }
         }
 
@@ -61,9 +72,10 @@ namespace RPG.InventorySystem
             {
                 slotData[i] = slots[i].slotData;
             }
+
             return slotData;
         }
-        
+
         public void LoadData(object dataObj)
         {
             if (!(dataObj is InventorySlotData[] loadSlotData))
@@ -71,16 +83,27 @@ namespace RPG.InventorySystem
                 Debug.LogError("LoadSlotData Is Empty");
                 return;
             }
+
             // TODO: 修复加载的存档的格子数量与当前不一致问题
             InventorySlot[] slots = GetSlot().ToArray();
             for (int i = 0; i < loadSlotData.Length; i++)
             {
                 // 只更新物品数据和数量
+                // TODO: 是否在加载存档的时候通知外界该格子已更新
                 slots[i].UpdateSlot(loadSlotData[i]);
             }
         }
         
-        
+        [ContextMenu("InitSlot")]
+        public void InitSlot()
+        {
+            InventorySlot[] slots = GetSlot().ToArray();
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].slotIndex = i;
+            }
+        }
+
         protected abstract IEnumerable<InventorySlot> GetSlot();
     }
 }

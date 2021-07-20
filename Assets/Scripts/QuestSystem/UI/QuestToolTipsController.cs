@@ -24,14 +24,14 @@ namespace RPG.QuestSystem
                 Debug.LogError("Cant Find QuestSO");
             }
             // 设置提示栏任务简述
-            questToolTipsView.SetQuestResumeText(questSO.questResume);
+            questToolTipsView.SetQuestResumeText(questSO.Resume);
             // 设置提示栏任务目标
             foreach (QuestObjective questObjective in questSO.GetObjectives())
             {
-                questToolTipsView.SetQuestObjective(currentQuest.GetProgress(questObjective), questObjective.Target, questObjective.Description);
+                questToolTipsView.SetQuestObjective(currentQuest.GetProgress(questObjective), questObjective.TargetAmount, questObjective.Description);
             }
             // 设置提示栏任务奖励
-            questToolTipsView.SetQuestReward(questSO.questReward);
+            questToolTipsView.SetQuestReward(questSO.Reward);
         }
 
         public void OnEnter(PlayerQuestStatus _questStatus)

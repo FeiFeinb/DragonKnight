@@ -25,8 +25,8 @@ namespace RPG.InventorySystem
             EquipmentInventorySlot[] slots = PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot;
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].OnBeforeUpdate += OnTakeOff;
-                slots[i].OnAfterUpdate += OnWear;
+                slots[i].AddBeforeUpdateListener(OnTakeOff);
+                slots[i].AddAfterUpdateListener(OnWear);
             }
         }
         private void OnTakeOff(int slotIndex)

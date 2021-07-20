@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RPG.DialogueSystem.Graph;
+using RPG.QuestSystem;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -112,31 +113,66 @@ namespace DialogueSystem.Editor
         /// 从UXML中创建ObjectField
         /// </summary>
         /// <param name="foldout">源类</param>
-        /// <param name="labelStr">ObjectField中的标签</param>
+        /// <param name="objectLabelStr">ObjectField中的标签</param>
+        /// <param name="enumLabelStr">EnumField中的标签</param>
         /// <param name="objectValue">记录的数据</param>
-        /// <typeparam name="T">记录的数据类型</typeparam>
+        /// <param name="eventType">Type类型</param>
         /// <returns>创建的ObjectField</returns>
-        public static ObjectField AddObjectFieldFromUXML<T>(this Foldout foldout, string labelStr, T objectValue = null)
-            where T : ScriptableObject
+        public static ObjectField AddEventFieldFromUXML(this Foldout foldout,
+            DialogueEventType eventType = DialogueEventType.Others, ScriptableObject objectValue = null)
         {
+            void SwitchObjectType(ObjectField field, DialogueEventType newValue, DialogueEventType oldValue)
+            {
+                switch (newValue)
+                {
+                    case DialogueEventType.AcceptQuest:
+                    case DialogueEventType.SubmitQuest:
+                        if (oldValue != DialogueEventType.AcceptQuest && oldValue != DialogueEventType.SubmitQuest)
+                        {
+                            // 重置
+                            field.value = null;
+                            field.objectType = typeof(QuestSO);
+                            field.label = "QuestSO:";
+                        }
+                        break;
+                    case DialogueEventType.ProgressQuest:
+                        field.value = null;
+                        field.objectType = typeof(DialogueQuestSO);
+                        field.label = "DialogueQuestSO:";
+                        break;
+                    case DialogueEventType.Others:
+                        field.value = null;
+                        field.objectType = typeof(DialogueEventSO);
+                        field.label = "EventSO:";
+                        break;
+                }
+            }
+
             // TODO: 建立VisualTreeAsset资源创建类
-            VisualTreeAsset buttonPairTreeAsset =
+            VisualTreeAsset eventFieldTreeAsset =
                 AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(DialogueGraphAssetsPath
                     .DialogueGraphNodeObjectFieldButtonPair);
-            VisualElement objectFieldButtonPair = buttonPairTreeAsset.Instantiate();
+            VisualElement eventField = eventFieldTreeAsset.Instantiate();
 
             ObjectField objectField =
-                objectFieldButtonPair.Q<ObjectField>(DialogueGraphUSSName.DIALOGUE_NODE_OBJECT_FIELD);
-            objectField.objectType = typeof(T);
+                eventField.Q<ObjectField>(DialogueGraphUSSName.DIALOGUE_NODE_OBJECT_FIELD);
+            // 初值设定为DialogueEventType.Others 故ObjectField的初始类型为DialogueEventSO
+            SwitchObjectType(objectField, eventType, DialogueEventType.Others);
             objectField.value = objectValue;
-            objectField.label = labelStr;
             objectField.labelElement.name = DialogueGraphUSSName.DIALOGUE_NODE_LABEL;
 
-            Button deleteButton = objectFieldButtonPair.Q<Button>(DialogueGraphUSSName.DIALOGUE_NODE_DELETE_BUTTON);
-            // TODO: 设置按钮样式
-            deleteButton.clickable.clicked += () => foldout.contentContainer.Remove(objectFieldButtonPair);
+            EnumField enumField = eventField.Q<EnumField>();
+            enumField.Init(eventType);
+            enumField.label = "EventType:";
+            enumField.labelElement.name = DialogueGraphUSSName.DIALOGUE_NODE_LABEL;
+            enumField.RegisterValueChangedCallback(evt =>
+                SwitchObjectType(objectField, (DialogueEventType) evt.newValue, (DialogueEventType) evt.previousValue));
 
-            foldout.contentContainer.Add(objectFieldButtonPair);
+            Button deleteButton = eventField.Q<Button>(DialogueGraphUSSName.DIALOGUE_NODE_DELETE_BUTTON);
+            // TODO: 设置按钮样式
+            deleteButton.clickable.clicked += () => foldout.contentContainer.Remove(eventField);
+
+            foldout.contentContainer.Add(eventField);
             return objectField;
         }
 
@@ -153,8 +189,9 @@ namespace DialogueSystem.Editor
             //         .ToList();
             // }
 
-            Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData = new Dictionary<string, DialogueGraphBaseNodeSaveData>();
-            
+            Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData =
+                new Dictionary<string, DialogueGraphBaseNodeSaveData>();
+
             // 储存节点数据
             _selectSO.Clear();
             IEnumerable<DialogueGraphBaseNode> baseNodes = graphView.nodes.Cast<DialogueGraphBaseNode>();
@@ -184,7 +221,7 @@ namespace DialogueSystem.Editor
                         break;
                 }
             }
-            
+
             // 构建节点连线数组
             foreach (Edge edge in graphView.edges.Where(edge => edge.input != null))
             {
@@ -233,7 +270,7 @@ namespace DialogueSystem.Editor
 
             // originNodeUniqueID - List<originPortIndex, targetNodeUniqueID, targetPortIndex>
             var edgeDataDic = new Dictionary<string, List<Tuple<int, string, int>>>();
-            
+
             foreach (DialogueGraphEdgeSaveData edgeSaveData in _selectSO.edgesSaveData)
             {
                 string originNodeUniqueID = edgeSaveData.OutputNodeUniqueID;

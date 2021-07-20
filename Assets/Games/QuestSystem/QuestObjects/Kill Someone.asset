@@ -12,24 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1db71d8de97124d91811a7d427ed51, type: 3}
   m_Name: Kill Someone
   m_EditorClassIdentifier: 
-  questUniqueID: "\u6D88\u706D\u517D\u4EBA"
-  questTitle: "\u6D88\u706D\u517D\u4EBA"
-  questResume: "\u66B4\u8E81\u7684\u517D\u4EBA\u6B63\u5728\u88AD\u51FB\u6211\u4EEC\u7684\u6751\u5E84"
-  questReward:
+  QuestUniqueID: KILL
+  Title: "\u6D88\u706D\u90AA\u6076\u7684\u517D\u4EBA"
+  Resume: "\u662F\u65F6\u5019\u8BE5\u6E05\u7406\u4E00\u4E0B\u827E\u6CFD\u62C9\u65AF\u4E0A\u7684\u6E23\u6ED3\u4E86\uFF01"
+  Reward:
     coin:
-      goldCoin: 20
-      silverCoin: 20
-      copperCoin: 20
+      goldCoin: 1
+      silverCoin: 1
+      copperCoin: 1
     experience: 0
-    itemObj: {fileID: 11400000, guid: ab74d5b4e72e2b74283c9bdff5853f21, type: 2}
-    itemObjAmount: 1
-  questStory: 
-  killQuestObjectives:
-  - uniqueID: XMSR01
+    itemObj: {fileID: 0}
+    itemObjAmount: 0
+  Story: 
+  KillQuestObjectives:
+  - objectiveUniqueID: KILL01
     description: "\u6D88\u706D\u5965\u683C\u745E\u739B\u7684\u517D\u4EBA"
-    target: 2
+    targetAmount: 3
     entityID: 101
-  - uniqueID: XMSR02
-    description: "\u6D88\u706D\u81F3\u9AD8\u5CAD\u7684\u517D\u4EBA"
-    target: 3
-    entityID: 102

@@ -2,9 +2,10 @@ using UnityEngine;
 using RPG.InventorySystem;
 namespace RPG.QuestSystem
 {
-    class SeekItemQuestObjective : DialogueQuestObjective
+    [System.Serializable]
+    public class SeekItemQuestObjective : QuestObjective
     {
+        public BaseItemObject QuestItemObj => questItemObj;
         [SerializeField] private BaseItemObject questItemObj;           // 任务物品
-        
     }
 }

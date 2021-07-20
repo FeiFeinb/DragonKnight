@@ -5,13 +5,13 @@ namespace RPG.QuestSystem
     public class QuestObjective
     {
         public string Description => description;
-        public int Target => target;
-        public string UniqueID => uniqueID;
-        [Tooltip("任务标识ID"), SerializeField] private string uniqueID;
+        public int TargetAmount => targetAmount;
+        public string ObjectiveUniqueID => objectiveUniqueID;
+        [Tooltip("任务标识ID"), SerializeField] protected string objectiveUniqueID;
         
-        [Tooltip("任务描述"), SerializeField] private string description = default;
+        [Tooltip("任务描述"), SerializeField] protected string description = default;
 
-        [Tooltip("达成任务所需要的数量"), SerializeField] private int target = -1;
+        [Tooltip("达成任务所需要的数量"), SerializeField] protected int targetAmount = -1;
 
     }
 }

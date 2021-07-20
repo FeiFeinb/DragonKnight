@@ -12,6 +12,10 @@ using UnityEditor;
 
 public class TestClass : MonoBehaviour
 {
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))

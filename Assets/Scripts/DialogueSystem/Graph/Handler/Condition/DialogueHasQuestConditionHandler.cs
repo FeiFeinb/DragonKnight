@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DialogueSystem.Graph
 {
-    public class DialogueHasQuestConditionHandler : DialogueBaseConditionHandler
+    public class DialogueHasQuestConditionHandler : IDialogueConditionHandler
     {
         public bool HandleCondition(ScriptableObject conditionSO, GameObject obj)
         {

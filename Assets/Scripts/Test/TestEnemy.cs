@@ -7,7 +7,7 @@ using RPG.QuestSystem;
 using RPG.Entity;
 using UnityEngine.Events;
 
-public class TestEnemy : BaseEntity/*, IQuestListener*/
+public class TestEnemy : BaseEntity
 {
     private Action onDeath;
     private void Start()
