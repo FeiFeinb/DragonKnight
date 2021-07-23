@@ -19,6 +19,8 @@ namespace RPG.Utility
             }
             isCollide = Mathf.Abs(Vector3.Angle(results[0].transform.position - transform.position, transform.forward)) < angle;
         }
+        
+        # if UNITY_EDITOR
         protected override void OnDrawGizmosSelected()
         {
             base.OnDrawGizmosSelected();
@@ -26,6 +28,7 @@ namespace RPG.Utility
             Handles.DrawSolidArc(checkVec, transform.up, transform.forward, angle, radius);
             Handles.DrawSolidArc(checkVec, transform.up, transform.forward, -angle, radius);
         }
+        #endif
     }
 }
 

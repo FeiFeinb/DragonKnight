@@ -14,11 +14,13 @@ namespace RPG.Utility
         [SerializeField] protected Color gizmosColor;               // 外框颜色
         protected readonly Collider[] results = new Collider[5];    // 碰撞体暂存数组
         
+        # if UNITY_EDITOR
         protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = gizmosColor;
             Handles.color = gizmosColor;
         }
+        #endif
     }
 }
 
