@@ -15,10 +15,7 @@ namespace RPG.DialogueSystem.Graph
         [SerializeField] private Button _continueButton;
 
         private string _nodeUniqueID;
-
-        public override void PreInit()
-        {
-        }
+        
 
         public void SetDialogueDisplay(DialogueCharacterInfoSO characterInfoSO, string content, string nodeUniqueID)
         {
@@ -35,5 +32,6 @@ namespace RPG.DialogueSystem.Graph
             _nodeUniqueID = string.Empty;
             PlayerDialogueManager.Instance.ContinueDialogue(newStr);
         }
+
     }
 }

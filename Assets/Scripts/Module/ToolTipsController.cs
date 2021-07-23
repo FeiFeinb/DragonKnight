@@ -17,6 +17,7 @@ namespace RPG.Module
         private RectTransform toolTipsRect;
         public override void PreInit()
         {
+            base.PreInit();
             toolTipsRect = gameObject.transform as RectTransform;
         }
         public override void Show()

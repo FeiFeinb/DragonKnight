@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -169,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -291,6 +294,7 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &1831066231329546002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,13 +307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24f963015154974caa4b93ef4937dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questSidebarObjectivePrefab: {fileID: 6321599891628726092, guid: 09db24e565099ec41a41540c081d56ca,
-    type: 3}
+  questSidebarObjectivePrefab: {fileID: 6321599891628726092, guid: 09db24e565099ec41a41540c081d56ca, type: 3}
   objectiveContainer: {fileID: 6653297385860104841}
   questIndexButton: {fileID: 6653297385318262691}
   questIndex: {fileID: 6653297385283847207}
   questTitle: {fileID: 6653297385811466767}
-  questObjectiveUIs: []
 --- !u!1 &6653297385811466769
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +372,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.8784314, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -459,3 +462,4 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0

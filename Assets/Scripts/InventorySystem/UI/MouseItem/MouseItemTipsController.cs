@@ -33,7 +33,6 @@ namespace RPG.InventorySystem
             MonoEvent.Instance.AddUpdateEvent(TimerCount);
         }
 
-
         public void OnEnter(ItemToolTipsContent itemToolTipsContent)
         {
             SetControllerState(true, itemToolTipsContent);

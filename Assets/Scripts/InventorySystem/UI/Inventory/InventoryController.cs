@@ -37,6 +37,7 @@ namespace RPG.InventorySystem
         }
 
 
+
         protected override InventorySlot[] GetSlots()
         {
             return playerInventoryObject.inventorySlots;

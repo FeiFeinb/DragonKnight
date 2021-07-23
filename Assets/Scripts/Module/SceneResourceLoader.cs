@@ -6,6 +6,8 @@ using RPG.DialogueSystem.Graph;
 using RPG.Inertact;
 using RPG.QuestSystem;
 using RPG.TradeSystem;
+using UI;
+
 namespace RPG.Module
 {
     public class SceneResourceLoader : BaseSingletonWithMono<SceneResourceLoader>
@@ -24,6 +26,7 @@ namespace RPG.Module
             MouseItemTipsController.controller = InitController<MouseItemTipsController>(MouseItemTipsController.storePath);
             DialogueController.controller = InitController<DialogueController>(DialogueController.storePath);
             InteractionController.controller = InitController<InteractionController>(InteractionController.storePath);
+            PauseController.controller = InitController<PauseController>(PauseController.storePath);
         }
         private T InitController<T>(string _storePath) where T : BaseUIController
         {

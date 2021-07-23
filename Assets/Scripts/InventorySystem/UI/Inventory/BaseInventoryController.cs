@@ -17,6 +17,7 @@ namespace RPG.InventorySystem
 
         public override void PreInit()
         {
+            base.PreInit();
             InventorySlot[] slots = GetSlots();
             for (int i = 0; i < slots.Length; i++)
             {

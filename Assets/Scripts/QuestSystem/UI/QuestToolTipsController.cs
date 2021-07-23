@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using RPG.Module;
 namespace RPG.QuestSystem
@@ -43,6 +44,14 @@ namespace RPG.QuestSystem
         {
             currentQuest = null;
             Hide();
+        }
+
+        protected override bool AchieveDoTweenSequence()
+        {
+            RectTransform rect = transform as RectTransform;
+            inSequence.Append(rect.DOScaleX(1, 0.2f));
+            inSequence.Join(rect.DOScaleY(1, 0.2f));
+            return true;
         }
     }
 }

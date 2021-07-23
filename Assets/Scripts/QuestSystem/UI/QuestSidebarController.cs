@@ -14,10 +14,12 @@ namespace RPG.QuestSystem
         private Dictionary<PlayerQuestStatus, QuestSidebar> statusDic = new Dictionary<PlayerQuestStatus, QuestSidebar>();
         public override void PreInit()
         {
+            base.PreInit();
             PlayerQuestManager.Instance.AddOnQuestUpdateListener(RegenerateQuestSidebars);
             PlayerQuestManager.Instance.AddQuestObjectiveUpdateListener(ReDrawQuestState);
             RegenerateQuestSidebars();
         }
+
         private void RegenerateQuestSidebars()
         {
             // 清空任务列表

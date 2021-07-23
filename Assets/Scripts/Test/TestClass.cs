@@ -8,14 +8,11 @@ using RPG.Module;
 using RPG.UI;
 using RPG.SaveSystem;
 using RPG.TradeSystem;
+using UI;
 using UnityEditor;
 
 public class TestClass : MonoBehaviour
 {
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -43,17 +40,20 @@ public class TestClass : MonoBehaviour
                 EquipmentController.controller.Show();
             }
         }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (SavingController.controller.isActive)
+            if (PauseController.controller.isActive)
             {
-                SavingController.controller.Hide();
+                GlobalUIManager.Instance.CloseUI();
             }
             else
             {
-                SavingController.controller.Show();
+                GlobalUIManager.Instance.OpenUI(PauseController.controller);
             }
         }
+        
+        
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (TradeController.controller.isActive)

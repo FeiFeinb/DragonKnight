@@ -35,6 +35,8 @@ namespace RPG.InventorySystem
                 // OnSlotUpdate(i);
             }
         }
+
+
         [ContextMenu("ReSlot")]
         public void ReSlot()
         {

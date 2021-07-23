@@ -34,6 +34,7 @@ namespace RPG.TradeSystem
 
         public override void PreInit()
         {
+            base.PreInit();
             // 添加监听
             pageFlip.AddPageUpListener(UpdateTradeView);
             pageFlip.AddPageDownListener(UpdateTradeView);
@@ -64,6 +65,7 @@ namespace RPG.TradeSystem
                     });
             }
         }
+
 
         public override void Show()
         {

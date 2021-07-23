@@ -44,9 +44,5 @@ namespace RPG.InventorySystem
                 gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
             }
         }
-
-        public override void PreInit()
-        {
-        }
     }
 }

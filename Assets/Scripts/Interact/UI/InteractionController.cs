@@ -18,9 +18,11 @@ namespace RPG.Inertact
 
         public override void PreInit()
         {
+            base.PreInit();
             _interactionView.ClearButton();
         }
-        
+
+
         public void AddButton(string content, Action callBack)
         {
             InteractButton newButton = UIResourcesManager.Instance

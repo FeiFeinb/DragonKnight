@@ -4742,6 +4742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9e8afa17cf1274590eaa064031a90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFinish: 1
   questSidebarPrefab: {fileID: 6653297385560914921, guid: 859360fcbb35f30479ce574fc4ec940b, type: 3}
   questSidebarContainer: {fileID: 6757277860593590009}
 --- !u!1 &2268293900733506827
