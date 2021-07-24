@@ -80,7 +80,7 @@ namespace RPG.SaveSystem
             SaveManager.Instance.Load(saveSlotIndex);
         }
 
-        public void OnCencel()
+        public void OnReturnBack()
         {
             GlobalUIManager.Instance.CloseUI(this);
         }

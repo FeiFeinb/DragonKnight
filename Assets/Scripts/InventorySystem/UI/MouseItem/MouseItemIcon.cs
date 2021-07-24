@@ -41,7 +41,7 @@ namespace RPG.InventorySystem
         {
             if (gameObject != null)
             {
-                gameObject.GetComponent<RectTransform>().position = Input.mousePosition;
+                gameObject.GetComponent<RectTransform>().position = UnityEngine.Input.mousePosition;
             }
         }
     }

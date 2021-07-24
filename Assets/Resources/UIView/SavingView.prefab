@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4713952184174716298}
         m_TargetAssemblyTypeName: RPG.SaveSystem.SavingController, Assembly-CSharp
-        m_MethodName: OnCencel
+        m_MethodName: OnReturnBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

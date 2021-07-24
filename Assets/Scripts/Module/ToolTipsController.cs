@@ -42,7 +42,7 @@ namespace RPG.Module
             // 重新设置Pivot
             toolTipsRect.pivot = CalculatePivot(CaculateViewPos());
             // 获取鼠标位置完成位置变换
-            toolTipsRect.position = Input.mousePosition;
+            toolTipsRect.position = UnityEngine.Input.mousePosition;
         }
 
         private ViewDirection CaculateViewPos()
@@ -50,8 +50,8 @@ namespace RPG.Module
             // 根据面板大小计算面板朝向
             Vector2 viewSize = toolTipsRect.sizeDelta;
             RectTransform canvanRect = UIResourcesManager.Instance.CanvasTrans as RectTransform;
-            float newMousePositionX = Input.mousePosition.x / Screen.width * canvanRect.sizeDelta.x;
-            float newMousePositionY = Input.mousePosition.y / Screen.height * canvanRect.sizeDelta.y;
+            float newMousePositionX = UnityEngine.Input.mousePosition.x / Screen.width * canvanRect.sizeDelta.x;
+            float newMousePositionY = UnityEngine.Input.mousePosition.y / Screen.height * canvanRect.sizeDelta.y;
             float horizontalRight = Screen.width - newMousePositionX;
             float verticalUp = Screen.height - newMousePositionY;
             // 左下角显示

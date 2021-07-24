@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,18 @@ namespace RPG.UI
 {
     public abstract class BaseUIController : BaseUI, IUserInterfacePreInit
     {
+        /// <summary>
+        /// UI显示回调
+        /// </summary>
+        public Action onShow;
+        
+        /// <summary>
+        /// UI隐藏回调
+        /// </summary>
+        public Action OnHide;
+        
+        
+        
         public bool isFinish = true;
         protected Sequence inSequence;
 
@@ -47,6 +60,9 @@ namespace RPG.UI
             }
         }
 
+        /// <summary>
+        /// 在每一次重新载入UI时调用
+        /// </summary>
         public virtual void PreInit()
         {
             inSequence = DOTween.Sequence();

@@ -27,6 +27,7 @@ namespace RPG.Module
             DialogueController.controller = InitController<DialogueController>(DialogueController.storePath);
             InteractionController.controller = InitController<InteractionController>(InteractionController.storePath);
             PauseController.controller = InitController<PauseController>(PauseController.storePath);
+            OptionController.controller = InitController<OptionController>(OptionController.storePath);
         }
         private T InitController<T>(string _storePath) where T : BaseUIController
         {

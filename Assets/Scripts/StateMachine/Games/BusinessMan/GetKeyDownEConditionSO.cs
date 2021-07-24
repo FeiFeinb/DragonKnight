@@ -1,8 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using RPG.Entity;
 namespace RPG.StateMachine
 {
     [CreateAssetMenu(fileName = "GetKeyDownEConditionSO", menuName = "StateMachine/Condition/GetKeyDownE")]
@@ -11,7 +7,7 @@ namespace RPG.StateMachine
     {
         public override bool Statement()
         {
-            return Input.GetKeyDown(KeyCode.E);
+            return UnityEngine.Input.GetKeyDown(KeyCode.E);
         }
     }
 }

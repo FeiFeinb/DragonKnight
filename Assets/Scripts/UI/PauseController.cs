@@ -28,16 +28,23 @@ namespace UI
 #endif
         }
 
-        public void SaveAndLoadView()
+        public void OpenSaveAndLoadView()
         {
             GlobalUIManager.Instance.OpenUI(SavingController.controller);
         }
 
+        public void OpenOptionView()
+        {
+            GlobalUIManager.Instance.OpenUI(OptionController.controller);
+        }
+        
         public void ContinueGame()
         {
             GlobalUIManager.Instance.CloseUI(this);
         }
-
+        
+        
+        
         protected override bool AchieveDoTweenSequence()
         {
             inSequence.Append(_rect.DOAnchorPosX(-_rect.anchoredPosition.x, 0.3f));
