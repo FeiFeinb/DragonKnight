@@ -11,13 +11,23 @@ namespace RPG.UI
     public class KeyListenController : BaseUIController
     {
         [SerializeField] private Text _previewKeyText;
+        
         private bool _isStartListenKey = false;
         private KeySettingPairView _modifyPairView;
         public void StartListen(KeySettingPairView pairView)
         {
             _modifyPairView = pairView;
             _previewKeyText.text = string.Empty;
+            OptionController.controller.SetAccessible(true);
             Show();
+        }
+
+        private void EndListener()
+        {
+            _isStartListenKey = false;
+            _modifyPairView = null;
+            OptionController.controller.SetAccessible(false);
+            Hide();
         }
         
         protected override bool AchieveDoTweenSequence()
@@ -32,18 +42,15 @@ namespace RPG.UI
         {
             if (_isStartListenKey)
             {
-                var code = Event.current.keyCode;
-                if (code != KeyCode.None && _modifyPairView)
+                var newUpdatedCode = Event.current.keyCode;
+                if (newUpdatedCode != KeyCode.None && _modifyPairView)
                 {
                     // TODO: 实现OffKey的设置
-                    InputManager.Instance.inputData.SetNormalKey(_modifyPairView.title.text, code);
-                    
-                    _previewKeyText.text = code.ToString();
-                    _modifyPairView.SetMainKeyText(code.ToString());
-                    
-                    _isStartListenKey = false;
-                    _modifyPairView = null;
-                    Hide();
+                    // 更改UI
+                    _previewKeyText.text = newUpdatedCode.ToString();
+                    _modifyPairView.SetMainKeyText(newUpdatedCode.ToString());
+
+                    EndListener();
                 }
             }
         }

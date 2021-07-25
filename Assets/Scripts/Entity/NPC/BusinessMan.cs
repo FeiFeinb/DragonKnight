@@ -26,7 +26,7 @@ namespace RPG.Entity
 
         private void Update()
         {
-            if (collidePlayerCheck.IsCollide && UnityEngine.Input.GetKeyDown(KeyCode.E))
+            if (collidePlayerCheck.IsCollide && Input.GetKeyDown(KeyCode.E))
             {
                 dialogueNPC.StartDialogue();
             }

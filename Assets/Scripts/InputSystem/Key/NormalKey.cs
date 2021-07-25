@@ -13,7 +13,8 @@ namespace RPG.InputSystyem
         public bool isDown => _isDown;
 
         public bool isDoubleDown => _isDoubleDown;
-        
+
+        public KeyCode keyCode => _keyCode;
         /// <summary>
         /// 键的类型
         /// </summary>

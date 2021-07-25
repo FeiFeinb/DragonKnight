@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RPG.Utility;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -23,8 +24,7 @@ namespace RPG.InputSystyem
         /// AxisKey数列
         /// </summary>
         private Dictionary<string, AxisKey> _axisKeysDic = new Dictionary<string, AxisKey>();
-
-
+        
         /// <summary>
         /// 添加NormalKey操作
         /// </summary>
@@ -32,11 +32,35 @@ namespace RPG.InputSystyem
         /// <param name="keyCode">键</param>
         public void AddNormalKey(string name, KeyCode keyCode)
         {
-            _normalKeysDic.Add(name, new NormalKey(name, keyCode));
+            if (!_normalKeysDic.ContainsKey(name))
+            {
+                _normalKeysDic.Add(name, new NormalKey(name, keyCode));
+            }
+            else
+            {
+                SetNormalKey(name, keyCode);
+            }
         }
-        
-        
-        
+
+        public Dictionary<string, string> GetNormalKeyData()
+        {
+            Dictionary<string, string> dataDic = new Dictionary<string, string>();
+            foreach (KeyValuePair<string,NormalKey> keyValuePair in _normalKeysDic)
+            {
+                dataDic.Add(keyValuePair.Key, keyValuePair.Value.keyCode.ToString());
+            }
+
+            return dataDic;
+        }
+
+        public void LoadNormalKeyData(Dictionary<string, string> data)
+        {
+            foreach (KeyValuePair<string,string> keyValuePair in data)
+            {
+                string keyName = keyValuePair.Key;
+                AddNormalKey(keyName, keyValuePair.Value.ToKeyCode());
+            }
+        }
         
         
         /// <summary>

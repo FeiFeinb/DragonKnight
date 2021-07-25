@@ -10,4 +10,8 @@ public class OptionView : BaseUI
     public Button returnButton;
     public Button defaultButton;
     public Button applyButton;
+
+    public Image shelterImage;
+
+    
 }

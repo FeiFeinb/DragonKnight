@@ -1,4 +1,5 @@
 using DG.Tweening;
+using RPG.InputSystyem;
 using RPG.Module;
 using RPG.UI;
 using UnityEngine;
@@ -12,15 +13,21 @@ namespace UI
 
         [SerializeField] private OptionView _optionView;
         
-        
-        public KeySettingView _keySettingView;
+        [SerializeField] private KeySettingController _keySettingController;
 
         public override void PreInit()
         {
             base.PreInit();
-            _keySettingView.Init();
+            _keySettingController.PreInit();
         }
 
+        
+        
+        public void SetAccessible(bool isShelter)
+        {
+            _optionView.shelterImage.gameObject.SetActive(isShelter);
+        }
+        
         protected override bool AchieveDoTweenSequence()
         {
             RectTransform rect = transform as RectTransform;
@@ -28,14 +35,26 @@ namespace UI
             return true;
         }
 
-        public void OnReturnBack()
+        public void ReturnBack()
         {
             GlobalUIManager.Instance.CloseUI(this);
         }
         
-        // TODO: 使用LitJson完成读写
-        public void LoadDefaultConfigure() {}
-        public void ApplyConfigure() {}
-        private void LoadUserConfigure() {}
+        // TODO: 添加对音效的操作
+        public void LoadDefaultConfigure()
+        {
+            // 从Json中加载
+            InputManager.Instance.LoadDefaultJsonToInputData();
+            // 从InputData中读取数据应用到UI
+            _keySettingController.LoadMainKeyChangeFromInputData();
+        }
+
+        public void ApplyConfigure()
+        {
+            // 从UI写入到InputData
+            _keySettingController.WriteMainKeyChangeToInputData();
+            // 保存到Json
+            InputManager.Instance.WritePlayerJsonFromInputData();
+        }
     }
 }
