@@ -14,7 +14,7 @@ namespace RPG.InputSystyem
         [SerializeField] private string _saveDirectory = "PlayerData/";
         [SerializeField] private string _dataFileName = "PlayerKey.json";
         [SerializeField] private string _defaultDataFileName = "DefaultPlayerKey.json";
-        private void Start()
+        private void Awake()
         {
             LoadPlayerJsonToInputData();
         }
@@ -50,21 +50,18 @@ namespace RPG.InputSystyem
             inputData.LoadNormalKeyData(JsonMapper.ToObject<Dictionary<string, string>>(dataStr));
         }
         
-        /// <summary>
-        /// 不可随意更改DefaultJson
-        /// </summary>
-        [ContextMenu(nameof(WriteDefaultJsonFromInputData))]
-        private void WriteDefaultJsonFromInputData()
+        public void WriteDefaultJsonFromInputData(Dictionary<string, string> data)
         {
-            WriteJson(_saveDirectory, _defaultDataFileName);
+            // 从UI上读取信息直接写入Json
+            WriteJson(_saveDirectory, _defaultDataFileName, data);
         }
         
         public void WritePlayerJsonFromInputData()
         {
-            WriteJson(_saveDirectory, _dataFileName);
+            WriteJson(_saveDirectory, _dataFileName, inputData.GetNormalKeyData());
         }
 
-        private void WriteJson(string saveDirectory, string dataFileName)
+        private void WriteJson(string saveDirectory, string dataFileName, Dictionary<string, string> data)
         {
             string path = Path.Combine(Application.dataPath, string.Concat(saveDirectory, dataFileName));
             // 若文件夹不存在 则创建文件夹
@@ -75,7 +72,7 @@ namespace RPG.InputSystyem
             FileStream fileStream = File.Open(path, FileMode.Create);
             StreamWriter writer = new StreamWriter(fileStream);
 
-            string jsonStr = JsonMapper.ToJson(inputData.GetNormalKeyData());
+            string jsonStr = JsonMapper.ToJson(data);
             writer.WriteLine(jsonStr);
             writer.Close();
         }

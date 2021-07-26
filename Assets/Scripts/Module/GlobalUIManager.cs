@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.InputSystyem;
 using RPG.UI;
 using UI;
 using UnityEngine;
@@ -32,7 +33,9 @@ namespace RPG.Module
             
             if (_baseUIStack.Count == 1 && nextUI == PauseController.controller)
             {
+                // 暂停所有键位输入
                 isPausing = true;
+                InputManager.Instance.inputData.CloseAllKeyInput(0);
             }
         }
 
@@ -50,23 +53,12 @@ namespace RPG.Module
             
             if (_baseUIStack.Count == 0 && topUI == PauseController.controller)
             {
+                // 恢复所有输入
                 isPausing = false;
-                // 暂停所有键位输入
+                InputManager.Instance.inputData.OpenAllKeyInput(0);
             }
         }
 
-        private void CheckHideKeyInput()
-        {
-            if (_baseUIStack.Count > 0)
-            {
-                // 关闭键盘输入
-            }
-            else
-            {
-                // 开启键盘输入
-            }
-        }
-        
         private BaseUIController GetTopUIController()
         {
             return _baseUIStack.Count > 0 ? _baseUIStack.Peek() : null;

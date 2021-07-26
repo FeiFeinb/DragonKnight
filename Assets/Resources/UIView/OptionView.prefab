@@ -1664,7 +1664,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E0B\u8E72"
+  m_Text: Crouch
 --- !u!1 &5447629909897693488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2526,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8DF3\u8DC3"
+  m_Text: Jump
 --- !u!1 &7227048912591779053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,7 +2805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u75BE\u8DD1"
+  m_Text: Run
 --- !u!1 &8192474590403673012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,7 +3416,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6253\u5F00\u5730\u56FE"
+  m_Text: OpenMap
 --- !u!1 &8192474590460590711
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,7 +4935,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u666E\u901A\u6280\u80FD"
+  m_Text: NormalSkill
 --- !u!1 &8192474590811200290
 GameObject:
   m_ObjectHideFlags: 0
@@ -6316,7 +6316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6253\u5F00\u80CC\u5305"
+  m_Text: OpenInventory
 --- !u!1 &8192474591072409189
 GameObject:
   m_ObjectHideFlags: 0
@@ -6647,7 +6647,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u573A\u666F\u4EA4\u4E92"
+  m_Text: SceneInteract
 --- !u!1 &8192474591188058324
 GameObject:
   m_ObjectHideFlags: 0
@@ -10105,7 +10105,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6253\u5F00\u8BBE\u7F6E"
+  m_Text: OpenOption
 --- !u!1 &8192474592068451342
 GameObject:
   m_ObjectHideFlags: 0
@@ -10687,7 +10687,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EC8\u6781\u6280\u80FD"
+  m_Text: FinalSkill
 --- !u!1 &8192474592263541070
 GameObject:
   m_ObjectHideFlags: 0
@@ -10899,7 +10899,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6253\u5F00\u88C5\u5907\u680F"
+  m_Text: OpenEquipment
 --- !u!1 &8192474592295293732
 GameObject:
   m_ObjectHideFlags: 0
@@ -11558,7 +11558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd234da55e8f61e4caa76f599ea9e574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: {fileID: 8192474591076900781}
+  container: {fileID: 8192474591076900781}
   keySettingPairViews:
   - {fileID: 2138607475473399101}
   - {fileID: 2842844480516060280}
@@ -11890,7 +11890,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5BF9\u8BDD"
+  m_Text: Dialogue
 --- !u!1 &8192474592543661050
 GameObject:
   m_ObjectHideFlags: 0

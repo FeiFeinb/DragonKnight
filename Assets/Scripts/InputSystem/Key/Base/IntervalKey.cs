@@ -26,7 +26,7 @@ namespace RPG.InputSystyem
             _value = 0;
         }
 
-        protected IntervalKey(string keyName) : base(keyName)
+        protected IntervalKey(KeyActionType keyActionType) : base(keyActionType)
         {
         }
     }

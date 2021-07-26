@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using RPG.InputSystyem;
 using UnityEngine;
 using RPG.InventorySystem;
 using RPG.Module;
@@ -14,46 +15,50 @@ using UnityEngine.Events;
 
 public class TestClass : MonoBehaviour
 {
-    private void Update()
+    private void Start()
     {
-        // if (Input.GetKeyDown(KeyCode.Tab))
-        // {
-        //     // 显示背包界面
-        //     if (InventoryController.controller.isActive)
-        //     {
-        //         InventoryController.controller.Hide();
-        //     }
-        //     else
-        //     {
-        //         InventoryController.controller.Show();
-        //     }
-        // }
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     // 显示装备界面
-        //     if (EquipmentController.controller.isActive)
-        //     {
-        //         EquipmentController.controller.Hide();
-        //     }
-        //     else
-        //     {
-        //         EquipmentController.controller.Show();
-        //     }
-        // }
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
+        InputManager.Instance.inputData.SetNormalKeyWeights(KeyActionType.OpenOption, 1);
+        InputManager.Instance.inputData.AddNormalKeyListener(KeyActionType.OpenOption, delegate
         {
             if (GlobalUIManager.Instance.UICount == 0)
             {
                 GlobalUIManager.Instance.OpenUI(PauseController.controller);
             }
-            else if (!GlobalUIManager.Instance.isforceDontClose)
-            { 
+            else
+            {
                 GlobalUIManager.Instance.CloseUI();
             }
-        }
+        });
         
-        
+        InputManager.Instance.inputData.AddNormalKeyListener(KeyActionType.OpenInventory, delegate
+        {
+            // 显示背包界面
+            if (InventoryController.controller.isActive)
+            {
+                InventoryController.controller.Hide();
+            }
+            else
+            {
+                InventoryController.controller.Show();
+            }
+        });
+
+        InputManager.Instance.inputData.AddNormalKeyListener(KeyActionType.OpenEquipment, delegate
+        {
+            // 显示装备界面
+            if (EquipmentController.controller.isActive)
+            {
+                EquipmentController.controller.Hide();
+            }
+            else
+            {
+                EquipmentController.controller.Show();
+            }
+        });
+    }
+
+    private void Update()
+    {
         // if (Input.GetKeyDown(KeyCode.B))
         // {
         //     if (TradeController.controller.isActive)
@@ -65,8 +70,5 @@ public class TestClass : MonoBehaviour
         //         TradeController.controller.Show();
         //     }
         // }
-        
     }
-
 }
-

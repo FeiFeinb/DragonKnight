@@ -52,7 +52,7 @@ namespace RPG.InputSystyem
             _negKeyCode = negKeyCode;
         }
 
-        public AxisKey(string keyName) : base(keyName)
+        public AxisKey(KeyActionType keyActionType) : base(keyActionType)
         {
         }
     }

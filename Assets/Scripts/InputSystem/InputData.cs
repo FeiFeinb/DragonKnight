@@ -13,202 +13,146 @@ namespace RPG.InputSystyem
         /// <summary>
         /// NormalKey数列
         /// </summary>
-        private Dictionary<string, NormalKey> _normalKeysDic = new Dictionary<string, NormalKey>();
-
-        /// <summary>
-        /// UnitIntervalKey数列
-        /// </summary>
-        private Dictionary<string, UnitIntervalKey> _unitIntervalKeysDic = new Dictionary<string, UnitIntervalKey>();
-
+        private Dictionary<KeyActionType, NormalKey> _normalKeysDic = new Dictionary<KeyActionType, NormalKey>();
+        
         /// <summary>
         /// AxisKey数列
         /// </summary>
-        private Dictionary<string, AxisKey> _axisKeysDic = new Dictionary<string, AxisKey>();
+        private Dictionary<KeyActionType, AxisKey> _axisKeysDic = new Dictionary<KeyActionType, AxisKey>();
         
         /// <summary>
-        /// 添加NormalKey操作
+        /// 添加NormalKey
         /// </summary>
-        /// <param name="name">操作名</param>
+        /// <param name="actionType">操作名</param>
         /// <param name="keyCode">键</param>
-        public void AddNormalKey(string name, KeyCode keyCode)
+        public void SetNormalKey(KeyActionType actionType, KeyCode keyCode)
         {
-            if (!_normalKeysDic.ContainsKey(name))
+            if (!_normalKeysDic.ContainsKey(actionType))
             {
-                _normalKeysDic.Add(name, new NormalKey(name, keyCode));
+                _normalKeysDic.Add(actionType, new NormalKey(actionType, keyCode));
             }
             else
             {
-                SetNormalKey(name, keyCode);
+                _normalKeysDic[actionType].SetKey(keyCode);
             }
         }
 
+        /// <summary>
+        /// 获取NormalKey数据 可将传达给Json进行写操作
+        /// </summary>
+        /// <returns>(name)-(KeyCodeStr) 数据字典</returns>
         public Dictionary<string, string> GetNormalKeyData()
         {
             Dictionary<string, string> dataDic = new Dictionary<string, string>();
-            foreach (KeyValuePair<string,NormalKey> keyValuePair in _normalKeysDic)
+            foreach (KeyValuePair<KeyActionType,NormalKey> keyValuePair in _normalKeysDic)
             {
-                dataDic.Add(keyValuePair.Key, keyValuePair.Value.keyCode.ToString());
+                dataDic.Add(keyValuePair.Key.ToString(), keyValuePair.Value.mainKeyCode.ToString());
             }
 
             return dataDic;
         }
 
+        /// <summary>
+        /// 将外界传来的数据字典记录到类中
+        /// </summary>
+        /// <param name="data">(name)-(KeyCodeStr) 数据字典</param>
         public void LoadNormalKeyData(Dictionary<string, string> data)
         {
             foreach (KeyValuePair<string,string> keyValuePair in data)
             {
-                string keyName = keyValuePair.Key;
-                AddNormalKey(keyName, keyValuePair.Value.ToKeyCode());
+                SetNormalKey(keyValuePair.Key.ToKeyActionType(), keyValuePair.Value.ToKeyCode());
             }
         }
-        
         
         /// <summary>
         /// 获取NormalKey
         /// </summary>
-        /// <param name="keyName">操作名</param>
+        /// <param name="actionType">操作名</param>
         /// <returns>NormalKey</returns>
-        public NormalKey GetNormalKey(string keyName)
+        public NormalKey GetNormalKey(KeyActionType actionType)
         {
-            if (!_normalKeysDic.ContainsKey(keyName))
-                throw new Exception($"Input系统中无法找到键{keyName}");
-            return _normalKeysDic[keyName];
+            if (!_normalKeysDic.ContainsKey(actionType))
+                throw new Exception($"Input系统中无法找到键{actionType}");
+            return _normalKeysDic[actionType];
         }
-
+        
         /// <summary>
-        /// 获取ValueKey
+        /// 获取NormalKey按下状态
         /// </summary>
         /// <param name="keyName">操作名</param>
-        /// <returns>UnitIntervalKey</returns>
-        public UnitIntervalKey GetUnitIntervalKey(string keyName)
+        /// <returns>键状态</returns>
+        public bool GetNormalKeyDown(KeyActionType actionType)
         {
-            if (!_unitIntervalKeysDic.ContainsKey(keyName))
-                throw new Exception($"Input系统中无法找到键{keyName}");
-            return _unitIntervalKeysDic[keyName];
-        }
-
-        /// <summary>
-        /// 获取AxisKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <returns>AxisKey</returns>
-        public AxisKey GetAxisKey(string keyName)
-        {
-            if (!_axisKeysDic.ContainsKey(keyName))
-                throw new Exception($"Input系统中无法找到键{keyName}");
-            return _axisKeysDic[keyName];
-        }
-
-        /// <summary>
-        /// 设置NormalKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <param name="keyCode">键</param>
-        public void SetNormalKey(string keyName, KeyCode keyCode)
-        {
-            NormalKey normalKey = GetNormalKey(keyName);
-            normalKey?.SetKey(keyCode);
-        }
-
-        /// <summary>
-        /// 设置ValueKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <param name="keyCode">键</param>
-        public void SetUnitIntervalKey(string keyName, KeyCode keyCode)
-        {
-            UnitIntervalKey unitIntervalKey = GetUnitIntervalKey(keyName);
-            unitIntervalKey?.SetKey(keyCode);
-        }
-
-        /// <summary>
-        /// 设置AxisKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <param name="posKeyCode">正向键</param>
-        /// <param name="negKeyCode">逆向键</param>
-        public void SetAxisKey(string keyName, KeyCode posKeyCode, KeyCode negKeyCode)
-        {
-            AxisKey axisKey = GetAxisKey(keyName);
-            axisKey?.SetKeyCode(posKeyCode, negKeyCode);
-        }
-
-        /// <summary>
-        /// 设置AxisKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <param name="posKeyCode">正向键</param>
-        public void SetAxisPosKey(string keyName, KeyCode posKeyCode)
-        {
-            AxisKey axisKey = GetAxisKey(keyName);
-            axisKey?.SetPosKeyCode(posKeyCode);
-        }
-
-        /// <summary>
-        /// 设置AxisKey
-        /// </summary>
-        /// <param name="keyName">操作名</param>
-        /// <param name="negKeyCode">逆向键</param>
-        public void SetAxisNegKey(string keyName, KeyCode negKeyCode)
-        {
-            AxisKey axisKey = GetAxisKey(keyName);
-            axisKey?.SetNegKeyCode(negKeyCode);
-        }
-
-        public bool GetNormalKeyDown(string keyName)
-        {
-            NormalKey normalKey = GetNormalKey(keyName);
+            NormalKey normalKey = GetNormalKey(actionType);
             if (normalKey == null) return false;
             return normalKey.isDown;
         }
-
-        public bool GetNormalKeyDoubleDown(string keyName)
+        
+        /// <summary>
+        /// 设置NormalKey的启用状态
+        /// </summary>
+        /// <param name="keyName">操作名</param>
+        /// <param name="isEnable">是否启用</param>
+        public void SetNormalKeyEnable(KeyActionType actionType, bool isEnable)
         {
-            NormalKey normalKey = GetNormalKey(keyName);
-            if (normalKey == null) return false;
-            return normalKey.isDoubleDown;
-        }
-
-        public float GetUnitIntervalKeyValue(string keyName)
-        {
-            UnitIntervalKey unitIntervalKey = GetUnitIntervalKey(keyName);
-            if (unitIntervalKey == null) return 0;
-            return unitIntervalKey.value;
-        }
-
-        public float GetAxisKeyValue(string keyName)
-        {
-            AxisKey axisKey = GetAxisKey(keyName);
-            if (axisKey == null) return 0;
-            return axisKey.value;
-        }
-
-        public void SetNormalKeyEnable(string keyName, bool isEnable)
-        {
-            NormalKey normalKey = GetNormalKey(keyName);
+            NormalKey normalKey = GetNormalKey(actionType);
             if (normalKey == null) return;
             normalKey.SetEnable(isEnable);
         }
 
-        public void SetUnitIntervalKeyEnable(string keyName, bool isEnable)
+        public void AddNormalKeyListener(KeyActionType actionType, Action callBack)
         {
-            UnitIntervalKey unitIntervalKey = GetUnitIntervalKey(keyName);
-            if (unitIntervalKey == null) return;
-            unitIntervalKey.SetEnable(isEnable);
+            NormalKey normalKey = GetNormalKey(actionType);
+            normalKey.AddTriggerListener(callBack);
         }
 
-        public void SetAxisKeyEnable(string keyName, bool isEnable)
+        public void RemoveNormalKeyListener(KeyActionType actionType, Action callBack)
         {
-            AxisKey axisKey = GetAxisKey(keyName);
-            if (axisKey == null) return;
-            axisKey.SetEnable(isEnable);
+            NormalKey normalKey = GetNormalKey(actionType);
+            normalKey.RemoveTriggerListener(callBack);
         }
-
+        
+        /// <summary>
+        /// 每帧更新键
+        /// </summary>
         public void UpdateKey()
         {
             foreach (var normalKey in _normalKeysDic)
             {
                 normalKey.Value.HandleKey();
+            }
+        }
+
+        
+        /// <summary>
+        /// 设置NormalKey权重
+        /// </summary>
+        public void SetNormalKeyWeights(KeyActionType actionType, int weight)
+        {
+            NormalKey normalKey = GetNormalKey(actionType);
+            normalKey.SetWeight(weight);
+        }
+        
+        /// <summary>
+        /// 打开某权重及以下的所有键
+        /// </summary>
+        /// <param name="weight">权重</param>
+        public void OpenAllKeyInput(int weight)
+        {
+            foreach (var normalKey in _normalKeysDic.Where(normalKey => normalKey.Value.weight <= weight))
+            {
+                normalKey.Value.SetEnable(true);
+            }
+        }
+        
+        /// <summary>
+        /// 关闭某权重及以下的所有键盘
+        /// </summary>
+        public void CloseAllKeyInput(int weight)
+        {
+            foreach (var normalKey in _normalKeysDic.Where(normalKey => normalKey.Value.weight <= weight))
+            {
+                normalKey.Value.SetEnable(false);
             }
         }
     }
