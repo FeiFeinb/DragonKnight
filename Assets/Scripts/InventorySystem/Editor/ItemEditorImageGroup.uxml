@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="image-group" style="flex-direction: row;">
+        <ui:VisualElement name="image-container" style="min-height: 40px; min-width: 40px; justify-content: center;" />
+        <ui:VisualElement name="property-container" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

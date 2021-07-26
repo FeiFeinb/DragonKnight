@@ -1,0 +1,14 @@
+#title-label {
+    color: white;
+}
+
+#item-list-view-label {
+    -unity-text-align: middle-center;
+    font-size: 15;
+}
+
+#item-choose-list-view-label {
+    -unity-text-align: middle-center;
+    font-size: 15;
+    background-color: rgb(50, 50, 50);
+}

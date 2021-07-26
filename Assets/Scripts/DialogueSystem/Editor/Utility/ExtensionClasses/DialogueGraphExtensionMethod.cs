@@ -231,9 +231,8 @@ namespace DialogueSystem.Editor
                     InputNodeUniqueID = ((DialogueGraphBaseNode) edge.input.node).UniqueID
                 });
             }
-
-            // 脏标记
-            EditorUtility.SetDirty(_selectSO);
+            
+            AssetDatabase.SaveAssets();
         }
 
         /// <summary>

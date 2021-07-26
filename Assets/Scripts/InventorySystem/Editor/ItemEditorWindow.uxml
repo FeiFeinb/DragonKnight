@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="ItemEditorWindow.uss" />
+    <ui:VisualElement name="item-editor-window" style="flex-direction: row; height: auto; width: auto; flex-grow: 1;">
+        <ui:VisualElement name="left-container" style="width: 30%; height: 100%; background-color: rgb(75, 75, 75);">
+            <ui:Label text="ItemLists" display-tooltip-when-elided="true" name="title-label" style="-unity-text-align: middle-center; font-size: 35px; background-color: rgb(65, 65, 65); min-height: 60px;" />
+            <ui:ListView focusable="true" name="item-list-view" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="right-container" style="width: 70%; height: 100%; background-color: rgb(60, 60, 60);">
+            <ui:Label text="Details" display-tooltip-when-elided="true" name="title-label" style="-unity-text-align: middle-center; font-size: 35px; -unity-font-style: normal; height: auto; background-color: rgb(50, 50, 50); min-height: 60px;" />
+            <ui:ScrollView name="details-scroll-view" horizontal-scroller-visibility="Hidden" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <uie:Toolbar style="height: auto; min-height: 20px; align-items: stretch;">
+        <ui:Button text="Refresh" display-tooltip-when-elided="true" name="refresh-button" />
+        <ui:Button text="SaveAll" display-tooltip-when-elided="true" name="save-all-button" />
+    </uie:Toolbar>
+</ui:UXML>
