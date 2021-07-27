@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using RPG.Inertact;
+using RPG.Interact;
 using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
@@ -17,7 +17,7 @@ namespace RPG.DialogueSystem.Graph
         public override bool HandleData(DialogueTreeNode treeNode, GameObject obj)
         {
             // 向交互UI面板添加交互选项
-            InteractionController.controller.AddButton(Content, () => PlayerDialogueManager.Instance.ContinueDialogue(UniqueID));
+            InteractManager.Instance.AddDialogueChoiceButton(Content, () => PlayerDialogueManager.Instance.ContinueDialogue(UniqueID));
             return false;
         }
         

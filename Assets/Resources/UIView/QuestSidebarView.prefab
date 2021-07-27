@@ -4743,7 +4743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFinish: 1
-  questSidebarPrefab: {fileID: 6653297385560914921, guid: 859360fcbb35f30479ce574fc4ec940b, type: 3}
+  questSidebarElementPrefab: {fileID: 6653297385560914921, guid: 859360fcbb35f30479ce574fc4ec940b, type: 3}
   questSidebarContainer: {fileID: 6757277860593590009}
 --- !u!1 &2268293900733506827
 GameObject:

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace RPG.Inertact
+namespace RPG.Interact
 {
     public class InteractButton : MonoBehaviour
     {
@@ -11,16 +12,20 @@ namespace RPG.Inertact
         [SerializeField] private Text _content;
         [SerializeField] private Button _button;
 
-        public void Init(string content)
+        public void SetInformation(Sprite sprite, string content)
         {
-            // TODO: 将Image赋值更改为Enum赋值 由此类去查找对应的Image自动赋值
-            // _icon = icon;
+            if (sprite) _icon.sprite = sprite;
             _content.text = content;
         }
 
         public void AddOnClickListener(Action onCLickCallBack)
         {
             _button.onClick.AddListener(onCLickCallBack.Invoke);
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }

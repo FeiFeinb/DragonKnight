@@ -11,7 +11,7 @@ namespace RPG.Entity
     [RequireComponent(typeof(Animator), typeof(DialogueNPC), typeof(CapsuleCollider))]
     public class BusinessMan : BaseEntity
     {
-        public bool IsCollidePlayer => collidePlayerCheck.IsCollide;
+        public bool IsCollidePlayer => collidePlayerCheck.isCollide;
         [SerializeField] private LayerMask targetLayer;             // 对象层级
         private Animator animator;
         private DialogueNPC dialogueNPC;
@@ -22,14 +22,6 @@ namespace RPG.Entity
             animator = GetComponent<Animator>();
             dialogueNPC = GetComponent<DialogueNPC>();
             collidePlayerCheck = GetComponent<OverlabSphereCheck>();
-        }
-
-        private void Update()
-        {
-            if (collidePlayerCheck.IsCollide && Input.GetKeyDown(KeyCode.E))
-            {
-                dialogueNPC.StartDialogue();
-            }
         }
     }
 

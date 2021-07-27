@@ -13,26 +13,7 @@ namespace RPG.InventorySystem
     {
         public PlayerInventoryObject inventoryObject; // 玩家背包
         public EquipmentInventoryObject equipmentObject; // 装备栏
-
-        private void OnTriggerEnter(Collider other)
-        {
-            // 捡起物品
-            // TODO: 将从地上捡起改为UI界面中拾取
-            var groundItem = other.GetComponent<GroundItem>();
-            if (groundItem)
-            {
-                int itemLeft = inventoryObject.AddWithoutCheck(new ItemData(groundItem.itemObj), 1);
-                if (itemLeft == 0)
-                {
-                    Destroy(other.gameObject);
-                }
-                else
-                {
-                    Debug.Log($"背包已满 剩下{itemLeft}个无法装下");
-                }
-            }
-        }
-
+        
         private void OnApplicationQuit()
         {
             // 退出游戏时清空背包

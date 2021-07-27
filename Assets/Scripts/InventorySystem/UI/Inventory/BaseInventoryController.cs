@@ -13,8 +13,6 @@ namespace RPG.InventorySystem
     [RequireComponent(typeof(EventTrigger))]
     public abstract class BaseInventoryController : BaseUIController
     {
-        [SerializeField] protected Sprite uiMask;       // 空插槽UI
-
         public override void PreInit()
         {
             base.PreInit();
@@ -41,7 +39,7 @@ namespace RPG.InventorySystem
             // 该插槽无物体
             else
             {
-                uiInventorySlot.SetItemSprite(uiMask);
+                uiInventorySlot.SetItemSprite(null, 0);
                 uiInventorySlot.SetItemAmount(string.Empty);
             }
         }

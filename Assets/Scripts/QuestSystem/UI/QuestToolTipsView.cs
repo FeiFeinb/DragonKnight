@@ -61,7 +61,7 @@ namespace RPG.QuestSystem
                 Destroy(questObjectiveUI.gameObject);
             }
             questObjectiveUIs.Clear();
-            questToolTipsRewardContainer.DestroyChildren();
+            questToolTipsRewardContainer.DestroyChildren(true);
         }
     }
 }

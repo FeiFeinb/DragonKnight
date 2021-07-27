@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using RPG.DialogueSystem.Graph;
 using RPG.Module;
 using RPG.UI;
+using RPG.Utility;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace RPG.Inertact
+namespace RPG.Interact
 {
     public class InteractionController : BaseUIController
     {
@@ -14,26 +14,65 @@ namespace RPG.Inertact
         public static InteractionController controller;
 
         [SerializeField] private InteractionView _interactionView;
-        [SerializeField] private GameObject _interactButtonPrefab;
+        [SerializeField] private GameObject _interactStartDialogueButtonPrefab;
+        [SerializeField] private GameObject _interactDialogueChoicePrefab;
+        [SerializeField] private GameObject _interactPickButtonPrefab;
 
         public override void PreInit()
         {
             base.PreInit();
-            _interactionView.ClearButton();
+            _interactionView.ClearButton(true);
         }
 
-
-        public void AddButton(string content, Action callBack)
+        /// <summary>
+        /// 向UI中添加互动按钮
+        /// </summary>
+        /// <param name="interactType">互动类型</param>
+        /// <param name="content">互动按钮显示内容</param>
+        /// <param name="callBack">点击按钮回调</param>
+        /// <param name="buttonSprite">互动按钮Sprite 为null则默认</param>
+        /// <param name="clickType">点击按钮的类型</param>
+        /// <returns>创建的互动按钮</returns>
+        public InteractButton AddButton(InteractType interactType, string content, Action callBack,
+            Sprite buttonSprite = null)
         {
-            InteractButton newButton = UIResourcesManager.Instance
-                .LoadUserInterface(_interactButtonPrefab.gameObject, _interactionView.Container.transform)
-                .GetComponent<InteractButton>();
+            InteractButton newButton;
             // 初始化交互按钮
-            newButton.Init(content);
-            // 点击一次后即刻删除
-            newButton.AddOnClickListener(delegate { _interactionView.ClearButton(); });
+            switch (interactType)
+            {
+                case InteractType.StartDialogue:
+                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactStartDialogueButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    break;
+                case InteractType.PickItem:
+                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactPickButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    newButton.AddOnClickListener(delegate { newButton.Destroy(); });
+                    break;
+                case InteractType.DialogueChoice:
+                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactDialogueChoicePrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    newButton.AddOnClickListener(delegate { _interactionView.ClearButton(false); });
+                    break;
+                default:
+                    throw new Exception("找不到对应的InteractButton资源");
+            }
             // 添加监听
+            newButton.SetInformation(buttonSprite, content);
             newButton.AddOnClickListener(callBack);
+            return newButton;
+        }
+
+        public void RemoveButton(InteractButton button)
+        {
+            button.Destroy();
+        }
+
+        public void HideAllButton()
+        {
+            _interactionView.Container.SetChildrenActive(false);
+        }
+
+        public void ShowAllButton()
+        {
+            _interactionView.Container.SetChildrenActive(true);
         }
     }
 }

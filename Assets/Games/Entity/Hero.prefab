@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037147296}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 0.85, z: 1.96}
+  m_LocalPosition: {x: -0, y: 0.85, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2201882226826966202}
@@ -34266,6 +34266,8 @@ GameObject:
   - component: {fileID: 2199260235067961537}
   - component: {fileID: 693494647}
   - component: {fileID: 5342081370960170989}
+  - component: {fileID: 1947654559}
+  - component: {fileID: 1947654560}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -34490,6 +34492,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f48e75c44a64b0e8902e61862443f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1947654559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199260235067961550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e22121832f3a341962a83954f13d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isCollide: 0
+  _isDrawLine: 1
+  _heightOffSet: 1
+  _collideLayer:
+    serializedVersion: 2
+    m_Bits: 384
+  _gizmosColor: {r: 0.9528302, g: 0.7340987, b: 0.7340987, a: 0.56078434}
+  _results:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  radius: 2
+--- !u!114 &1947654560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199260235067961550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25d2acd93754692b2a0ed3eab6f5deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overlabSphereCheck: {fileID: 1947654559}
 --- !u!1 &2199260592243329924
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ namespace RPG.QuestSystem
     {
         public static string storePath = "UIView/QuestSidebarView";
         public static QuestSidebarController controller;
-        [SerializeField] private GameObject questSidebarPrefab;             // 侧栏任务UI预制体
+        [SerializeField] private GameObject questSidebarElementPrefab;             // 侧栏任务UI预制体
         [SerializeField] private RectTransform questSidebarContainer;       // 侧栏任务UI Container
         private Dictionary<PlayerQuestStatus, QuestSidebar> statusDic = new Dictionary<PlayerQuestStatus, QuestSidebar>();
         public override void PreInit()
@@ -28,7 +28,7 @@ namespace RPG.QuestSystem
             foreach (PlayerQuestStatus questStatus in PlayerQuestManager.Instance.GetQuestStatuses())
             {
                 // 遍历任务列表并生成侧栏任务UI
-                QuestSidebar tempQuestSidebar = UIResourcesManager.Instance.LoadUserInterface(questSidebarPrefab, questSidebarContainer).GetComponent<QuestSidebar>();
+                QuestSidebar tempQuestSidebar = UIResourcesManager.Instance.LoadUserInterface(questSidebarElementPrefab, questSidebarContainer).GetComponent<QuestSidebar>();
                 // 记录到数列中
                 tempQuestSidebar.InitQuestSidebarInfo(questStatus);
                 statusDic.Add(questStatus, tempQuestSidebar);

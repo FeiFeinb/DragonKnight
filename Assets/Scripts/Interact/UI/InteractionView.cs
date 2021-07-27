@@ -5,16 +5,16 @@ using RPG.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.Inertact
+namespace RPG.Interact
 {
     public class InteractionView : MonoBehaviour
     {
-        [SerializeField] private GameObject _container;
-        public GameObject Container => _container;
+        [SerializeField] private Transform _container;
+        public Transform Container => _container;
         
-        public void ClearButton()
+        public void ClearButton(bool isDestroyUnActive)
         {
-            _container.transform.DestroyChildren();
+            _container.DestroyChildren(isDestroyUnActive);
         }
     }
 }

@@ -3,7 +3,7 @@ using RPG.InventorySystem;
 using RPG.UI;
 using RPG.SaveSystem;
 using RPG.DialogueSystem.Graph;
-using RPG.Inertact;
+using RPG.Interact;
 using RPG.QuestSystem;
 using RPG.TradeSystem;
 using UI;

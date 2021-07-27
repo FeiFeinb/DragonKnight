@@ -18,7 +18,7 @@ namespace RPG.Entity
         }
         private void Update()
         {
-            int weightValue = sectorCollidePlayerCheck.IsCollide ? 1 : 0;
+            int weightValue = sectorCollidePlayerCheck.isCollide ? 1 : 0;
             multiAimConstraint.weight = Mathf.Lerp(multiAimConstraint.weight, weightValue, aimSpeed * Time.deltaTime);
         }
     }
