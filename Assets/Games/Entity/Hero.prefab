@@ -34504,20 +34504,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e22121832f3a341962a83954f13d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isCollide: 0
   _isDrawLine: 1
   _heightOffSet: 1
   _collideLayer:
     serializedVersion: 2
     m_Bits: 384
   _gizmosColor: {r: 0.9528302, g: 0.7340987, b: 0.7340987, a: 0.56078434}
-  _results:
+  _radius: 2
+  _previousFrameColliders: []
+  _result: []
+  currentFrameColliders:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  radius: 2
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1947654560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34530,7 +34536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25d2acd93754692b2a0ed3eab6f5deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _overlabSphereCheck: {fileID: 1947654559}
+  updateOverlapSphereCheck: {fileID: 1947654559}
 --- !u!1 &2199260592243329924
 GameObject:
   m_ObjectHideFlags: 0

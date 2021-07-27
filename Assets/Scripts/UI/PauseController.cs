@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace RPG.UI
 {
     public class PauseController : BaseUIController
     {

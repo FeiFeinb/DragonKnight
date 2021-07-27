@@ -17,7 +17,7 @@ namespace RPG.DialogueSystem.Graph
             sprite = npcInfo.HeadSculpture;
         }
 
-        public void Interact()
+        public void OnInteractButtonClick()
         {
             PlayerDialogueManager.Instance.StartDialogue(this);
         }

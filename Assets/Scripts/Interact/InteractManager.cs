@@ -9,13 +9,13 @@ namespace RPG.Interact
 {
     public class InteractManager : BaseSingletonWithMono<InteractManager>
     {
-        [SerializeField] private OverlabSphereCheck _overlabSphereCheck;
+        [SerializeField] private UpdateOverlapSphereCheck updateOverlapSphereCheck;
         
         private Dictionary<Collider, InteractButton> uiDic = new Dictionary<Collider, InteractButton>();
         private void Start()
         {
-            _overlabSphereCheck.onAddCollider += ApproachCollider;
-            _overlabSphereCheck.onLossCollider += NonContactCollider;
+            updateOverlapSphereCheck.onAddCollider += ApproachCollider;
+            updateOverlapSphereCheck.onLossCollider += NonContactCollider;
         }
 
         private void NonContactCollider(Collider removeCollider)
@@ -32,7 +32,7 @@ namespace RPG.Interact
             addCollider.gameObject.TryGetComponent(out IInteractable tempInteractable);
             if (tempInteractable == null) return;
             tempInteractable.GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite);
-            uiDic.Add(addCollider, InteractionController.controller.AddButton(type, buttonStr, tempInteractable.Interact, sprite));
+            uiDic.Add(addCollider, InteractionController.controller.AddButton(type, buttonStr, tempInteractable.OnInteractButtonClick, sprite));
         }
 
         public void AddDialogueChoiceButton(string content, Action callBack)

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Entity;
+using RPG.Utility;
+
 namespace RPG.StateMachine
 {
     [CreateAssetMenu(fileName = "BusinessManTalkStateActionSO", menuName = "StateMachine/BusinessMan/StateAction/Talk")]
     public class BusinessManTalkStateActionSO : StateActionSO<BusinessManTalkStateAction> {}
     public class BusinessManTalkStateAction : StateAction
     {
-        private BusinessMan businessMan;
+        private JudgmentOverlapSectorCheck overlapCheck;
         public override void Init(StateMachine stateMachine)
         {
             base.Init(stateMachine);
-            businessMan = stateMachine.GetComponent<BusinessMan>();
+            overlapCheck = stateMachine.GetComponent<JudgmentOverlapSectorCheck>();
         }
         public override void OnStateEnter()
         {

@@ -56,7 +56,7 @@ namespace RPG.InventorySystem
             sprite = itemObj.sprite;
         }
 
-        public void Interact()
+        public void OnInteractButtonClick()
         {
             int itemLeft = PlayerInventoryManager.Instance.inventoryObject.AddWithoutCheck(new ItemData(itemObj), 1);
             if (itemLeft == 0)

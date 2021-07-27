@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using RPG.InputSystyem;
 using RPG.UI;
-using UI;
 using UnityEngine;
 
 namespace RPG.Module

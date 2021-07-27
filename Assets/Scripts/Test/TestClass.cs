@@ -10,7 +10,6 @@ using RPG.Module;
 using RPG.UI;
 using RPG.SaveSystem;
 using RPG.TradeSystem;
-using UI;
 using UnityEditor;
 using UnityEngine.Events;
 

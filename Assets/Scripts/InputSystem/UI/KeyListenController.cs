@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using RPG.UI;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 

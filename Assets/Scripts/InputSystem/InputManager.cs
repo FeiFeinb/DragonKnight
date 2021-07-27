@@ -4,7 +4,7 @@ using System.IO;
 using RPG.Module;
 using UnityEngine;
 using LitJson;
-using UI;
+using RPG.UI;
 
 namespace RPG.InputSystyem
 {

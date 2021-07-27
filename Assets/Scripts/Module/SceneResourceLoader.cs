@@ -6,7 +6,6 @@ using RPG.DialogueSystem.Graph;
 using RPG.Interact;
 using RPG.QuestSystem;
 using RPG.TradeSystem;
-using UI;
 
 namespace RPG.Module
 {

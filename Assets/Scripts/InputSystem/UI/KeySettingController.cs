@@ -10,9 +10,8 @@ namespace RPG.InputSystyem
     public class KeySettingController : BaseUIController
     {
         [SerializeField] private KeySettingView _keySettingView;
-        
-        [SerializeField] private KeyListenController keyListenController;
 
+        [SerializeField] private KeyListenController _keyListenController;
         public void OnEnable()
         {
             // 开启时重新加载UI
@@ -23,7 +22,7 @@ namespace RPG.InputSystyem
         {
             base.PreInit();
             _keySettingView.keySettingPairViews.ForEach(keyListenController => keyListenController.Init(this));
-            keyListenController.PreInit();
+            _keyListenController.PreInit();
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace RPG.InputSystyem
         /// <param name="pairView"></param>
         public void SetMainKeyChange(KeySettingPairView pairView)
         {
-            keyListenController.StartListen(pairView);
+            _keyListenController.StartListen(pairView);
         }
 
         /// <summary>

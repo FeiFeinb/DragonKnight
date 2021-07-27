@@ -7,6 +7,6 @@ namespace RPG.Interact
     {
         void GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite);
         
-        void Interact();
+        void OnInteractButtonClick();
     }
 }
