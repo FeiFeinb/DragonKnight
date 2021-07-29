@@ -41,7 +41,7 @@ namespace RPG.DialogueSystem.Graph
         {
             // 开启其他交互按钮的显示
             DialogueController.controller.Hide();
-            InputManager.Instance.inputData.CloseAllKeyInput(2);
+            InputManager.Instance.inputData.OpenAllKeyInput(2);
             InteractionController.controller.ShowAllButton();
         }
         

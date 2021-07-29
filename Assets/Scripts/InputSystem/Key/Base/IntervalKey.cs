@@ -19,10 +19,10 @@ namespace RPG.InputSystyem
         /// <summary>
         /// 设置是否启用
         /// </summary>
-        /// <param name="isEnable">是否启用</param>
-        public override void SetEnable(bool isEnable)
+        /// <param name="paramIsEnable">是否启用</param>
+        public override void SetEnable(bool paramIsEnable)
         {
-            base.SetEnable(isEnable);
+            base.SetEnable(paramIsEnable);
             _value = 0;
         }
 

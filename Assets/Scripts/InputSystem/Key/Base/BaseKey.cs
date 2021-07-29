@@ -25,11 +25,6 @@ namespace RPG.InputSystyem
         protected bool _isEnable = false;
 
         /// <summary>
-        /// 键触发事件
-        /// </summary>
-        protected Action _trigger;
-
-        /// <summary>
         /// 设置权重
         /// </summary>
         protected int _weight;
@@ -54,24 +49,6 @@ namespace RPG.InputSystyem
         }
 
         /// <summary>
-        /// 添加键触发事件
-        /// </summary>
-        /// <param name="callBack">键触发事件</param>
-        public void AddTriggerListener(Action callBack)
-        {
-            _trigger += callBack;
-        }
-        
-        /// <summary>
-        /// 移除键触发事件
-        /// </summary>
-        /// <param name="callBack">键触发事件</param>
-        public void RemoveTriggerListener(Action callBack)
-        {
-            _trigger -= callBack;
-        }
-
-        /// <summary>
         /// 设置键的权重
         /// </summary>
         /// <param name="paramWeight">权重</param>
@@ -79,11 +56,11 @@ namespace RPG.InputSystyem
         {
             _weight = paramWeight;
         }
-        
+
         /// <summary>
         /// 处理键的触发
         /// </summary>
-        public virtual void HandleKey() {}
+        public abstract void HandleKey();
 
     }
 }

@@ -12,6 +12,8 @@
         NormalSkill,
         FinalSkill,
         Dialogue,
-        SceneInteract
+        SceneInteract,
+        MoveVertical,
+        MoveHorizontal
     }
 }

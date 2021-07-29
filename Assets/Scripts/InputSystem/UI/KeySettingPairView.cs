@@ -34,7 +34,7 @@ namespace RPG.InputSystyem
         public void WriteUIDataToInputData()
         {
             // Add or Set ?
-            InputManager.Instance.inputData.SetNormalKey(title.text.ToKeyActionType(), mainKeyText.text.ToKeyCode());
+            InputManager.Instance.inputData.SetOrAddNormalKey(title.text.ToKeyActionType(), mainKeyText.text.ToKeyCode());
         }
 
         public (string, string) GetUIData()

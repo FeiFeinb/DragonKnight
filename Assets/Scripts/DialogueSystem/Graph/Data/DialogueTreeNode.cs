@@ -27,6 +27,7 @@ namespace RPG.DialogueSystem.Graph
             DialogueGraphSOUniqueID = dialogueGraphSOUniqueID;
             BaseNodeSaveData = baseNodeSaveData;
         }
+        
         public string DialogueGraphSOUniqueID;
         public DialogueGraphBaseNodeSaveData BaseNodeSaveData;
         public readonly List<TreeNodePair> childrenNodePair = new List<TreeNodePair>();

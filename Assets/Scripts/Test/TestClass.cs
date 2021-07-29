@@ -55,6 +55,11 @@ public class TestClass : MonoBehaviour
                 EquipmentController.controller.Show();
             }
         });
+        
+        // 手动添加AxisKey
+        InputManager.Instance.inputData.SetOrAddAxisKey(KeyActionType.MoveHorizontal, KeyCode.D, KeyCode.A);
+        InputManager.Instance.inputData.SetOrAddAxisKey(KeyActionType.MoveVertical, KeyCode.W, KeyCode.S);
+        InputManager.Instance.inputData.GetNormalKey(KeyActionType.Run).SetHoldType(NormalKey.HoldType.Press);
     }
 
     private void Update()

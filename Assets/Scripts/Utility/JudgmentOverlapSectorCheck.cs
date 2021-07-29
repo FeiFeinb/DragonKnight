@@ -37,6 +37,7 @@ namespace RPG.Utility
 # if UNITY_EDITOR
         protected override void OnDrawGizmosSelected()
         {
+            if (!_isDrawLine) return;
             base.OnDrawGizmosSelected();
             Transform trans = transform;
             Vector3 checkVec = trans.position + new Vector3(0, _heightOffSet, 0);

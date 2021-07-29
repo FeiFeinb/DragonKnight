@@ -21,6 +21,11 @@ namespace RPG.StateMachine
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            if (!selectMachine)
+            {
+                OnEnable();
+            }
+            if (selectMachine.CurrentState == null) return;
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current StateName:");

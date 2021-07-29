@@ -2678,7 +2678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 481, y: -320.08}
+  m_AnchoredPosition: {x: 481, y: -285.08}
   m_SizeDelta: {x: 290, y: 289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8662372228709443894
@@ -3283,7 +3283,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 481, y: -499.58}
-  m_SizeDelta: {x: 800, y: 30}
+  m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2106850020475684714
 CanvasRenderer:
@@ -3326,7 +3326,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Made By FeiFei
+  m_Text: 'Made By FeiFei
+
+
+    Art resources come from the network'
 --- !u!1 &6205826045651405164
 GameObject:
   m_ObjectHideFlags: 0
