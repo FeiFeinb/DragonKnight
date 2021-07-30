@@ -1,7 +1,7 @@
 ﻿using System;
 using RPG.Entity;
 using RPG.InputSystyem;
-using RPG.InventorySystem;
+using RPG.Character;
 using UnityEngine;
 
 namespace RPG.StateMachine

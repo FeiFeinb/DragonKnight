@@ -101,7 +101,7 @@ namespace RPG.InventorySystem
             foreach (Transform child in transform)
             {
                 BodyPosition type = child.GetComponent<BodyTypeInfo>().bodyType;
-                child.gameObject.name = type.ToString();
+                child.gameObject.name = type.ToString() + "Mesh";
                 bodyTypeDic.Add(type, child);
                 // 保存原有外观
                 originInfo.Add(type, new EquipmentBindInfo(child.GetComponent<SkinnedMeshRenderer>()));
