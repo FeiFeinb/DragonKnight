@@ -23,6 +23,7 @@ namespace RPG.InventorySystem
                 return slotData.IsEmpty;
             }
         }
+        
         [DisplayOnly] public int slotIndex;         // 插槽编号
         public AllowType allowType;                 // 允许防止的类型
         public InventorySlotData slotData;          // 插槽存储数据

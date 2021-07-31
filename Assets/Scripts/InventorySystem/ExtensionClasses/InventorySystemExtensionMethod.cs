@@ -43,7 +43,20 @@ namespace RPG.InventorySystem
                 case EquipmentType.Boots: return "护足";
                 case EquipmentType.OneHandedSword: return "单手剑";
                 case EquipmentType.TwoHandedSword: return "双手剑";
+                case EquipmentType.Shield: return "盾牌";
                 default: return equipmentType.ToString();
+            }
+        }
+
+        public static int ToAnimatorInt(this EquipmentType equipmentType)
+        {
+            switch (equipmentType)
+            {
+                case EquipmentType.Null: return 0;
+                case EquipmentType.OneHandedSword: return 1;
+                case EquipmentType.TwoHandedSword: return 2;
+                case EquipmentType.Shield: return 3;
+                default: return -1;
             }
         }
         public static string ToChinese(this ItemRare itemRare)
