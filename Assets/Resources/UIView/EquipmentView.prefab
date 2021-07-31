@@ -2959,9 +2959,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908666882061810}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: MainHand
+      value: Leg
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x
@@ -3072,9 +3076,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908666882061810}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: OffHand
+      value: Feet
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x
@@ -3298,9 +3306,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7062887414060492410}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: Wrist
+      value: MainHand
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x
@@ -3411,6 +3423,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908665978635728}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
       value: Neck
@@ -3524,9 +3540,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908666882061810}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: Feet
+      value: Ornaments
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x
@@ -3637,9 +3657,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7062887414060492410}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: Ornaments
+      value: OffHand
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x
@@ -3750,6 +3774,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908665978635728}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
       value: Chest
@@ -3863,6 +3891,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908665978635728}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
       value: Hand
@@ -3976,9 +4008,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5983908666882061810}
     m_Modifications:
+    - target: {fileID: 130651979930389225, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
+      propertyPath: type
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 138915923944925736, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Name
-      value: Leg
+      value: Wrist
       objectReference: {fileID: 0}
     - target: {fileID: 4526991043803233578, guid: 7f7c055cb2e66f34789606aefeee0084, type: 3}
       propertyPath: m_Pivot.x

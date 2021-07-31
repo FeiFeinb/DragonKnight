@@ -37,8 +37,8 @@ namespace RPG.InventorySystem
         }
 
 
-        [ContextMenu("ReSlot")]
-        public void ReSlot()
+        [ContextMenu("ReSortSlotType")]
+        public void ReSortSlotType()
         {
             // 根据EquipmentInventoryObject中的顺序重新设置slotGameObject顺序
             var slot = equipmentInventoryObject.equipmentInventorySlot;

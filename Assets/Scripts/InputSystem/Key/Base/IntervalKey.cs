@@ -14,7 +14,7 @@ namespace RPG.InputSystyem
         /// <summary>
         /// 值增长速度
         /// </summary>
-        protected float _increaseSpeed = 3.0f;
+        protected float _increaseSpeed = 6.0f;
 
         /// <summary>
         /// 设置是否启用

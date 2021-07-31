@@ -75,7 +75,7 @@ namespace RPG.InventorySystem
             MouseItemIcon.controller.SetHoverObj(null);
             if (!slot.IsEmpty)
             {
-                MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(slot.ItemObj, slot.slotData.itemData.itemBuffs));
+                MouseItemTipsController.controller.OnExit();
             }
         }
         // 指针进入UI
@@ -114,6 +114,7 @@ namespace RPG.InventorySystem
                 InventoryHelper.Instance.SwapItem(GetSlot(obj), MouseItemIcon.controller.hoverSlot);
             }
         }
+        
         protected void OnRightMouseClick(GameObject obj)
         {
             // 右键单击插槽
@@ -121,13 +122,16 @@ namespace RPG.InventorySystem
             if (slot.IsEmpty) return;
             // 使用该物体
             slot.ItemObj.Use(slot);
+            MouseItemTipsController.controller.OnExit();
         }
+        
         public override void Hide()
         {
             // 如果两个界面打开 则禁止关闭
             if (MouseItemIcon.controller.isActive || MouseItemTipsController.controller.isActive) return;
             base.Hide();
         }
+        
         protected abstract InventorySlot[] GetSlots();
         protected abstract InventorySlot GetSlot(GameObject keyObj);
         protected abstract GameObject GetSlotUI(InventorySlot keySlot);

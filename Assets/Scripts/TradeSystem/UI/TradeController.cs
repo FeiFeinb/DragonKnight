@@ -48,7 +48,7 @@ namespace RPG.TradeSystem
                     slotObj = UIResourcesManager.Instance.LoadUserInterface(sellItemSlotPrefab, slotContainerTrans),
                     itemObj = null
                 };
-                // WARNING: 不可删除下面这行代码
+                // 由于闭包特性 需要转变为临时变量
                 SellItemSlotData sellData = sellDatas[i];
                 // 添加鼠标进入监听
                 EventTriggerManager.Instance.AddEvent(sellDatas[i].slotObj, EventTriggerType.PointerEnter,
@@ -86,7 +86,7 @@ namespace RPG.TradeSystem
         {
             BaseItemObject itemObj = sellData.itemObj;
             if (itemObj == null) return;
-            MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(itemObj, itemObj.item.itemBuffs));
+            MouseItemTipsController.controller.OnExit();
         }
 
         private void OnPointerRightClickSlot(SellItemSlotData sellData)

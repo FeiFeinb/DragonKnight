@@ -94,8 +94,8 @@ namespace RPG.InventorySystem
             }
         }
         
-        [ContextMenu("InitSlot")]
-        public void InitSlot()
+        [ContextMenu("ResortSlotIndex")]
+        public void ResortSlotIndex()
         {
             InventorySlot[] slots = GetSlot().ToArray();
             for (int i = 0; i < slots.Length; i++)

@@ -37,7 +37,7 @@ namespace RPG.InventorySystem
         {
             SetControllerState(true, itemToolTipsContent);
         }
-        public void OnExit(ItemToolTipsContent itemToolTipsContent)
+        public void OnExit()
         {
             // 结束计时
             SetControllerState(false, null);

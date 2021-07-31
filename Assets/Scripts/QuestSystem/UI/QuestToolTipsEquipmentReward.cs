@@ -23,14 +23,14 @@ namespace RPG.QuestSystem
             // 物品数量等于1时候不设置数值显示
             tempUIInventorySlot.SetItemAmount(amount > 1 ? amount.ToString() : string.Empty);
         }
+        // TODO: 更改为由Slot自动注册监听事件
         private void OnPointerEnterSlot(BaseItemObject baseItemObject)
         {
             MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(baseItemObject, baseItemObject.item.itemBuffs));
         }
         private void OnPointerExitSlot(BaseItemObject baseItemObject)
         {
-            MouseItemTipsController.controller.OnExit(new ItemToolTipsContent(baseItemObject, baseItemObject.item.itemBuffs));
-
+            MouseItemTipsController.controller.OnExit();
         }
     }
 }

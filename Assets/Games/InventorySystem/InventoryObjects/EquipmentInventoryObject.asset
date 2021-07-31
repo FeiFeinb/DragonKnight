@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce70cbe235ae2a4891a7cfd709684cb, type: 3}
   m_Name: EquipmentInventoryObject
   m_EditorClassIdentifier: 
-  backpackCapacity: 10
   equipmentInventorySlot:
   - slotIndex: 0
     allowType:
@@ -62,50 +61,6 @@ MonoBehaviour:
     allowType:
       allIn: 0
       baseItemTypes: 02000000
-      equipmentTypes: 05000000
-    slotData:
-      amount: 0
-      itemData:
-        id: -1
-        itemBuffs: []
-    equipmentSlotType: 4
-  - slotIndex: 5
-    allowType:
-      allIn: 0
-      baseItemTypes: 02000000
-      equipmentTypes: 06000000
-    slotData:
-      amount: 0
-      itemData:
-        id: -1
-        itemBuffs: []
-    equipmentSlotType: 5
-  - slotIndex: 6
-    allowType:
-      allIn: 0
-      baseItemTypes: 02000000
-      equipmentTypes: 07000000
-    slotData:
-      amount: 0
-      itemData:
-        id: -1
-        itemBuffs: []
-    equipmentSlotType: 6
-  - slotIndex: 7
-    allowType:
-      allIn: 0
-      baseItemTypes: 02000000
-      equipmentTypes: 08000000
-    slotData:
-      amount: 0
-      itemData:
-        id: -1
-        itemBuffs: []
-    equipmentSlotType: 7
-  - slotIndex: 8
-    allowType:
-      allIn: 0
-      baseItemTypes: 02000000
       equipmentTypes: 090000000a000000
     slotData:
       amount: 0
@@ -113,7 +68,7 @@ MonoBehaviour:
         id: -1
         itemBuffs: []
     equipmentSlotType: 8
-  - slotIndex: 9
+  - slotIndex: 5
     allowType:
       allIn: 0
       baseItemTypes: 02000000
@@ -124,3 +79,47 @@ MonoBehaviour:
         id: -1
         itemBuffs: []
     equipmentSlotType: 9
+  - slotIndex: 6
+    allowType:
+      allIn: 0
+      baseItemTypes: 02000000
+      equipmentTypes: 05000000
+    slotData:
+      amount: 0
+      itemData:
+        id: -1
+        itemBuffs: []
+    equipmentSlotType: 4
+  - slotIndex: 7
+    allowType:
+      allIn: 0
+      baseItemTypes: 02000000
+      equipmentTypes: 06000000
+    slotData:
+      amount: 0
+      itemData:
+        id: -1
+        itemBuffs: []
+    equipmentSlotType: 5
+  - slotIndex: 8
+    allowType:
+      allIn: 0
+      baseItemTypes: 02000000
+      equipmentTypes: 07000000
+    slotData:
+      amount: 0
+      itemData:
+        id: -1
+        itemBuffs: []
+    equipmentSlotType: 6
+  - slotIndex: 9
+    allowType:
+      allIn: 0
+      baseItemTypes: 02000000
+      equipmentTypes: 08000000
+    slotData:
+      amount: 0
+      itemData:
+        id: -1
+        itemBuffs: []
+    equipmentSlotType: 7

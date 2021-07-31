@@ -19,6 +19,7 @@ namespace RPG.Character
         [Space]
         public float runSpeed = 4.2f;
         public float sprintSpeed = 6.8f;
+        public float jumpSpeed = 5f;
         public float jumpHeight = 6;
         public float gravity = 15;
         [Space]
@@ -63,7 +64,7 @@ namespace RPG.Character
             int sizeCenter = Physics.OverlapSphereNonAlloc(position, _jumpCheckRadius, _jumpCachedColliders, _groundCheckLayer);
             int underfootInRadiusColliderAmount = Physics.OverlapCapsuleNonAlloc(position, position + Vector3.down * 2f, _jumpCheckRadius, _buttomCachedColliders, _groundCheckLayer);
             
-            isFalling = _yOffSet < -gravity || underfootInRadiusColliderAmount == 0;
+            isFalling = underfootInRadiusColliderAmount == 0;
             isGround = sizeRight > 0 || sizeLeft > 0;
             canJump = sizeCenter > 0;
         }
