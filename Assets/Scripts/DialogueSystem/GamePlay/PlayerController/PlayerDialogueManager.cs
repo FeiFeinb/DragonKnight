@@ -32,7 +32,8 @@ namespace RPG.DialogueSystem.Graph
             
             // 关闭其他交互按钮的显示
             InteractionController.controller.HideAllButton();
-            InputManager.Instance.inputData.CloseAllKeyInput(2);
+            InputManager.Instance.inputData.CloseAllKeyInput(1);
+            InputManager.Instance.CloseMouseInput();
             DialogueController.controller.Show();
             HandleTreeNode(_rootNode);
         }
@@ -41,7 +42,8 @@ namespace RPG.DialogueSystem.Graph
         {
             // 开启其他交互按钮的显示
             DialogueController.controller.Hide();
-            InputManager.Instance.inputData.OpenAllKeyInput(2);
+            InputManager.Instance.OpenMouseInput();
+            InputManager.Instance.inputData.OpenAllKeyInput(1);
             InteractionController.controller.ShowAllButton();
         }
         

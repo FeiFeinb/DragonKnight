@@ -49,16 +49,16 @@ namespace RPG.StateMachine
                 vertical * Mathf.Sqrt(1 - horizontal * horizontal / 2f));
             if (circleMappingVec.magnitude < 0.01) return;
 
-            Vector3 moveDir = circleMappingVec.x * _cameraTrans.right + circleMappingVec.y *
-                Vector3.Scale(_cameraTrans.forward, new Vector3(1, 0, 1)).normalized;
-            _controller.Move(moveDir * (_statesManager.currentSpeed * Time.deltaTime));
+            Vector3 moveDir = circleMappingVec.x * _cameraTrans.right +
+                              circleMappingVec.y * new Vector3(_cameraTrans.forward.x, 0, _cameraTrans.forward.z);
+                _controller.Move(moveDir * (_statesManager.currentSpeed * Time.deltaTime));
 
             // 设置旋转
             Vector3 turnDir = _transform.InverseTransformDirection(moveDir);
             var m_TurnAmount = Mathf.Atan2(turnDir.x, turnDir.z);
-            float turnSpeed = Mathf.Lerp(180, 360, turnDir.z);
+            if (circleMappingVec.magnitude < 0.1 && Mathf.Abs(m_TurnAmount) > 1) return;
+            float turnSpeed = Mathf.Lerp(360, 540, turnDir.z);
             _transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
-
             // 设置动画
             _animatorController.SetVertical(circleMappingVec.magnitude * _statesManager.runSprintMulti);
         }

@@ -35,6 +35,7 @@ namespace RPG.Module
                 // 暂停所有键位输入
                 isPausing = true;
                 InputManager.Instance.inputData.CloseAllKeyInput(0);
+                InputManager.Instance.CloseMouseInput();
             }
         }
 
@@ -55,6 +56,7 @@ namespace RPG.Module
                 // 恢复所有输入
                 isPausing = false;
                 InputManager.Instance.inputData.OpenAllKeyInput(0);
+                InputManager.Instance.OpenMouseInput();
             }
         }
 

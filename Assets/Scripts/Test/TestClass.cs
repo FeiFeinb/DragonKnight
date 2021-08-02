@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using RPG.InputSystyem;
+using RPG.Interact;
 using UnityEngine;
 using RPG.InventorySystem;
 using RPG.Module;
@@ -55,6 +56,8 @@ public class TestClass : MonoBehaviour
                 EquipmentController.controller.Show();
             }
         });
+        
+        // InputManager.Instance.inputData.AddNormalKeyListener(KeyActionType.SceneInteract, InteractManager.Instance.InteractFirst);
         
         // 手动添加AxisKey
         InputManager.Instance.inputData.SetOrAddAxisKey(KeyActionType.MoveHorizontal, KeyCode.D, KeyCode.A);

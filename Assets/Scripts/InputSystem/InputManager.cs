@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Cinemachine;
 using RPG.Module;
 using UnityEngine;
 using LitJson;
@@ -11,6 +12,7 @@ namespace RPG.InputSystyem
     public class InputManager : BaseSingletonWithMono<InputManager>
     {
         public InputData inputData = new InputData();
+        [SerializeField] private CinemachineFreeLook _freeLook;
         [SerializeField] private string _saveDirectory = "PlayerData/";
         [SerializeField] private string _dataFileName = "PlayerKey.json";
         [SerializeField] private string _defaultDataFileName = "DefaultPlayerKey.json";
@@ -79,6 +81,16 @@ namespace RPG.InputSystyem
         private void Update()
         {
             inputData.UpdateKey();
+        }
+
+        public void CloseMouseInput()
+        {
+            _freeLook.enabled = false;
+        }
+
+        public void OpenMouseInput()
+        {
+            _freeLook.enabled = true;
         }
     }
 }

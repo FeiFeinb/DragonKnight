@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddefee191271c1740bbefa5c1b3b629f, type: 3}
+  m_Name: LeatherPants
+  m_EditorClassIdentifier: 
+  sprite: {fileID: -4276132764150820406, guid: 3285a1016aefd3b488cbb348a47a6f58, type: 3}
+  itemType:
+    baseItemType: 2
+    equipmentType: 7
+    bodyType: 10
+    itemRare: 1
+  isStackable: 0
+  stackAmount: 1
+  sellPrice:
+    goldCoin: 5
+    silverCoin: 30
+    copperCoin: 0
+  item:
+    id: -1
+    itemBuffs:
+    - itemAttributeType: 0
+      value: 0
+      minValue: 7
+      maxValue: 10
+  description: A pair of leather pants picked up from Darnassus
+  equipmentPrefab: {fileID: 8442903777178170254, guid: b23791537254e174f864ca20f154915a, type: 3}

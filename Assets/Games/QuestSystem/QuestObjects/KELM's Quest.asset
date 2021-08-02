@@ -21,8 +21,8 @@ MonoBehaviour:
       silverCoin: 10
       copperCoin: 20
     experience: 0
-    itemObj: {fileID: 0}
-    itemObjAmount: 0
+    itemObj: {fileID: 11400000, guid: 8b4c8fe3b31f9a44a963b0fa414d0a7b, type: 2}
+    itemObjAmount: 2
   Story: 
   DialogueQuestObjectives:
   - objectiveUniqueID: KELM01

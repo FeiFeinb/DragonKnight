@@ -31,7 +31,6 @@ namespace RPG.Interact
         /// <param name="content">互动按钮显示内容</param>
         /// <param name="callBack">点击按钮回调</param>
         /// <param name="buttonSprite">互动按钮Sprite 为null则默认</param>
-        /// <param name="clickType">点击按钮的类型</param>
         /// <returns>创建的互动按钮</returns>
         public InteractButton AddButton(InteractType interactType, string content, Action callBack,
             Sprite buttonSprite = null)

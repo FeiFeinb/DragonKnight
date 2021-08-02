@@ -14,6 +14,7 @@ namespace RPG.InputSystyem
         public void StartListen(KeySettingPairView pairView)
         {
             InputManager.Instance.inputData.CloseAllKeyInput(1);
+            InputManager.Instance.CloseMouseInput();
             _modifyPairView = pairView;
             _previewKeyText.text = string.Empty;
             OptionController.controller.SetAccessible(true);
@@ -34,7 +35,11 @@ namespace RPG.InputSystyem
             RectTransform rect = transform as RectTransform;
             inSequence.Append(rect.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack));
             inSequence.onComplete += delegate { _isStartListenKey = true; };
-            inSequence.onRewind += delegate { InputManager.Instance.inputData.OpenAllKeyInput(1); };
+            inSequence.onRewind += delegate
+            {
+                InputManager.Instance.inputData.OpenAllKeyInput(1);
+                InputManager.Instance.OpenMouseInput();
+            };
             return true;
         }
 

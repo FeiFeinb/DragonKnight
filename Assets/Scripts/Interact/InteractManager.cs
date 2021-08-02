@@ -12,6 +12,8 @@ namespace RPG.Interact
         [SerializeField] private UpdateOverlapSphereCheck updateOverlapSphereCheck;
         
         private Dictionary<Collider, InteractButton> uiDic = new Dictionary<Collider, InteractButton>();
+
+        // private List<IInteractable> _buttonsList = new List<IInteractable>();
         private void Start()
         {
             updateOverlapSphereCheck.onAddCollider += ApproachCollider;
@@ -25,6 +27,7 @@ namespace RPG.Interact
             if (tempInteractable == null) return;
             InteractionController.controller.RemoveButton(uiDic[removeCollider]);
             uiDic.Remove(removeCollider);
+            // _buttonsList.Remove(tempInteractable);
         }
 
         private void ApproachCollider(Collider addCollider)
@@ -32,12 +35,28 @@ namespace RPG.Interact
             addCollider.gameObject.TryGetComponent(out IInteractable tempInteractable);
             if (tempInteractable == null) return;
             tempInteractable.GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite);
-            uiDic.Add(addCollider, InteractionController.controller.AddButton(type, buttonStr, tempInteractable.OnInteractButtonClick, sprite));
+            InteractButton addButton = InteractionController.controller.AddButton(type, buttonStr, () =>
+            {
+                // uiDic.Remove(addCollider);
+                // _buttonsList.Remove(tempInteractable);
+                tempInteractable.OnInteractButtonClick();
+            }, sprite);
+            uiDic.Add(addCollider, addButton);
+            // _buttonsList.Add(tempInteractable);
         }
 
         public void AddDialogueChoiceButton(string content, Action callBack)
         {
             InteractionController.controller.AddButton(InteractType.DialogueChoice, content, callBack);
         }
+
+        // public void InteractFirst()
+        // {
+        //     if (_buttonsList.Count > 0)
+        //     {
+        //         _buttonsList[0].OnInteractButtonClick();
+        //         _buttonsList.RemoveAt(0);
+        //     }
+        // }
     }
 }
