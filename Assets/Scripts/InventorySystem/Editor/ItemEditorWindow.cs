@@ -116,9 +116,17 @@ public class ItemEditorWindow : EditorWindow
 
         rootVisualElement.Q<Button>("delete-button").clickable.clicked += delegate
         {
+            // 删除选中的Scriptable
             AssetDatabase.DeleteAsset($"{createPath}{(itemListView.selectedItem as BaseItemObject).name}.asset");
             Refresh();
-            itemListView.selectedIndex = (int)Mathf.Clamp(itemListView.selectedIndex - 1, 0, Mathf.Infinity);
+            if (_baseItemObjects.Count > 0)
+            {
+                itemListView.selectedIndex = (int)Mathf.Clamp(itemListView.selectedIndex - 1, 0, Mathf.Infinity);
+            }
+            else
+            {
+                _scrollView.Clear();
+            }
         };
         
         
@@ -130,21 +138,25 @@ public class ItemEditorWindow : EditorWindow
         
         rootVisualElement.Q<Button>("create-button").clickable.clicked += () =>
         {
+            BaseItemObject createObj;
+            // 创建ScriptableObject
+            // TODO: 优化创建资源和删除资源的逻辑 以及选择指向的逻辑
             switch (_dropdownField.value)
             {
                 case "Equipment":
-                    var equipObj = CreateInstance<EquipmentItemObject>();
-                    AssetDatabase.CreateAsset(equipObj, $"{createPath}{_textField.text}.asset");
+                    createObj = CreateInstance<EquipmentItemObject>();
+                    AssetDatabase.CreateAsset(createObj, $"{createPath}{_textField.text}.asset");
                     break;
                 case "Food":
-                    var foodObj = CreateInstance<FoodItemObject>();
-                    AssetDatabase.CreateAsset(foodObj, $"{createPath}{_textField.text}.asset");
+                    createObj = CreateInstance<FoodItemObject>();
+                    AssetDatabase.CreateAsset(createObj, $"{createPath}{_textField.text}.asset");
                     break;
                 default:
                     throw new Exception($"Cant Find CreateType {_dropdownField.value}");
             }
-
             Refresh();
+            // 将选择指向新创建的物体
+            itemListView.selectedIndex = _baseItemObjects.IndexOf(createObj);
         };
     }
 
