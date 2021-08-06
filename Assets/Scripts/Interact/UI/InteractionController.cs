@@ -24,6 +24,8 @@ namespace RPG.Interact
             _interactionView.ClearButton(true);
         }
 
+        
+        
         /// <summary>
         /// 向UI中添加互动按钮
         /// </summary>
@@ -39,14 +41,14 @@ namespace RPG.Interact
             // 初始化交互按钮
             switch (interactType)
             {
-                case InteractType.StartDialogue:
+                case InteractType.Keep:
                     newButton = UIResourcesManager.Instance.LoadUserInterface(_interactStartDialogueButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
                     break;
-                case InteractType.PickItem:
+                case InteractType.DestroySelf:
                     newButton = UIResourcesManager.Instance.LoadUserInterface(_interactPickButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
                     newButton.AddOnClickListener(delegate { newButton.Destroy(); });
                     break;
-                case InteractType.DialogueChoice:
+                case InteractType.DestroyAll:
                     newButton = UIResourcesManager.Instance.LoadUserInterface(_interactDialogueChoicePrefab, _interactionView.Container).GetComponent<InteractButton>();
                     newButton.AddOnClickListener(delegate { _interactionView.ClearButton(false); });
                     break;

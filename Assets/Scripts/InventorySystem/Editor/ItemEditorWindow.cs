@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RPG.InventorySystem;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
 public class ItemEditorWindow : EditorWindow
 {
+    private readonly string createPath = "Assets/Resources/Items/";
+
     /// <summary>
     /// 捕获的BaseItemObject数列
     /// </summary>
     private readonly List<BaseItemObject> _baseItemObjects = new List<BaseItemObject>();
-    
+
     /// <summary>
     /// 双击选中的BaseItemObject
     /// </summary>
@@ -24,12 +26,20 @@ public class ItemEditorWindow : EditorWindow
     /// 编辑器窗口中的ScrollView
     /// </summary>
     private ScrollView _scrollView;
-    
+
     /// <summary>
     /// 编辑器窗口中的ListView的ContentContainer
     /// </summary>
     private VisualElement _listViewContainer;
-    
+
+    /// <summary>
+    /// 创建选项中的下拉列表
+    /// </summary>
+    private DropdownField _dropdownField;
+
+    private TextField _textField;
+
+    private ListView itemListView;
     /// <summary>
     /// 创建物品编辑器窗口
     /// </summary>
@@ -61,20 +71,37 @@ public class ItemEditorWindow : EditorWindow
     public void OnEnable()
     {
         // 导入UXML并添加
-        VisualTreeAsset treeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/InventorySystem/Editor/ItemEditorWindow.uxml");
+        VisualTreeAsset treeAsset =
+            AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                "Assets/Scripts/InventorySystem/Editor/ItemEditorWindow.uxml");
         VisualElement itemEditorElement = treeAsset.Instantiate();
         itemEditorElement.style.flexGrow = 1;
         rootVisualElement.Add(itemEditorElement);
-        
+
         // 获取UXML中的元素
         _scrollView = itemEditorElement.Q<ScrollView>("details-scroll-view");
         _listViewContainer = itemEditorElement.Q<VisualElement>("unity-content-container");
-        
+
         // 创建Toolbar按钮
         CreateToolbarButtons();
         // 创建编辑栏
         CreateItemEditorBar();
     }
+
+    private void Refresh()
+    {
+        _baseItemObjects.Clear();
+        string[] itemsGuid = AssetDatabase.FindAssets("t:BaseItemObject");
+        foreach (var t in itemsGuid)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(t);
+            _baseItemObjects.Add(AssetDatabase.LoadAssetAtPath<BaseItemObject>(path));
+        }
+
+        itemListView = rootVisualElement.Q<ListView>("item-list-view");
+        itemListView.Refresh();
+    }
+
 
     /// <summary>
     /// 创建Toolbar
@@ -82,24 +109,45 @@ public class ItemEditorWindow : EditorWindow
     private void CreateToolbarButtons()
     {
         // 找到刷新按钮并注册刷新回调
-        rootVisualElement.Q<Button>("refresh-button").clickable.clicked += () =>
-        {
-            _baseItemObjects.Clear();
-            string[] itemsGuid = AssetDatabase.FindAssets("t:BaseItemObject");
-            foreach (var t in itemsGuid)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(t);
-                _baseItemObjects.Add(AssetDatabase.LoadAssetAtPath<BaseItemObject>(path));
-            }
-            
-            ListView itemListView = rootVisualElement.Q<ListView>("item-list-view");
-            itemListView.Refresh();
-        };
+        rootVisualElement.Q<Button>("refresh-button").clickable.clicked += Refresh;
 
         // 找到保存按钮并注册保存回调
         rootVisualElement.Q<Button>("save-all-button").clickable.clicked += AssetDatabase.SaveAssets;
+
+        rootVisualElement.Q<Button>("delete-button").clickable.clicked += delegate
+        {
+            AssetDatabase.DeleteAsset($"{createPath}{(itemListView.selectedItem as BaseItemObject).name}.asset");
+            Refresh();
+            itemListView.selectedIndex = (int)Mathf.Clamp(itemListView.selectedIndex - 1, 0, Mathf.Infinity);
+        };
+        
+        
+        VisualElement container = rootVisualElement.Q<VisualElement>("toolbar-right-container");
+        _dropdownField = new DropdownField(new List<string> {"Equipment", "Food"}, 0);
+        container.Add(_dropdownField);
+
+        _textField = container.Q<TextField>("item-name-textfield");
+        
+        rootVisualElement.Q<Button>("create-button").clickable.clicked += () =>
+        {
+            switch (_dropdownField.value)
+            {
+                case "Equipment":
+                    var equipObj = CreateInstance<EquipmentItemObject>();
+                    AssetDatabase.CreateAsset(equipObj, $"{createPath}{_textField.text}.asset");
+                    break;
+                case "Food":
+                    var foodObj = CreateInstance<FoodItemObject>();
+                    AssetDatabase.CreateAsset(foodObj, $"{createPath}{_textField.text}.asset");
+                    break;
+                default:
+                    throw new Exception($"Cant Find CreateType {_dropdownField.value}");
+            }
+
+            Refresh();
+        };
     }
-    
+
     /// <summary>
     /// 创建编辑栏
     /// </summary>
@@ -107,7 +155,6 @@ public class ItemEditorWindow : EditorWindow
     {
         // 开始前清空
         _baseItemObjects.Clear();
-        
         // 由类型BaseIemObject找到对应的资源 并添加至数列
         string[] itemsGuid = AssetDatabase.FindAssets("t:BaseItemObject");
         foreach (var t in itemsGuid)
@@ -115,9 +162,9 @@ public class ItemEditorWindow : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(t);
             _baseItemObjects.Add(AssetDatabase.LoadAssetAtPath<BaseItemObject>(path));
         }
-        
+
         // 初始化ListView
-        ListView itemListView = rootVisualElement.Q<ListView>("item-list-view");
+        itemListView = rootVisualElement.Q<ListView>("item-list-view");
         itemListView.makeItem = () => new Label();
         itemListView.itemsSource = _baseItemObjects;
         itemListView.bindItem = (element, i) =>
@@ -126,10 +173,12 @@ public class ItemEditorWindow : EditorWindow
             label.name = itemListView.selectedIndex == i ? "item-choose-list-view-label" : "item-list-view-label";
             label.text = _baseItemObjects[i].name;
         };
-        
+
         // 读取UXML
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/InventorySystem/Editor/ItemEditorImageGroup.uxml");
-        
+        var visualTree =
+            AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                "Assets/Scripts/InventorySystem/Editor/ItemEditorImageGroup.uxml");
+
         itemListView.onSelectionChange += objects =>
         {
             _scrollView.Clear();
@@ -143,15 +192,15 @@ public class ItemEditorWindow : EditorWindow
             // 创建可序列化物体
             BaseItemObject itemObject = objects.FirstOrDefault() as BaseItemObject;
             SerializedObject serializedItemObject = new SerializedObject(itemObject);
-            
+
             // 创建物品图标预览图
             Image itemImage = new Image
             {
                 sprite = itemObject.sprite,
-                style = { alignSelf = new StyleEnum<Align>(Align.Center)}
+                style = {alignSelf = new StyleEnum<Align>(Align.Center)}
             };
             imageContainer.Add(itemImage);
-            
+
             // 获取物体中的可序列化属性
             SerializedProperty serializedProperty = serializedItemObject.GetIterator();
             // 逐个遍历
@@ -170,6 +219,7 @@ public class ItemEditorWindow : EditorWindow
                         itemImage.sprite = evt.changedProperty.objectReferenceValue as Sprite;
                     });
                 }
+
                 // 判断propertyField应添加至哪个容器
                 if (serializedProperty.name == "m_Script" || serializedProperty.name == "sprite")
                 {
@@ -180,11 +230,13 @@ public class ItemEditorWindow : EditorWindow
                     _scrollView.Add(propertyField);
                 }
             }
-            
+
             // 设置已被选择的栏的Style
             for (int i = 0; i < _listViewContainer.childCount; i++)
             {
-                _listViewContainer[i].name = itemListView.selectedIndex == i ? "item-choose-list-view-label" : "item-list-view-label";
+                _listViewContainer[i].name = itemListView.selectedIndex == i
+                    ? "item-choose-list-view-label"
+                    : "item-list-view-label";
             }
         };
 
@@ -195,7 +247,7 @@ public class ItemEditorWindow : EditorWindow
             itemListView.selectedIndex = index;
             _doubleClickSelectObject = null;
         }
+
         itemListView.Refresh();
-        
     }
 }

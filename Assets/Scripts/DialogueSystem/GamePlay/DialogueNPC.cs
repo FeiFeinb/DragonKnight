@@ -12,7 +12,7 @@ namespace RPG.DialogueSystem.Graph
 
         public void GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite)
         {
-            type = InteractType.StartDialogue;
+            type = InteractType.Keep;
             buttonStr = npcInfo.CharacterName;
             sprite = npcInfo.HeadSculpture;
         }

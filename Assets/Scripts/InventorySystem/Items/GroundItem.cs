@@ -51,7 +51,7 @@ namespace RPG.InventorySystem
 
         public void GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite)
         {
-            type = InteractType.PickItem;
+            type = InteractType.DestroySelf;
             buttonStr = itemObj.name;
             sprite = itemObj.sprite;
         }

@@ -10,8 +10,15 @@
             <ui:ScrollView name="details-scroll-view" horizontal-scroller-visibility="Hidden" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <uie:Toolbar style="height: auto; min-height: 20px; align-items: stretch;">
-        <ui:Button text="Refresh" display-tooltip-when-elided="true" name="refresh-button" />
-        <ui:Button text="SaveAll" display-tooltip-when-elided="true" name="save-all-button" />
+    <uie:Toolbar style="height: auto; min-height: 20px; align-items: stretch; background-color: rgb(46, 43, 43);">
+        <ui:VisualElement name="toolbar-left-container" style="flex-direction: row; width: 50%;">
+            <ui:Button text="Delete" display-tooltip-when-elided="true" name="delete-button" />
+            <ui:Button text="Refresh" display-tooltip-when-elided="true" name="refresh-button" />
+            <ui:Button text="SaveAll" display-tooltip-when-elided="true" name="save-all-button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="toolbar-right-container" style="flex-direction: row-reverse; width: 50%;">
+            <ui:Button text="Create" display-tooltip-when-elided="true" name="create-button" />
+            <ui:TextField picking-mode="Ignore" value="NewItemObject" text="NewItemObject" name="item-name-textfield" />
+        </ui:VisualElement>
     </uie:Toolbar>
 </ui:UXML>
