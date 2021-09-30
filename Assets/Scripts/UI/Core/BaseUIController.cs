@@ -9,18 +9,6 @@ namespace RPG.UI
 {
     public abstract class BaseUIController : BaseUI, IUserInterfacePreInit
     {
-        /// <summary>
-        /// UI显示回调
-        /// </summary>
-        public Action onShow;
-        
-        /// <summary>
-        /// UI隐藏回调
-        /// </summary>
-        public Action OnHide;
-        
-        
-        
         public bool isFinish = true;
         protected Sequence inSequence;
 

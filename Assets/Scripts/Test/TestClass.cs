@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using RPG.InputSystyem;
 using RPG.Interact;
@@ -12,6 +13,7 @@ using RPG.UI;
 using RPG.SaveSystem;
 using RPG.TradeSystem;
 using UnityEditor;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine.Events;
 
 public class TestClass : MonoBehaviour
@@ -63,6 +65,7 @@ public class TestClass : MonoBehaviour
         InputManager.Instance.inputData.SetOrAddAxisKey(KeyActionType.MoveHorizontal, KeyCode.D, KeyCode.A);
         InputManager.Instance.inputData.SetOrAddAxisKey(KeyActionType.MoveVertical, KeyCode.W, KeyCode.S);
         InputManager.Instance.inputData.GetNormalKey(KeyActionType.Run).SetHoldType(NormalKey.HoldType.Press);
+        
     }
 
     private void Update()

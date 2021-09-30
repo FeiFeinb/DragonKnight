@@ -40,6 +40,32 @@ public class ItemEditorWindow : EditorWindow
     private TextField _textField;
 
     private ListView itemListView;
+
+    private const string ScrollViewName = "details-scroll-view";
+
+    private const string ListViewContainerName = "unity-content-container";
+
+    private const string ItemListViewName = "item-list-view";
+
+    private const string RefreshButtonName = "refresh-button";
+
+    private const string SaveAllButtonName = "save-all-button";
+
+    private const string DeleteButtonName = "delete-button";
+
+    private const string ToolbarRightContainerName = "toolbar-right-container";
+    
+    private const string ItemNameTextFieldName = "item-name-textfield";
+    
+    private const string CreateButtonName = "create-button";
+
+    private const string ItemChooseListViewLabelName = "item-choose-list-view-label";
+    
+    private const string ItemListViewLabelName = "item-list-view-label";
+    
+    private const string ImageContainerName = "image-container";
+    
+    private const string PropertyContainerName = "property-container";
     /// <summary>
     /// 创建物品编辑器窗口
     /// </summary>
@@ -79,8 +105,8 @@ public class ItemEditorWindow : EditorWindow
         rootVisualElement.Add(itemEditorElement);
 
         // 获取UXML中的元素
-        _scrollView = itemEditorElement.Q<ScrollView>("details-scroll-view");
-        _listViewContainer = itemEditorElement.Q<VisualElement>("unity-content-container");
+        _scrollView = itemEditorElement.Q<ScrollView>(ScrollViewName);
+        _listViewContainer = itemEditorElement.Q<VisualElement>(ListViewContainerName);
 
         // 创建Toolbar按钮
         CreateToolbarButtons();
@@ -98,7 +124,7 @@ public class ItemEditorWindow : EditorWindow
             _baseItemObjects.Add(AssetDatabase.LoadAssetAtPath<BaseItemObject>(path));
         }
 
-        itemListView = rootVisualElement.Q<ListView>("item-list-view");
+        itemListView = rootVisualElement.Q<ListView>(ItemListViewName);
         itemListView.Refresh();
     }
 
@@ -109,34 +135,34 @@ public class ItemEditorWindow : EditorWindow
     private void CreateToolbarButtons()
     {
         // 找到刷新按钮并注册刷新回调
-        rootVisualElement.Q<Button>("refresh-button").clickable.clicked += Refresh;
+        rootVisualElement.Q<Button>(RefreshButtonName).clickable.clicked += Refresh;
 
         // 找到保存按钮并注册保存回调
-        rootVisualElement.Q<Button>("save-all-button").clickable.clicked += AssetDatabase.SaveAssets;
+        rootVisualElement.Q<Button>(SaveAllButtonName).clickable.clicked += AssetDatabase.SaveAssets;
 
-        rootVisualElement.Q<Button>("delete-button").clickable.clicked += delegate
+        rootVisualElement.Q<Button>(DeleteButtonName).clickable.clicked += delegate
         {
             // 删除选中的Scriptable
             AssetDatabase.DeleteAsset($"{createPath}{(itemListView.selectedItem as BaseItemObject).name}.asset");
             Refresh();
             if (_baseItemObjects.Count > 0)
             {
-                itemListView.selectedIndex = (int)Mathf.Clamp(itemListView.selectedIndex - 1, 0, Mathf.Infinity);
+                itemListView.selectedIndex = (int) Mathf.Clamp(itemListView.selectedIndex - 1, 0, Mathf.Infinity);
             }
             else
             {
                 _scrollView.Clear();
             }
         };
-        
-        
-        VisualElement container = rootVisualElement.Q<VisualElement>("toolbar-right-container");
+
+
+        VisualElement container = rootVisualElement.Q<VisualElement>(ToolbarRightContainerName);
         _dropdownField = new DropdownField(new List<string> {"Equipment", "Food"}, 0);
         container.Add(_dropdownField);
 
-        _textField = container.Q<TextField>("item-name-textfield");
-        
-        rootVisualElement.Q<Button>("create-button").clickable.clicked += () =>
+        _textField = container.Q<TextField>(ItemNameTextFieldName);
+
+        rootVisualElement.Q<Button>(CreateButtonName).clickable.clicked += () =>
         {
             BaseItemObject createObj;
             // 创建ScriptableObject
@@ -154,6 +180,7 @@ public class ItemEditorWindow : EditorWindow
                 default:
                     throw new Exception($"Cant Find CreateType {_dropdownField.value}");
             }
+
             Refresh();
             // 将选择指向新创建的物体
             itemListView.selectedIndex = _baseItemObjects.IndexOf(createObj);
@@ -176,13 +203,13 @@ public class ItemEditorWindow : EditorWindow
         }
 
         // 初始化ListView
-        itemListView = rootVisualElement.Q<ListView>("item-list-view");
+        itemListView = rootVisualElement.Q<ListView>(ItemListViewName);
         itemListView.makeItem = () => new Label();
         itemListView.itemsSource = _baseItemObjects;
         itemListView.bindItem = (element, i) =>
         {
             Label label = element as Label;
-            label.name = itemListView.selectedIndex == i ? "item-choose-list-view-label" : "item-list-view-label";
+            label.name = itemListView.selectedIndex == i ? ItemChooseListViewLabelName : ItemListViewLabelName;
             label.text = _baseItemObjects[i].name;
         };
 
@@ -198,8 +225,8 @@ public class ItemEditorWindow : EditorWindow
             // 生成ImageGroup并添加进ScrollView中
             VisualElement imageGroup = visualTree.Instantiate();
             _scrollView.Add(imageGroup);
-            VisualElement imageContainer = imageGroup.Q<VisualElement>("image-container");
-            VisualElement propertyContainer = imageGroup.Q<VisualElement>("property-container");
+            VisualElement imageContainer = imageGroup.Q<VisualElement>(ImageContainerName);
+            VisualElement propertyContainer = imageGroup.Q<VisualElement>(PropertyContainerName);
 
             // 创建可序列化物体
             BaseItemObject itemObject = objects.FirstOrDefault() as BaseItemObject;
@@ -246,9 +273,7 @@ public class ItemEditorWindow : EditorWindow
             // 设置已被选择的栏的Style
             for (int i = 0; i < _listViewContainer.childCount; i++)
             {
-                _listViewContainer[i].name = itemListView.selectedIndex == i
-                    ? "item-choose-list-view-label"
-                    : "item-list-view-label";
+                _listViewContainer[i].name = itemListView.selectedIndex == i ? ItemChooseListViewLabelName : ItemListViewLabelName;
             }
         };
 
