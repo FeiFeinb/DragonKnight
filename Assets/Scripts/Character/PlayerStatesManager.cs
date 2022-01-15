@@ -34,11 +34,10 @@ namespace RPG.Character
         
         private readonly Collider[] _footCachedColliders = new Collider[5];
         private readonly Collider[] _jumpCachedColliders = new Collider[5];
-        private readonly Collider[] _buttomCachedColliders = new Collider[5];
-        
+        private readonly Collider[] _bottomCachedColliders = new Collider[5];
+
         [SerializeField] private LayerMask _groundCheckLayer;
-        
-        
+
         public float _yOffSet;
         private CharacterController _controller;
         private PlayerAnimatorController _animatorController;
@@ -48,8 +47,10 @@ namespace RPG.Character
             _controller = GetComponent<CharacterController>();
             _animatorController = GetComponent<PlayerAnimatorController>();
             
-            // TODO: 优化监听逻辑
-            foreach (EquipmentInventorySlot handSlot in PlayerInventoryManager.Instance.equipmentObject.equipmentInventorySlot.Where(slot => slot.equipmentSlotType == EquipmentSlotType.MainHand || slot.equipmentSlotType == EquipmentSlotType.OffHand))
+            // 添加装备武器和动画之间的监听逻辑
+            foreach (EquipmentInventorySlot handSlot in PlayerInventoryManager.Instance.equipmentObject.
+                equipmentInventorySlot.Where(slot => slot.equipmentSlotType == EquipmentSlotType.MainHand 
+                                                     || slot.equipmentSlotType == EquipmentSlotType.OffHand))
             {
                 handSlot.AddAfterUpdateListener(delegate { SwitchWeapon(); });
             }
@@ -62,7 +63,7 @@ namespace RPG.Character
             
             var position = _buttonJumpCheckTrans.position;
             int sizeCenter = Physics.OverlapSphereNonAlloc(position, _jumpCheckRadius, _jumpCachedColliders, _groundCheckLayer);
-            int underfootInRadiusColliderAmount = Physics.OverlapCapsuleNonAlloc(position, position + Vector3.down * 2f, _jumpCheckRadius, _buttomCachedColliders, _groundCheckLayer);
+            int underfootInRadiusColliderAmount = Physics.OverlapCapsuleNonAlloc(position, position + Vector3.down * 2f, _jumpCheckRadius, _bottomCachedColliders, _groundCheckLayer);
             
             isFalling = underfootInRadiusColliderAmount == 0;
             isGround = sizeRight > 0 || sizeLeft > 0;

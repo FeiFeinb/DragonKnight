@@ -159,7 +159,7 @@ namespace RPG.InventorySystem
                 amount -= GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount;
             }
 
-            // 无空插槽 或 空插槽使用完了但还没放完 
+            // 无空插槽 或 空插槽使用完了但还没放完
             return new Tuple<ItemData, int>(addItem, amount);
         }
 

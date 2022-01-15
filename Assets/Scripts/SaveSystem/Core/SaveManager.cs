@@ -97,6 +97,7 @@ namespace RPG.SaveSystem
             }
             return _saveDic;
         }
+        
         /// <summary>
         /// 加载存档数据
         /// </summary>
@@ -122,6 +123,7 @@ namespace RPG.SaveSystem
             // 获取保存路径
             return string.Concat(Path.Combine(Application.persistentDataPath, saveName), saveSuffix);
         }
+        
         private SaveEntity[] FindSaveEntity()
         {
             // 获取可保存实体
