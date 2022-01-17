@@ -16,7 +16,7 @@ namespace RPG.UI
         {
             // 记录位置偏移
             originOffset = eventData.position - (Vector2)targetTrans.position;
-            // 讲拖动目标的UI设为最顶层
+            // 将拖动目标的UI设为最顶层
             targetTrans.SetAsLastSibling();
         }
     }

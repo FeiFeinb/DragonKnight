@@ -42,9 +42,7 @@ namespace RPG.UI
         {
             GlobalUIManager.Instance.CloseUI(this);
         }
-        
-        
-        
+
         protected override bool AchieveDoTweenSequence()
         {
             inSequence.Append(_rect.DOAnchorPosX(-_rect.anchoredPosition.x, 0.3f));

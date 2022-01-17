@@ -59,7 +59,7 @@ namespace RPG.UI
             {
                 isFinish = true;
             };
-            // 逆向关闭UI回调
+            // 逆向关闭UI的回调
             inSequence.onRewind += () =>
             {
                 isFinish = true;
