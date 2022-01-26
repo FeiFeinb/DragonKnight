@@ -60,7 +60,7 @@ namespace RPG.QuestSystem
         
         public IEnumerable<PlayerQuestStatus> GetQuestStatuses<T>() where T : QuestSO
         {
-            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
+            Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.GetGlobalResource<QuestDataBaseSO>().questSODic;
             foreach (var playerQuestStatus in playerQuestStatuses.Where(playerQuestStatus => tempQuestSODic[playerQuestStatus.QuestUniqueID] is T))
             {
                 yield return playerQuestStatus;
@@ -90,7 +90,7 @@ namespace RPG.QuestSystem
             {
                 Debug.Log(string.Concat("完成了任务", removeQuest.Title));
                 // 任务提交完成 移除任务
-                Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.questDataBaseSO.questSODic;
+                Dictionary<string, QuestSO> tempQuestSODic = GlobalResource.Instance.GetGlobalResource<QuestDataBaseSO>().questSODic;
                 // 查找符合条件的Status
                 foreach (var playerQuestStatus in playerQuestStatuses.Where(tempPlayerQuestStatus => tempQuestSODic[tempPlayerQuestStatus.QuestUniqueID] == removeQuest))
                 {

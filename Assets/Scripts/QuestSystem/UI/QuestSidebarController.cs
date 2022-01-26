@@ -5,16 +5,16 @@ using RPG.UI;
 using RPG.Module;
 namespace RPG.QuestSystem
 {
-    public class QuestSidebarController : BaseUIController
+    public class QuestSidebarController : BaseUI
     {
         public static string storePath = "UIView/QuestSidebarView";
-        public static QuestSidebarController controller;
         [SerializeField] private GameObject questSidebarElementPrefab;             // 侧栏任务UI预制体
         [SerializeField] private RectTransform questSidebarContainer;       // 侧栏任务UI Container
         private Dictionary<PlayerQuestStatus, QuestSidebar> statusDic = new Dictionary<PlayerQuestStatus, QuestSidebar>();
-        public override void PreInit()
+
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             PlayerQuestManager.Instance.AddOnQuestUpdateListener(RegenerateQuestSidebars);
             PlayerQuestManager.Instance.AddQuestObjectiveUpdateListener(ReDrawQuestState);
             RegenerateQuestSidebars();
@@ -28,7 +28,7 @@ namespace RPG.QuestSystem
             foreach (PlayerQuestStatus questStatus in PlayerQuestManager.Instance.GetQuestStatuses())
             {
                 // 遍历任务列表并生成侧栏任务UI
-                QuestSidebar tempQuestSidebar = UIResourcesManager.Instance.LoadUserInterface(questSidebarElementPrefab, questSidebarContainer).GetComponent<QuestSidebar>();
+                QuestSidebar tempQuestSidebar = UIResourcesLoader.Instance.InstantiateUserInterface(questSidebarElementPrefab, questSidebarContainer).GetComponent<QuestSidebar>();
                 // 记录到数列中
                 tempQuestSidebar.InitQuestSidebarInfo(questStatus);
                 statusDic.Add(questStatus, tempQuestSidebar);

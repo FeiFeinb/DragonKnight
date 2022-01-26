@@ -5,7 +5,7 @@ using RPG.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionView : BaseUI
+public class OptionView : BaseUIPanel
 {
     public Button audioSettingViewButton;
     public Button keySettingViewButton;

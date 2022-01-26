@@ -6,20 +6,36 @@ using RPG.Module;
 using UnityEngine;
 using LitJson;
 using RPG.UI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.InputSystyem
 {
+    public class InputStrTuple
+    {
+        public InputStrTuple() {}
+
+        public InputStrTuple(string newKeyTypeStr, string newFirstKeyCodeStr, string newSecondKeyCodeStr)
+        {
+            keyTypeStr = newKeyTypeStr;
+            firstKeyCodeStr = newFirstKeyCodeStr;
+            secondKeyCodeStr = newSecondKeyCodeStr;
+        }
+        
+        public string keyTypeStr;
+        public string firstKeyCodeStr;
+        public string secondKeyCodeStr;
+    }
+    
+    
     public class InputManager : BaseSingletonWithMono<InputManager>
     {
         public InputData inputData = new InputData();
+
         [SerializeField] private CinemachineFreeLook _freeLook;
+
         [SerializeField] private string _saveDirectory = "PlayerData/";
         [SerializeField] private string _dataFileName = "PlayerKey.json";
         [SerializeField] private string _defaultDataFileName = "DefaultPlayerKey.json";
-        private void Awake()
-        {
-            LoadPlayerJsonToInputData();
-        }
 
         public void LoadPlayerJsonToInputData()
         {
@@ -30,10 +46,11 @@ namespace RPG.InputSystyem
                 LoadDefaultJsonToInputData();
                 return;
             }
+
             Debug.Log("读取PlayerKey的Json文件");
             LoadJson(path);
         }
-        
+
         public void LoadDefaultJsonToInputData()
         {
             string path = Path.Combine(Application.dataPath, string.Concat(_saveDirectory, _defaultDataFileName));
@@ -41,6 +58,7 @@ namespace RPG.InputSystyem
             {
                 throw new Exception("未找到键位Default配置文件");
             }
+
             Debug.Log("读取DefaultJson文件");
             LoadJson(path);
         }
@@ -49,21 +67,29 @@ namespace RPG.InputSystyem
         {
             string dataStr = File.ReadAllText(jsonPath);
             // 同步到InputData
-            inputData.LoadNormalKeyData(JsonMapper.ToObject<Dictionary<string, string>>(dataStr));
+            inputData.LoadKeyData(JsonMapper.ToObject<Dictionary<string, InputStrTuple>>(dataStr));
+            // TODO: 加载其他类型的键位
         }
-        
-        public void WriteDefaultJsonFromInputData(Dictionary<string, string> data)
+
+        /// <summary>
+        /// 写入Default配置文件
+        /// </summary>
+        /// <param name="data">默认的键位设置</param>
+        public void WriteDefaultJsonFromInputData(Dictionary<string, InputStrTuple> data)
         {
             // 从UI上读取信息直接写入Json
             WriteJson(_saveDirectory, _defaultDataFileName, data);
         }
-        
+
+        /// <summary>
+        /// 将玩家的键位设置写入Json中
+        /// </summary>
         public void WritePlayerJsonFromInputData()
         {
-            WriteJson(_saveDirectory, _dataFileName, inputData.GetNormalKeyData());
+            WriteJson(_saveDirectory, _dataFileName, inputData.GetKeyData());
         }
 
-        private void WriteJson(string saveDirectory, string dataFileName, Dictionary<string, string> data)
+        private void WriteJson(string saveDirectory, string dataFileName, Dictionary<string, InputStrTuple> data)
         {
             string path = Path.Combine(Application.dataPath, string.Concat(saveDirectory, dataFileName));
             // 若文件夹不存在 则创建文件夹
@@ -71,6 +97,7 @@ namespace RPG.InputSystyem
             {
                 Directory.CreateDirectory(Path.Combine(Application.dataPath, saveDirectory));
             }
+
             FileStream fileStream = File.Open(path, FileMode.Create);
             StreamWriter writer = new StreamWriter(fileStream);
 
@@ -78,6 +105,7 @@ namespace RPG.InputSystyem
             writer.WriteLine(jsonStr);
             writer.Close();
         }
+
         private void Update()
         {
             inputData.UpdateKey();
@@ -85,12 +113,34 @@ namespace RPG.InputSystyem
 
         public void CloseMouseInput()
         {
-            _freeLook.enabled = false;
+            if (_freeLook)
+            {
+                _freeLook.enabled = false;
+            }
         }
 
         public void OpenMouseInput()
         {
-            _freeLook.enabled = true;
+            if (_freeLook)
+            {
+                _freeLook.enabled = true;
+            }
+        }
+
+        public void SeekOrSetMainCamera(CinemachineFreeLook mainCamera = null)
+        {
+            if (mainCamera == null)
+            {
+                _freeLook = FindObjectOfType<CinemachineFreeLook>();
+                if (_freeLook == null)
+                {
+                    Debug.Log($"场景: {SceneManager.GetActiveScene().name}中没有CinemachineFreeLook");
+                }
+            }
+            else
+            {
+                _freeLook = mainCamera;
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using RPG.Module;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using RPG.UI;
 namespace RPG.SaveSystem
 {
-    public class SavingSlot : BaseUI, IPointerEnterHandler, IPointerExitHandler
+    public class SavingSlot : BaseUIPanel, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField, DisplayOnly] private int slotIndex;        // 插槽序号
         [SerializeField] private Image backGround;                  // 插槽背景
@@ -17,13 +18,13 @@ namespace RPG.SaveSystem
         public void SetSlotFilled(string _timeStr)
         {
             SetDateText(_timeStr);
-            SetBackGroundColor(SavingController.controller.fillColor);
+            SetBackGroundColor(BaseUI.GetController<SavingController>().fillColor);
             SetOptionState(true);
         }
         public void SetSlotEmpty()
         {
             SetDateText("空");
-            SetBackGroundColor(SavingController.controller.defaultColor);
+            SetBackGroundColor(BaseUI.GetController<SavingController>().defaultColor);
             SetOptionState(false);
         }
         private void SetBackGroundColor(Color _color)
@@ -45,17 +46,17 @@ namespace RPG.SaveSystem
         public void OnClickSave()
         {
             // 点击保存按钮
-            SavingController.controller.OnSave(slotIndex);
+            BaseUI.GetController<SavingController>().OnSave(slotIndex);
         }
         public void OnClickLoad()
         {
             // 点击载入按钮
-            SavingController.controller.OnLoad(slotIndex);
+            BaseUI.GetController<SavingController>().OnLoad(slotIndex);
         }
         public void OnClickDelete()
         {
             // 点击删除按钮
-            SavingController.controller.OnDelete(slotIndex);
+            BaseUI.GetController<SavingController>().OnDelete(slotIndex);
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

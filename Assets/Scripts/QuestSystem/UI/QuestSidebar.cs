@@ -22,13 +22,13 @@ namespace RPG.QuestSystem
             // 设置按钮点击事件
             questIndexButton.onClick.AddListener(() =>
             {
-                if (!QuestToolTipsController.controller.isActive)
+                if (!BaseUI.GetController<QuestToolTipsController>().isActive)
                 {
-                    QuestToolTipsController.controller.OnEnter(questStatus);
+                    BaseUI.GetController<QuestToolTipsController>().OnEnter(questStatus);
                 }
                 else
                 {
-                    QuestToolTipsController.controller.OnExit(questStatus);
+                    BaseUI.GetController<QuestToolTipsController>().OnExit(questStatus);
                 }
             });
             // 设置任务标题
@@ -37,13 +37,13 @@ namespace RPG.QuestSystem
             foreach (QuestObjective questObjective in questStatus.GetObjectives())
             {
                 // 生成并初始化侧栏任务目标
-                QuestObjectiveUI tempQuestObjectiveUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
+                QuestObjectiveUI tempQuestObjectiveUI = UIResourcesLoader.Instance.InstantiateUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
                 tempQuestObjectiveUI.SetQuestObjectiveSidebar(questStatus.GetProgress(questObjective), questObjective.TargetAmount, questObjective.Description);
                 // 添加记录至数列中
                 objectiveDic.Add(questObjective, tempQuestObjectiveUI);
             }
             // 判断任务是否完成 完成则清空 不完成则更新进度
-            finishUI = UIResourcesManager.Instance.LoadUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
+            finishUI = UIResourcesLoader.Instance.InstantiateUserInterface(questSidebarObjectivePrefab, objectiveContainer).GetComponent<QuestObjectiveUI>();
             // 生成并初始化侧栏任务目标
             finishUI.SetQuestObjectiveSidebar("已完成");
             finishUI.gameObject.SetActive(false);

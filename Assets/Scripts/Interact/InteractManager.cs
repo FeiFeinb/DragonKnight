@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using RPG.Interact;
 using RPG.Module;
+using RPG.UI;
 using RPG.Utility;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace RPG.Interact
             if (!removeCollider || !removeCollider.gameObject) return;
             removeCollider.gameObject.TryGetComponent(out IInteractable tempInteractable);
             if (tempInteractable == null) return;
-            InteractionController.controller.RemoveButton(uiDic[tempInteractable]);
+            BaseUI.GetController<InteractionController>().RemoveButton(uiDic[tempInteractable]);
             uiDic.Remove(tempInteractable);
             // _buttonsList.Remove(tempInteractable);
         }
@@ -34,7 +35,7 @@ namespace RPG.Interact
             addCollider.gameObject.TryGetComponent(out IInteractable tempInteractable);
             if (tempInteractable == null) return;
             tempInteractable.GetInteractInfo(out InteractType type, out string buttonStr, out Sprite sprite);
-            InteractButton addButton = InteractionController.controller.AddButton(type, buttonStr, () =>
+            InteractButton addButton = BaseUI.GetController<InteractionController>().AddButton(type, buttonStr, () =>
             {
                 // uiDic.Remove(addCollider);
                 // _buttonsList.Remove(tempInteractable);
@@ -46,7 +47,7 @@ namespace RPG.Interact
 
         public void AddDialogueChoiceButton(string content, Action callBack)
         {
-            InteractionController.controller.AddButton(InteractType.DestroyAll, content, callBack);
+            BaseUI.GetController<InteractionController>().AddButton(InteractType.DestroyAll, content, callBack);
         }
 
         // public void InteractFirst()

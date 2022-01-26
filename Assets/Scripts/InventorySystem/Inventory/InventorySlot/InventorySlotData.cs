@@ -10,7 +10,7 @@ namespace RPG.InventorySystem
             {
                 if (itemData?.id >= 0)
                 {
-                    return GlobalResource.Instance.itemDataBase.itemObjs[itemData.id];
+                    return GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[itemData.id];
                 }
                 return null;
             }

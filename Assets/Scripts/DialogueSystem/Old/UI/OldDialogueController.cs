@@ -8,7 +8,7 @@
 //
 // namespace DialogueSystem.Old.UI
 // {
-//     public class OldDialogueController : BaseUIController
+//     public class OldDialogueController : BaseUI
 //     {
 //         public static string storePath = "UIView/OldDialogueView";
 //         public static OldDialogueController controller;

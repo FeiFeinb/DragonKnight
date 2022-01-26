@@ -2,15 +2,11 @@
 {
     public enum KeyActionType
     {
-        OpenOption,
+        Exit,
         OpenInventory,
         OpenEquipment,
-        OpenMap,
         Jump,
         Run,
-        Crouch,
-        NormalSkill,
-        FinalSkill,
         Dialogue,
         SceneInteract,
         MoveVertical,

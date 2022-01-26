@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 namespace RPG.DialogueSystem.Graph
 {
-    public class DialogueController : BaseUIController
+    public class DialogueController: BaseUI
     {
         public static string storePath = "UIView/DialogueView";
-        public static DialogueController controller;
 
         [SerializeField] private DialogueView _dialogueView;
         [SerializeField] private Button _continueButton;

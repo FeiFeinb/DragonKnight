@@ -1,13 +1,47 @@
 {
-  "OpenOption": "Escape",
-  "OpenInventory": "B",
-  "OpenEquipment": "P",
-  "OpenMap": "M",
-  "Jump": "Space",
-  "Run": "LeftShift",
-  "Crouch": "LeftControl",
-  "NormalSkill": "Q",
-  "FinalSkill": "R",
-  "Dialogue": "E",
-  "SceneInteract": "F"
+  "Exit": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "Escape",
+    "secondKeyCodeStr": "None"
+  },
+  "OpenInventory": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "B",
+    "secondKeyCodeStr": "None"
+  },
+  "OpenEquipment": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "E",
+    "secondKeyCodeStr": "None"
+  },
+  "Jump": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "Space",
+    "secondKeyCodeStr": "None"
+  },
+  "Run": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "LeftShift",
+    "secondKeyCodeStr": "None"
+  },
+  "Dialogue": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "F",
+    "secondKeyCodeStr": "None"
+  },
+  "SceneInteract": {
+    "keyTypeStr": "NormalKey",
+    "firstKeyCodeStr": "Q",
+    "secondKeyCodeStr": "None"
+  },
+  "MoveVertical": {
+    "keyTypeStr": "AxisKey",
+    "firstKeyCodeStr": "W",
+    "secondKeyCodeStr": "S"
+  },
+  "MoveHorizontal": {
+    "keyTypeStr": "AxisKey",
+    "firstKeyCodeStr": "A",
+    "secondKeyCodeStr": "D"
+  }
 }

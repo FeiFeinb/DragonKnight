@@ -1,33 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using RPG.Module;
 using UnityEngine;
 using UnityEditor;
 namespace RPG.InventorySystem
 {
     [CreateAssetMenu(fileName = "New ItemDataBaseSO", menuName = "Inventory System/ItemDataBaseSO")]
-    public class ItemDataBaseSO : ScriptableObject
+    public class ItemDataBaseSO : DataBaseSO
     {
         public string loadPath;
-        public BaseItemObject[] itemObjs;
-
-        [ContextMenu("LoadDateBaseItem")]
-        public void LoadDateBaseItem()
+        
+        public List<BaseItemObject> itemObjs;
+        
+        
+#if UNITY_EDITOR
+        public void GenerateItemID()
         {
             BaseItemObject[] loadSO = Resources.LoadAll<BaseItemObject>(loadPath);
-            itemObjs = new BaseItemObject[loadSO.Length];
             for (int i = 0; i < loadSO.Length; i++)
             {
-                itemObjs[i] = loadSO[i] as BaseItemObject;
-            }
-            UpdateDateBaseID();
-        }
-        public void UpdateDateBaseID()
-        {
-            for (int i = 0; i < itemObjs.Length; i++)
-            {
-                // 仓库序列化时赋值ID
+                itemObjs.Add(loadSO[i]);
                 itemObjs[i].item.id = i;
             }
+            EditorUtility.SetDirty(this);
+        }
+#endif
+        public override void InitAndLoad()
+        {
         }
     }
 }

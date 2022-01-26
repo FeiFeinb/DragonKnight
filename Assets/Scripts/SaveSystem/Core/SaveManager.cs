@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Module;
+using UnityEngine.SceneManagement;
+
 namespace RPG.SaveSystem
 {
     public class SaveManager : BaseSingletonWithMono<SaveManager>
@@ -12,6 +15,7 @@ namespace RPG.SaveSystem
         public int maxSaveFileNum = 6;
         [SerializeField] private string saveName = "MySave";
         [SerializeField] private string saveSuffix = ".save";
+        
         public Dictionary<string, object>[] LoadSaveDics()
         {
             string savePath = GetSavePath();
@@ -27,6 +31,7 @@ namespace RPG.SaveSystem
             fileStream.Close();
             return _saveDics;
         }
+        
         public void Save(int _saveIndex, Action<string> saveCallBack)
         {
             // 控制台输出
@@ -39,7 +44,10 @@ namespace RPG.SaveSystem
             // 写入时间信息
             string timeStr = System.DateTime.Now.ToString();
             _saveDics[_saveIndex]["saveTime"] = timeStr;
-
+            // 写入当前场景的名称
+            string sceneNameStr = SceneManager.GetActiveScene().name;
+            _saveDics[_saveIndex]["saveScene"] = sceneNameStr;
+            
             // 写入文件
             WriteFile(savePath, _saveDics);
             // 回调
@@ -57,8 +65,11 @@ namespace RPG.SaveSystem
             {
                 UnityEngine.Debug.LogError("读取的存档为空");
             }
-            RestoreStates(_saveDics[_saveIndex]);
+            
+            // 开启读取的协程
+            StartCoroutine(RestoreStates(_saveDics[_saveIndex]));
         }
+        
         public void Delete(int _saveIndex, Action deleteCallBack)
         {
             // 控制台输出
@@ -102,8 +113,21 @@ namespace RPG.SaveSystem
         /// 加载存档数据
         /// </summary>
         /// <param name="saveDic">存档数据</param>
-        private void RestoreStates(Dictionary<string, object> saveDic)
+        private IEnumerator RestoreStates(Dictionary<string, object> saveDic)
         {
+            // 加载对应的场景
+            if (!saveDic.ContainsKey("saveScene"))
+            {
+                Debug.LogError("Cant Load Scene In SaveDictionary");
+                yield break;
+            }
+            
+            SceneLoader.Instance.Load(saveDic["saveScene"] as string);
+            // 等待场景加载完毕
+            while (SceneLoader.Instance.isLoading)
+            {
+                yield return null;
+            }
             // 寻找场景中的SaveEntity
             foreach (SaveEntity saveEntity in FindSaveEntity())
             {

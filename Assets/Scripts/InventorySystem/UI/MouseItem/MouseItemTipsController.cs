@@ -19,7 +19,6 @@ namespace RPG.InventorySystem
     public class MouseItemTipsController : ToolTipsController
     {
         public static string storePath = "UIView/MouseItemTipsView";   // 路径
-        public static MouseItemTipsController controller;
         
         [SerializeField, Tooltip("启用面板的事件延迟")] private float viewShowDelay = 1.5f;     // 目标计时时间
         private ItemToolTipsContent content;
@@ -27,9 +26,9 @@ namespace RPG.InventorySystem
         private float viewShowTimer;                        // 面板显示计时器
         private bool isStartTimer;                          // 是否开启计时
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             MonoEvent.Instance.AddUpdateEvent(TimerCount);
         }
 

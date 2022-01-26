@@ -24,9 +24,9 @@ namespace RPG.Module
     public class CenterEvent : BaseSingletonWithMono<CenterEvent>
     {
         //储存所有事件
-        private Dictionary<string, IEventInfo> eventDir = new Dictionary<string, IEventInfo>();
+        private Dictionary<GlobalEventID, IEventInfo> eventDir = new Dictionary<GlobalEventID, IEventInfo>();
 
-        public void AddListener<T>(string eventName, UnityAction<T> action)
+        public void AddListener<T>(GlobalEventID eventName, UnityAction<T> action)
         {
             //有参版本
             if (eventDir.ContainsKey(eventName))
@@ -34,7 +34,7 @@ namespace RPG.Module
             else
                 eventDir.Add(eventName, new EventInfo<T>(action));
         }
-        public void AddListener(string eventName, UnityAction action)
+        public void AddListener(GlobalEventID eventName, UnityAction action)
         {
             //无参版本
             if (eventDir.ContainsKey(eventName))
@@ -43,26 +43,26 @@ namespace RPG.Module
                 eventDir.Add(eventName, new EventInfo(action));
         }
         //RemoveListener一般在OnDestroy中调用
-        public void RemoveListener<T>(string eventName, UnityAction<T> action)
+        public void RemoveListener<T>(GlobalEventID eventName, UnityAction<T> action)
         {
             //有参版本
             if (eventDir.ContainsKey(eventName))
                 (eventDir[eventName] as EventInfo<T>).actions -= action;
         }
-        public void RemoveListener(string eventName, UnityAction action)
+        public void RemoveListener(GlobalEventID eventName, UnityAction action)
         {
             //无参版本
             if (eventDir.ContainsKey(eventName))
                 (eventDir[eventName] as EventInfo).actions -= action;
         }
 
-        public void Raise<T>(string eventName, T info)
+        public void Raise<T>(GlobalEventID eventName, T info)
         {
             //如果存在，则依次调用所有事件
             if (eventDir.ContainsKey(eventName))
                 (eventDir[eventName] as EventInfo<T>).actions?.Invoke(info);
         }
-        public void Raise(string eventName)
+        public void Raise(GlobalEventID eventName)
         {
             //如果存在，则依次调用所有事件
             if (eventDir.ContainsKey(eventName))

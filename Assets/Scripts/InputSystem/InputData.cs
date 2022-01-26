@@ -14,12 +14,13 @@ namespace RPG.InputSystyem
         /// NormalKey数列
         /// </summary>
         private Dictionary<KeyActionType, NormalKey> _normalKeysDic = new Dictionary<KeyActionType, NormalKey>();
-        
+
         /// <summary>
         /// AxisKey数列
         /// </summary>
         private Dictionary<KeyActionType, AxisKey> _axisKeysDic = new Dictionary<KeyActionType, AxisKey>();
-        
+
+
         /// <summary>
         /// 设置NormalKey 若不存在会自动添加
         /// </summary>
@@ -78,7 +79,7 @@ namespace RPG.InputSystyem
                 throw new Exception($"Input系统在AxisKey中无法找到键{actionType}");
             return _axisKeysDic[actionType];
         }
-        
+
         /// <summary>
         /// 获取NormalKey按下状态
         /// </summary>
@@ -102,7 +103,7 @@ namespace RPG.InputSystyem
             if (axisKey == null) return 0;
             return axisKey.value;
         }
-        
+
         /// <summary>
         /// 设置NormalKey的启用状态
         /// </summary>
@@ -148,8 +149,8 @@ namespace RPG.InputSystyem
             AxisKey axisKey = GetAxisKey(actionType);
             axisKey.SetWeight(weight);
         }
-        
-        
+
+
         /// <summary>
         /// 打开某权重及以下的所有键
         /// </summary>
@@ -166,7 +167,7 @@ namespace RPG.InputSystyem
                 axisKey.Value.SetEnable(true);
             }
         }
-        
+
         /// <summary>
         /// 关闭某权重及以下的所有键盘
         /// </summary>
@@ -176,13 +177,13 @@ namespace RPG.InputSystyem
             {
                 normalKey.Value.SetEnable(false);
             }
-            
+
             foreach (var axisKey in _axisKeysDic.Where(axisKey => axisKey.Value.weight <= weight))
             {
                 axisKey.Value.SetEnable(false);
             }
         }
-        
+
         /// <summary>
         /// 每帧更新键
         /// </summary>
@@ -198,7 +199,7 @@ namespace RPG.InputSystyem
                 axisKey.Value.HandleKey();
             }
         }
-        
+
         public void AddNormalKeyListener(KeyActionType actionType, Action callBack)
         {
             NormalKey normalKey = GetNormalKey(actionType);
@@ -210,17 +211,30 @@ namespace RPG.InputSystyem
             NormalKey normalKey = GetNormalKey(actionType);
             normalKey.RemoveTriggerListener(callBack);
         }
-        
+
         /// <summary>
         /// 获取NormalKey数据 可将传达给Json进行写操作
         /// </summary>
-        /// <returns>(name)-(KeyCodeStr) 数据字典</returns>
-        public Dictionary<string, string> GetNormalKeyData()
+        /// <returns>数据字典</returns>
+        public Dictionary<string, InputStrTuple> GetKeyData()
         {
-            Dictionary<string, string> dataDic = new Dictionary<string, string>();
-            foreach (KeyValuePair<KeyActionType,NormalKey> keyValuePair in _normalKeysDic)
+            var dataDic = new Dictionary<string, InputStrTuple>();
+
+
+            // 常规点按键
+            foreach (KeyValuePair<KeyActionType, NormalKey> keyValuePair in _normalKeysDic)
             {
-                dataDic.Add(keyValuePair.Key.ToString(), keyValuePair.Value.mainKeyCode.ToString());
+                var tuple = new InputStrTuple(KeyType.NormalKey.ToString(),
+                    keyValuePair.Value.mainKeyCode.ToString(), KeyCode.None.ToString());
+                dataDic.Add(keyValuePair.Key.ToString(), tuple);
+            }
+
+            // Axis键
+            foreach (KeyValuePair<KeyActionType, AxisKey> keyValuePair in _axisKeysDic)
+            {
+                var tuple = new InputStrTuple(KeyType.AxisKey.ToString(),
+                    keyValuePair.Value.posKeyCode.ToString(), keyValuePair.Value.negKeyCode.ToString());
+                dataDic.Add(keyValuePair.Key.ToString(), tuple);
             }
 
             return dataDic;
@@ -229,12 +243,21 @@ namespace RPG.InputSystyem
         /// <summary>
         /// 将外界传来的数据字典记录到类中
         /// </summary>
-        /// <param name="data">(name)-(KeyCodeStr) 数据字典</param>
-        public void LoadNormalKeyData(Dictionary<string, string> data)
+        /// <param name="data">数据字典</param>
+        public void LoadKeyData(Dictionary<string, InputStrTuple> data)
         {
-            foreach (KeyValuePair<string,string> keyValuePair in data)
+            foreach (var pair in data)
             {
-                SetOrAddNormalKey(keyValuePair.Key.ToKeyActionType(), keyValuePair.Value.ToKeyCode());
+                switch (pair.Value.keyTypeStr.ToKeyType())
+                {
+                    case KeyType.NormalKey:
+                        SetOrAddNormalKey(pair.Key.ToKeyActionType(), pair.Value.firstKeyCodeStr.ToKeyCode());
+                        break;
+                    case KeyType.AxisKey:
+                        SetOrAddAxisKey(pair.Key.ToKeyActionType(), pair.Value.firstKeyCodeStr.ToKeyCode(),
+                            pair.Value.secondKeyCodeStr.ToKeyCode());
+                        break;
+                }
             }
         }
     }

@@ -4,30 +4,31 @@ using RPG.InputSystyem;
 using RPG.Module;
 using RPG.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RPG.UI
 {
-    public class OptionController : BaseUIController
+    public class OptionController : BaseUI
     {
         public static string storePath = "UIView/OptionView";
-        public static OptionController controller;
 
         [SerializeField] private OptionView _optionView;
         
-        [SerializeField] private AudioSettingController _audioSettingController;
-        [SerializeField] private KeySettingController _keySettingController;
-        [SerializeField] private MakerController _makerController;
+        public AudioSettingController audioSettingController;
+        public KeySettingController keySettingController;
+        public MakerController makerController;
 
         [SerializeField] private Color _normalColor;
         [SerializeField] private Color _selectColor;
-        private BaseUI _currentSettingView;
         
-        public override void PreInit()
+        private BaseUI _currentSettingController;
+
+        protected override void InitInstance()
         {
-            base.PreInit();
-            _audioSettingController.PreInit();
-            _keySettingController.PreInit();
-            _makerController.PreInit();
+            base.InitInstance();
+            audioSettingController.Init();
+            keySettingController.Init();
+            makerController.Init();
 
             _optionView.audioSettingViewButton.onClick.AddListener(SwitchToAudioSettingView);
             _optionView.keySettingViewButton.onClick.AddListener(SwitchToKeySettingView);
@@ -44,15 +45,15 @@ namespace RPG.UI
         protected override bool AchieveDoTweenSequence()
         {
             RectTransform rect = transform as RectTransform;
-            inSequence.Append(rect.DOAnchorPosY(-rect.anchoredPosition.y, 0.4f).SetEase(Ease.OutBack));
+            _inSequence.Append(rect.DOAnchorPosY(-rect.anchoredPosition.y, 0.4f).SetEase(Ease.OutBack));
             return true;
         }
 
         private void SwitchToAudioSettingView()
         {
-            if (_currentSettingView)
-                _currentSettingView.Hide();
-            _currentSettingView = _audioSettingController;
+            if (_currentSettingController)
+                _currentSettingController.Hide();
+            _currentSettingController = audioSettingController;
             
             _optionView.audioSettingViewButton.image.color = _selectColor;
             _optionView.keySettingViewButton.image.color = _normalColor;
@@ -60,14 +61,14 @@ namespace RPG.UI
             
             _optionView.defaultButton.gameObject.SetActive(false);
             _optionView.applyButton.gameObject.SetActive(false);
-            _currentSettingView.Show();
+            _currentSettingController.Show();
         }
         
         private void SwitchToKeySettingView()
         {
-            if (_currentSettingView)
-                _currentSettingView.Hide();
-            _currentSettingView = _keySettingController;
+            if (_currentSettingController)
+                _currentSettingController.Hide();
+            _currentSettingController = keySettingController;
             
             _optionView.audioSettingViewButton.image.color = _normalColor;
             _optionView.keySettingViewButton.image.color = _selectColor;
@@ -75,14 +76,14 @@ namespace RPG.UI
             
             _optionView.defaultButton.gameObject.SetActive(true);
             _optionView.applyButton.gameObject.SetActive(true);
-            _currentSettingView.Show();
+            _currentSettingController.Show();
         }
         
         private void SwitchToMakerView()
         {
-            if (_currentSettingView)
-                _currentSettingView.Hide();
-            _currentSettingView = _makerController;
+            if (_currentSettingController)
+                _currentSettingController.Hide();
+            _currentSettingController = makerController;
             
             _optionView.audioSettingViewButton.image.color = _normalColor;
             _optionView.keySettingViewButton.image.color = _normalColor;
@@ -90,7 +91,7 @@ namespace RPG.UI
             
             _optionView.defaultButton.gameObject.SetActive(false);
             _optionView.applyButton.gameObject.SetActive(false);
-            _currentSettingView.Show();
+            _currentSettingController.Show();
         }
 
         
@@ -99,7 +100,7 @@ namespace RPG.UI
         /// </summary>
         public void ReturnBack()
         {
-            GlobalUIManager.Instance.CloseUI(this);
+            UIStackManager.Instance.PopUI();
         }
         
         // TODO: 添加对音效配置的加载
@@ -111,7 +112,7 @@ namespace RPG.UI
             // 从Json中加载
             InputManager.Instance.LoadDefaultJsonToInputData();
             // 从InputData中读取数据应用到UI
-            _keySettingController.LoadMainKeyChangeFromInputData();
+            keySettingController.LoadMainKeyChangeFromInputData();
         }
 
         /// <summary>
@@ -120,8 +121,8 @@ namespace RPG.UI
         public void ApplyConfigure()
         {
             // 从UI写入到InputData
-            _keySettingController.WriteMainKeyChangeToInputData();
-            // 保存到Json
+            keySettingController.WriteMainKeyChangeToInputData();
+            // 从InputData中写入到Json
             InputManager.Instance.WritePlayerJsonFromInputData();
         }
     }

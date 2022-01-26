@@ -9,7 +9,6 @@ namespace RPG.InventorySystem
     public class InventoryController : BaseInventoryController
     {
         public static string storePath = "UIView/InventoryView";
-        public static InventoryController controller;
         
         public PlayerInventoryObject playerInventoryObject;     // 显示哪个背包
         
@@ -20,14 +19,14 @@ namespace RPG.InventorySystem
         private Dictionary<InventorySlot, GameObject> slotUIDic = new Dictionary<InventorySlot, GameObject>(); // 插槽-UI字典
 
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             // 将对应的GameObject与对应的InventorySlot绑定
             foreach (InventorySlot slot in playerInventoryObject.inventorySlots)
             {
                 // 生成空物品栏
-                var itemObject = UIResourcesManager.Instance.LoadUserInterface(inventorySlotPrefab, slotContainerTrans);
+                var itemObject = UIResourcesLoader.Instance.InstantiateUserInterface(inventorySlotPrefab, slotContainerTrans);
                 slotDic.Add(itemObject, slot);
                 slotUIDic.Add(slot, itemObject);
                 AddSlotEvent(itemObject);

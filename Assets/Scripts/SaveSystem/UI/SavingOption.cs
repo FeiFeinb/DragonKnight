@@ -1,9 +1,10 @@
+using RPG.Module;
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.UI;
 namespace RPG.SaveSystem
 {
-    public class SavingOption : BaseUI
+    public class SavingOption : BaseUIPanel
     {
         [SerializeField] private Button saveButton;
         [SerializeField] private Button loadButton;

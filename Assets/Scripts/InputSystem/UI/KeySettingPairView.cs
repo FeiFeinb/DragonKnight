@@ -1,45 +1,80 @@
-﻿using RPG.InputSystyem;
+﻿using System;
+using RPG.InputSystyem;
+using RPG.Module;
 using RPG.UI;
 using RPG.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 namespace RPG.InputSystyem
 {
-    public class KeySettingPairView : BaseUI
+    public class KeySettingPairView : BaseUIPanel, ISerializationCallbackReceiver
     {
-        public Text title;
-        public Button mainKeyButton;
-        public Button offKeyButton;
-        public Text mainKeyText;
-        public Text offKeyText;
+        public KeyActionType keyActionType => _keyActionType;
+
+        public KeyType keyType => _keyType;
         
-        public void Init(KeySettingController keySettingController)
+        [SerializeField] private KeyActionType _keyActionType;
+
+        [SerializeField] private KeyType _keyType;
+        
+        [Space]
+        
+        [SerializeField] private Button _firstKeyButton;
+        [SerializeField] private Button _secondKeyButton;
+        
+        [SerializeField] private Text _firstKeyText;
+        [SerializeField] private Text _secondKeyText;
+
+        
+        public override void PreInit()
         {
-            mainKeyButton.onClick.AddListener(delegate { keySettingController.SetMainKeyChange(this); }); 
+            _firstKeyButton.onClick.AddListener(delegate
+            {
+                // TODO 设置的是哪个键位的变换
+                BaseUI.GetController<OptionController>().keySettingController.ModifyKey(this.SetFirstKeyText);
+            });
+            // 只有AxisKey才监听第二个键位的修改
+            if (_keyType == KeyType.AxisKey)
+            {
+                // 设置第二个键位的更改
+                _secondKeyButton.onClick.AddListener(delegate
+                {
+                    BaseUI.GetController<OptionController>().keySettingController.ModifyKey(this.SetSecondKeyText);
+                });
+            }
         }
 
-        public void SetMainKeyText(string keyStr)
+        public void SetKeyText(KeyType newKeyType, string firstKeyCode, string secondKeyCode)
         {
-            mainKeyText.text = keyStr;
+            _keyType = newKeyType;
+            _firstKeyText.text = firstKeyCode;
+            _secondKeyText.text = secondKeyCode;
+            _secondKeyButton.interactable = newKeyType == KeyType.AxisKey;
         }
 
-        public void SetOffKeyText(string keyStr)
+        public void SetFirstKeyText(KeyCode firstKeyCode)
         {
-            offKeyText.text = keyStr;
+            _firstKeyText.text = firstKeyCode.ToString();
         }
 
-        /// <summary>
-        /// 将UI上记录的键位信息储存到InputData中
-        /// </summary>
-        public void WriteUIDataToInputData()
+        public void SetSecondKeyText(KeyCode secondKeyCode)
         {
-            // Add or Set ?
-            InputManager.Instance.inputData.SetOrAddNormalKey(title.text.ToKeyActionType(), mainKeyText.text.ToKeyCode());
+            _secondKeyText.text = secondKeyCode.ToString();
+        }
+        
+        public InputStrTuple GetKeyInfo()
+        {
+            return new InputStrTuple(_keyType.ToString(), _firstKeyText.text, _secondKeyText.text);
         }
 
-        public (string, string) GetUIData()
+        public void OnBeforeSerialize()
         {
-            return (title.text, mainKeyText.text);
+            gameObject.name = _keyActionType.ToString();
+        }
+
+        public void OnAfterDeserialize()
+        {
+            
         }
     }
 }

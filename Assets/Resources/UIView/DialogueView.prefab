@@ -940,5 +940,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfc9f033fe13ec4590095ac229e7f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFinish: 1
   _dialogueView: {fileID: 7743090815736446398}
   _continueButton: {fileID: 1250259901443462993}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04836bc0b9304418b1164e6db424b3fc, type: 3}
+  m_Name: MedievalCastleSceneUIResources
+  m_EditorClassIdentifier: 
+  configPairs:
+  - loadPrefab: {fileID: 8192474591619870035, guid: 4af9520e1603b834582ea99e1f90be43, type: 3}
+    canvasType: 0
+    className: OptionController

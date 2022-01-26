@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Demo_ExteriorOnly_Optimized.unity
+    path: Assets/Scenes/MedievalCastleScene.unity
     guid: 5840491f9dde1b349bd9dde4b6f2d7b7
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: be1941f6be20f31479bd215bfd6a1e37
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 48a9af454edcdde4ea8fcd8db4c73b08, type: 2}

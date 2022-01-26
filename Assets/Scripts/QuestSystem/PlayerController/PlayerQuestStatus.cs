@@ -92,7 +92,7 @@ namespace RPG.QuestSystem
                 return;
             }
 
-            QuestSO questSO = GlobalResource.Instance.questDataBaseSO.questSODic[loadQuestStoreInfo.questSOUniqueID];
+            QuestSO questSO = GlobalResource.Instance.GetGlobalResource<QuestDataBaseSO>().questSODic[loadQuestStoreInfo.questSOUniqueID];
             InitPlayerQuestStatus(questSO, loadQuestStoreInfo.objectiveData);
             CheckFinish();
         }

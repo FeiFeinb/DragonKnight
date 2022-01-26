@@ -91,7 +91,7 @@ namespace RPG.InventorySystem
         {
             IEnumerable<InventorySlot> sameItemSlots = GetAvailableSameItemSlots(addItem.id);
             IEnumerable<InventorySlot> emptySlots = GetEmptySlot();
-            int maxStackAmount = GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount;
+            int maxStackAmount = GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[addItem.id].stackAmount;
             int availableAmount =
                 sameItemSlots.Sum(slot =>
                     (int) Mathf.Clamp(maxStackAmount - slot.slotData.amount, 0f, Mathf.Infinity)) +
@@ -147,7 +147,7 @@ namespace RPG.InventorySystem
             foreach (InventorySlot emptySlot in GetEmptySlot())
             {
                 // 能够一次性放下
-                if (amount <= GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount)
+                if (amount <= GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[addItem.id].stackAmount)
                 {
                     emptySlot.UpdateSlot(new InventorySlotData(addItem, amount));
                     return null;
@@ -155,8 +155,8 @@ namespace RPG.InventorySystem
 
                 // 不能一次性放下
                 emptySlot.UpdateSlot(new InventorySlotData(addItem,
-                    GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount));
-                amount -= GlobalResource.Instance.itemDataBase.itemObjs[addItem.id].stackAmount;
+                    GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[addItem.id].stackAmount));
+                amount -= GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[addItem.id].stackAmount;
             }
 
             // 无空插槽 或 空插槽使用完了但还没放完
@@ -169,7 +169,7 @@ namespace RPG.InventorySystem
             // 遍历插槽 找出不空不满的插槽 再找出编号匹对的插槽
             return inventorySlots
                 .Where(slot => !slot.IsEmpty && slot.slotData.amount !=
-                    GlobalResource.Instance.itemDataBase.itemObjs[itemID].stackAmount)
+                    GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[itemID].stackAmount)
                 .Where(flexSlot => itemID == flexSlot.slotData.itemData.id);
         }
 

@@ -1,23 +1,30 @@
-﻿using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using RPG.InventorySystem;
-using RPG.DialogueSystem.Graph;
-using RPG.QuestSystem;
+using RPG.UI;
+
 namespace RPG.Module
 {
     public class GlobalResource : BaseSingletonWithMono<GlobalResource>
     {
-        [Tooltip("物品数据库")] public ItemDataBaseSO itemDataBase;
-        [Tooltip("NPC信息数据库")] public DialogueCharacterInfoDataBaseSO characterInfoDataBase;
-        [Tooltip("任务数据库")] public QuestDataBaseSO questDataBaseSO;
-        private void Awake()
+        [SerializeField] private List<ResourcesSO> _objectInitializations;
+
+        public void LoadGlobalResource()
         {
-            // 开始游戏时初始化各个数据库
-            itemDataBase.UpdateDateBaseID();
-            characterInfoDataBase.UpdateDateBase();
-            questDataBaseSO.UpdateDataBaseID();
-            DontDestroyOnLoad(gameObject);
+            // 加载或初始化全局数据
+            foreach (var objectInitialization in _objectInitializations)
+            {
+                objectInitialization.InitAndLoad();
+            }  
+        }
+
+        public T GetGlobalResource<T>() where T : ResourcesSO
+        {
+            foreach (var objectInitialization in _objectInitializations)
+            {
+                if (objectInitialization is T initialization)
+                    return initialization;
+            }
+            return null;
         }
     }
 }

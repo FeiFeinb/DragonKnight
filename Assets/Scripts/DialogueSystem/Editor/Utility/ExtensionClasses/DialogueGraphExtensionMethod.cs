@@ -183,12 +183,6 @@ namespace DialogueSystem.Editor
         /// <param name="graphView">节点图</param>
         public static void Save(this DialogueGraphSO _selectSO, DialogueGraphView graphView)
         {
-            // List<SaveT> CaptureNodesData<T, SaveT>(UQueryState<Node> graphNodes) where T : DialogueGraphBaseNode
-            // {
-            //     return graphNodes.Where(node => node is T).Cast<T>().Select(node => node.CreateNodeData()).Cast<SaveT>()
-            //         .ToList();
-            // }
-
             Dictionary<string, DialogueGraphBaseNodeSaveData> cachedData =
                 new Dictionary<string, DialogueGraphBaseNodeSaveData>();
 
@@ -232,6 +226,7 @@ namespace DialogueSystem.Editor
                 });
             }
             
+            EditorUtility.SetDirty(_selectSO);
             AssetDatabase.SaveAssets();
         }
 

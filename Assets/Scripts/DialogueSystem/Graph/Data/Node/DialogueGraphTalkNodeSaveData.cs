@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RPG.UI;
 using UnityEngine;
 
 namespace RPG.DialogueSystem.Graph
@@ -23,7 +24,7 @@ namespace RPG.DialogueSystem.Graph
         public override bool HandleData(DialogueTreeNode treeNode, GameObject obj)
         {
             // 设置UI显示
-            DialogueController.controller.SetDialogueDisplay(CharacterInfoSO, Content, UniqueID);
+            BaseUI.GetController<DialogueController>().SetDialogueDisplay(CharacterInfoSO, Content, UniqueID);
             return false;
         }
     }

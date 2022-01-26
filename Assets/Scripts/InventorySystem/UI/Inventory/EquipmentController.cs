@@ -11,15 +11,16 @@ namespace RPG.InventorySystem
     public class EquipmentController : BaseInventoryController
     {
         public static string storePath = "UIView/EquipmentView";
-        public static EquipmentController controller;
+        
         public EquipmentInventoryObject equipmentInventoryObject;           // 显示哪个背包
         public Dictionary<GameObject, EquipmentInventorySlot> slotDic = new Dictionary<GameObject, EquipmentInventorySlot>();      // 字典
         public Dictionary<EquipmentInventorySlot, GameObject> slotUIDIc = new Dictionary<EquipmentInventorySlot, GameObject>();    // 字典
         [SerializeField] private PlayerAttributeTextManager playerAttributeTextManager;
         [SerializeField] private UIEquipmentSlotType[] slotTypes;
-        public override void PreInit()
+
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             // 初始化文本
             playerAttributeTextManager.InitPlayerAttributeTextManager();
             // 将对应的GameObject与对应的InventorySlot绑定

@@ -13,7 +13,11 @@ namespace RPG.InputSystyem
             SetKeyCode(posKeyCode, negKeyCode);
             SetEnable(true);
         }
-        
+
+        public KeyCode posKeyCode => _posKeyCode;
+
+        public KeyCode negKeyCode => _negKeyCode;
+
         /// <summary>
         /// 区间范围
         /// </summary>

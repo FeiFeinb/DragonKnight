@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RPG.InputSystyem;
 using RPG.Interact;
 using RPG.Module;
+using RPG.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -31,20 +32,20 @@ namespace RPG.DialogueSystem.Graph
             _currentObj = dialogueNpc.gameObject;
             
             // 关闭其他交互按钮的显示
-            InteractionController.controller.HideAllButton();
+            BaseUI.GetController<InteractionController>().HideAllButton();
             InputManager.Instance.inputData.CloseAllKeyInput(1);
             InputManager.Instance.CloseMouseInput();
-            DialogueController.controller.Show();
+            BaseUI.GetController<DialogueController>().Show();
             HandleTreeNode(_rootNode);
         }
         
         public void EndDialogue()
         {
             // 开启其他交互按钮的显示
-            DialogueController.controller.Hide();
+            BaseUI.GetController<DialogueController>().Hide();
             InputManager.Instance.OpenMouseInput();
             InputManager.Instance.inputData.OpenAllKeyInput(1);
-            InteractionController.controller.ShowAllButton();
+            BaseUI.GetController<InteractionController>().ShowAllButton();
         }
         
         private void HandleTreeNode(DialogueTreeNode startTreeNode)

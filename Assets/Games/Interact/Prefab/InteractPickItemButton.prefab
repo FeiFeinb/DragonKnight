@@ -121,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775853616872097572, guid: 7f2afc15e7cd0b84681d7f99a4183fee, type: 3}
       propertyPath: m_Name
-      value: InteractPickItemButton Variant
+      value: InteractPickItemButton
       objectReference: {fileID: 0}
     - target: {fileID: 6467258440889325089, guid: 7f2afc15e7cd0b84681d7f99a4183fee, type: 3}
       propertyPath: m_Type

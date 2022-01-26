@@ -5,11 +5,8 @@ using UnityEngine.UI;
 using RPG.UI;
 namespace RPG.InventorySystem
 {
-    public class MouseItemIcon : BaseUIController
+    public class MouseItemIcon : BaseUI
     {
-        public static MouseItemIcon controller;
-        public static string storePath = "UIView/MouseItemIconView";
-
         [HideInInspector] public InventorySlot hoverSlot { get; private set; }     // 所指插槽物件
 
         [HideInInspector] public BaseInventoryController hoverUI;                  // 所处UI

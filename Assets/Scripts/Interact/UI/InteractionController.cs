@@ -8,19 +8,16 @@ using UnityEngine;
 
 namespace RPG.Interact
 {
-    public class InteractionController : BaseUIController
+    public class InteractionController : BaseUI
     {
-        public static string storePath = "UIView/InteractionView";
-        public static InteractionController controller;
-
         [SerializeField] private InteractionView _interactionView;
         [SerializeField] private GameObject _interactStartDialogueButtonPrefab;
         [SerializeField] private GameObject _interactDialogueChoicePrefab;
         [SerializeField] private GameObject _interactPickButtonPrefab;
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             _interactionView.ClearButton(true);
         }
 
@@ -42,14 +39,14 @@ namespace RPG.Interact
             switch (interactType)
             {
                 case InteractType.Keep:
-                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactStartDialogueButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    newButton = UIResourcesLoader.Instance.InstantiateUserInterface(_interactStartDialogueButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
                     break;
                 case InteractType.DestroySelf:
-                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactPickButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    newButton = UIResourcesLoader.Instance.InstantiateUserInterface(_interactPickButtonPrefab, _interactionView.Container).GetComponent<InteractButton>();
                     newButton.AddOnClickListener(delegate { newButton.Destroy(); });
                     break;
                 case InteractType.DestroyAll:
-                    newButton = UIResourcesManager.Instance.LoadUserInterface(_interactDialogueChoicePrefab, _interactionView.Container).GetComponent<InteractButton>();
+                    newButton = UIResourcesLoader.Instance.InstantiateUserInterface(_interactDialogueChoicePrefab, _interactionView.Container).GetComponent<InteractButton>();
                     newButton.AddOnClickListener(delegate { _interactionView.ClearButton(false); });
                     break;
                 default:

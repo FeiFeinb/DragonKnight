@@ -2,7 +2,7 @@ using RPG.UI;
 
 namespace RPG.UI
 {
-    public class MakerController : BaseUIController
+    public class MakerController : BaseUI
     {
         
     }

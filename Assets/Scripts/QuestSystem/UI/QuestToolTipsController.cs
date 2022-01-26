@@ -8,7 +8,6 @@ namespace RPG.QuestSystem
     public class QuestToolTipsController : ToolTipsController
     {
         public static string storePath = "UIView/QuestToolTipsView";   // 路径
-        public static QuestToolTipsController controller;
         private QuestToolTipsView questToolTipsView;
         private PlayerQuestStatus currentQuest;
 
@@ -20,7 +19,7 @@ namespace RPG.QuestSystem
             }
             // 开始前先清空提示面板
             questToolTipsView.Clear();
-            if (!GlobalResource.Instance.questDataBaseSO.questSODic.TryGetValue(currentQuest.QuestUniqueID, out QuestSO questSO))
+            if (!GlobalResource.Instance.GetGlobalResource<QuestDataBaseSO>().questSODic.TryGetValue(currentQuest.QuestUniqueID, out QuestSO questSO))
             {
                 Debug.LogError("Cant Find QuestSO");
             }
@@ -49,8 +48,8 @@ namespace RPG.QuestSystem
         protected override bool AchieveDoTweenSequence()
         {
             RectTransform rect = transform as RectTransform;
-            inSequence.Append(rect.DOScaleX(1, 0.2f));
-            inSequence.Join(rect.DOScaleY(1, 0.2f));
+            _inSequence.Append(rect.DOScaleX(1, 0.2f));
+            _inSequence.Join(rect.DOScaleY(1, 0.2f));
             return true;
         }
     }

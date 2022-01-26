@@ -43,7 +43,7 @@ namespace RPG.InventorySystem
         {
             if (itemId >= 0)
             {
-                Debug.Log( $"{GlobalResource.Instance.itemDataBase.itemObjs[itemId].name}的数量变换了{amount}个");
+                Debug.Log( $"{GlobalResource.Instance.GetGlobalResource<ItemDataBaseSO>().itemObjs[itemId].name}的数量变换了{amount}个");
             }
             if (itemAddedCallBackDic.ContainsKey(itemId))
             {

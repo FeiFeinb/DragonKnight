@@ -9,10 +9,9 @@ using UnityEngine.UI;
 
 namespace RPG.SaveSystem
 {
-    public class SavingController : BaseUIController
+    public class SavingController : BaseUI
     {
         public static string storePath = "UIView/SavingView";   // 路径
-        public static SavingController controller;
         [Tooltip("UI无存档颜色")]public Color defaultColor;
         [Tooltip("UI有存档颜色")]public Color fillColor;
         [SerializeField] private Transform container;           // 插槽生成容器
@@ -24,14 +23,14 @@ namespace RPG.SaveSystem
             ChangeSaveSlotState();
         }
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             // 以保存系统支持的最大存档数进行存档插槽的初始化
             savingSlots = new SavingSlot[SaveManager.Instance.maxSaveFileNum];
             for (int i = 0; i < SaveManager.Instance.maxSaveFileNum; i++)
             {
-                savingSlots[i] = UIResourcesManager.Instance.LoadUserInterface(saveSlotPrefab, container).GetComponent<SavingSlot>(); 
+                savingSlots[i] = UIResourcesLoader.Instance.InstantiateUserInterface(saveSlotPrefab, container).GetComponent<SavingSlot>(); 
                 savingSlots[i].InitSavingSlot(i);
             }
         }
@@ -39,7 +38,7 @@ namespace RPG.SaveSystem
         protected override bool AchieveDoTweenSequence()
         {
             RectTransform rect = transform as RectTransform;
-            inSequence.Append(rect.DOAnchorPosY(-rect.anchoredPosition.y, 0.4f).SetEase(Ease.OutBack));
+            _inSequence.Append(rect.DOAnchorPosY(-rect.anchoredPosition.y, 0.4f).SetEase(Ease.OutBack));
             return true;
         }
 
@@ -82,7 +81,7 @@ namespace RPG.SaveSystem
 
         public void OnReturnBack()
         {
-            GlobalUIManager.Instance.CloseUI(this);
+            UIStackManager.Instance.PopUI();
         }
     }
 }

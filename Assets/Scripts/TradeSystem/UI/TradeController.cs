@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 
 namespace RPG.TradeSystem
 {
-    public class TradeController : BaseUIController
+    public class TradeController : BaseUI
     {
         [System.Serializable]
         public class SellItemSlotData
@@ -21,7 +21,6 @@ namespace RPG.TradeSystem
         }
 
         public static string storePath = "UIView/TradeView";
-        public static TradeController controller;
 
         private const int maxSlot = 12; // 单页商店最大插槽数
 
@@ -32,9 +31,9 @@ namespace RPG.TradeSystem
 
         private SellItemSlotData[] sellDatas; // 商店插槽数据数组
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             // 添加监听
             pageFlip.AddPageUpListener(UpdateTradeView);
             pageFlip.AddPageDownListener(UpdateTradeView);
@@ -45,17 +44,17 @@ namespace RPG.TradeSystem
                 // 初始化插槽
                 sellDatas[i] = new SellItemSlotData
                 {
-                    slotObj = UIResourcesManager.Instance.LoadUserInterface(sellItemSlotPrefab, slotContainerTrans),
+                    slotObj = UIResourcesLoader.Instance.InstantiateUserInterface(sellItemSlotPrefab, slotContainerTrans),
                     itemObj = null
                 };
                 // 由于闭包特性 需要转变为临时变量
                 SellItemSlotData sellData = sellDatas[i];
                 // 添加鼠标进入监听
-                EventTriggerManager.Instance.AddEvent(sellDatas[i].slotObj, EventTriggerType.PointerEnter,
+                GlobalEventRegister.AddLocalEvent(sellDatas[i].slotObj, EventTriggerType.PointerEnter,
                     delegate { OnPointerEnterSlot(sellData); });
-                EventTriggerManager.Instance.AddEvent(sellDatas[i].slotObj, EventTriggerType.PointerExit,
+                GlobalEventRegister.AddLocalEvent(sellDatas[i].slotObj, EventTriggerType.PointerExit,
                     delegate { OnPointerExitSlot(sellData); });
-                EventTriggerManager.Instance.AddEvent(sellDatas[i].slotObj, EventTriggerType.PointerClick,
+                GlobalEventRegister.AddLocalEvent(sellDatas[i].slotObj, EventTriggerType.PointerClick,
                     (baseEventData) =>
                     {
                         if ((baseEventData as PointerEventData)?.button == PointerEventData.InputButton.Right)
@@ -79,14 +78,14 @@ namespace RPG.TradeSystem
         {
             BaseItemObject itemObj = sellData.itemObj;
             if (itemObj == null) return;
-            MouseItemTipsController.controller.OnEnter(new ItemToolTipsContent(itemObj, itemObj.item.itemBuffs));
+            BaseUI.GetController<MouseItemTipsController>().OnEnter(new ItemToolTipsContent(itemObj, itemObj.item.itemBuffs));
         }
 
         private void OnPointerExitSlot(SellItemSlotData sellData)
         {
             BaseItemObject itemObj = sellData.itemObj;
             if (itemObj == null) return;
-            MouseItemTipsController.controller.OnExit();
+            BaseUI.GetController<MouseItemTipsController>().OnExit();
         }
 
         private void OnPointerRightClickSlot(SellItemSlotData sellData)

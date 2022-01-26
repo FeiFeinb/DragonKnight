@@ -1,22 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class MainMenuController : BaseUIController
+    public class MainMenuController : BaseUI
     {
-        public static string storePath = "UIView/MainMenuController";
-        public static MainMenuController controller;
-
         [SerializeField] private MainMenuView _mainMenuView;
 
-        public override void PreInit()
+        protected override void InitInstance()
         {
-            base.PreInit();
             // 初始化各个按钮的功能
+            _mainMenuView.PreInit();
         }
+        
+        protected override bool InitControlObj()
+        {
+            _controlUITrans = _mainMenuView.buttonContainer.transform;
+            _controlUIGameObj = _mainMenuView.buttonContainer.gameObject;
+            return true;
+        }
+
+        protected override bool AchieveDoTweenSequence()
+        {
+            RectTransform rect = _mainMenuView.buttonContainer;
+            _inSequence.Append(rect.DOAnchorPosY(-rect.anchoredPosition.y, 0.2f).SetEase(Ease.Linear));
+            return true;
+        }
+        
     }
     
 }

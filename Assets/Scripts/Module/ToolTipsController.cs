@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using RPG.UI;
 namespace RPG.Module
 {
-    public abstract class ToolTipsController : BaseUIController
+    public abstract class ToolTipsController : BaseUI
     {
         public enum ViewDirection
         {
@@ -15,9 +15,10 @@ namespace RPG.Module
             DownRight       // 右下角
         }
         private RectTransform toolTipsRect;
-        public override void PreInit()
+
+        protected override void InitInstance()
         {
-            base.PreInit();
+            base.InitInstance();
             toolTipsRect = gameObject.transform as RectTransform;
         }
         public override void Show()
@@ -49,7 +50,7 @@ namespace RPG.Module
         {
             // 根据面板大小计算面板朝向
             Vector2 viewSize = toolTipsRect.sizeDelta;
-            RectTransform canvanRect = UIResourcesManager.Instance.CanvasTrans as RectTransform;
+            RectTransform canvanRect = UIResourcesLoader.Instance.mainCanvasTrans as RectTransform;
             float newMousePositionX = UnityEngine.Input.mousePosition.x / Screen.width * canvanRect.sizeDelta.x;
             float newMousePositionY = UnityEngine.Input.mousePosition.y / Screen.height * canvanRect.sizeDelta.y;
             float horizontalRight = Screen.width - newMousePositionX;

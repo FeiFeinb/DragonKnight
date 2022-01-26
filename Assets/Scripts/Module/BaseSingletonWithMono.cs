@@ -22,6 +22,7 @@ namespace RPG.Module
                 return instance;
             }
         }
+        
     }
 }
 

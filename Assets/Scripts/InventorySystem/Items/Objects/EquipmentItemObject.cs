@@ -1,3 +1,4 @@
+using RPG.UI;
 using UnityEngine;
 using UnityTemplateProjects.InventorySystem;
 
@@ -25,7 +26,7 @@ namespace RPG.InventorySystem
             else
             {
                 Debug.Log("物品未被装备，将其装备");
-                InventorySlot targetSlot = EquipmentController.controller.GetTypeSlot(itemType.equipmentType);
+                InventorySlot targetSlot = BaseUI.GetController<EquipmentController>().GetTypeSlot(itemType.equipmentType);
                 InventoryHelper.Instance.SwapItem(originSlot, targetSlot);
             }
         }

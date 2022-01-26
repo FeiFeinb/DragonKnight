@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04836bc0b9304418b1164e6db424b3fc, type: 3}
+  m_Name: StartSceneUIResources
+  m_EditorClassIdentifier: 
+  configPairs:
+  - loadPrefab: {fileID: 8192474591619870035, guid: 4af9520e1603b834582ea99e1f90be43, type: 3}
+    className: OptionController
+  - loadPrefab: {fileID: 2434936852591339243, guid: 86d86a4c14dd3a945bf0526123c18291, type: 3}
+    className: MainMenuController
+  - loadPrefab: {fileID: 4713952184174716296, guid: 589fa87058ec680429027b04a76df57f, type: 3}
+    className: SavingController

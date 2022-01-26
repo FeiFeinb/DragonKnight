@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RPG.Audio
 {
 
-    public class AudioSettingController : BaseUIController
+    public class AudioSettingController : BaseUI
     {
         // Start is called before the first frame update
         void Start()
