@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Cinemachine;
 using RPG.Module;
 using UnityEngine;
@@ -127,6 +128,11 @@ namespace RPG.InputSystyem
             }
         }
 
+        public KeyCode GetCurrentKeyDown()
+        {
+            return Input.anyKeyDown ? Enum.GetValues(typeof(KeyCode)).Cast<KeyCode>().FirstOrDefault(Input.GetKeyDown) : KeyCode.None;
+        }
+        
         public void SeekOrSetMainCamera(CinemachineFreeLook mainCamera = null)
         {
             if (mainCamera == null)

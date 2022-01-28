@@ -11,8 +11,6 @@ namespace RPG.InputSystyem
     {
         [SerializeField] private Text _previewKeyText;
 
-        private bool _isStartListenKey = false;
-
         public void StartListen(Action<KeyCode> modifiedCallBack)
         {
             InputManager.Instance.inputData.CloseAllKeyInput(1);
@@ -25,7 +23,6 @@ namespace RPG.InputSystyem
 
         private void EndListener()
         {
-            _isStartListenKey = false;
             BaseUI.GetController<OptionController>().SetAccessible(false);
 
             Hide();
@@ -33,20 +30,16 @@ namespace RPG.InputSystyem
 
         private IEnumerator ListenKey(Action<KeyCode> modifiedCallBack)
         {
-            while (!Input.anyKeyDown)
+            KeyCode currentKeyCode = InputManager.Instance.GetCurrentKeyDown();
+            while (currentKeyCode == KeyCode.None)
             {
                 yield return null;
+                currentKeyCode = InputManager.Instance.GetCurrentKeyDown();
             }
             
-            foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode)))
-            {
-                if (Input.GetKeyDown(keyCode))
-                {
-                    _previewKeyText.text = keyCode.ToString();
-                    modifiedCallBack(keyCode);
-                    EndListener();
-                }
-            }
+            _previewKeyText.text = currentKeyCode.ToString();
+            modifiedCallBack(currentKeyCode);
+            EndListener();
 
         }
 
@@ -54,7 +47,6 @@ namespace RPG.InputSystyem
         {
             RectTransform rect = transform as RectTransform;
             _inSequence.Append(rect.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack));
-            _inSequence.onComplete += delegate { _isStartListenKey = true; };
             _inSequence.onRewind += delegate
             {
                 InputManager.Instance.inputData.OpenAllKeyInput(1);
